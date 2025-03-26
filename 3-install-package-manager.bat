@@ -16,8 +16,8 @@ if %errorlevel%==0 (
     echo Scoop is already installed.
 ) else (
     echo Scoop is not installed. Installing Scoop...
-    powershell Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
-    powershell Set-ExecutionPolicy RemoteSigned -scope CurrentUser
+    powershell -Command "Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')"
+    powershell -Command "Set-ExecutionPolicy RemoteSigned -scope CurrentUser"
 )
 
 pause
