@@ -1,49 +1,48 @@
-/**
-
-@file Password.java
-@brief This file serves as a demonstration file for the Password class.
-@details This file contains the implementation of the Password class, which provides various mathematical operations.
-*/
-
-/**
-
-@package com.ucoruh.password
-@brief The com.ucoruh.password package contains all the classes and files related to the Password App.
-*/
 package com.ucoruh.password;
 
-import org.slf4j.LoggerFactory;
-
-import ch.qos.logback.classic.Logger;
 /**
-
-@class Password
-@brief This class represents a Password that performs mathematical operations.
-@details The Password class provides methods to perform mathematical operations such as addition, subtraction, multiplication, and division. It also supports logging functionality using the logger object.
-@author ugur.coruh
-*/
+ * Represents a stored password entry for a specific service.
+ */
 public class Password {
+    private String service;
+    private String username;
+    private String password;
 
-  /**
-   * @brief Logger for the Password class.
-   */
-  private static final Logger logger = (Logger) LoggerFactory.getLogger(Password.class);
+    /**
+     * Constructs a Password object with service, username, and password.
+     *
+     * @param service the service name (e.g., Gmail, Facebook)
+     * @param username the associated username
+     * @param password the password string
+     */
+    public Password(String service, String username, String password) {
+        this.service = service;
+        this.username = username;
+        this.password = password;
+    }
 
-  /**
-   * @brief Calculates the sum of two integers.
-   *
-   * @details This function takes two integer values, `a` and `b`, and returns their sum. It also logs a message using the logger object.
-   *
-   * @param a The first integer value.
-   * @param b The second integer value.
-   * @return The sum of `a` and `b`.
-   */
-  public int add(int a, int b) {
-    // Logging an informational message
-    logger.info("Logging message");
-    // Logging an error message
-    logger.error("Error message");
-    // Returning the sum of `a` and `b`
-    return a + b;
-  }
+    public String getService() {
+        return service;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "Service: " + service + " | Username: " + username + " | Password: " + password;
+    }
 }
