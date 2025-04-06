@@ -14,7 +14,7 @@ public class PasswordStorageFactory {
     public static InterfacePasswordStorage create(StorageType type) {
         return switch (type) {
             case FILE -> new FilePasswordStorage();
-            case SQLITE -> throw new UnsupportedOperationException("SQLite storage not implemented yet.");
+            case SQLITE -> new DatabasePasswordStorage();
         };
     }
 }
