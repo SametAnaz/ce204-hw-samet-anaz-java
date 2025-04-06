@@ -83,12 +83,29 @@ public class AuthManagerTest {
 
     @Test
     public void testUserMenuLogoutOption() {
+        final SecurityManager originalSecurityManager = System.getSecurityManager();
+
+        class NoExitSecurityManager extends SecurityManager {
+            @Override
+            public void checkPermission(java.security.Permission perm) {}
+            @Override
+            public void checkExit(int status) {
+                super.checkExit(status);
+                throw new SecurityException("System.exit blocked");
+            }
+        }
+
+        System.setSecurityManager(new NoExitSecurityManager());
+
         Scanner scanner = new Scanner(new ByteArrayInputStream("1\n".getBytes()));
         try {
             auth.userMenu(scanner);
-            fail("System.exit should be called.");
-        } catch (Exception e) {
-            // expected behavior
+            fail("Expected System.exit to be called");
+        } catch (SecurityException e) {
+            assertEquals("System.exit blocked", e.getMessage());
+        } finally {
+            System.setSecurityManager(originalSecurityManager); 
         }
     }
+
 }
