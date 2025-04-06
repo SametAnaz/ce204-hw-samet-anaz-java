@@ -14,8 +14,12 @@ public class DatabasePasswordStorage implements InterfacePasswordStorage {
         createTableIfNotExists();
     }
 
+    protected String getDatabaseUrl() {
+        return DB_URL;
+    }
+
     private void createTableIfNotExists() {
-        try (Connection conn = DriverManager.getConnection(DB_URL);
+        try (Connection conn = DriverManager.getConnection(getDatabaseUrl());
              Statement stmt = conn.createStatement()) {
             String sql = """
                 CREATE TABLE IF NOT EXISTS passwords (
@@ -39,7 +43,7 @@ public class DatabasePasswordStorage implements InterfacePasswordStorage {
         System.out.print("Password: ");
         String pass = scanner.nextLine();
 
-        try (Connection conn = DriverManager.getConnection(DB_URL);
+        try (Connection conn = DriverManager.getConnection(getDatabaseUrl());
              PreparedStatement pstmt = conn.prepareStatement(
                      "INSERT INTO passwords(service, username, password) VALUES(?, ?, ?)")) {
             pstmt.setString(1, service);
@@ -54,7 +58,7 @@ public class DatabasePasswordStorage implements InterfacePasswordStorage {
 
     @Override
     public void view() {
-        try (Connection conn = DriverManager.getConnection(DB_URL);
+        try (Connection conn = DriverManager.getConnection(getDatabaseUrl());
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery("SELECT * FROM passwords")) {
 
@@ -79,7 +83,7 @@ public class DatabasePasswordStorage implements InterfacePasswordStorage {
         System.out.print("New password: ");
         String password = scanner.nextLine();
 
-        try (Connection conn = DriverManager.getConnection(DB_URL);
+        try (Connection conn = DriverManager.getConnection(getDatabaseUrl());
              PreparedStatement pstmt = conn.prepareStatement(
                      "UPDATE passwords SET username = ?, password = ? WHERE service = ?")) {
             pstmt.setString(1, username);
@@ -98,7 +102,7 @@ public class DatabasePasswordStorage implements InterfacePasswordStorage {
         System.out.print("Service to delete: ");
         String service = scanner.nextLine();
 
-        try (Connection conn = DriverManager.getConnection(DB_URL);
+        try (Connection conn = DriverManager.getConnection(getDatabaseUrl());
              PreparedStatement pstmt = conn.prepareStatement("DELETE FROM passwords WHERE service = ?")) {
             pstmt.setString(1, service);
             int affected = pstmt.executeUpdate();
@@ -112,7 +116,7 @@ public class DatabasePasswordStorage implements InterfacePasswordStorage {
     @Override
     public List<Password> readAll() {
         List<Password> list = new ArrayList<>();
-        try (Connection conn = DriverManager.getConnection(DB_URL);
+        try (Connection conn = DriverManager.getConnection(getDatabaseUrl());
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery("SELECT * FROM passwords")) {
 
@@ -131,7 +135,7 @@ public class DatabasePasswordStorage implements InterfacePasswordStorage {
 
     @Override
     public void writeAll(List<Password> list) {
-        try (Connection conn = DriverManager.getConnection(DB_URL);
+        try (Connection conn = DriverManager.getConnection(getDatabaseUrl());
              Statement stmt = conn.createStatement()) {
             stmt.execute("DELETE FROM passwords"); // clear all
             for (Password p : list) {
