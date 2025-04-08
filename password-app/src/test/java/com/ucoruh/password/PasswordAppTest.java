@@ -17,9 +17,10 @@ import org.junit.Test;
  * @brief Unit tests for the PasswordApp class using the runApp method.
  *
  * These tests simulate full application flow by injecting input and capturing output.
+ * Additional tests cover each main menu branch.
  */
 public class PasswordAppTest {
-    
+
     private final PrintStream originalOut = System.out;
     private ByteArrayOutputStream outputStream;
 
@@ -51,25 +52,20 @@ public class PasswordAppTest {
      */
     @Test
     public void testMainSuccess() {
-        // Input sequence:
-        // "testMaster" - for setting the master password,
-        // "testMaster" - for successful login,
-        // "0"         - to exit the main menu.
         String simulatedInput = "testMaster\n" + "testMaster\n" + "0\n";
         ByteArrayInputStream inputStream = new ByteArrayInputStream(
                 simulatedInput.getBytes(StandardCharsets.UTF_8));
         Scanner scanner = new Scanner(inputStream);
-        
+
         PasswordApp.runApp(scanner, System.out);
         scanner.close();
-        
+
         String output = outputStream.toString();
-        // Check that output contains the main menu prompt and exit message.
         assertTrue("Output should contain MAIN MENU", output.contains("==== MAIN MENU ===="));
         assertTrue("Output should contain Exiting...", output.contains("Exiting..."));
         assertFalse("Output should not contain 'Login failed.'", output.contains("Login failed."));
     }
-    
+
     /**
      * @brief Tests the login failure scenario.
      *
@@ -78,22 +74,18 @@ public class PasswordAppTest {
      */
     @Test
     public void testMainError() {
-        // Input sequence:
-        // "testMaster" - for setting the master password,
-        // "wrongMaster" - for an incorrect login attempt.
         String simulatedInput = "testMaster\n" + "wrongMaster\n";
         ByteArrayInputStream inputStream = new ByteArrayInputStream(
                 simulatedInput.getBytes(StandardCharsets.UTF_8));
         Scanner scanner = new Scanner(inputStream);
-        
+
         PasswordApp.runApp(scanner, System.out);
         scanner.close();
-        
+
         String output = outputStream.toString();
-        // Verify that output includes the login failure message.
         assertTrue("Output should contain 'Login failed.'", output.contains("Login failed."));
     }
-    
+
     /**
      * @brief Tests full menu navigation.
      *
@@ -102,20 +94,120 @@ public class PasswordAppTest {
      */
     @Test
     public void testFullMenuNavigation() {
-        // Input sequence:
-        // "testMaster" - for setting the master password,
-        // "testMaster" - for successful login,
-        // "0"         - to exit directly.
         String simulatedInput = "testMaster\n" + "testMaster\n" + "0\n";
         ByteArrayInputStream inputStream = new ByteArrayInputStream(
                 simulatedInput.getBytes(StandardCharsets.UTF_8));
         Scanner scanner = new Scanner(inputStream);
-        
+
         PasswordApp.runApp(scanner, System.out);
         scanner.close();
-        
+
         String output = outputStream.toString();
-        // Check that the output contains the main menu header.
         assertTrue("Output should contain MAIN MENU", output.contains("==== MAIN MENU ===="));
+    }
+
+    /**
+     * @brief Tests main menu option 1: User Authentication.
+     *
+     * Simulates choosing option 1 and verifies that the user menu stub output is shown.
+     */
+    @Test
+    public void testMenuOptionUserAuthentication() {
+        // Simulated input: set master, login, then choose option 1, then exit.
+        String simulatedInput = "testMaster\n" + "testMaster\n" + "1\n" + "0\n";
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(
+                simulatedInput.getBytes(StandardCharsets.UTF_8));
+        Scanner scanner = new Scanner(inputStream);
+
+        PasswordApp.runApp(scanner, System.out);
+        scanner.close();
+
+        String output = outputStream.toString();
+        assertTrue("Output should indicate user menu stub", output.contains("User menu functionality not yet implemented."));
+    }
+
+    /**
+     * @brief Tests main menu option 2: Secure Storage of Passwords.
+     *
+     * Simulates choosing option 2 and then immediately exiting the inner PasswordManager menu.
+     */
+    @Test
+    public void testMenuOptionSecureStorage() {
+        // Simulated input: set master, login, choose option 2, then in inner menu choose 4 to exit, then exit main menu.
+        String simulatedInput = "testMaster\n" + "testMaster\n" + "2\n" + "4\n" + "0\n";
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(
+                simulatedInput.getBytes(StandardCharsets.UTF_8));
+        Scanner scanner = new Scanner(inputStream);
+
+        PasswordApp.runApp(scanner, System.out);
+        scanner.close();
+
+        String output = outputStream.toString();
+        // Since PasswordManager.menu prints its own menu header, verify its presence.
+        assertTrue("Output should contain inner PasswordManager menu", output.contains("==== MAIN MENU ===="));
+    }
+
+    /**
+     * @brief Tests main menu option 3: Password Generator.
+     *
+     * Simulates choosing option 3 and entering a desired password length.
+     * Verifies that the generated password output is present.
+     */
+    @Test
+    public void testMenuOptionPasswordGenerator() {
+        // Simulated input: set master, login, choose option 3, input desired length, then exit.
+        String simulatedInput = "testMaster\n" + "testMaster\n" + "3\n" + "8\n" + "0\n";
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(
+                simulatedInput.getBytes(StandardCharsets.UTF_8));
+        Scanner scanner = new Scanner(inputStream);
+
+        PasswordApp.runApp(scanner, System.out);
+        scanner.close();
+
+        String output = outputStream.toString();
+        // Expect the password generator to output "Generated Password:".
+        assertTrue("Output should contain Generated Password:", output.contains("Generated Password:"));
+    }
+
+    /**
+     * @brief Tests main menu option 4: Auto-Login Feature.
+     *
+     * Simulates choosing option 4. Assumes AutoLoginManager.menu prints a placeholder message.
+     */
+    @Test
+    public void testMenuOptionAutoLoginFeature() {
+        // Simulated input: set master, login, choose option 4, then exit.
+        String simulatedInput = "testMaster\n" + "testMaster\n" + "4\n" + "0\n";
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(
+                simulatedInput.getBytes(StandardCharsets.UTF_8));
+        Scanner scanner = new Scanner(inputStream);
+
+        PasswordApp.runApp(scanner, System.out);
+        scanner.close();
+
+        String output = outputStream.toString();
+        // Check for expected placeholder output; adjust expected text if needed.
+        assertTrue("Output should mention Auto-Login Feature", output.contains("Auto-Login Feature"));
+    }
+
+    /**
+     * @brief Tests main menu option 5: Multi-Platform Compatibility.
+     *
+     * Simulates choosing option 5. Assumes PlatformManager.showPlatforms prints a placeholder message.
+     */
+    @Test
+    public void testMenuOptionMultiPlatform() {
+        // Simulated input: set master, login, choose option 5, then exit.
+        String simulatedInput = "testMaster\n" + "testMaster\n" + "5\n" + "0\n";
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(
+                simulatedInput.getBytes(StandardCharsets.UTF_8));
+        Scanner scanner = new Scanner(inputStream);
+
+        PasswordApp.runApp(scanner, System.out);
+        scanner.close();
+
+        String output = outputStream.toString();
+        // Check for expected placeholder text from platform manager; adjust as necessary.
+        assertTrue("Output should mention Supported platforms", output.contains("Supported platforms:"));
     }
 }

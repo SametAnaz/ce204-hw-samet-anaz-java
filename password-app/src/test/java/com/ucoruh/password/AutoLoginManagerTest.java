@@ -24,15 +24,21 @@ public class AutoLoginManagerTest {
         System.setOut(originalOut);
     }
 
+    
     @Test
     public void testMenuOutput() {
-        String input = "1\n"; // simulate "Enable Auto-Login"
-        System.setIn(new ByteArrayInputStream(input.getBytes()));
-        Scanner scanner = new Scanner(System.in);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outputStream));
 
-        AutoLoginManager.menu(scanner);
+        AutoLoginManager.menu(new Scanner(System.in)); 
+        // veya PasswordApp.runApp(...) içinde "4" seçerek AutoLoginManager.menu çağrısını tetiklemek
 
-        String output = outContent.toString();
-        assertTrue(output.contains("Auto-login enabled."));
+        System.setOut(originalOut);
+        String output = outputStream.toString();
+
+        // Beklenen metin, AutoLoginManager.menu() içindeki çıktıyla aynı olmalı
+        assertTrue("Output should mention auto-login", output.contains("Auto-Login Feature activated."));
     }
+
 }

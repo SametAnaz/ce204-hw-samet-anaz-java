@@ -1,21 +1,14 @@
 package com.ucoruh.password;
 
 /**
- * Displays platform compatibility information.
+ * @brief Stub class for Multi-Platform Compatibility.
  */
 public class PlatformManager {
 
     /**
-     * Prints a list of supported platforms to the console.
+     * Displays supported platforms.
      */
     public static void showPlatforms() {
-        System.out.println("""
-                --- Platform Support ---
-                ✅ Windows
-                ✅ macOS
-                ✅ Linux
-                ✅ Android
-                ✅ iOS
-                """);
+        System.out.println("Supported platforms: Windows, macOS, Linux, Android, iOS");
     }
 }

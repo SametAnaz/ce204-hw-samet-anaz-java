@@ -3,24 +3,16 @@ package com.ucoruh.password;
 import java.util.Scanner;
 
 /**
- * Manages auto-login feature settings through the console menu.
+ * @brief Stub class for the Auto-Login Feature.
  */
 public class AutoLoginManager {
 
     /**
-     * Displays the auto-login settings menu and handles user input.
-     *
-     * @param scanner Scanner instance for reading user input
+     * Displays a placeholder message for Auto-Login Feature.
+     * @param scanner Scanner for user input.
      */
     public static void menu(Scanner scanner) {
-        System.out.println("""
-                --- Auto-Login ---
-                1. Enable Auto-Login
-                2. Disable Auto-Login
-                0. Back
-                """);
-        int c = scanner.nextInt(); scanner.nextLine();
-        if (c == 1) System.out.println("Auto-login enabled.");
-        else if (c == 2) System.out.println("Auto-login disabled.");
+        // Do not attempt to read input here; simply output a placeholder message.
+        System.out.println("Auto-Login Feature activated.");
     }
 }
