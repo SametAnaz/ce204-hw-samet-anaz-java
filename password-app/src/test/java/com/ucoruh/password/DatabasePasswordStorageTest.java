@@ -6,16 +6,13 @@ import java.util.*;
 
 import static org.junit.Assert.*;
 
-/**
- * Unit tests for DatabasePasswordStorage (readAll & writeAll only).
- */
 public class DatabasePasswordStorageTest {
 
     private static final String TEST_DB_PATH = "test-passwords.db";
     private static final String TEST_DB_URL = "jdbc:sqlite:" + TEST_DB_PATH;
-
     private DatabasePasswordStorage storage;
 
+    // Anonymous subclass to override database URL for testing
     private static class TestableDatabasePasswordStorage extends DatabasePasswordStorage {
         @Override
         protected String getDatabaseUrl() {
@@ -33,8 +30,8 @@ public class DatabasePasswordStorageTest {
     @Test
     public void testWriteAndReadAll() {
         List<Password> input = Arrays.asList(
-                new Password("gmail", "user1", "pass1"),
-                new Password("github", "user2", "pass2")
+            new Password("gmail", "user1", "pass1"),
+            new Password("github", "user2", "pass2")
         );
 
         storage.writeAll(input);

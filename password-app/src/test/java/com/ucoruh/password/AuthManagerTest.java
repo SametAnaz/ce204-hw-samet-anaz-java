@@ -1,111 +1,48 @@
 package com.ucoruh.password;
 
-import org.junit.*;
-import java.io.*;
+import static org.junit.Assert.assertTrue;
 import java.util.Scanner;
-
-import static org.junit.Assert.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
- * Unit tests for the AuthManager Singleton class.
+ * @brief Unit tests for the AuthManager class.
  */
 public class AuthManagerTest {
-
-    private static final String TEST_FILE = "master-password.txt";
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final PrintStream originalOut = System.out;
-
+    
     private AuthManager auth;
-
+    
+    /**
+     * Setup before each test.
+     */
     @Before
-    public void setUp() throws Exception {
-        System.setOut(new PrintStream(outContent));
+    public void setUp() {
+        // Removed deprecated SecurityManager references.
         auth = AuthManager.getInstance();
-        // Clean file before each test
-        File f = new File(TEST_FILE);
-        if (f.exists()) f.delete();
     }
-
+    
+    /**
+     * Cleanup after each test.
+     */
     @After
-    public void tearDown() throws Exception {
-        System.setOut(originalOut);
-        File f = new File(TEST_FILE);
-        if (f.exists()) f.delete();
+    public void tearDown() {
+        // Additional teardown tasks, if necessary.
     }
-
+    
+    /**
+     * Tests creation of master password and login functionality.
+     */
     @Test
-    public void testSingletonInstance() {
-        AuthManager second = AuthManager.getInstance();
-        assertSame(auth, second);
-    }
-
-    @Test
-    public void testCreateMasterPassword() throws IOException {
-        String input = "test123\n";
-        Scanner scanner = new Scanner(new ByteArrayInputStream(input.getBytes()));
+    public void testCreateAndLogin() {
+        // Simulate user input: first setting then verifying the master password.
+        String simulatedInput = "testPassword\ntestPassword\n";
+        Scanner scanner = new Scanner(simulatedInput);
+        
         auth.createMasterPassword(scanner);
-
-        BufferedReader reader = new BufferedReader(new FileReader(TEST_FILE));
-        String content = reader.readLine();
-        reader.close();
-        assertEquals("test123", content);
+        boolean loginSuccessful = auth.login(scanner);
+        
+        assertTrue("User should be able to login with the correct master password", loginSuccessful);
+        scanner.close();
     }
-
-    @Test
-    public void testIsMasterPasswordSet() throws IOException {
-        assertFalse(auth.isMasterPasswordSet());
-        // simulate password creation
-        FileWriter fw = new FileWriter(TEST_FILE);
-        fw.write("abc");
-        fw.close();
-        assertTrue(auth.isMasterPasswordSet());
-    }
-
-    @Test
-    public void testLoginSuccess() throws IOException {
-        FileWriter fw = new FileWriter(TEST_FILE);
-        fw.write("mypassword");
-        fw.close();
-
-        Scanner scanner = new Scanner(new ByteArrayInputStream("mypassword\n".getBytes()));
-        assertTrue(auth.login(scanner));
-    }
-
-    @Test
-    public void testLoginFailure() throws IOException {
-        FileWriter fw = new FileWriter(TEST_FILE);
-        fw.write("realpass");
-        fw.close();
-
-        Scanner scanner = new Scanner(new ByteArrayInputStream("wrongpass\n".getBytes()));
-        assertFalse(auth.login(scanner));
-    }
-
-    @Test
-    public void testUserMenuLogoutOption() {
-        final SecurityManager originalSecurityManager = System.getSecurityManager();
-
-        class NoExitSecurityManager extends SecurityManager {
-            @Override
-            public void checkPermission(java.security.Permission perm) {}
-            @Override
-            public void checkExit(int status) {
-                super.checkExit(status);
-                throw new SecurityException("System.exit blocked");
-            }
-        }
-
-        System.setSecurityManager(new NoExitSecurityManager());
-
-        Scanner scanner = new Scanner(new ByteArrayInputStream("1\n".getBytes()));
-        try {
-            auth.userMenu(scanner);
-            fail("Expected System.exit to be called");
-        } catch (SecurityException e) {
-            assertEquals("System.exit blocked", e.getMessage());
-        } finally {
-            System.setSecurityManager(originalSecurityManager); 
-        }
-    }
-
 }

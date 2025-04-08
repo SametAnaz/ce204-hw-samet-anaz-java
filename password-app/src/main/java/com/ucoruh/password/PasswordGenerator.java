@@ -44,4 +44,9 @@ public class PasswordGenerator {
         }
         System.out.println("Password: " + sb);
     }
+
+	public static String generatePassword(int length) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

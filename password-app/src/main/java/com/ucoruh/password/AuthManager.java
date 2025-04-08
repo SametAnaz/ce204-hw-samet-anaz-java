@@ -1,22 +1,27 @@
 package com.ucoruh.password;
 
-import java.io.*;
 import java.util.Scanner;
 
 /**
- * @brief Singleton class responsible for user authentication and master password management.
+ * @brief Singleton class that manages user authentication.
+ *
+ * This class handles the creation and verification of the master password.
+ * It also provides a stub for user-specific functionality.
  */
 public class AuthManager {
-    private static final String MASTER_PASSWORD_FILE = "master-password.txt";
     private static AuthManager instance;
-
-    // Private constructor for Singleton
-    private AuthManager() {}
+    private String masterPassword;  // Stores master password
 
     /**
-     * Returns the singleton instance of AuthManager.
-     *
-     * @return AuthManager instance
+     * Private constructor to enforce singleton pattern.
+     */
+    private AuthManager() {
+        // Private constructor.
+    }
+
+    /**
+     * Retrieve the singleton instance.
+     * @return AuthManager instance.
      */
     public static AuthManager getInstance() {
         if (instance == null) {
@@ -24,63 +29,59 @@ public class AuthManager {
         }
         return instance;
     }
-
+    
     /**
-     * Checks if a master password has already been set.
-     *
-     * @return true if master password exists, false otherwise
+     * Resets the singleton instance.
+     * <p>
+     * This method is intended for testing purposes only.
+     * </p>
+     */
+    public static void resetInstance() {
+        instance = null;
+    }
+    
+    /**
+     * Check if the master password is set.
+     * @return true if master password is set; otherwise false.
      */
     public boolean isMasterPasswordSet() {
-        return new File(MASTER_PASSWORD_FILE).exists();
+        return masterPassword != null && !masterPassword.isEmpty();
     }
-
+    
     /**
-     * Prompts the user to create a new master password and saves it to a file.
-     *
-     * @param scanner Scanner object for reading input
+     * Create the master password.
+     * @param scanner The Scanner object for user input.
      */
     public void createMasterPassword(Scanner scanner) {
-        System.out.print("Create a new master password: ");
-        String pass = scanner.nextLine();
-        try (FileWriter fw = new FileWriter(MASTER_PASSWORD_FILE)) {
-            fw.write(pass);
-            System.out.println("Password saved.");
-        } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
+        System.out.print("Set master password: ");
+        masterPassword = scanner.nextLine();
+        // In production, store a hashed version.
     }
-
+    
     /**
-     * Authenticates the user by verifying the entered master password.
-     *
-     * @param scanner Scanner object for reading input
-     * @return true if authentication is successful, false otherwise
+     * Perform user login.
+     * @param scanner The Scanner object for user input.
+     * @return true if login is successful.
      */
     public boolean login(Scanner scanner) {
-        System.out.print("Enter master password: ");
+        System.out.print("Enter master password to login: ");
         String input = scanner.nextLine();
-        try (BufferedReader reader = new BufferedReader(new FileReader(MASTER_PASSWORD_FILE))) {
-            return input.equals(reader.readLine());
-        } catch (IOException e) {
-            return false;
-        }
+        return masterPassword.equals(input);
     }
-
+    
     /**
-     * Displays the user authentication menu.
-     *
-     * @param scanner Scanner object for reading input
+     * Getter for the master password.
+     * @return The master password.
+     */
+    public String getMasterPassword() {
+        return masterPassword;
+    }
+    
+    /**
+     * Display user-specific menu (stub implementation).
+     * @param scanner The Scanner object for user input.
      */
     public void userMenu(Scanner scanner) {
-        System.out.println("""
-                --- User Authentication ---
-                1. Logout
-                0. Back
-                """);
-        int choice = scanner.nextInt(); scanner.nextLine();
-        if (choice == 1) {
-            System.out.println("Logged out.");
-            System.exit(0);
-        }
+        System.out.println("User menu functionality not yet implemented.");
     }
 }
