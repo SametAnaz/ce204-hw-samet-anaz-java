@@ -1,8 +1,9 @@
 package com.ucoruh.password;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -15,15 +16,13 @@ import org.junit.Test;
 /**
  * @brief Unit tests for the PasswordManager class.
  *
- * These tests cover non-interactive credential management and the interactive menu functionality.
+ * These tests cover non-interactive credential management, the interactive menu,
+ * the Generate Password (case "3"), and the main() method via runApp.
  */
 public class PasswordManagerTest {
 
     /**
-     * @brief Tests that credentials are added and retrieved correctly.
-     *
-     * Verifies that addCredential stores the password and getCredential retrieves it;
-     * also checks that a non-existent account returns null.
+     * Tests that credentials are added and retrieved correctly.
      */
     @Test
     public void testAddAndGetCredential() {
@@ -38,21 +37,14 @@ public class PasswordManagerTest {
     }
 
     /**
-     * @brief Tests the interactive menu by simulating user input.
-     *
-     * This test simulates adding a credential and then retrieving it
-     * by providing a sequence of inputs through a ByteArrayInputStream.
-     * Output is captured via a ByteArrayOutputStream and verified.
+     * Tests the interactive menu by simulating user input for add and retrieve actions.
      */
     @Test
     public void testMenuInteractive() {
         // Simulated input:
-        // 1 -> Choose Add Credential
-        // "account1" -> Account name
-        // "password1" -> Password
-        // 2 -> Choose Retrieve Credential
-        // "account1" -> Account name for retrieval
-        // 4 -> Exit
+        // Option "1": add credential: account "account1", password "password1"
+        // Option "2": retrieve credential: account "account1"
+        // Option "4": exit.
         String simulatedInput = "1\naccount1\npassword1\n2\naccount1\n4\n";
         ByteArrayInputStream testInput = new ByteArrayInputStream(simulatedInput.getBytes(StandardCharsets.UTF_8));
         Scanner scanner = new Scanner(testInput);
@@ -65,21 +57,17 @@ public class PasswordManagerTest {
         scanner.close();
         
         String output = testOutput.toString();
-        // Check that output contains prompts and messages for added credential.
         assertTrue(output.contains("Enter account name:"));
         assertTrue(output.contains("Credential added."));
         assertTrue(output.contains("Password: password1"));
     }
 
     /**
-     * @brief Tests the interactive menu for handling invalid options.
-     *
-     * This test simulates an invalid menu option followed by exit,
-     * and verifies that the output contains the "Invalid option" message.
+     * Tests the interactive menu for handling invalid options.
      */
     @Test
     public void testMenuInvalidOption() {
-        // Simulated input: "invalid" (an invalid menu option) then "4" to exit.
+        // Simulated input: an invalid option then exit.
         String simulatedInput = "invalid\n4\n";
         ByteArrayInputStream testInput = new ByteArrayInputStream(simulatedInput.getBytes(StandardCharsets.UTF_8));
         Scanner scanner = new Scanner(testInput);
@@ -92,7 +80,54 @@ public class PasswordManagerTest {
         scanner.close();
         
         String output = testOutput.toString();
-        // Verify that the "Invalid option." message is present.
         assertTrue(output.contains("Invalid option."));
+    }
+
+    /**
+     * Tests the Generate Password functionality (case "3") in the interactive menu.
+     */
+    @Test
+    public void testMenuCase3() {
+        // Simulated input:
+        // Master password: "dummy"
+        // Option "3" for Generate Password, then length "8", then option "4" to exit.
+        String simulatedInput = "dummy\n3\n8\n4\n";
+        ByteArrayInputStream inStream = new ByteArrayInputStream(simulatedInput.getBytes(StandardCharsets.UTF_8));
+        Scanner scanner = new Scanner(inStream);
+        
+        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(outStream);
+        
+        // Use runApp() to include the master password prompt.
+        PasswordManager.runApp(scanner, printStream);
+        scanner.close();
+        
+        String output = outStream.toString();
+        assertTrue("Output should contain Generated Password:", output.contains("Generated Password:"));
+    }
+
+    /**
+     * Tests the main method functionality via the runApp() method.
+     */
+    @Test
+    public void testMainMethod() {
+        // Simulated input:
+        // Master password: "dummy"
+        // Then option "4" to exit.
+        String simulatedInput = "dummy\n4\n";
+        ByteArrayInputStream inStream = new ByteArrayInputStream(simulatedInput.getBytes(StandardCharsets.UTF_8));
+        Scanner scanner = new Scanner(inStream);
+        
+        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(outStream);
+        
+        // Instead of calling main(), use runApp() directly.
+        PasswordManager.runApp(scanner, printStream);
+        scanner.close();
+        
+        String output = outStream.toString();
+        // Verify the output contains the initial prompt and a menu element.
+        assertTrue("Output should contain 'Enter master password:'", output.contains("Enter master password:"));
+        assertTrue("Output should contain '1. Add Credential'", output.contains("1. Add Credential"));
     }
 }

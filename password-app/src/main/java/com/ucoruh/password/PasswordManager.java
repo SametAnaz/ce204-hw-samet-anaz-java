@@ -75,7 +75,7 @@ public class PasswordManager {
             out.print("Choose an option: ");
             String option = scanner.nextLine();
 
-            switch(option) {
+            switch (option) {
                 case "1":
                     out.print("Enter account name: ");
                     String account = scanner.nextLine();
@@ -111,15 +111,25 @@ public class PasswordManager {
     }
 
     /**
+     * Runs the application using the provided Scanner and PrintStream.
+     * This method allows testing of the main application flow.
+     * @param scanner Scanner for user input.
+     * @param out PrintStream for output.
+     */
+    public static void runApp(Scanner scanner, PrintStream out) {
+        out.print("Enter master password: ");
+        String masterPwd = scanner.nextLine();
+        PasswordManager pm = new PasswordManager(masterPwd);
+        pm.menu(scanner, out);
+    }
+
+    /**
      * Main method to launch the console application.
      * @param args Command-line arguments.
      */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter master password: ");
-        String masterPwd = scanner.nextLine();
-        PasswordManager pm = new PasswordManager(masterPwd);
-        pm.menu(scanner, System.out);
+        runApp(scanner, System.out);
         scanner.close();
     }
 }
