@@ -1,49 +1,27 @@
 package com.ucoruh.password;
 
+import static com.github.stefanbirkner.systemlambda.SystemLambda.tapSystemOut;
 import static org.junit.Assert.assertEquals;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 /**
- * @brief Unit tests for the PlatformManager class.
+ * @brief Unit tests for the PlatformManager class using SystemLambda.
  *
- * Verifies that the showPlatforms() method outputs the expected supported platforms message.
+ * This test captures the output of the showPlatforms() static method and 
+ * compares it with the expected string.
  */
 public class PlatformManagerTest {
 
-    private final PrintStream originalOut = System.out;
-    private ByteArrayOutputStream outContent;
-
-    /**
-     * Set up the output stream to capture console output.
-     */
-    @Before
-    public void setUp() {
-        outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-    }
-
-    /**
-     * Restore the original System.out after each test.
-     */
-    @After
-    public void tearDown() {
-        System.setOut(originalOut);
-    }
-
     /**
      * @brief Tests that showPlatforms() prints the correct supported platforms message.
+     *
+     * Uses SystemLambda's tapSystemOut() to capture System.out output.
      */
     @Test
-    public void testShowPlatforms() {
-        PlatformManager.showPlatforms();
+    public void testShowPlatformsUsingSystemLambda() throws Exception {
+        String output = tapSystemOut(() -> PlatformManager.showPlatforms());
         String expected = "Supported platforms: Windows, macOS, Linux, Android, iOS";
-        String output = outContent.toString().trim();
-        assertEquals("The output of showPlatforms() should match the expected text", expected, output);
+        assertEquals("The output of showPlatforms() should match the expected text", expected, output.trim());
     }
 }
