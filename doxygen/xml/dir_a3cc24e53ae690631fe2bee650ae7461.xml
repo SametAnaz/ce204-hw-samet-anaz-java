@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_a3cc24e53ae690631fe2bee650ae7461" kind="dir">
+    <compoundname>password-app/src/main/java/com/ucoruh/password</compoundname>
+    <innerfile refid="AuthManager_8java">AuthManager.java</innerfile>
+    <innerfile refid="AutoLoginManager_8java">AutoLoginManager.java</innerfile>
+    <innerfile refid="DatabasePasswordStorage_8java">DatabasePasswordStorage.java</innerfile>
+    <innerfile refid="FilePasswordStorage_8java">FilePasswordStorage.java</innerfile>
+    <innerfile refid="InterfacePasswordStorage_8java">InterfacePasswordStorage.java</innerfile>
+    <innerfile refid="Password_8java">Password.java</innerfile>
+    <innerfile refid="PasswordApp_8java">PasswordApp.java</innerfile>
+    <innerfile refid="PasswordGenerator_8java">PasswordGenerator.java</innerfile>
+    <innerfile refid="PasswordManager_8java">PasswordManager.java</innerfile>
+    <innerfile refid="PasswordStorageFactory_8java">PasswordStorageFactory.java</innerfile>
+    <innerfile refid="PlatformManager_8java">PlatformManager.java</innerfile>
+    <innerfile refid="StorageType_8java">StorageType.java</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="password-app/src/main/java/com/ucoruh/password/"/>
+  </compounddef>
+</doxygen>

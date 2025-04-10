@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="StorageType_8java" kind="file" language="Java">
+    <compoundname>StorageType.java</compoundname>
+    <innerclass refid="enumcom_1_1ucoruh_1_1password_1_1StorageType" prot="public">com::ucoruh::password::StorageType</innerclass>
+    <innernamespace refid="namespacecom_1_1ucoruh_1_1password">com::ucoruh::password</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="keyword">package<sp/></highlight><highlight class="normal">com.ucoruh.password;</highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6" refid="enumcom_1_1ucoruh_1_1password_1_1StorageType" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="enumcom_1_1ucoruh_1_1password_1_1StorageType" kindref="compound">StorageType</ref><sp/>{</highlight></codeline>
+<codeline lineno="7" refid="enumcom_1_1ucoruh_1_1password_1_1StorageType_1abf055d3f5792b39ddce614391f38fe3d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="enumcom_1_1ucoruh_1_1password_1_1StorageType_1abf055d3f5792b39ddce614391f38fe3d" kindref="member">FILE</ref>,</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/>SQLITE</highlight></codeline>
+<codeline lineno="9" refid="enumcom_1_1ucoruh_1_1password_1_1StorageType_1aa5cd323ea0d9febe1387d0487ad55846" refkind="member"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="password-app/src/main/java/com/ucoruh/password/StorageType.java"/>
+  </compounddef>
+</doxygen>

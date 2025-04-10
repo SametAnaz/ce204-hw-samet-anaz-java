@@ -1,0 +1,1 @@
+genhtml ./password-app/target/site/coverxygen/lcov.info --legend --title 'Documentation Coverage Report' -o password-app/target/site/coverxygen

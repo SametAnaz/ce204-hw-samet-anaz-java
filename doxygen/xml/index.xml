@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.9.8" xml:lang="en-US">
+  <compound refid="classcom_1_1ucoruh_1_1password_1_1AuthManager" kind="class"><name>com::ucoruh::password::AuthManager</name>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1AuthManager_1a089d685cbe1d6965f87ad73809f8610f" kind="variable"><name>instance</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1AuthManager_1a6ded5635a1f0a35e1ae3af6dac726ec8" kind="variable"><name>masterPassword</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1AuthManager_1aeac8412639f96ea0fa0e6e3daa175b1b" kind="function"><name>AuthManager</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1AuthManager_1a57d8f4ee816f0b15170bbaa11af24a78" kind="function"><name>getInstance</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1AuthManager_1a284077a94ff867d2aceef13ea6d5c7f7" kind="function"><name>resetInstance</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1AuthManager_1a0ac402a736634c3b63c88772f0758bb2" kind="function"><name>isMasterPasswordSet</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1AuthManager_1aee4b1dc5254ca5318ddbae1fb1423c4d" kind="function"><name>createMasterPassword</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1AuthManager_1a9c2c297da2f557714394b4b48467cec0" kind="function"><name>login</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1AuthManager_1ad670e15b89405a182394e55eaaea0013" kind="function"><name>getMasterPassword</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1AuthManager_1a7c27efe3ab593db7714bcd9c64b75986" kind="function"><name>userMenu</name></member>
+  </compound>
+  <compound refid="classcom_1_1ucoruh_1_1password_1_1AutoLoginManager" kind="class"><name>com::ucoruh::password::AutoLoginManager</name>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1AutoLoginManager_1a9a03ef69aa94bef54cd0bfc4ce73f1ee" kind="function"><name>menu</name></member>
+  </compound>
+  <compound refid="classcom_1_1ucoruh_1_1password_1_1DatabasePasswordStorage" kind="class"><name>com::ucoruh::password::DatabasePasswordStorage</name>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1DatabasePasswordStorage_1abe5bd35d83e3f33648791ec682d8c6fe" kind="variable"><name>DB_URL</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1DatabasePasswordStorage_1a8407a622c453c35b076bef915d108084" kind="function"><name>DatabasePasswordStorage</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1DatabasePasswordStorage_1a07285fbf443c7c8790947cff4cd3ebdc" kind="function"><name>add</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1DatabasePasswordStorage_1a6f8ca35d6d3e8fff03c99133a4f4beec" kind="function"><name>view</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1DatabasePasswordStorage_1a61feb6c18f0e22a9b92203fc7c8af9e1" kind="function"><name>update</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1DatabasePasswordStorage_1ab99893f3e2fa6b2eb0fcb99b2e55247a" kind="function"><name>delete</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1DatabasePasswordStorage_1a28ccd318382e7cf641aed55886e6ff3f" kind="function"><name>readAll</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1DatabasePasswordStorage_1a26b59d024d16e04652ad406520dd0ce4" kind="function"><name>writeAll</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1DatabasePasswordStorage_1ad4622a897df6bae99b16e18a678c918c" kind="function"><name>getDatabaseUrl</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1DatabasePasswordStorage_1ab2d6f75e2e2c31dd6529823132e63686" kind="function"><name>createTableIfNotExists</name></member>
+  </compound>
+  <compound refid="classcom_1_1ucoruh_1_1password_1_1FilePasswordStorage" kind="class"><name>com::ucoruh::password::FilePasswordStorage</name>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1FilePasswordStorage_1aab77f89c0b09a56c5e7e2763bf5469fa" kind="variable"><name>FILE</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1FilePasswordStorage_1a8fc35fcfc82e8e34d1061b28fb24a0b5" kind="function"><name>add</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1FilePasswordStorage_1a58f0fd74ada8b31a9288c04f1335f538" kind="function"><name>view</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1FilePasswordStorage_1ac876d3414ca43cf9d97bbee8ae4987e6" kind="function"><name>update</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1FilePasswordStorage_1a769bbc8b5e780b402d8b4503dc064eef" kind="function"><name>delete</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1FilePasswordStorage_1a2a79362bebd36965f359f256750f5147" kind="function"><name>readAll</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1FilePasswordStorage_1af65af5b5fca90a2021c0824cbb9eee77" kind="function"><name>writeAll</name></member>
+  </compound>
+  <compound refid="interfacecom_1_1ucoruh_1_1password_1_1InterfacePasswordStorage" kind="interface"><name>com::ucoruh::password::InterfacePasswordStorage</name>
+    <member refid="interfacecom_1_1ucoruh_1_1password_1_1InterfacePasswordStorage_1a0fe076c31fbdcf4a4bb9d5902851fca9" kind="function"><name>add</name></member>
+    <member refid="interfacecom_1_1ucoruh_1_1password_1_1InterfacePasswordStorage_1a1dd4753ae620eb3ec34006f979e476c1" kind="function"><name>view</name></member>
+    <member refid="interfacecom_1_1ucoruh_1_1password_1_1InterfacePasswordStorage_1a9bf1269fa12c4029241f22e58160278a" kind="function"><name>update</name></member>
+    <member refid="interfacecom_1_1ucoruh_1_1password_1_1InterfacePasswordStorage_1ac377db9714e0f1f33125348443be6618" kind="function"><name>delete</name></member>
+    <member refid="interfacecom_1_1ucoruh_1_1password_1_1InterfacePasswordStorage_1a510a9229f4894c56948b68c6e9533377" kind="function"><name>readAll</name></member>
+    <member refid="interfacecom_1_1ucoruh_1_1password_1_1InterfacePasswordStorage_1a79682a7a8403b0c830f54cfbdc0a2536" kind="function"><name>writeAll</name></member>
+  </compound>
+  <compound refid="classcom_1_1ucoruh_1_1password_1_1Password" kind="class"><name>com::ucoruh::password::Password</name>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1Password_1a96d88995d6f6d75cdbde758800706632" kind="variable"><name>service</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1Password_1a34cc4b9842e9cc614483ae6b834d5354" kind="variable"><name>username</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1Password_1a2369a07982462a155b5072bfa9235f9a" kind="variable"><name>password</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1Password_1a2426ee892932f9622c7c9e0dba29b12f" kind="function"><name>Password</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1Password_1aeee47c0814f07a2786e001de460dca56" kind="function"><name>getService</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1Password_1ac71524f3858846e80ae071427f8dbbbb" kind="function"><name>getUsername</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1Password_1ae283c08b711f5184d21d6e4cb8bc84fd" kind="function"><name>getPassword</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1Password_1a61385ad34ca377c79c6e1c5042b7da1b" kind="function"><name>setUsername</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1Password_1a50fde41c22e09aa73e41a27cbc0e1458" kind="function"><name>setPassword</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1Password_1a576182bb96979cfcf79af917faa6f0cb" kind="function"><name>toString</name></member>
+  </compound>
+  <compound refid="classcom_1_1ucoruh_1_1password_1_1PasswordApp" kind="class"><name>com::ucoruh::password::PasswordApp</name>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1PasswordApp_1a09619322e5a449a7983bec3956c157e6" kind="function"><name>runApp</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1PasswordApp_1a640e1d366f86d17023d58550428ff795" kind="function"><name>main</name></member>
+  </compound>
+  <compound refid="classcom_1_1ucoruh_1_1password_1_1PasswordGenerator" kind="class"><name>com::ucoruh::password::PasswordGenerator</name>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1PasswordGenerator_1a17f426d87cf23321432105a084cb7b9b" kind="variable"><name>CHARACTERS</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1PasswordGenerator_1a8aea66fb62433e17575299ffd6ba0b52" kind="function"><name>generatePassword</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1PasswordGenerator_1a310273be744ee0a5983a605d0ee8dc66" kind="function"><name>generate</name></member>
+  </compound>
+  <compound refid="classcom_1_1ucoruh_1_1password_1_1PasswordManager" kind="class"><name>com::ucoruh::password::PasswordManager</name>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1PasswordManager_1a634662335d29380ac2e88f0cf557b231" kind="variable"><name>credentials</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1PasswordManager_1a7cff5a6dafccaa5187a9b97a7d9c715f" kind="variable"><name>masterPassword</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1PasswordManager_1a903e09f359bffd2d40b66bcd240aaefd" kind="function"><name>PasswordManager</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1PasswordManager_1a18c3f249db545c340acb1705e8fe8d17" kind="function"><name>addCredential</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1PasswordManager_1a6275d915b04160563e97237369a26aff" kind="function"><name>getCredential</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1PasswordManager_1a6fc0efa64346092b3a41b5706c98e1e0" kind="function"><name>menu</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1PasswordManager_1aa27558f501baddc354ff46d0bd0cbcaf" kind="function"><name>loadCredentials</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1PasswordManager_1a0bd3ef7994847cf8850ea0f7d00c820e" kind="function"><name>saveCredentials</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1PasswordManager_1ac54c89533970ab1079065cf2fac576f4" kind="function"><name>runApp</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1PasswordManager_1a3cb37a64c5cc86e0075dd195a8374d6e" kind="function"><name>main</name></member>
+  </compound>
+  <compound refid="classcom_1_1ucoruh_1_1password_1_1PasswordStorageFactory" kind="class"><name>com::ucoruh::password::PasswordStorageFactory</name>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1PasswordStorageFactory_1aaa4fc0b490bae5aed3c06334b222dd84" kind="function"><name>create</name></member>
+  </compound>
+  <compound refid="classcom_1_1ucoruh_1_1password_1_1PlatformManager" kind="class"><name>com::ucoruh::password::PlatformManager</name>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1PlatformManager_1a0ed6dd9a7435c3135c0d0b2a4608d7bf" kind="function"><name>showPlatforms</name></member>
+  </compound>
+  <compound refid="enumcom_1_1ucoruh_1_1password_1_1StorageType" kind="enum"><name>com::ucoruh::password::StorageType</name>
+    <member refid="enumcom_1_1ucoruh_1_1password_1_1StorageType_1abf055d3f5792b39ddce614391f38fe3d" kind="variable"><name>FILE</name></member>
+    <member refid="enumcom_1_1ucoruh_1_1password_1_1StorageType_1aa5cd323ea0d9febe1387d0487ad55846" kind="variable"><name>SQLITE</name></member>
+  </compound>
+  <compound refid="namespacecom" kind="namespace"><name>com</name>
+  </compound>
+  <compound refid="namespacecom_1_1ucoruh" kind="namespace"><name>com::ucoruh</name>
+  </compound>
+  <compound refid="namespacecom_1_1ucoruh_1_1password" kind="namespace"><name>com::ucoruh::password</name>
+  </compound>
+  <compound refid="namespacejava_1_1lang" kind="namespace"><name>java::lang</name>
+  </compound>
+  <compound refid="AuthManager_8java" kind="file"><name>AuthManager.java</name>
+  </compound>
+  <compound refid="AutoLoginManager_8java" kind="file"><name>AutoLoginManager.java</name>
+  </compound>
+  <compound refid="DatabasePasswordStorage_8java" kind="file"><name>DatabasePasswordStorage.java</name>
+  </compound>
+  <compound refid="FilePasswordStorage_8java" kind="file"><name>FilePasswordStorage.java</name>
+  </compound>
+  <compound refid="InterfacePasswordStorage_8java" kind="file"><name>InterfacePasswordStorage.java</name>
+  </compound>
+  <compound refid="Password_8java" kind="file"><name>Password.java</name>
+  </compound>
+  <compound refid="PasswordApp_8java" kind="file"><name>PasswordApp.java</name>
+  </compound>
+  <compound refid="PasswordGenerator_8java" kind="file"><name>PasswordGenerator.java</name>
+  </compound>
+  <compound refid="PasswordManager_8java" kind="file"><name>PasswordManager.java</name>
+  </compound>
+  <compound refid="PasswordStorageFactory_8java" kind="file"><name>PasswordStorageFactory.java</name>
+  </compound>
+  <compound refid="PlatformManager_8java" kind="file"><name>PlatformManager.java</name>
+  </compound>
+  <compound refid="StorageType_8java" kind="file"><name>StorageType.java</name>
+  </compound>
+  <compound refid="dir_ab93d7df21b9e909f8bb63d659b99166" kind="dir"><name>password-app/src/main/java/com</name>
+  </compound>
+  <compound refid="dir_21ff29864e818d55bb4c7f5cd6d30e79" kind="dir"><name>password-app/src/main/java</name>
+  </compound>
+  <compound refid="dir_54e50b1f022e1ff73c34586ea84a3874" kind="dir"><name>password-app/src/main</name>
+  </compound>
+  <compound refid="dir_a3cc24e53ae690631fe2bee650ae7461" kind="dir"><name>password-app/src/main/java/com/ucoruh/password</name>
+  </compound>
+  <compound refid="dir_a29944098af7c90c1398c33572b13cfb" kind="dir"><name>password-app</name>
+  </compound>
+  <compound refid="dir_da58ea00117d24ea88aed9ac4fa75808" kind="dir"><name>password-app/src</name>
+  </compound>
+  <compound refid="dir_9127c4b107bf6a0aa9abeef0d467cd92" kind="dir"><name>password-app/src/main/java/com/ucoruh</name>
+  </compound>
+</doxygenindex>

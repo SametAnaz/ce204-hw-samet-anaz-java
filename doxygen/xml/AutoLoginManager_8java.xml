@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="AutoLoginManager_8java" kind="file" language="Java">
+    <compoundname>AutoLoginManager.java</compoundname>
+    <includes local="no">java.util.Scanner</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>password-app/src/main/java/com/ucoruh/password/AutoLoginManager.java</label>
+        <link refid="AutoLoginManager_8java"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>java.util.Scanner</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classcom_1_1ucoruh_1_1password_1_1AutoLoginManager" prot="public">com::ucoruh::password::AutoLoginManager</innerclass>
+    <innernamespace refid="namespacecom_1_1ucoruh_1_1password">com::ucoruh::password</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="keyword">package<sp/></highlight><highlight class="normal">com.ucoruh.password;</highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>java.util.Scanner;</highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8" refid="classcom_1_1ucoruh_1_1password_1_1AutoLoginManager" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classcom_1_1ucoruh_1_1password_1_1AutoLoginManager" kindref="compound">AutoLoginManager</ref><sp/>{</highlight></codeline>
+<codeline lineno="13" refid="classcom_1_1ucoruh_1_1password_1_1AutoLoginManager_1a9a03ef69aa94bef54cd0bfc4ce73f1ee" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classcom_1_1ucoruh_1_1password_1_1AutoLoginManager_1a9a03ef69aa94bef54cd0bfc4ce73f1ee" kindref="member">menu</ref>(Scanner<sp/>scanner)<sp/>{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Do<sp/>not<sp/>attempt<sp/>to<sp/>read<sp/>input<sp/>here;<sp/>simply<sp/>output<sp/>a<sp/>placeholder<sp/>message.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>System.out.println(</highlight><highlight class="stringliteral">&quot;Auto-Login<sp/>Feature<sp/>activated.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="17"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="password-app/src/main/java/com/ucoruh/password/AutoLoginManager.java"/>
+  </compounddef>
+</doxygen>

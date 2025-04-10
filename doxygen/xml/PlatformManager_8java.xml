@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="PlatformManager_8java" kind="file" language="Java">
+    <compoundname>PlatformManager.java</compoundname>
+    <innerclass refid="classcom_1_1ucoruh_1_1password_1_1PlatformManager" prot="public">com::ucoruh::password::PlatformManager</innerclass>
+    <innernamespace refid="namespacecom_1_1ucoruh_1_1password">com::ucoruh::password</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="keyword">package<sp/></highlight><highlight class="normal">com.ucoruh.password;</highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6" refid="classcom_1_1ucoruh_1_1password_1_1PlatformManager" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classcom_1_1ucoruh_1_1password_1_1PlatformManager" kindref="compound">PlatformManager</ref><sp/>{</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11" refid="classcom_1_1ucoruh_1_1password_1_1PlatformManager_1a0ed6dd9a7435c3135c0d0b2a4608d7bf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classcom_1_1ucoruh_1_1password_1_1PlatformManager_1a0ed6dd9a7435c3135c0d0b2a4608d7bf" kindref="member">showPlatforms</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>System.out.println(</highlight><highlight class="stringliteral">&quot;Supported<sp/>platforms:<sp/>Windows,<sp/>macOS,<sp/>Linux,<sp/>Android,<sp/>iOS&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="14"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="password-app/src/main/java/com/ucoruh/password/PlatformManager.java"/>
+  </compounddef>
+</doxygen>

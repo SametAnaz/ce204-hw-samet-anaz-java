@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_9127c4b107bf6a0aa9abeef0d467cd92" kind="dir">
+    <compoundname>password-app/src/main/java/com/ucoruh</compoundname>
+    <innerdir refid="dir_a3cc24e53ae690631fe2bee650ae7461">password-app/src/main/java/com/ucoruh/password</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="password-app/src/main/java/com/ucoruh/"/>
+  </compounddef>
+</doxygen>
