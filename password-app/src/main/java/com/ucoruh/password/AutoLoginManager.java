@@ -6,7 +6,6 @@ import java.util.Scanner;
  * @brief Stub class for the Auto-Login Feature.
  */
 public class AutoLoginManager {
-
     /**
      * Displays a placeholder message for Auto-Login Feature.
      * @param scanner Scanner for user input.

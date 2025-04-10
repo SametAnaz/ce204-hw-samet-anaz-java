@@ -143,7 +143,7 @@ jobs:
         id: create_common_release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.MAVEN_TEMPLATE_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.SECRET_SAMET }}
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
@@ -151,7 +151,7 @@ jobs:
             Changes in this release:
             ${{ steps.commit_summary.outputs.summary }}
             
-            Asst. Prof. Dr. Ugur CORUH
+            Prof. Dr. Samet Anaz
           draft: false
           prerelease: false
                 
@@ -175,7 +175,7 @@ jobs:
           asset_name: password.jar
           asset_content_type: application/jar
         env:
-          GITHUB_TOKEN: ${{ secrets.MAVEN_TEMPLATE_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.SECRET_SAMET }}
           
       - name: Upload Test Coverage Report
         uses: actions/upload-release-asset@v1
@@ -185,7 +185,7 @@ jobs:
           asset_name: test-coverage-report.tar.gz
           asset_content_type: application/gzip
         env:
-          GITHUB_TOKEN: ${{ secrets.MAVEN_TEMPLATE_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.SECRET_SAMET }}
           
       - name: Upload Doc Coverage Report
         uses: actions/upload-release-asset@v1
@@ -195,7 +195,7 @@ jobs:
           asset_name: doc-coverage-report.tar.gz
           asset_content_type: application/gzip
         env:
-          GITHUB_TOKEN: ${{ secrets.MAVEN_TEMPLATE_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.SECRET_SAMET }}
           
       - name: Upload Doxygen Documentation
         uses: actions/upload-release-asset@v1
@@ -205,7 +205,7 @@ jobs:
           asset_name: app-documents.tar.gz
           asset_content_type: application/gzip
         env:
-          GITHUB_TOKEN: ${{ secrets.MAVEN_TEMPLATE_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.SECRET_SAMET }}
           
       - name: Upload Web Site
         uses: actions/upload-release-asset@v1
@@ -215,10 +215,10 @@ jobs:
           asset_name: app-website.tar.gz
           asset_content_type: application/gzip
         env:
-          GITHUB_TOKEN: ${{ secrets.MAVEN_TEMPLATE_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.SECRET_SAMET }}
           
       - name: Deploy Web Site
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.MAVEN_TEMPLATE_TOKEN }}
+          github_token: ${{ secrets.SECRET_SAMET }}
           publish_dir: ./password-app/target/site

@@ -7,7 +7,6 @@ import java.util.*;
  * SQLite-based implementation of password storage.
  */
 public class DatabasePasswordStorage implements InterfacePasswordStorage {
-
     private static final String DB_URL = "jdbc:sqlite:passwords.db";
 
     public DatabasePasswordStorage() {

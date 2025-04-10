@@ -7,7 +7,6 @@ import java.util.Scanner;
  * Entry point for the Password Manager console application.
  */
 public class PasswordApp {
-
     /**
      * Runs the application using the provided Scanner and PrintStream.
      * This method is designed for testing and production use.

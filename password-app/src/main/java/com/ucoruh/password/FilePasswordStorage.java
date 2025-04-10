@@ -7,7 +7,6 @@ import java.util.*;
  * Implementation of InterfacePasswordStorage using file-based storage.
  */
 public class FilePasswordStorage implements InterfacePasswordStorage {
-
     private static final String FILE = "passwords.txt";
 
     @Override

@@ -85,7 +85,7 @@ call mvn site
 cd ..
 
 echo Package Output Jar Files
-tar -czvf release\application-binary.tar.gz -C password-app\target '*.jar'
+tar -czvf release\application-binary.tar.gz -C password-app\target *.jar
 
 echo Package Jacoco Test Coverage Report (Optional)
 call tar -czvf release\test-jacoco-report.tar.gz -C password-app\target\site\jacoco .

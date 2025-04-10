@@ -10,7 +10,6 @@ import static org.junit.Assert.*;
  * Unit test for AutoLoginManager class.
  */
 public class AutoLoginManagerTest {
-
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
 
