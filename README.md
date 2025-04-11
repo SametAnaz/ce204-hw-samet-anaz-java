@@ -2,119 +2,31 @@
 
 # Overview
 
-You will generate eclipse maven project with Junit4 from CLI and. Also you will generate jar and then you will run your application. For more information you can check examples [Maven – Maven in 5 Minutes](https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html) and [TheNEXUS | A Community Project](https://books.sonatype.com/mvnref-book/reference/index.html)
-
+The Password Application is a secure and lightweight console-based password manager developed using Java and the Maven framework. It provides essential features such as encrypted password storage, strong password generation, user authentication, and platform-based credential organization. Designed with modularity and maintainability in mind, the application leverages object-oriented principles and supports SQLite for local database management. This project also integrates test coverage and documentation tools, and is structured to allow future expansion, including GUI development.
 ## Releases
 
 - [![GitHub release badge](https://badgen.net/github/release/ucoruh/ce204-hw-samet-anaz-java)](https://github.com/SametAnaz/ce204-hw-samet-anaz-java.git/releases/latest)
 
-## Platforms
 
-- ![Ubuntu badge](assets/badge-ubuntu.svg)
+## Uml Class Diagrams
+## Class Diagram
+![](assets/UmlClassDiagram.png)
+## Sqeence Diagram
+![](assets/Squence.png)
+## C4 Diagram
+![](assets/C4.png)
+## Context Diagram
+![](assets/ContextDiagram.png)
+## Conteiner Diagram
+![](assets/Conteiner.png)
+## C4 Code Diagram
+![](assets/C4codeDiagram.png)
+## Use Case Diagram
+![](assets/UsaCase.png)
 
-- ![macOS badge](assets/badge-macos.svg)
 
-- ![Windows badge](assets/badge-windows.svg)
 
-## Test Coverage
 
-[![Release](https://github.com/SametAnaz/ce204-hw-samet-anaz-java.git/actions/workflows/release.yml/badge.svg)](https://github.com/SametAnaz/ce204-hw-samet-anaz-java.git/actions/workflows/release.yml)
-
-**Coverage**
-
-- ![All](assets/badge_combined.svg)
-
-**Branch Coverage**
-
-- ![Branch Coverage](assets/badge_branchcoverage.svg)
-
-**Line Coverage**
-
-- ![Line Coverage](assets/badge_linecoverage.svg)
-
-**Method Coverage**
-
-- ![Method Coverage](assets/badge_methodcoverage.svg)
-
-### Install Requirements
-
-- Eclipse
-  
-  - [Eclipse Downloads | The Eclipse Foundation](https://www.eclipse.org/downloads/)
-
-- Maven
-  
-  - [Maven – Download Apache Maven](https://maven.apache.org/download.cgi)
-
-- JDK
-  
-  - [Eclipse Downloads | The Eclipse Foundation](https://www.eclipse.org/downloads/)
-
-- Lcov
-  
-  - https://fredgrott.medium.com/lcov-on-windows-7c58dda07080
-
-- Coverxygen
-  
-  - [coverxygen · PyPI](https://pypi.org/project/coverxygen/)
-  
-  - [GitHub - psycofdj/coverxygen: Generate doxygen&#39;s documentation coverage report](https://github.com/psycofdj/coverxygen)
-
-- Reportgenerator
-  
-  - https://reportgenerator.io/
-
-```bash
-dotnet tool install -g dotnet-reportgenerator-globaltool
-```
-
-- Choose Licence
-  
-  - [Appendix | Choose a License](https://choosealicense.com/appendix/)
-
-#### Package Manager Windows Setup
-
-We will install required application with package manager on Windows so use following script to install [chocolatey](https://chocolatey.org/install) and [scoop](https://scoop.sh/)
-
-```batch
-@echo off
-@setlocal enableextensions
-@cd /d "%~dp0"
-
-echo Checking if Chocolatey is installed...
-if exist "%ProgramData%\Chocolatey\bin\choco.exe" (
-    echo Chocolatey is already installed.
-) else (
-    echo Installing Chocolatey...
-    powershell -Command "Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))"
-)
-
-echo Checking if Scoop is installed...
-where scoop >nul 2>&1
-if %errorlevel%==0 (
-    echo Scoop is already installed.
-) else (
-    echo Scoop is not installed. Installing Scoop...
-    powershell Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
-    powershell Set-ExecutionPolicy RemoteSigned -scope CurrentUser
-)
-
-pause
-```
-
-### Pre-Commit Code Formatter Astyle Installation
-
-Before each commit also with batch script we will format our code with astyle we need to install it with package manager as following script you can visit package manager web site for more details [Chocolatey Software | Artistic Style 3.2.1](https://community.chocolatey.org/packages/astyle) and [https://astyle.sourceforge.net/](https://astyle.sourceforge.net/)
-
-```batch
-@echo off
-@setlocal enableextensions
-@cd /d "%~dp0"
-echo Installing Astyle...
-choco install astyle
-```
-
-Astyle tool need configuration there is example configuration named `astyle-options.txt`
 
 ```yaml
 # https://github.com/brchiu/openairinterface5g/blob/master/ci-scripts/astyle-options.txt
@@ -146,309 +58,8 @@ break-after-logical
 # lineend=linux
 ```
 
-After installation and config file generation we can format our code with following script this script look for .cs extension and format related files according to configuration in astyle-options.txt
 
-```batch
-@echo off
-@setlocal enableextensions
-@cd /d "%~dp0"
 
-echo Formatting Code with Astyle...
-
-astyle --options="astyle-options.txt" --recursive *.cs
-
-pause
-```
-
-### Doxygen and Graphviz Setup + MkDocs Material Theme
-
-We will use package manager for this but also we can use several tools I prefer to use following script to install all parties, This setup also use for mkdocs material them documentation generation maybe we can use for project website generation
-
-```batch
-@echo off
-@setlocal enableextensions
-@cd /d "%~dp0"
-
-rem force re-install need "--force --force-dependencies -y" parameters
-
-REM Test if Pandoc is installed
-where pandoc >nul 2>&1
-if %errorlevel%==0 (
-    echo Pandoc is already installed.
-) else (
-    echo Installing Pandoc...
-    choco install pandoc -y
-)
-
-REM Test if rsvg-convert is installed
-where rsvg-convert >nul 2>&1
-if %errorlevel%==0 (
-    echo rsvg-convert is already installed.
-) else (
-    echo Installing rsvg-convert...
-    choco install rsvg-convert -y
-)
-
-REM Test if Python is installed
-where python >nul 2>&1
-if %errorlevel%==0 (
-    echo Python is already installed.
-) else (
-    echo Installing Python...
-    choco install python -y
-)
-
-
-REM Test if Miktex is installed
-where miktex >nul 2>&1
-if %errorlevel%==0 (
-    echo Miktex is already installed.
-) else (
-    echo Installing Miktex...
-    choco install miktex -y
-)
-
-REM Test if CuRL is installed
-where curl >nul 2>&1
-if %errorlevel%==0 (
-    echo curl is already installed.
-) else (
-    echo Installing CuRL...
-    choco install curl -y
-)
-
-REM Test if MARP-CLI is installed
-where marp >nul 2>&1
-if %errorlevel%==0 (
-    echo MARP-CLI is already installed.
-) else (
-    echo Installing MARP-CLI...
-    choco install marp-cli -y
-)
-
-REM Test if Doxygen is installed
-where doxygen >nul 2>&1
-if %errorlevel%==0 (
-    echo MARP-CLI is already installed.
-) else (
-    echo Installing Doxygen...
-    choco install doxygen.install -y
-)
-
-REM Test if Doxygen is installed
-where dot >nul 2>&1
-if %errorlevel%==0 (
-    echo Graphviz is already installed.
-) else (
-    echo Installing Graphviz...
-    choco install graphviz -y
-)
-
-pip install mkdocs
-pip install pymdown-extensions
-pip install mkdocs-material
-pip install mkdocs-material-extensions
-pip install mkdocs-simple-hooks
-pip install mkdocs-video
-pip install mkdocs-minify-plugin
-pip install mkdocs-git-revision-date-localized-plugin
-pip install mkdocs-minify-plugin
-pip install mkdocs-static-i18n
-pip install mkdocs-with-pdf
-pip install qrcode
-pip install mkdocs-awesome-pages-plugin
-pip install mkdocs-embed-external-markdown
-pip install mkdocs-include-markdown-plugin
-pip install mkdocs-ezlinks-plugin
-pip install mkdocs-git-authors-plugin
-pip install mkdocs-git-committers-plugin
-pip install mkdocs-exclude
-
-pip install pptx2md
-pause
-```
-
-After doxygen installation create default doxygen file with -g option
-
-```batch
-doxygen -g
-```
-
-This will create Doxyfile for us to modify. Use Doxywizard to modify file. Be sure that your output directory should be **./docs** and all warnings should be opened and warnings stop operations.
-
-# 
-
-#### coverxygen Setup
-
-We are parsing doxygen XML output with coverxygen and generate info file for LCOV. This tool generate output that LCOV use and generate HTML document coverage report
-
-To install coverxygen you need python and pip
-
-```bash
-@echo off
-@setlocal enableextensions
-@cd /d "%~dp0"
-echo Installing converxygen doxygen XML parser
-pip install coverxygen
-```
-
-#### LCOV Setup
-
-LCOV is use to generate HTML document coverage tool in this project, but it can be used for different purposes. You can use choco package manager to install application as follow
-
-```bash
-@echo off
-@setlocal enableextensions
-@cd /d "%~dp0"
-echo Installing Report Generator...
-choco install lcov -y
-echo lcov and genhtml located on C:\ProgramData\chocolatey\lib\lcov\tools\bin\
-pause
-```
-
-#### ReportGenerator Setup
-
-We need to install [reportgenerator](https://reportgenerator.io/) for creation of HTML test reports, we will use choco to install visit package manager web site [Chocolatey Software | ReportGenerator (Portable) - Generates reports for various code coverage tools 5.1.20](https://community.chocolatey.org/packages/reportgenerator.portable)
-
-```batch
-@echo off
-@setlocal enableextensions
-@cd /d "%~dp0"
-echo Installing Report Generator...
-choco install reportgenerator.portable
-```
-
-## Repository Setup
-
-#### Github Repositoy Creation
-
-First create a empty project in github and clone it to your PC,
-
-#### Pre-Commit Action Restrictions
-
-Use following pre-commit script and replace it with `.git/hook/precommit`
-
-```bash
-#!/bin/bash
-# Installation:
-#   Copy this script as pre-commit to .git/hooks folder
-
-OPTIONS="--options=astyle-options.txt"
-
-# Check if .gitignore file exists
-if [ ! -f astyle-options.txt ]; then
-    echo "[!] astyle-options.txt file not found. Please make sure the astyle-options.txt file is present." >&2
-    exit 1
-fi
-
-RETURN=0
-ASTYLE=$(command -v astyle)
-if [ $? -ne 0 ]; then
-    echo "[!] AStyle is not installed. Unable to check source file format policy." >&2
-    exit 1
-fi
-
-# Check if .gitignore file exists
-if [ ! -f .gitignore ]; then
-    echo "[!] .gitignore file not found. Please make sure the .gitignore file is present." >&2
-    exit 1
-fi
-
-# Check if README.md file exists
-if [ ! -f README.md ]; then
-    echo "[!] README.md file not found. Please make sure the README.md file is present." >&2
-    exit 1
-fi
-
-# Check if .gitignore file exists
-if [ ! -f Doxyfile ]; then
-    echo "[!] Doxyfile file not found. Please make sure the Doxyfile file is present." >&2
-    exit 1
-fi
-
-FILES=$(git diff --cached --name-only --diff-filter=ACMRTUXB | grep -E "\.(cs|java|c|cpp|h)$")
-for FILE in $FILES; do
-    FORMATTED=$( "$ASTYLE" $OPTIONS < "$FILE" 2>&1 )
-    if [ $? -ne 0 ]; then
-        echo "[!] Error formatting $FILE:" >&2
-        echo "$FORMATTED" >&2
-        RETURN=1
-    elif [ -n "$FORMATTED" ]; then
-        echo "Formatted $FILE"
-        echo "$FORMATTED"
-        echo ""
-        echo "$FORMATTED" > "$FILE"
-        git add "$FILE"
-    fi
-done
-
-if [ $RETURN -eq 1 ]; then
-    echo "" >&2
-    echo "Make sure you have run AStyle with the following options:" >&2
-    echo $OPTIONS >&2
-fi
-
-exit $RETURN
-```
-
-This script will check astyle-options.txt file, gitignore file, README.md file and Doxyfile is exist if not it will be terminate your commit operation. Also after `astyle` installation and `astyle-options.txt` generation it will automatically format your source code before each commit. Formatting configuration will be stored in `astyle-options.txt` .
-
-#### Create .gitignore with TOPTAL API via batch script
-
-Use the following script to generate .gitignore file, you can change gitignore file by changing the configuration after `https://www.toptal.com/developers/gitignore/api`
-
-This is the selected configuration
-
-`c,csharp,vs,visualstudio,visualstudiocode,java,maven,c++,cmake,eclipse,netbeans`
-
-```batch
-@echo off
-
-set API_URL=https://www.toptal.com/developers/gitignore/api/c,csharp,vs,visualstudio,visualstudiocode,java,maven,c++,cmake,eclipse,netbeans
-set OUTPUT_FILE=.gitignore
-
-REM Set the running folder to the current working folder
-cd /d "%~dp0"
-
-REM Download the API results using curl
-curl -s -o %OUTPUT_FILE% %API_URL%
-
-echo Downloaded .gitignore file from %API_URL% and saved as %OUTPUT_FILE%
-
-pause
-```
-
-#### Create an Empty README.md file
-
-Create and EMPTY `README.md` file and during project fill required parts
-
-#### Create Default Doxyfile
-
-Use following command to generate default `Doxyfile` if you didn't create or you can use pre-configured configuration and you can edit over this configurations. Be sure that your output directory should be **./docs** and all warnings should be opened and warnings stop operations.
-
-```batch
-doxygen -g
-```
-
-#### First commit is ready, You can commit and push your work.
-
-You can use gitextension to commit your work, check if you get any error than return steps and check missing parts.
-
----
-
-## Creating a Project
-
-```bash
-mvn archetype:generate -DgroupId=com.ucoruh.password -DartifactId=password-app -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
-```
-
-### Import Project to Eclipse
-
-Use import existing maven project option to import project to Eclipse
-
-### Rename Files
-
-Rename App.java to PasswordApp.java and AppTest.java to PasswordAppTest.java and Generate Password.java and PasswordTest.java
 
 ```java
 package com.ucoruh.password;
@@ -590,13 +201,6 @@ public class PasswordApp {
 
 ```
 
-Generate test with add new unit test feature in Eclipse 
-
-![](assets/2023-05-24-16-48-59-image.png)
-
-![](assets/2023-05-24-16-49-11-image.png)
-
-![](assets/2023-05-24-16-49-27-image.png)
 
 ```java
 package com.ucoruh.password;
@@ -863,27 +467,30 @@ public class PasswordAppTest {
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <!-- The Basics -->
+
     <groupId>com.ucoruh.password</groupId>
     <artifactId>password-app</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <!-- More Project Information -->
     <name>password-app</name>
-    <url>https://github.com/SametAnaz/ce204-hw-samet-anaz-java.git</url>
+    <url>https://github.com/ucoruh/eclipse-java-maven-template</url>
+    <description>Password App Example Template Project</description>
+
     <scm>
-        <url>https://github.com/SametAnaz/ce204-hw-samet-anaz-java.git</url>
+        <url>https://github.com/ucoruh/eclipse-java-maven-template</url>
     </scm>
+
     <inceptionYear>2023</inceptionYear>
+
     <developers>
         <developer>
-            <name>Samet Anaz</name>
+            <name>Asst. Prof. Dr. Ugur CORUH</name>
             <organization>RTEU</organization>
-            <email>samet_anaz21@ergon.edu.tr</email>
+            <email>ugur.coruh@erdogan.edu.tr</email>
             <roles>
                 <role>Developer</role>
                 <role>Designer</role>
@@ -898,60 +505,72 @@ public class PasswordAppTest {
             </roles>
         </developer>
     </developers>
+
     <contributors>
         <contributor>
-            <name>Samet Anaz</name>
-            <email>samet_anaz21@ergon.edu.tr</email>
+            <name>Asst. Prof. Dr. Ugur CORUH</name>
+            <email>ugur.coruh@erdogan.edu.tr</email>
             <organization>RTEU</organization>
             <roles>
                 <role>Developer</role>
                 <role>Designer</role>
             </roles>
         </contributor>
-
+        <contributor>
+            <name>Other Person</name>
+            <organization>RTEU</organization>
+            <email>mail@gmail.com</email>
+            <roles>
+                <role>Developer</role>
+            </roles>
+        </contributor>
     </contributors>
-    <description>ce204-hw-samet-anaz-java</description>
+
     <organization>
         <name>Recep Tayyip Erdogan University</name>
         <url>www.erdogan.edu.tr</url>
     </organization>
-    <!-- Environment Settings -->
+
     <issueManagement>
         <system>Github</system>
-        <url>https://github.com/SametAnaz/ce204-hw-samet-anaz-java.git</url>
+        <url>https://github.com/ucoruh/eclipse-java-maven-template</url>
     </issueManagement>
+
     <ciManagement>
         <system>Github</system>
         <notifiers>
             <notifier>
-                <address>samet_anaz21@ergon.edu.tr</address>
+                <address>ugur.coruh@erdogan.edu.tr</address>
                 <sendOnSuccess>true</sendOnSuccess>
                 <sendOnError>true</sendOnError>
                 <sendOnFailure>true</sendOnFailure>
                 <sendOnWarning>true</sendOnWarning>
             </notifier>
         </notifiers>
-        <url>https://github.com/SametAnaz/ce204-hw-samet-anaz-java.git</url>
+        <url>https://github.com/ucoruh/eclipse-java-maven-template</url>
     </ciManagement>
+
     <repositories>
         <repository>
-            <id>ce204-hw-samet-anaz-java</id>
-            <name>ce204-hw-samet-anaz-java</name>
-            <url>https://github.com/SametAnaz/ce204-hw-samet-anaz-java.git</url>
+            <id>eclipse-java-maven-template</id>
+            <name>eclipse-java-maven-template</name>
+            <url>https://github.com/ucoruh/eclipse-java-maven-template</url>
         </repository>
     </repositories>
+
     <distributionManagement>
         <site>
-            <name>https://github.com/SametAnaz/ce204-hw-samet-anaz-java.git</name>
-            <id>ce204-hw-samet-anaz-java</id>
+            <name>https://github.com/ucoruh/eclipse-java-maven-template</name>
+            <id>eclipse-java-maven-template</id>
         </site>
-        <downloadUrl>https://github.com/SametAnaz/ce204-hw-samet-anaz-java.git</downloadUrl>
+        <downloadUrl>https://github.com/ucoruh/eclipse-java-maven-template</downloadUrl>
         <repository>
-            <id>ce204-hw-samet-anaz-java</id>
-            <name>ce204-hw-samet-anaz-java</name>
-            <url>https://github.com/SametAnaz/ce204-hw-samet-anaz-java.git</url>
+            <id>eclipse-java-maven-template</id>
+            <name>eclipse-java-maven-template</name>
+            <url>https://github.com/ucoruh/eclipse-java-maven-template</url>
         </repository>
     </distributionManagement>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
@@ -959,6 +578,11 @@ public class PasswordAppTest {
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>3.36.0.3</version>
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -971,18 +595,25 @@ public class PasswordAppTest {
             <version>1.3</version>
             <scope>test</scope>
         </dependency>
-        <!-- SLF4J API -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.32</version>
         </dependency>
-        <!-- Logback Implementation -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>1.2.6</version>
         </dependency>
+		
+		<dependency>
+			<groupId>com.github.stefanbirkner</groupId>
+			<artifactId>system-lambda</artifactId>
+			<version>1.2.0</version>
+			<scope>test</scope>
+		</dependency>
+
+		
     </dependencies>
 
     <build>
@@ -990,50 +621,54 @@ public class PasswordAppTest {
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.10.1</version>
                 <configuration>
                     <source>17</source>
                     <target>17</target>
                 </configuration>
             </plugin>
+
+         <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <version>2.22.1</version>
+    <configuration>
+        <includes>
+            <include>**/com/ucoruh/password/*Test.java</include> 
+        </includes>
+    </configuration>
+</plugin>
+
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <includes>
-                        <include>**/PasswordAppTest.java</include>
-                        <include>**/PasswordTest.java</include>
-                    </includes>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.7</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>report</id>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-                <version>4.0.0-M8</version>
-                <configuration>
-                    <port>9000</port>
-                    <tempWebappDirectory>${basedir}/target/site</tempWebappDirectory>
-                </configuration>
-            </plugin>
-            <!-- Maven Shade Plugin -->
+    <groupId>org.jacoco</groupId>
+    <artifactId>jacoco-maven-plugin</artifactId>
+    <version>0.8.7</version>  
+    <executions>
+        <execution>
+            <goals>
+                <goal>prepare-agent</goal>
+            </goals>
+        </execution>
+        <execution>
+            <id>report</id>
+            <phase>test</phase>
+            <goals>
+                <goal>report</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.21.0</version>
+				<configuration>
+					<port>9000</port>
+					<tempWebappDirectory>${basedir}/target/site</tempWebappDirectory>
+				</configuration>
+			</plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
@@ -1047,10 +682,8 @@ public class PasswordAppTest {
                         <configuration>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
                             <transformers>
-                                <transformer
-                                    implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>
-                                        com.ucoruh.password.PasswordApp</mainClass>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>com.ucoruh.password.PasswordApp</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
@@ -1058,29 +691,17 @@ public class PasswordAppTest {
                 </executions>
             </plugin>
         </plugins>
+        
 
-        <pluginManagement><!-- lock down plugins versions to avoid using Maven
-            defaults (may be moved to parent pom) -->
+        <pluginManagement>
             <plugins>
-                <!-- clean lifecycle, see
-                https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
                 <plugin>
                     <artifactId>maven-clean-plugin</artifactId>
                     <version>3.1.0</version>
                 </plugin>
-                <!-- default lifecycle, jar packaging: see
-                https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
                 <plugin>
                     <artifactId>maven-resources-plugin</artifactId>
                     <version>3.0.2</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.8.0</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.22.1</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-jar-plugin</artifactId>
@@ -1094,15 +715,13 @@ public class PasswordAppTest {
                     <artifactId>maven-deploy-plugin</artifactId>
                     <version>2.8.2</version>
                 </plugin>
-                <!-- site lifecycle, see
-                https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
                 <plugin>
-                    <artifactId>maven-site-plugin</artifactId>
-                    <version>3.7.1</version>
-                </plugin>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>3.21.0</version>
+				</plugin>
                 <plugin>
                     <artifactId>maven-project-info-reports-plugin</artifactId>
-                    <version>3.0.0</version>
+                    <version>3.5.0</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -1110,192 +729,5 @@ public class PasswordAppTest {
 </project>
 ```
 
-### Generate Project Site Files
 
-- site.xml
-  
-  - resources
-    
-    - images
-      
-      - banner.png
-      
-      - logo.png
-    
-    - markdown
-      
-      - overview.md
-
-You can use files in project
-
-### Build the Project
-
-Enter pom.xml root folder and run following command to test and generate jar file
-
-```bash
-mvn clean test site package
-```
-
-### Run Project
-
-You can run application by specify the Main function
-
-```bash
-java -cp password-app-1.0-SNAPSHOT.jar com.ucoruh.password.PasswordApp
-```
-
-Output
-
-```bash
-C:\Users\ugur.coruh\Desktop\ce204-hw-samet-anaz-java\password-app\target>java -cp password-app-1.0-SNAPSHOT.jar com.ucoruh.password.PasswordApp
-Hello World!
-```
-
-### Generate HTML Coverage Report
-
-```bash
-reportgenerator "-reports:target/site/jacoco/jacoco.xml" "-sourcedirs:src/main/java" "-targetdir:coveragereport" -reporttypes:Html
-```
-
-Output
-
-```bash
-C:\Users\ugur.coruh\Desktop\ce204-hw-samet-anaz-java\password-app>reportgenerator "-reports:target/site/jacoco/jacoco.xml" "-sourcedirs:src/main/java" "-targetdir:coveragereport" -reporttypes:Html
-2023-05-24T17:26:40: Arguments
-2023-05-24T17:26:40:  -reports:target/site/jacoco/jacoco.xml
-2023-05-24T17:26:40:  -sourcedirs:src/main/java
-2023-05-24T17:26:40:  -targetdir:coveragereport
-2023-05-24T17:26:40:  -reporttypes:Html
-2023-05-24T17:26:40: Writing report file 'coveragereport\index.html'
-2023-05-24T17:26:40: Report generation took 0,2 seconds
-
-C:\Users\ugur.coruh\Desktop\ce204-hw-samet-anaz-java\password-app>
-```
-
-
-## Run Maven Site
-
-```bash
-mvn site:run
-```
-
-Use CTRL+C to cancel from console
-![](assets/UmlClassDiagram.png)
-![](assets/Squence.png)
-![](assets/C4.png)
-![](assets/ContextDiagram.png)
-![](assets/Conteainer2.png)
-![](assets/Cointainer.png)
-![](assets/C4codeDiagram.png)
-![](assets/UsaCase.png)
-This has code coverage and documentation coverage reports also
-
-
-### Clone-Test-Generate WebSite-Package-Generate Report-Run Web Site
-
-```bash
-@echo off
-
-echo Enable necessary extensions
-@setlocal enableextensions
-
-echo Change the current working directory to the script directory
-@cd /d "%~dp0"
-
-git clone https://github.com/SametAnaz/ce204-hw-samet-anaz-java.git.git
-
-echo Get the current directory
-set "currentDir=%CD%"
-
-echo Change directory to password-app
-cd password-app
-
-echo Perform Maven clean, test, site generation, and packaging
-call mvn clean test site package
-
-echo Return to the previous directory
-cd ..
-
-echo Generate Doxygen HTML and XML Documentation
-call doxygen Doxyfile
-
-echo Change directory to password-app
-cd password-app
-
-echo Generate ReportGenerator HTML Report
-call reportgenerator "-reports:target/site/jacoco/jacoco.xml" "-sourcedirs:src/main/java" "-targetdir:target/site/coveragereport" -reporttypes:Html
-
-echo Display information about the binary file
-echo Our Binary is a Single Jar With Dependencies. You Do Not Need to Compress It.
-
-echo Return to the previous directory
-cd ..
-
-echo Generate Doxygen Coverage Report
-
-echo Create coverxygen directory
-cd password-app
-cd target
-cd site
-mkdir coverxygen
-cd ..
-cd ..
-cd ..
-
-echo Run Coverxygen
-call python -m coverxygen --xml-dir ./password-app/target/site/doxygen/xml --src-dir ./ --format lcov --output ./password-app/target/site/coverxygen/lcov.info --prefix %currentDir%\password-app\
-
-echo Run lcov genhtml
-call perl C:\ProgramData\chocolatey\lib\lcov\tools\bin\genhtml ./password-app\target\site\coverxygen\lcov.info -o password-app/target/site/coverxygen
-
-echo Package Coverage Report-1
-call tar -czvf test-jacoco-report.tar.gz -C password-app/target/site/jacoco .
-
-echo Package Coverage Report-2
-call tar -czvf test-coverage-report.tar.gz -C password-app/target/site/coveragereport .
-
-echo Package Code Documentation
-call tar -czvf application-documentation.tar.gz -C password-app/target/site/doxygen .
-
-echo Package Product Site
-call tar -czvf application-site.tar.gz -C target/site .
-
-echo Return to the previous directory
-cd ..
-
-echo Operation Completed!
-pause
-```
-
-### Run Web Site
-
-```bash
-@echo off
-@setlocal enableextensions
-@cd /d "%~dp0"
-
-cd password-app
-
-echo Run Web Site
-echo to Exit Use CTRL+Z CTRL+C
-start http://localhost:9000/
-mvn site:run
-
-echo Operation Completed!
-pause
-```
-
-### Run Jar File
-
-```bash
-@echo off
-@setlocal enableextensions
-@cd /d "%~dp0"
-
-echo Running Application
-java -jar password-app/target/password-app-1.0-SNAPSHOT.jar
-
-echo Operation Completed!
-pause
-```
 
