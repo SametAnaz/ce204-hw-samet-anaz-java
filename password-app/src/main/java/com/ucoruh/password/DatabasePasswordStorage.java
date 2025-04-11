@@ -9,7 +9,12 @@ import java.util.*;
  * This class uses an SQLite database to store, retrieve, update, and delete password entries.
  */
 public class DatabasePasswordStorage implements InterfacePasswordStorage {
-    private static final String DB_URL = "jdbc:sqlite:passwords.db";
+	/**
+	 * @brief The database URL for the SQLite connection.
+	 *
+	 * This static final field holds the connection URL used to connect to the SQLite database.
+	 */
+	private static final String DB_URL = "jdbc:sqlite:passwords.db";
 
     /**
      * @brief Constructs a DatabasePasswordStorage object and initializes the database.

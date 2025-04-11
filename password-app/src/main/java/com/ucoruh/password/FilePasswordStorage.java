@@ -9,7 +9,13 @@ import java.util.*;
  * This class provides file-based operations to store, retrieve, update, and delete password entries.
  */
 public class FilePasswordStorage implements InterfacePasswordStorage {
-    private static final String FILE = "passwords.txt";
+	/**
+	 * @brief File name used for file-based password storage.
+	 *
+	 * This static final field holds the file name where password entries are stored 
+	 * when using a file-based storage mechanism.
+	 */
+	private static final String FILE = "passwords.txt";
 
     /**
      * @brief Adds a new password entry to the file-based storage.

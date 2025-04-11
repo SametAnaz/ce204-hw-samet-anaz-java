@@ -9,8 +9,21 @@ import java.util.Scanner;
  * It also provides a stub for user-specific functionality.
  */
 public class AuthManager {
-    private static AuthManager instance;
-    private String masterPassword;  // Stores master password
+	/**
+	 * @brief Singleton instance of the AuthManager.
+	 *
+	 * This static field holds the single instance of the AuthManager 
+	 * used throughout the application to ensure consistent user authentication.
+	 */
+	private static AuthManager instance;
+
+	/**
+	 * @brief Master password used for authentication.
+	 *
+	 * This field stores the master password that is used to authenticate the user.
+	 */
+	private String masterPassword;  // Stores master password
+
 
     /**
      * Private constructor to enforce singleton pattern..

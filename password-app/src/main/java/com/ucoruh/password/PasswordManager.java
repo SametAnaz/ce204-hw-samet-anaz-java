@@ -11,8 +11,19 @@ import java.util.Scanner;
  * Manages secure storage and retrieval of credentials using a master password.
  */
 public class PasswordManager {
-    private final Map<String, String> credentials;
-    private final String masterPassword;
+	/**
+	 * @brief Stores the association between account names and their corresponding passwords.
+	 *
+	 * This final map holds the credentials for different accounts and is used to manage password data.
+	 */
+	private final Map<String, String> credentials;
+
+	/**
+	 * @brief The master password used for authentication.
+	 *
+	 * This final field stores the master password that is utilized for user authentication and securing the credentials.
+	 */
+	private final String masterPassword;
 
     /**
      * @brief Constructor initializing the manager with a master password.
