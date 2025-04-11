@@ -10,7 +10,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content="Apache Maven Doxia Site Renderer 2.0.0" />
-    <title>ce204-hw-samet-anaz-java – password-app</title>
+    <title>eclipse-java-maven-template – password-app</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-2.0.1.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -129,14 +129,14 @@ Password App
           </div>
         </header>
         <main id="bodyColumn" class="span10">
-<section><a id="ce204-hw-samet-anaz-java"></a>
-<h1>ce204-hw-samet-anaz-java</h1></section><section><a id="Overview"></a>
+<section><a id="eclipse-java-maven-template"></a>
+<h1>eclipse-java-maven-template</h1></section><section><a id="Overview"></a>
 <h1>Overview</h1>
 <p>You will generate eclipse maven project with Junit4 from CLI and. Also you will generate jar and then you will run your application. For more information you can check examples <a href="https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html" class="externalLink">Maven &#x2013; Maven in 5 Minutes</a> and <a href="https://books.sonatype.com/mvnref-book/reference/index.html" class="externalLink">TheNEXUS | A Community Project</a></p><section><a id="Releases"></a>
 <h2>Releases</h2>
 <ul>
 
-<li><a href="https://github.com/SametAnaz/ce204-hw-samet-anaz-java.git/releases/latest" class="externalLink"><img src="https://badgen.net/github/release/ucoruh/ce204-hw-samet-anaz-java" alt="GitHub release badge" /></a></li>
+<li><a href="https://github.com/ucoruh/eclipse-java-maven-template/releases/latest" class="externalLink"><img src="https://badgen.net/github/release/ucoruh/eclipse-java-maven-template" alt="GitHub release badge" /></a></li>
 </ul></section><section><a id="Platforms"></a>
 <h2>Platforms</h2>
 <ul>
@@ -149,7 +149,7 @@ Password App
 <p><img src="assets/badge-windows.svg" alt="Windows badge" /></p></li>
 </ul></section><section><a id="Test_Coverage"></a>
 <h2>Test Coverage</h2>
-<p><a href="https://github.com/SametAnaz/ce204-hw-samet-anaz-java.git/actions/workflows/release.yml" class="externalLink"><img src="https://github.com/SametAnaz/ce204-hw-samet-anaz-java.git/actions/workflows/release.yml/badge.svg" alt="Release" /></a></p>
+<p><a href="https://github.com/ucoruh/eclipse-java-maven-template/actions/workflows/release.yml" class="externalLink"><img src="https://github.com/ucoruh/eclipse-java-maven-template/actions/workflows/release.yml/badge.svg" alt="Release" /></a></p>
 <p><strong>Coverage</strong></p>
 <ul>
 
@@ -548,405 +548,237 @@ pause
 <h3>Import Project to Eclipse</h3>
 <p>Use import existing maven project option to import project to Eclipse</p></section><section><a id="Rename_Files"></a>
 <h3>Rename Files</h3>
-<p>Rename App.java to PasswordApp.java and AppTest.java to PasswordAppTest.java and Generate Password.java and PasswordTest.java</p>
+<p>Rename App.java to CalculatorApp.java and AppTest.java to CalculatorAppTest.java and Generate Password.java and CalculatorTest.java</p>
 
 <pre class="prettyprint"><code class="language-java">package com.ucoruh.password;
 
-/**
- * Represents a stored password entry for a specific service.
- */
+import org.slf4j.LoggerFactory;
+
+import ch.qos.logback.classic.Logger;
+
 public class Password {
-    private String service;
-    private String username;
-    private String password;
+
+    private static final Logger logger = (Logger) LoggerFactory.getLogger(Password.class);
 
     /**
-     * Constructs a Password object with service, username, and password.
-     *
-     * @param service the service name (e.g., Gmail, Facebook)
-     * @param username the associated username
-     * @param password the password string
+     * 
+     * @param a
+     * @param b
+     * @return
      */
-    public Password(String service, String username, String password) {
-        this.service = service;
-        this.username = username;
-        this.password = password;
-    }
+    public int add(int a, int b) {
 
-    public String getService() {
-        return service;
-    }
+        logger.info(&quot;Logging message&quot;);
 
-    public String getUsername() {
-        return username;
-    }
+        logger.error(&quot;Error message&quot;);
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    @Override
-    public String toString() {
-        return &quot;Service: &quot; + service + &quot; | Username: &quot; + username + &quot; | Password: &quot; + password;
+        return a + b;
     }
 }
-
 </code></pre>
 
 <pre class="prettyprint"><code class="language-java">package com.ucoruh.password;
 
-import java.io.PrintStream;
-import java.util.Scanner;
+import java.io.IOException;
+
+import org.slf4j.LoggerFactory;
+
+import ch.qos.logback.classic.Logger;
 
 /**
- * Entry point for the Password Manager console application.
+ * Hello world!
+ *
  */
-public class PasswordApp {
-    /**
-     * Runs the application using the provided Scanner and PrintStream.
-     * This method is designed for testing and production use.
-     *
-     * @param scanner Scanner for user input.
-     * @param out PrintStream for output.
-     */
-    public static void runApp(Scanner scanner, PrintStream out) {
-        AuthManager auth = AuthManager.getInstance();
+public class CalculatorApp {
 
-        if (!auth.isMasterPasswordSet()) {
-            out.print(&quot;Set master password: &quot;);
-            auth.createMasterPassword(scanner);
-        }
+    private static final Logger logger = (Logger) LoggerFactory.getLogger(CalculatorApp.class);
 
-        out.print(&quot;Enter master password to login: &quot;);
-        if (auth.login(scanner)) {
-            PasswordManager pm = new PasswordManager(auth.getMasterPassword());
-            int choice = -1;
-            do {
-                out.println(&quot;==== MAIN MENU ====&quot;);
-                out.println(&quot;1. User Authentication&quot;);
-                out.println(&quot;2. Secure Storage of Passwords&quot;);
-                out.println(&quot;3. Password Generator&quot;);
-                out.println(&quot;4. Auto-Login Feature&quot;);
-                out.println(&quot;5. Multi-Platform Compatibility&quot;);
-                out.println(&quot;0. Exit&quot;);
-                out.print(&quot;Your choice: &quot;);
-                String input = scanner.nextLine();
-                try {
-                    choice = Integer.parseInt(input);
-                } catch (NumberFormatException e) {
-                    out.println(&quot;Invalid number.&quot;);
-                    continue;
-                }
-                switch (choice) {
-                    case 1:
-                        auth.userMenu(scanner);
-                        break;
-                    case 2:
-                        pm.menu(scanner, out);
-                        break;
-                    case 3:
-                        PasswordGenerator.generate(scanner);
-                        break;
-                    case 4:
-                        AutoLoginManager.menu(scanner);
-                        break;
-                    case 5:
-                        PlatformManager.showPlatforms();
-                        break;
-                    case 0:
-                        out.println(&quot;Exiting...&quot;);
-                        break;
-                    default:
-                        out.println(&quot;Invalid choice.&quot;);
-                        break;
-                }
-            } while (choice != 0);
-        } else {
-            out.println(&quot;Login failed.&quot;);
-        }
-    }
-
-    /**
-     * Main method to launch the console application.
-     *
-     * @param args command-line arguments (not used)
-     */
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        runApp(scanner, System.out);
-        scanner.close();
+
+        logger.info(&quot;Logging message&quot;);
+
+        logger.error(&quot;Error message&quot;);
+
+        System.out.println(&quot;Hello World!&quot;);
+
+        try {
+
+            if(args.length&gt;0)
+            {
+                if(args[0].equals(&quot;1&quot;))
+                {
+                    throw new IOException(&quot;Dummy Exception...&quot;);
+                }
+            }
+
+            System.out.println(&quot;Press Enter to Continue...&quot;);
+
+            System.in.read();
+
+            System.out.println(&quot;Thank you...&quot;);
+
+        } catch (IOException e) {
+            logger.error(e.toString());
+            e.printStackTrace();
+        }
     }
 }
-
 </code></pre>
 <p>Generate test with add new unit test feature in Eclipse</p>
 <p><img src="assets/2023-05-24-16-48-59-image.png" alt="" /></p>
 <p><img src="assets/2023-05-24-16-49-11-image.png" alt="" /></p>
 <p><img src="assets/2023-05-24-16-49-27-image.png" alt="" /></p>
 
-<pre class="prettyprint"><code class="language-java">package com.ucoruh.password;
+<pre class="prettyprint"><code class="language-java">/**
+ * 
+ */
+package com.ucoruh.password;
 
 import static org.junit.Assert.*;
 
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
- * Unit tests for the Password class.
+ * @author ugur.coruh
+ *
  */
-public class PasswordTest {
+public class CalculatorTest {
 
-    @Test
-    public void testConstructorAndGetters() {
-        Password password = new Password(&quot;gmail&quot;, &quot;user1&quot;, &quot;pass123&quot;);
-        assertEquals(&quot;gmail&quot;, password.getService());
-        assertEquals(&quot;user1&quot;, password.getUsername());
-        assertEquals(&quot;pass123&quot;, password.getPassword());
+    /**
+     * @throws java.lang.Exception
+     */
+    @BeforeClass
+    public static void setUpBeforeClass() throws Exception {
+    }
+
+    /**
+     * @throws java.lang.Exception
+     */
+    @AfterClass
+    public static void tearDownAfterClass() throws Exception {
+    }
+
+    /**
+     * @throws java.lang.Exception
+     */
+    @Before
+    public void setUp() throws Exception {
+    }
+
+    /**
+     * @throws java.lang.Exception
+     */
+    @After
+    public void tearDown() throws Exception {
     }
 
     @Test
-    public void testSetters() {
-        Password password = new Password(&quot;service&quot;, &quot;user&quot;, &quot;pass&quot;);
-        password.setUsername(&quot;newuser&quot;);
-        password.setPassword(&quot;newpass&quot;);
-
-        assertEquals(&quot;newuser&quot;, password.getUsername());
-        assertEquals(&quot;newpass&quot;, password.getPassword());
+    public void testAddition() {
+        Password password = new Password();
+        int result = password.add(2, 3);
+        assertEquals(5, result);
     }
 
-    @Test
-    public void testToString() {
-        Password password = new Password(&quot;github&quot;, &quot;dev&quot;, &quot;secure&quot;);
-        String result = password.toString();
-        assertTrue(result.contains(&quot;github&quot;));
-        assertTrue(result.contains(&quot;dev&quot;));
-        assertTrue(result.contains(&quot;secure&quot;));
-    }
 }
-
 </code></pre>
 
 <pre class="prettyprint"><code class="language-java">package com.ucoruh.password;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-import java.nio.charset.StandardCharsets;
-import java.util.Scanner;
 
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
-/**
- * @brief Unit tests for the PasswordApp class using the runApp method.
- *
- * These tests simulate full application flow by injecting input and capturing output.
- * Additional tests cover each main menu branch.
- */
-public class PasswordAppTest {
+public class CalculatorAppTest {
 
-    private final PrintStream originalOut = System.out;
-    private ByteArrayOutputStream outputStream;
+    @BeforeClass
+    public static void setUpBeforeClass() throws Exception {
+    }
 
-    /**
-     * Reset the AuthManager singleton and set up a new output stream.
-     */
+    @AfterClass
+    public static void tearDownAfterClass() throws Exception {
+    }
+
     @Before
-    public void setUp() {
-        AuthManager.resetInstance();
-        outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
+    public void setUp() throws Exception {
     }
 
-    /**
-     * Restore the original System.out after each test.
-     */
     @After
-    public void tearDown() {
-        System.setOut(originalOut);
-        outputStream.reset();
+    public void tearDown() throws Exception {
     }
 
-    /**
-     * @brief Tests a successful run of the application.
-     *
-     * Simulates setting a master password, successful login, and then exiting
-     * the main menu. Verifies that the output contains the main menu prompt and
-     * an exit message.
-     */
+
     @Test
     public void testMainSuccess() {
-        String simulatedInput = &quot;testMaster\n&quot; + &quot;testMaster\n&quot; + &quot;0\n&quot;;
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(
-                simulatedInput.getBytes(StandardCharsets.UTF_8));
-        Scanner scanner = new Scanner(inputStream);
+        // Redirect System.in and System.out
+        InputStream originalIn = System.in;
+        PrintStream originalOut = System.out;
 
-        PasswordApp.runApp(scanner, System.out);
-        scanner.close();
+        // Create a ByteArrayInputStream with the desired input
+        String input = System.lineSeparator(); // Pressing &quot;Enter&quot; key
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(input.getBytes());
 
-        String output = outputStream.toString();
-        assertTrue(&quot;Output should contain MAIN MENU&quot;, output.contains(&quot;==== MAIN MENU ====&quot;));
-        assertTrue(&quot;Output should contain Exiting...&quot;, output.contains(&quot;Exiting...&quot;));
-        assertFalse(&quot;Output should not contain 'Login failed.'&quot;, output.contains(&quot;Login failed.&quot;));
+        // Redirect System.in to the ByteArrayInputStream
+        System.setIn(inputStream);
+
+        // Create a ByteArrayOutputStream to capture the output
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+
+        String[] args = new String[] {&quot;0&quot;};
+        // Call the main method of CalculatorApp
+        CalculatorApp.main(args);
+
+        // Restore original System.in and System.out
+        System.setIn(originalIn);
+        System.setOut(originalOut);
+
+        // Assert the desired behavior based on the output
+        assertTrue(true);
     }
 
-    /**
-     * @brief Tests the login failure scenario.
-     *
-     * Simulates setting a master password but then providing an incorrect
-     * login input. Verifies that the output contains &quot;Login failed.&quot;
-     */
     @Test
     public void testMainError() {
-        String simulatedInput = &quot;testMaster\n&quot; + &quot;wrongMaster\n&quot;;
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(
-                simulatedInput.getBytes(StandardCharsets.UTF_8));
-        Scanner scanner = new Scanner(inputStream);
+        // Redirect System.in and System.out
+        InputStream originalIn = System.in;
+        PrintStream originalOut = System.out;
 
-        PasswordApp.runApp(scanner, System.out);
-        scanner.close();
+        // Create a ByteArrayInputStream with the desired input
+        String input = System.lineSeparator(); // Pressing &quot;Enter&quot; key
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(input.getBytes());
 
-        String output = outputStream.toString();
-        assertTrue(&quot;Output should contain 'Login failed.'&quot;, output.contains(&quot;Login failed.&quot;));
+        // Redirect System.in to the ByteArrayInputStream
+        System.setIn(inputStream);
+
+        // Create a ByteArrayOutputStream to capture the output
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+
+        String[] args = new String[] {&quot;1&quot;};
+        // Call the main method of CalculatorApp
+        CalculatorApp.main(args);
+
+        // Restore original System.in and System.out
+        System.setIn(originalIn);
+        System.setOut(originalOut);
+
+        // Assert the desired behavior based on the output
+        assertTrue(true);
     }
 
-    /**
-     * @brief Tests full menu navigation.
-     *
-     * Simulates a run of the application that displays the main menu.
-     * Verifies that the captured output shows the menu header.
-     */
-    @Test
-    public void testFullMenuNavigation() {
-        String simulatedInput = &quot;testMaster\n&quot; + &quot;testMaster\n&quot; + &quot;0\n&quot;;
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(
-                simulatedInput.getBytes(StandardCharsets.UTF_8));
-        Scanner scanner = new Scanner(inputStream);
-
-        PasswordApp.runApp(scanner, System.out);
-        scanner.close();
-
-        String output = outputStream.toString();
-        assertTrue(&quot;Output should contain MAIN MENU&quot;, output.contains(&quot;==== MAIN MENU ====&quot;));
-    }
-
-    /**
-     * @brief Tests main menu option 1: User Authentication.
-     *
-     * Simulates choosing option 1 and verifies that the user menu stub output is shown.
-     */
-    @Test
-    public void testMenuOptionUserAuthentication() {
-        // Simulated input: set master, login, then choose option 1, then exit.
-        String simulatedInput = &quot;testMaster\n&quot; + &quot;testMaster\n&quot; + &quot;1\n&quot; + &quot;0\n&quot;;
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(
-                simulatedInput.getBytes(StandardCharsets.UTF_8));
-        Scanner scanner = new Scanner(inputStream);
-
-        PasswordApp.runApp(scanner, System.out);
-        scanner.close();
-
-        String output = outputStream.toString();
-        assertTrue(&quot;Output should indicate user menu stub&quot;, output.contains(&quot;User menu functionality not yet implemented.&quot;));
-    }
-
-    /**
-     * @brief Tests main menu option 2: Secure Storage of Passwords.
-     *
-     * Simulates choosing option 2 and then immediately exiting the inner PasswordManager menu.
-     */
-    @Test
-    public void testMenuOptionSecureStorage() {
-        // Simulated input: set master, login, choose option 2, then in inner menu choose 4 to exit, then exit main menu.
-        String simulatedInput = &quot;testMaster\n&quot; + &quot;testMaster\n&quot; + &quot;2\n&quot; + &quot;4\n&quot; + &quot;0\n&quot;;
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(
-                simulatedInput.getBytes(StandardCharsets.UTF_8));
-        Scanner scanner = new Scanner(inputStream);
-
-        PasswordApp.runApp(scanner, System.out);
-        scanner.close();
-
-        String output = outputStream.toString();
-        // Since PasswordManager.menu prints its own menu header, verify its presence.
-        assertTrue(&quot;Output should contain inner PasswordManager menu&quot;, output.contains(&quot;==== MAIN MENU ====&quot;));
-    }
-
-    /**
-     * @brief Tests main menu option 3: Password Generator.
-     *
-     * Simulates choosing option 3 and entering a desired password length.
-     * Verifies that the generated password output is present.
-     */
-    @Test
-    public void testMenuOptionPasswordGenerator() {
-        // Simulated input: set master, login, choose option 3, input desired length, then exit.
-        String simulatedInput = &quot;testMaster\n&quot; + &quot;testMaster\n&quot; + &quot;3\n&quot; + &quot;8\n&quot; + &quot;0\n&quot;;
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(
-                simulatedInput.getBytes(StandardCharsets.UTF_8));
-        Scanner scanner = new Scanner(inputStream);
-
-        PasswordApp.runApp(scanner, System.out);
-        scanner.close();
-
-        String output = outputStream.toString();
-        // Expect the password generator to output &quot;Generated Password:&quot;.
-        assertTrue(&quot;Output should contain Generated Password:&quot;, output.contains(&quot;Generated Password:&quot;));
-    }
-
-    /**
-     * @brief Tests main menu option 4: Auto-Login Feature.
-     *
-     * Simulates choosing option 4. Assumes AutoLoginManager.menu prints a placeholder message.
-     */
-    @Test
-    public void testMenuOptionAutoLoginFeature() {
-        // Simulated input: set master, login, choose option 4, then exit.
-        String simulatedInput = &quot;testMaster\n&quot; + &quot;testMaster\n&quot; + &quot;4\n&quot; + &quot;0\n&quot;;
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(
-                simulatedInput.getBytes(StandardCharsets.UTF_8));
-        Scanner scanner = new Scanner(inputStream);
-
-        PasswordApp.runApp(scanner, System.out);
-        scanner.close();
-
-        String output = outputStream.toString();
-        // Check for expected placeholder output; adjust expected text if needed.
-        assertTrue(&quot;Output should mention Auto-Login Feature&quot;, output.contains(&quot;Auto-Login Feature&quot;));
-    }
-
-    /**
-     * @brief Tests main menu option 5: Multi-Platform Compatibility.
-     *
-     * Simulates choosing option 5. Assumes PlatformManager.showPlatforms prints a placeholder message.
-     */
-    @Test
-    public void testMenuOptionMultiPlatform() {
-        // Simulated input: set master, login, choose option 5, then exit.
-        String simulatedInput = &quot;testMaster\n&quot; + &quot;testMaster\n&quot; + &quot;5\n&quot; + &quot;0\n&quot;;
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(
-                simulatedInput.getBytes(StandardCharsets.UTF_8));
-        Scanner scanner = new Scanner(inputStream);
-
-        PasswordApp.runApp(scanner, System.out);
-        scanner.close();
-
-        String output = outputStream.toString();
-        // Check for expected placeholder text from platform manager; adjust as necessary.
-        assertTrue(&quot;Output should mention Supported platforms&quot;, output.contains(&quot;Supported platforms:&quot;));
-    }
 }
-
 </code></pre></section><section><a id="Update_pom.xml"></a>
 <h3>Update pom.xml</h3>
 
@@ -964,16 +796,16 @@ public class PasswordAppTest {
 
     &lt;!-- More Project Information --&gt;
     &lt;name&gt;password-app&lt;/name&gt;
-    &lt;url&gt;https://github.com/SametAnaz/ce204-hw-samet-anaz-java.git&lt;/url&gt;
+    &lt;url&gt;https://github.com/ucoruh/eclipse-java-maven-template&lt;/url&gt;
     &lt;scm&gt;
-        &lt;url&gt;https://github.com/SametAnaz/ce204-hw-samet-anaz-java.git&lt;/url&gt;
+        &lt;url&gt;https://github.com/ucoruh/eclipse-java-maven-template&lt;/url&gt;
     &lt;/scm&gt;
     &lt;inceptionYear&gt;2023&lt;/inceptionYear&gt;
     &lt;developers&gt;
         &lt;developer&gt;
-            &lt;name&gt;Samet Anaz&lt;/name&gt;
+            &lt;name&gt;Asst. Prof. Dr. Ugur CORUH&lt;/name&gt;
             &lt;organization&gt;RTEU&lt;/organization&gt;
-            &lt;email&gt;samet_anaz21@ergon.edu.tr&lt;/email&gt;
+            &lt;email&gt;ugur.coruh@erdogan.edu.tr&lt;/email&gt;
             &lt;roles&gt;
                 &lt;role&gt;Developer&lt;/role&gt;
                 &lt;role&gt;Designer&lt;/role&gt;
@@ -990,17 +822,24 @@ public class PasswordAppTest {
     &lt;/developers&gt;
     &lt;contributors&gt;
         &lt;contributor&gt;
-            &lt;name&gt;Samet Anaz&lt;/name&gt;
-            &lt;email&gt;samet_anaz21@ergon.edu.tr&lt;/email&gt;
+            &lt;name&gt;Asst. Prof. Dr. Ugur CORUH&lt;/name&gt;
+            &lt;email&gt;ugur.coruh@erdogan.edu.tr&lt;/email&gt;
             &lt;organization&gt;RTEU&lt;/organization&gt;
             &lt;roles&gt;
                 &lt;role&gt;Developer&lt;/role&gt;
                 &lt;role&gt;Designer&lt;/role&gt;
             &lt;/roles&gt;
         &lt;/contributor&gt;
-
+        &lt;contributor&gt;
+            &lt;name&gt;Other Person&lt;/name&gt;
+            &lt;organization&gt;RTEU&lt;/organization&gt;
+            &lt;email&gt;mail@gmail.com&lt;/email&gt;
+            &lt;roles&gt;
+                &lt;role&gt;Developer&lt;/role&gt;
+            &lt;/roles&gt;
+        &lt;/contributor&gt;
     &lt;/contributors&gt;
-    &lt;description&gt;ce204-hw-samet-anaz-java&lt;/description&gt;
+    &lt;description&gt;Maven Example Template Project&lt;/description&gt;
     &lt;organization&gt;
         &lt;name&gt;Recep Tayyip Erdogan University&lt;/name&gt;
         &lt;url&gt;www.erdogan.edu.tr&lt;/url&gt;
@@ -1008,44 +847,44 @@ public class PasswordAppTest {
     &lt;!-- Environment Settings --&gt;
     &lt;issueManagement&gt;
         &lt;system&gt;Github&lt;/system&gt;
-        &lt;url&gt;https://github.com/SametAnaz/ce204-hw-samet-anaz-java.git&lt;/url&gt;
+        &lt;url&gt;https://github.com/ucoruh/eclipse-java-maven-template&lt;/url&gt;
     &lt;/issueManagement&gt;
     &lt;ciManagement&gt;
         &lt;system&gt;Github&lt;/system&gt;
         &lt;notifiers&gt;
             &lt;notifier&gt;
-                &lt;address&gt;samet_anaz21@ergon.edu.tr&lt;/address&gt;
+                &lt;address&gt;ugur.coruh@erdogan.edu.tr&lt;/address&gt;
                 &lt;sendOnSuccess&gt;true&lt;/sendOnSuccess&gt;
                 &lt;sendOnError&gt;true&lt;/sendOnError&gt;
                 &lt;sendOnFailure&gt;true&lt;/sendOnFailure&gt;
                 &lt;sendOnWarning&gt;true&lt;/sendOnWarning&gt;
             &lt;/notifier&gt;
         &lt;/notifiers&gt;
-        &lt;url&gt;https://github.com/SametAnaz/ce204-hw-samet-anaz-java.git&lt;/url&gt;
+        &lt;url&gt;https://github.com/ucoruh/eclipse-java-maven-template&lt;/url&gt;
     &lt;/ciManagement&gt;
     &lt;repositories&gt;
         &lt;repository&gt;
-            &lt;id&gt;ce204-hw-samet-anaz-java&lt;/id&gt;
-            &lt;name&gt;ce204-hw-samet-anaz-java&lt;/name&gt;
-            &lt;url&gt;https://github.com/SametAnaz/ce204-hw-samet-anaz-java.git&lt;/url&gt;
+            &lt;id&gt;eclipse-java-maven-template&lt;/id&gt;
+            &lt;name&gt;eclipse-java-maven-template&lt;/name&gt;
+            &lt;url&gt;https://github.com/ucoruh/eclipse-java-maven-template&lt;/url&gt;
         &lt;/repository&gt;
     &lt;/repositories&gt;
     &lt;distributionManagement&gt;
         &lt;site&gt;
-            &lt;name&gt;https://github.com/SametAnaz/ce204-hw-samet-anaz-java.git&lt;/name&gt;
-            &lt;id&gt;ce204-hw-samet-anaz-java&lt;/id&gt;
+            &lt;name&gt;https://github.com/ucoruh/eclipse-java-maven-template&lt;/name&gt;
+            &lt;id&gt;eclipse-java-maven-template&lt;/id&gt;
         &lt;/site&gt;
-        &lt;downloadUrl&gt;https://github.com/SametAnaz/ce204-hw-samet-anaz-java.git&lt;/downloadUrl&gt;
+        &lt;downloadUrl&gt;https://github.com/ucoruh/eclipse-java-maven-template&lt;/downloadUrl&gt;
         &lt;repository&gt;
-            &lt;id&gt;ce204-hw-samet-anaz-java&lt;/id&gt;
-            &lt;name&gt;ce204-hw-samet-anaz-java&lt;/name&gt;
-            &lt;url&gt;https://github.com/SametAnaz/ce204-hw-samet-anaz-java.git&lt;/url&gt;
+            &lt;id&gt;eclipse-java-maven-template&lt;/id&gt;
+            &lt;name&gt;eclipse-java-maven-template&lt;/name&gt;
+            &lt;url&gt;https://github.com/ucoruh/eclipse-java-maven-template&lt;/url&gt;
         &lt;/repository&gt;
     &lt;/distributionManagement&gt;
     &lt;properties&gt;
         &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
-        &lt;maven.compiler.source&gt;17&lt;/maven.compiler.source&gt;
-        &lt;maven.compiler.target&gt;17&lt;/maven.compiler.target&gt;
+        &lt;maven.compiler.source&gt;1.8&lt;/maven.compiler.source&gt;
+        &lt;maven.compiler.target&gt;1.8&lt;/maven.compiler.target&gt;
     &lt;/properties&gt;
 
     &lt;dependencies&gt;
@@ -1081,8 +920,8 @@ public class PasswordAppTest {
                 &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
                 &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
                 &lt;configuration&gt;
-                    &lt;source&gt;17&lt;/source&gt;
-                    &lt;target&gt;17&lt;/target&gt;
+                    &lt;source&gt;1.8&lt;/source&gt;
+                    &lt;target&gt;1.8&lt;/target&gt;
                 &lt;/configuration&gt;
             &lt;/plugin&gt;
             &lt;plugin&gt;
@@ -1090,8 +929,8 @@ public class PasswordAppTest {
                 &lt;artifactId&gt;maven-surefire-plugin&lt;/artifactId&gt;
                 &lt;configuration&gt;
                     &lt;includes&gt;
-                        &lt;include&gt;**/PasswordAppTest.java&lt;/include&gt;
-                        &lt;include&gt;**/PasswordTest.java&lt;/include&gt;
+                        &lt;include&gt;**/CalculatorAppTest.java&lt;/include&gt;
+                        &lt;include&gt;**/CalculatorTest.java&lt;/include&gt;
                     &lt;/includes&gt;
                 &lt;/configuration&gt;
             &lt;/plugin&gt;
@@ -1140,7 +979,7 @@ public class PasswordAppTest {
                                 &lt;transformer
                                     implementation=&quot;org.apache.maven.plugins.shade.resource.ManifestResourceTransformer&quot;&gt;
                                     &lt;mainClass&gt;
-                                        com.ucoruh.password.PasswordApp&lt;/mainClass&gt;
+                                        com.ucoruh.password.CalculatorApp&lt;/mainClass&gt;
                                 &lt;/transformer&gt;
                             &lt;/transformers&gt;
                         &lt;/configuration&gt;
@@ -1237,11 +1076,11 @@ public class PasswordAppTest {
 <h3>Run Project</h3>
 <p>You can run application by specify the Main function</p>
 
-<pre class="prettyprint"><code class="language-bash">java -cp password-app-1.0-SNAPSHOT.jar com.ucoruh.password.PasswordApp
+<pre class="prettyprint"><code class="language-bash">java -cp password-app-1.0-SNAPSHOT.jar com.ucoruh.password.CalculatorApp
 </code></pre>
 <p>Output</p>
 
-<pre class="prettyprint"><code class="language-bash">C:\Users\ugur.coruh\Desktop\ce204-hw-samet-anaz-java\password-app\target&gt;java -cp password-app-1.0-SNAPSHOT.jar com.ucoruh.password.PasswordApp
+<pre class="prettyprint"><code class="language-bash">C:\Users\ugur.coruh\Desktop\eclipse-java-maven-template\password-app\target&gt;java -cp password-app-1.0-SNAPSHOT.jar com.ucoruh.password.CalculatorApp
 Hello World!
 </code></pre></section><section><a id="Generate_HTML_Coverage_Report"></a>
 <h3>Generate HTML Coverage Report</h3>
@@ -1250,7 +1089,7 @@ Hello World!
 </code></pre>
 <p>Output</p>
 
-<pre class="prettyprint"><code class="language-bash">C:\Users\ugur.coruh\Desktop\ce204-hw-samet-anaz-java\password-app&gt;reportgenerator &quot;-reports:target/site/jacoco/jacoco.xml&quot; &quot;-sourcedirs:src/main/java&quot; &quot;-targetdir:coveragereport&quot; -reporttypes:Html
+<pre class="prettyprint"><code class="language-bash">C:\Users\ugur.coruh\Desktop\eclipse-java-maven-template\password-app&gt;reportgenerator &quot;-reports:target/site/jacoco/jacoco.xml&quot; &quot;-sourcedirs:src/main/java&quot; &quot;-targetdir:coveragereport&quot; -reporttypes:Html
 2023-05-24T17:26:40: Arguments
 2023-05-24T17:26:40:  -reports:target/site/jacoco/jacoco.xml
 2023-05-24T17:26:40:  -sourcedirs:src/main/java
@@ -1259,22 +1098,19 @@ Hello World!
 2023-05-24T17:26:40: Writing report file 'coveragereport\index.html'
 2023-05-24T17:26:40: Report generation took 0,2 seconds
 
-C:\Users\ugur.coruh\Desktop\ce204-hw-samet-anaz-java\password-app&gt;
-</code></pre></section></section><section><a id="Run_Maven_Site"></a>
+C:\Users\ugur.coruh\Desktop\eclipse-java-maven-template\password-app&gt;
+</code></pre>
+<p><img src="assets/2023-05-25-00-52-27-image.png" alt="" /></p></section></section><section><a id="Run_Maven_Site"></a>
 <h2>Run Maven Site</h2>
 
 <pre class="prettyprint"><code class="language-bash">mvn site:run
 </code></pre>
-<p>Use CTRL+C to cancel from console
-<img src="assets/UmlClassDiagram.png" alt="" />
-<img src="assets/Squence.png" alt="" />
-<img src="assets/C4.png" alt="" />
-<img src="assets/ContextDiagram.png" alt="" />
-<img src="assets/Conteainer2.png" alt="" />
-<img src="assets/Cointainer.png" alt="" />
-<img src="assets/C4codeDiagram.png" alt="" />
-<img src="assets/UsaCase.png" alt="" />
-This has code coverage and documentation coverage reports also</p><section><a id="Clone-Test-Generate_WebSite-Package-Generate_Report-Run_Web_Site"></a>
+<p>Use CTRL+C to cancel from console</p>
+<p><img src="assets/2023-05-25-03-53-48-image.png" alt="" /></p>
+<p>This has code coverage and documentation coverage reports also</p>
+<p><img src="assets/2023-05-25-03-54-34-image.png" alt="" /></p>
+<p><img src="assets/2023-05-25-03-54-20-image.png" alt="" /></p>
+<p><img src="assets/2023-05-25-03-53-14-image.png" alt="" /></p><section><a id="Clone-Test-Generate_WebSite-Package-Generate_Report-Run_Web_Site"></a>
 <h3>Clone-Test-Generate WebSite-Package-Generate Report-Run Web Site</h3>
 
 <pre class="prettyprint"><code class="language-bash">@echo off
@@ -1285,7 +1121,7 @@ echo Enable necessary extensions
 echo Change the current working directory to the script directory
 @cd /d &quot;%~dp0&quot;
 
-git clone https://github.com/SametAnaz/ce204-hw-samet-anaz-java.git.git
+git clone https://github.com/ucoruh/eclipse-java-maven-template.git
 
 echo Get the current directory
 set &quot;currentDir=%CD%&quot;
@@ -1376,7 +1212,8 @@ java -jar password-app/target/password-app-1.0-SNAPSHOT.jar
 
 echo Operation Completed!
 pause
-</code></pre></section></section></section>        </main>
+</code></pre>
+<p><img src="assets/2023-05-25-00-57-01-image.png" alt="" /></p></section></section></section>        </main>
       </div>
     </div>
     <hr/>
