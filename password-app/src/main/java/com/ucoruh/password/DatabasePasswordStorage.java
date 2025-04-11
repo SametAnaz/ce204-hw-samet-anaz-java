@@ -4,19 +4,35 @@ import java.sql.*;
 import java.util.*;
 
 /**
- * SQLite-based implementation of password storage.
+ * @brief SQLite-based implementation of password storage.
+ *
+ * This class uses an SQLite database to store, retrieve, update, and delete password entries.
  */
 public class DatabasePasswordStorage implements InterfacePasswordStorage {
     private static final String DB_URL = "jdbc:sqlite:passwords.db";
 
+    /**
+     * @brief Constructs a DatabasePasswordStorage object and initializes the database.
+     */
     public DatabasePasswordStorage() {
         createTableIfNotExists();
     }
 
+    /**
+     * @brief Retrieves the database URL for the SQLite connection.
+     *
+     * @return A string containing the SQLite database URL.
+     */
     protected String getDatabaseUrl() {
         return DB_URL;
     }
 
+    /**
+     * @brief Creates the passwords table in the database if it does not already exist.
+     *
+     * This method executes an SQL statement to initialize the database structure required
+     * to store password entries.
+     */
     private void createTableIfNotExists() {
         try (Connection conn = DriverManager.getConnection(getDatabaseUrl());
              Statement stmt = conn.createStatement()) {
@@ -33,6 +49,14 @@ public class DatabasePasswordStorage implements InterfacePasswordStorage {
         }
     }
 
+    /**
+     * @brief Adds a new password entry to the database using user input.
+     *
+     * This method reads service, username, and password from the provided Scanner,
+     * and inserts the new entry into the passwords table.
+     *
+     * @param scanner the Scanner object used to obtain user input.
+     */
     @Override
     public void add(Scanner scanner) {
         System.out.print("Service: ");
@@ -55,6 +79,12 @@ public class DatabasePasswordStorage implements InterfacePasswordStorage {
         }
     }
 
+    /**
+     * @brief Retrieves and displays all password entries from the database.
+     *
+     * This method executes an SQL query to obtain all records from the passwords table
+     * and prints each entry using the Password class's toString() method.
+     */
     @Override
     public void view() {
         try (Connection conn = DriverManager.getConnection(getDatabaseUrl());
@@ -73,6 +103,14 @@ public class DatabasePasswordStorage implements InterfacePasswordStorage {
         }
     }
 
+    /**
+     * @brief Updates an existing password entry in the database with new username and password.
+     *
+     * This method prompts the user for the service to update, along with the new username
+     * and password, and then updates the corresponding record in the database.
+     *
+     * @param scanner the Scanner object used to obtain user input.
+     */
     @Override
     public void update(Scanner scanner) {
         System.out.print("Service to update: ");
@@ -96,6 +134,14 @@ public class DatabasePasswordStorage implements InterfacePasswordStorage {
         }
     }
 
+    /**
+     * @brief Deletes a password entry from the database based on the service name.
+     *
+     * This method prompts the user for the service of the entry to delete and removes the
+     * corresponding record from the database.
+     *
+     * @param scanner the Scanner object used to obtain user input.
+     */
     @Override
     public void delete(Scanner scanner) {
         System.out.print("Service to delete: ");
@@ -112,6 +158,14 @@ public class DatabasePasswordStorage implements InterfacePasswordStorage {
         }
     }
 
+    /**
+     * @brief Reads all password entries from the database.
+     *
+     * This method retrieves all records from the passwords table, converts each record into a
+     * Password object, and returns a list of these objects.
+     *
+     * @return A List of Password objects representing all stored password entries.
+     */
     @Override
     public List<Password> readAll() {
         List<Password> list = new ArrayList<>();
@@ -132,6 +186,14 @@ public class DatabasePasswordStorage implements InterfacePasswordStorage {
         return list;
     }
 
+    /**
+     * @brief Writes a list of password entries to the database.
+     *
+     * This method clears the existing contents of the passwords table and inserts all password entries
+     * from the provided list.
+     *
+     * @param list A List of Password objects to be written to the database.
+     */
     @Override
     public void writeAll(List<Password> list) {
         try (Connection conn = DriverManager.getConnection(getDatabaseUrl());

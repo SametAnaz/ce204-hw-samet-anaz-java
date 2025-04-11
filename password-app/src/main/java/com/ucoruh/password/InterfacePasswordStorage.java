@@ -4,47 +4,63 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Interface for password storage operations.
+ * @brief Interface for password storage operations.
+ *
+ * This interface defines the operations required for handling password storage,
+ * including adding, viewing, updating, deleting, reading, and writing password entries.
  */
 public interface InterfacePasswordStorage {
 
     /**
-     * Adds a new password entry.
+     * @brief Adds a new password entry.
      *
-     * @param scanner Scanner for user input
+     * This method reads input from the user using the provided Scanner and adds a new password entry.
+     *
+     * @param scanner Scanner for user input.
      */
     void add(Scanner scanner);
 
     /**
-     * Displays all saved passwords.
+     * @brief Displays all saved password entries.
+     *
+     * This method retrieves and displays all password entries stored in the system.
      */
     void view();
 
     /**
-     * Updates a password entry.
+     * @brief Updates an existing password entry.
      *
-     * @param scanner Scanner for user input
+     * This method allows the user to update an existing password entry by specifying new details.
+     *
+     * @param scanner Scanner for user input.
      */
     void update(Scanner scanner);
 
     /**
-     * Deletes a password entry.
+     * @brief Deletes a password entry.
      *
-     * @param scanner Scanner for user input
+     * This method deletes a password entry based on user input obtained via the provided Scanner.
+     *
+     * @param scanner Scanner for user input.
      */
     void delete(Scanner scanner);
 
     /**
-     * Reads all saved passwords (used internally or for testing).
+     * @brief Reads all saved password entries.
      *
-     * @return List of Password entries
+     * Retrieves all saved password entries from the underlying storage.
+     *
+     * @return A list of Password entries.
      */
     List<Password> readAll();
 
     /**
-     * Writes all passwords to storage (used internally).
+     * @brief Writes all password entries to the storage.
      *
-     * @param list List of Password entries
+     * This method writes the provided list of password entries to the underlying storage,
+     * replacing any existing entries.
+     *
+     * @param list List of Password entries.
      */
     void writeAll(List<Password> list);
 }

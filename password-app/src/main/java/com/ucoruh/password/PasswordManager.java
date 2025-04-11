@@ -15,7 +15,10 @@ public class PasswordManager {
     private final String masterPassword;
 
     /**
-     * Constructor initializing the manager with a master password.
+     * @brief Constructor initializing the manager with a master password.
+     *
+     * Initializes the credentials map and loads stored credentials.
+     *
      * @param masterPassword Master password used for encryption/decryption.
      */
     public PasswordManager(String masterPassword) {
@@ -25,23 +28,30 @@ public class PasswordManager {
     }
 
     /**
-     * Load credentials from file.
-     * (Dummy implementation for demonstration)
+     * @brief Loads credentials from file.
+     *
+     * Dummy implementation for demonstration purposes.
+     * In production, this method should load and decrypt file data.
      */
     private void loadCredentials() {
         // In production, load and decrypt file data.
     }
 
     /**
-     * Save credentials to file.
-     * (Dummy implementation for demonstration)
+     * @brief Saves credentials to file.
+     *
+     * Dummy implementation for demonstration purposes.
+     * In production, this method should encrypt and store credentials.
      */
     private void saveCredentials() {
         // In production, encrypt and store credentials.
     }
 
     /**
-     * Add a new credential.
+     * @brief Adds a new credential.
+     *
+     * Inserts the credential for the given account into the internal storage and saves it.
+     *
      * @param account Account name.
      * @param password Password for the account.
      */
@@ -51,17 +61,23 @@ public class PasswordManager {
     }
 
     /**
-     * Retrieve a credential.
+     * @brief Retrieves a credential.
+     *
+     * Fetches the password associated with the specified account.
+     *
      * @param account Account name.
-     * @return Password if account exists; otherwise, null.
+     * @return Password if account exists; otherwise, returns null.
      */
     public String getCredential(String account) {
         return credentials.get(account);
     }
 
     /**
-     * Displays the interactive menu and processes user input.
+     * @brief Displays the interactive menu and processes user input.
+     *
      * Uses dependency injection for Scanner and PrintStream to enable unit testing.
+     * Provides options to add, retrieve credentials, generate passwords, or exit.
+     *
      * @param scanner The Scanner object for reading user input.
      * @param out The PrintStream object for writing output.
      */
@@ -111,8 +127,11 @@ public class PasswordManager {
     }
 
     /**
-     * Runs the application using the provided Scanner and PrintStream.
-     * This method allows testing of the main application flow.
+     * @brief Runs the application using the provided Scanner and PrintStream.
+     *
+     * Initiates the application by requesting the master password and
+     * then invoking the interactive menu.
+     *
      * @param scanner Scanner for user input.
      * @param out PrintStream for output.
      */
@@ -124,7 +143,11 @@ public class PasswordManager {
     }
 
     /**
-     * Main method to launch the console application.
+     * @brief Main method to launch the console application.
+     *
+     * Entry point of the application. Initializes input and output streams,
+     * then invokes the runApp method.
+     *
      * @param args Command-line arguments.
      */
     public static void main(String[] args) {

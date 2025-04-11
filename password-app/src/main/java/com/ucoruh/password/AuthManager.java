@@ -13,7 +13,7 @@ public class AuthManager {
     private String masterPassword;  // Stores master password
 
     /**
-     * Private constructor to enforce singleton pattern.
+     * Private constructor to enforce singleton pattern..
      */
     private AuthManager() {
         // Private constructor.

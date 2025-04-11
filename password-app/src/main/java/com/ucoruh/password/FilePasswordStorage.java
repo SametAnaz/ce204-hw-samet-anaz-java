@@ -4,11 +4,21 @@ import java.io.*;
 import java.util.*;
 
 /**
- * Implementation of InterfacePasswordStorage using file-based storage.
+ * @brief Implementation of InterfacePasswordStorage using file-based storage.
+ *
+ * This class provides file-based operations to store, retrieve, update, and delete password entries.
  */
 public class FilePasswordStorage implements InterfacePasswordStorage {
     private static final String FILE = "passwords.txt";
 
+    /**
+     * @brief Adds a new password entry to the file-based storage.
+     *
+     * This method prompts the user to enter the service, username, and password, then creates a Password
+     * object and appends its details to the passwords file.
+     *
+     * @param scanner the Scanner object used to obtain user input.
+     */
     @Override
     public void add(Scanner scanner) {
         System.out.print("Service: ");
@@ -28,6 +38,11 @@ public class FilePasswordStorage implements InterfacePasswordStorage {
         }
     }
 
+    /**
+     * @brief Displays all stored password entries.
+     *
+     * This method reads all password entries from the file and prints them to the console.
+     */
     @Override
     public void view() {
         List<Password> list = readAll();
@@ -38,6 +53,13 @@ public class FilePasswordStorage implements InterfacePasswordStorage {
         }
     }
 
+    /**
+     * @brief Updates an existing password entry.
+     *
+     * This method prompts the user for the service to update and, if found, updates its username and password.
+     *
+     * @param scanner the Scanner object used to obtain user input for the update.
+     */
     @Override
     public void update(Scanner scanner) {
         List<Password> list = readAll();
@@ -64,6 +86,13 @@ public class FilePasswordStorage implements InterfacePasswordStorage {
         }
     }
 
+    /**
+     * @brief Deletes a password entry from the file-based storage.
+     *
+     * This method prompts the user for the service name of the entry to delete and removes the entry from the file.
+     *
+     * @param scanner the Scanner object used to obtain user input for deletion.
+     */
     @Override
     public void delete(Scanner scanner) {
         List<Password> list = readAll();
@@ -79,6 +108,14 @@ public class FilePasswordStorage implements InterfacePasswordStorage {
         }
     }
 
+    /**
+     * @brief Reads all password entries from the file.
+     *
+     * This method opens the file and reads each line, converting them into Password objects. All valid entries
+     * are returned as a list.
+     *
+     * @return a List of Password objects representing the stored password entries.
+     */
     @Override
     public List<Password> readAll() {
         List<Password> list = new ArrayList<>();
@@ -94,6 +131,13 @@ public class FilePasswordStorage implements InterfacePasswordStorage {
         return list;
     }
 
+    /**
+     * @brief Writes the list of password entries to the file.
+     *
+     * This method clears the existing content of the file and writes all password entries from the provided list.
+     *
+     * @param list a List of Password objects to be written to the file.
+     */
     @Override
     public void writeAll(List<Password> list) {
         try (FileWriter writer = new FileWriter(FILE)) {
