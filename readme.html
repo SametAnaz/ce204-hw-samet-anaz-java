@@ -130,15 +130,47 @@ Password App
         </header>
         <main id="bodyColumn" class="span10">
 <section><a id="ce204-hw-samet-anaz-java"></a>
-<h1>ce204-hw-samet-anaz-java</h1></section><section><a id="Overview"></a>
+<h1>ce204-hw-samet-anaz-java</h1><section><a id="Contents"></a>
+<h2>Contents</h2>
+<ul>
+
+<li><a href="#overview">Overview</a></li>
+<li><a href="#releases">Releases</a></li>
+<li><a href="#uml-class-diagramlar.C4.B1">UML Class Diagramlar&#x131;</a>
+<ul>
+
+<li><a href="#class-diagram">Class Diagram</a></li>
+<li><a href="#sequence-diagram">Sequence Diagram</a></li>
+<li><a href="#c4-diagram">C4 Diagram</a></li>
+<li><a href="#context-diagram">Context Diagram</a></li>
+<li><a href="#container-diagram">Container Diagram</a></li>
+<li><a href="#c4-code-diagram">C4 Code Diagram</a></li>
+<li><a href="#use-case-diagram">Use Case Diagram</a></li>
+</ul></li>
+<li><a href="#source-code">Source Code</a>
+<ul>
+
+<li><a href="#password-class">Password Class</a></li>
+<li><a href="#passwordapp-class">PasswordApp Class</a></li>
+</ul></li>
+<li><a href="#test-s.C4.B1n.C4.B1flar.C4.B1">Test S&#x131;n&#x131;flar&#x131;</a>
+<ul>
+
+<li><a href="#passwordtest">PasswordTest</a></li>
+<li><a href="#passwordapptest">PasswordAppTest</a></li>
+</ul></li>
+<li><a href="#pomxml">pom.xml</a></li>
+</ul></section></section><section><a id="Overview"></a>
 <h1>Overview</h1>
 <p>The Password Application is a secure and lightweight console-based password manager developed using Java and the Maven framework. It provides essential features such as encrypted password storage, strong password generation, user authentication, and platform-based credential organization. Designed with modularity and maintainability in mind, the application leverages object-oriented principles and supports SQLite for local database management. This project also integrates test coverage and documentation tools, and is structured to allow future expansion, including GUI development.</p><section><a id="Releases"></a>
 <h2>Releases</h2>
 <ul>
 
-<li><a href="https://github.com/SametAnaz/ce204-hw-samet-anaz-java.git/releases/latest" class="externalLink"><img src="https://badgen.net/github/release/ucoruh/ce204-hw-samet-anaz-java" alt="GitHub release badge" /></a></li>
-</ul></section><section><a id="Uml_Class_Diagrams"></a>
-<h2>Uml Class Diagrams</h2></section><section><a id="Class_Diagram"></a>
+<li><a href="https://github.com/SametAnaz/ce204-hw-samet-anaz-java/releases/latest" class="externalLink"><img src="https://img.shields.io/github/release/SametAnaz/ce204-hw-samet-anaz-java.svg" alt="GitHub Release" /></a>
+<a href="https://github.com/SametAnaz/ce204-hw-samet-anaz-java/actions" class="externalLink"><img src="https://img.shields.io/github/workflow/status/SametAnaz/ce204-hw-samet-anaz-java/Build" alt="Build Status" /></a></li>
+</ul>
+<p><a href="LICENSE"><img src="https://img.shields.io/github/license/SametAnaz/ce204-hw-samet-anaz-java" alt="License" /></a></p></section></section><section><a id="Uml_Class_Diagrams"></a>
+<h1>Uml Class Diagrams</h1><section><a id="Class_Diagram"></a>
 <h2>Class Diagram</h2>
 <p><img src="assets/UmlClassDiagram.png" alt="" /></p></section><section><a id="Sqeence_Diagram"></a>
 <h2>Sqeence Diagram</h2>
@@ -148,40 +180,14 @@ Password App
 <h2>Context Diagram</h2>
 <p><img src="assets/ContextDiagram.png" alt="" /></p></section><section><a id="Conteiner_Diagram"></a>
 <h2>Conteiner Diagram</h2>
-<p><img src="assets/Conteiner.png" alt="" /></p></section><section><a id="C4_Code_Diagram"></a>
+<p><img src="assets/Cointainer.png" alt="" /></p></section><section><a id="C4_Code_Diagram"></a>
 <h2>C4 Code Diagram</h2>
 <p><img src="assets/C4codeDiagram.png" alt="" /></p></section><section><a id="Use_Case_Diagram"></a>
 <h2>Use Case Diagram</h2>
-<p><img src="assets/UsaCase.png" alt="" /></p>
-
-<pre class="prettyprint"><code class="language-yaml"># https://github.com/brchiu/openairinterface5g/blob/master/ci-scripts/astyle-options.txt
-# OAI is using a style that is similar to the Google style
---style=google
-# long options can be written without the preceding '--'
-# Convert tabs to spaces
-convert-tabs
-# Indentation is 2 spaces
-indent=spaces=2
-# Indent 'switch' blocks so that the 'case X:' statements are indented in the switch block. 
-indent-switches
-# Indent preprocessor blocks at bracket level 0.
-indent-preproc-block
-# Indent multi-line preprocessor #define statements.
-indent-preproc-define
-# Indent C++ comments beginning in column one.
-indent-col1-comments
-# Pad empty lines around header blocks
-break-blocks
-delete-empty-lines
-# Attach a pointer or reference operator (*, &amp;, or ^) to the variable name (right)
-align-pointer=name
-# The code line length is 200 characters/columns (this is the maximum allowed by astyle)
-max-code-length=200
-# If the line contains logical conditionals they will be placed first on the new line.
-break-after-logical
-# Force use of the linux end of line
-# lineend=linux
-</code></pre>
+<p><img src="assets/UsaCase.png" alt="" /></p></section></section><section><a id="Source_Code"></a>
+<h1>Source Code</h1><section><a id="Password_Class"></a>
+<h2>Password Class</h2>
+<p>The Password class represents a stored password entry for a specific service. It contains fields for the service name, username, and password, along with getter and setter methods to access and update these values. The toString() method provides a formatted representation of the password entry.</p>
 
 <pre class="prettyprint"><code class="language-java">package com.ucoruh.password;
 
@@ -232,7 +238,9 @@ public class Password {
     }
 }
 
-</code></pre>
+</code></pre></section><section><a id="PasswordApp_Class"></a>
+<h2>PasswordApp Class</h2>
+<p>The PasswordApp class serves as the entry point for the Password Manager console application. It contains the main method and the runApp method that orchestrates user authentication and displays an interactive main menu. This menu allows users to perform tasks such as adding credentials, retrieving stored passwords, generating passwords, activating the auto-login feature, and accessing platform-specific functions.</p>
 
 <pre class="prettyprint"><code class="language-java">package com.ucoruh.password;
 
@@ -319,7 +327,9 @@ public class PasswordApp {
     }
 }
 
-</code></pre>
+</code></pre></section></section><section><a id="Test_Classes"></a>
+<h1>Test Classes</h1><section><a id="PasswordTest"></a>
+<h2>PasswordTest</h2>
 
 <pre class="prettyprint"><code class="language-java">package com.ucoruh.password;
 
@@ -360,7 +370,8 @@ public class PasswordTest {
     }
 }
 
-</code></pre>
+</code></pre></section><section><a id="PasswordAppTest"></a>
+<h2>PasswordAppTest</h2>
 
 <pre class="prettyprint"><code class="language-java">package com.ucoruh.password;
 
@@ -576,8 +587,9 @@ public class PasswordAppTest {
     }
 }
 
-</code></pre><section><a id="Update_pom.xml"></a>
-<h3>Update pom.xml</h3>
+</code></pre></section><section><a id="pom.xml"></a>
+<h2>pom.xml</h2>
+<p>The pom.xml file is the core configuration file for Maven projects. It defines important information such as the project's dependencies, plugins, build profiles, and other configuration details. This file centralizes settings related to project structure, compilation, testing, and packaging, allowing for a standardized and automated build process.</p>
 
 <pre class="prettyprint"><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 
@@ -842,7 +854,7 @@ public class PasswordAppTest {
         &lt;/pluginManagement&gt;
     &lt;/build&gt;
 &lt;/project&gt;
-</code></pre></section></section></section>        </main>
+</code></pre></section></section>        </main>
       </div>
     </div>
     <hr/>

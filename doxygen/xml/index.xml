@@ -12,6 +12,8 @@
     <member refid="classcom_1_1ucoruh_1_1password_1_1AuthManager_1ad670e15b89405a182394e55eaaea0013" kind="function"><name>getMasterPassword</name></member>
     <member refid="classcom_1_1ucoruh_1_1password_1_1AuthManager_1a7c27efe3ab593db7714bcd9c64b75986" kind="function"><name>userMenu</name></member>
   </compound>
+  <compound refid="classAutoLoginManager" kind="class"><name>AutoLoginManager</name>
+  </compound>
   <compound refid="classcom_1_1ucoruh_1_1password_1_1AutoLoginManager" kind="class"><name>com::ucoruh::password::AutoLoginManager</name>
     <member refid="classcom_1_1ucoruh_1_1password_1_1AutoLoginManager_1a9a03ef69aa94bef54cd0bfc4ce73f1ee" kind="function"><name>menu</name></member>
   </compound>
@@ -82,6 +84,8 @@
   </compound>
   <compound refid="classcom_1_1ucoruh_1_1password_1_1PlatformManager" kind="class"><name>com::ucoruh::password::PlatformManager</name>
     <member refid="classcom_1_1ucoruh_1_1password_1_1PlatformManager_1a0ed6dd9a7435c3135c0d0b2a4608d7bf" kind="function"><name>showPlatforms</name></member>
+  </compound>
+  <compound refid="classPlatformManager" kind="class"><name>PlatformManager</name>
   </compound>
   <compound refid="enumcom_1_1ucoruh_1_1password_1_1StorageType" kind="enum"><name>com::ucoruh::password::StorageType</name>
     <member refid="enumcom_1_1ucoruh_1_1password_1_1StorageType_1abf055d3f5792b39ddce614391f38fe3d" kind="variable"><name>FILE</name></member>

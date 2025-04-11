@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classAutoLoginManager" kind="class" language="Java" prot="package">
+    <compoundname>AutoLoginManager</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>The class that provides a stub method for auto-login functionality. </para>
+    </detaileddescription>
+    <location file="password-app/src/main/java/com/ucoruh/password/AutoLoginManager.java" line="9" column="1"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
