@@ -1,11 +1,28 @@
 package com.ucoruh.password;
 
 /**
+ * @file Password.java
+ * @class Password
  * @brief Represents a stored password entry for a specific service.
+ *
+ * This class provides a structure to store and manage credentials such as
+ * service name, username, and password. You can retrieve or update these
+ * fields through the provided getter and setter methods.
  */
 public class Password {
+    /**
+     * @brief The name of the service (e.g., Gmail, Facebook).
+     */
     private String service;
+
+    /**
+     * @brief The associated username for the service.
+     */
     private String username;
+
+    /**
+     * @brief The password string for the service.
+     */
     private String password;
 
     /**
@@ -42,14 +59,14 @@ public class Password {
     /**
      * @brief Returns the password string.
      *
-     * @return the password string.
+     * @return the password string associated with this password entry.
      */
     public String getPassword() {
         return password;
     }
 
     /**
-     * @brief Sets a new username.
+     * @brief Sets a new username for this password entry.
      *
      * @param username the new username to be set for this password entry.
      */
@@ -58,7 +75,7 @@ public class Password {
     }
 
     /**
-     * @brief Sets a new password.
+     * @brief Sets a new password for this password entry.
      *
      * @param password the new password string to be set for this password entry.
      */

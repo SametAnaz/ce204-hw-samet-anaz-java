@@ -1,3 +1,11 @@
+/**
+ * @file PlatformManager.java
+ * @class PlatformManager
+ * @brief Stub class for Multi-Platform Compatibility.
+ *
+ * This file is a placeholder implementation for displaying supported platforms.
+ * It demonstrates how to integrate multi-platform compatibility into the project.
+ */
 package com.ucoruh.password;
 
 /**

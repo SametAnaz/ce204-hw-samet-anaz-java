@@ -4,12 +4,18 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
+ * @file PasswordGenerator.java
+ * @class PasswordGenerator
  * @brief Utility class for generating random passwords.
  *
  * This class provides methods to generate secure random passwords using a predefined
  * set of characters.
  */
 public class PasswordGenerator {
+
+    /**
+     * @brief The set of characters allowed when generating random passwords.
+     */
     private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
 
     /**
