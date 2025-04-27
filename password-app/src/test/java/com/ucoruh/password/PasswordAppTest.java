@@ -146,8 +146,8 @@ public class PasswordAppTest {
      */
     @Test
     public void testMenuOptionSecureStorage() {
-        // Simulated input: set master, login, choose option 2, then in inner menu choose 4 to exit, then exit main menu.
-        String simulatedInput = "testMaster\n" + "testMaster\n" + "2\n" + "4\n" + "0\n";
+        // Simulated input: set master, login, choose option 2, then in inner menu choose 0 to exit, then exit main menu.
+        String simulatedInput = "testMaster\ntestMaster\n2\n0\n0\n";
         ByteArrayInputStream inputStream = new ByteArrayInputStream(
                 simulatedInput.getBytes(StandardCharsets.UTF_8));
         Scanner scanner = new Scanner(inputStream);
@@ -157,7 +157,7 @@ public class PasswordAppTest {
 
         String output = outputStream.toString();
         // Since PasswordManager.menu prints its own menu header, verify its presence.
-        assertTrue("Output should contain inner PasswordManager menu", output.contains("PASSWORD MANAGER MENU"));
+        assertTrue("Output should contain inner PasswordManager menu", output.contains("PASSWORD STORAGE MENU"));
     }
 
     /**

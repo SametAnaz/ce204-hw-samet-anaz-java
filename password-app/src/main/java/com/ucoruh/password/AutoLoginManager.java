@@ -129,7 +129,7 @@ public class AutoLoginManager {
         
         boolean back = false;
         while (!back) {
-            System.out.println("\n==== AUTO-LOGIN MENU ====");
+            System.out.println("\n==== AUTO-LOGIN FEATURES ====");
             System.out.println("1. Enable Auto-Login for a service");
             System.out.println("2. Disable Auto-Login for a service");
             System.out.println("3. Show services with Auto-Login enabled");

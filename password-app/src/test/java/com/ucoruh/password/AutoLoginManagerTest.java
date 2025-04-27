@@ -43,7 +43,7 @@ public class AutoLoginManagerTest {
         
         String output = outContent.toString();
         assertTrue("Output should contain auto-login menu header", 
-                  output.contains("AUTO-LOGIN MENU"));
+                  output.contains("AUTO-LOGIN FEATURES"));
         assertTrue("Output should contain option to enable auto-login",
                   output.contains("Enable Auto-Login"));
     }
