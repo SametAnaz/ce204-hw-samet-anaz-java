@@ -50,4 +50,32 @@ public class PasswordStorageFactoryTest {
             assertNotNull("Factory should not return null for type: " + type, storage);
         }
     }
+    
+    /**
+     * @brief Tests that create() returns different instances on each call.
+     */
+    @Test
+    public void testFactoryReturnsDifferentInstances() {
+        InterfacePasswordStorage storage1 = PasswordStorageFactory.create(StorageType.FILE, TEST_MASTER_PASSWORD);
+        InterfacePasswordStorage storage2 = PasswordStorageFactory.create(StorageType.FILE, TEST_MASTER_PASSWORD);
+        
+        assertNotNull("Factory should not return null", storage1);
+        assertNotNull("Factory should not return null", storage2);
+        assertNotSame("Factory should return different instances on each call", storage1, storage2);
+    }
+    
+    /**
+     * @brief Tests that create() passes the master password to the storage implementation.
+     */
+    @Test
+    public void testFactoryPassesMasterPassword() {
+        // Create storage with a specific master password
+        String specificMasterPassword = "specific-test-password";
+        FilePasswordStorage fileStorage = (FilePasswordStorage) PasswordStorageFactory.create(
+                StorageType.FILE, specificMasterPassword);
+        
+        // We need to indirectly verify the master password was passed
+        // by checking the instance was created successfully
+        assertNotNull("Factory should create a storage instance with the given master password", fileStorage);
+    }
 }

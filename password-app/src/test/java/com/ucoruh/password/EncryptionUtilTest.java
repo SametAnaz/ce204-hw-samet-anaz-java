@@ -106,4 +106,57 @@ public class EncryptionUtilTest {
         assertEquals("Same input should produce the same hash", hash1, hash2);
         assertEquals("SHA-256 hash should be 64 characters long (hex string)", 64, hash1.length());
     }
+    
+    /**
+     * @brief Tests empty string encryption and decryption.
+     */
+    @Test
+    public void testEmptyStringEncryptDecrypt() throws Exception {
+        // Arrange
+        String originalData = "";
+        String masterPassword = "master-password-123";
+        
+        // Act
+        String encrypted = EncryptionUtil.encrypt(originalData, masterPassword);
+        String decrypted = EncryptionUtil.decrypt(encrypted, masterPassword);
+        
+        // Assert
+        assertNotEquals("Encrypted empty string should not be empty", originalData, encrypted);
+        assertEquals("Decrypted data should be empty string", originalData, decrypted);
+    }
+    
+    /**
+     * @brief Tests encryption with empty master password.
+     */
+    @Test
+    public void testEmptyMasterPassword() throws Exception {
+        // Arrange
+        String originalData = "test-data-123";
+        String masterPassword = "";
+        
+        // Act
+        String encrypted = EncryptionUtil.encrypt(originalData, masterPassword);
+        String decrypted = EncryptionUtil.decrypt(encrypted, masterPassword);
+        
+        // Assert
+        assertNotEquals("Encrypted data should be different from original", originalData, encrypted);
+        assertEquals("Decrypted data should match original", originalData, decrypted);
+    }
+    
+    /**
+     * @brief Tests hash of empty string.
+     */
+    @Test
+    public void testHashEmptyString() {
+        // Arrange
+        String input = "";
+        
+        // Act
+        String hash = EncryptionUtil.hashString(input);
+        
+        // Assert
+        assertNotNull("Hash of empty string should not be null", hash);
+        assertNotEquals("Hash should not be empty", "", hash);
+        assertEquals("SHA-256 hash should be 64 characters long", 64, hash.length());
+    }
 } 
