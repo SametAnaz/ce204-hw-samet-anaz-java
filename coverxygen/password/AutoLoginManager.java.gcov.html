@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-04-27 10:29:44</td>
+            <td class="headerValue">2025-04-27 10:50:18</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -276,31 +276,32 @@
 <span id="L206"><span class="lineNum">     206</span>              :      * @brief Displays all services with auto-login enabled.</span>
 <span id="L207"><span class="lineNum">     207</span>              :      */</span>
 <span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC">           1 :     private static void showAutoLoginServices() {</span></span>
-<span id="L209"><span class="lineNum">     209</span>              :         System.out.println(&quot;\nServices with Auto-Login enabled:&quot;);</span>
-<span id="L210"><span class="lineNum">     210</span>              :         if (autoLoginServices.isEmpty()) {</span>
-<span id="L211"><span class="lineNum">     211</span>              :             System.out.println(&quot;None&quot;);</span>
-<span id="L212"><span class="lineNum">     212</span>              :         } else {</span>
-<span id="L213"><span class="lineNum">     213</span>              :             for (String service : autoLoginServices) {</span>
-<span id="L214"><span class="lineNum">     214</span>              :                 System.out.println(&quot;- &quot; + service);</span>
-<span id="L215"><span class="lineNum">     215</span>              :             }</span>
-<span id="L216"><span class="lineNum">     216</span>              :         }</span>
-<span id="L217"><span class="lineNum">     217</span>              :     }</span>
-<span id="L218"><span class="lineNum">     218</span>              :     </span>
-<span id="L219"><span class="lineNum">     219</span>              :     /**</span>
-<span id="L220"><span class="lineNum">     220</span>              :      * @brief Simulates auto-login for a service.</span>
-<span id="L221"><span class="lineNum">     221</span>              :      *</span>
-<span id="L222"><span class="lineNum">     222</span>              :      * @param scanner The Scanner object for user input.</span>
-<span id="L223"><span class="lineNum">     223</span>              :      * @param passwordManager The PasswordManager instance to use.</span>
-<span id="L224"><span class="lineNum">     224</span>              :      */</span>
-<span id="L225"><span class="lineNum">     225</span> <span class="tlaGNC">           1 :     private static void simulateAutoLogin(Scanner scanner, PasswordManager passwordManager) {</span></span>
-<span id="L226"><span class="lineNum">     226</span>              :         System.out.print(&quot;Enter service name to auto-login: &quot;);</span>
-<span id="L227"><span class="lineNum">     227</span>              :         String service = scanner.nextLine();</span>
-<span id="L228"><span class="lineNum">     228</span>              :         </span>
-<span id="L229"><span class="lineNum">     229</span>              :         if (!autoLogin(service, passwordManager)) {</span>
-<span id="L230"><span class="lineNum">     230</span>              :             System.out.println(&quot;Auto-login failed for &quot; + service);</span>
-<span id="L231"><span class="lineNum">     231</span>              :         }</span>
-<span id="L232"><span class="lineNum">     232</span>              :     }</span>
-<span id="L233"><span class="lineNum">     233</span>              : }</span>
+<span id="L209"><span class="lineNum">     209</span>              :         initialize();</span>
+<span id="L210"><span class="lineNum">     210</span>              :         System.out.println(&quot;\nServices with Auto-Login enabled:&quot;);</span>
+<span id="L211"><span class="lineNum">     211</span>              :         if (autoLoginServices.isEmpty()) {</span>
+<span id="L212"><span class="lineNum">     212</span>              :             System.out.println(&quot;None&quot;);</span>
+<span id="L213"><span class="lineNum">     213</span>              :         } else {</span>
+<span id="L214"><span class="lineNum">     214</span>              :             for (String service : autoLoginServices) {</span>
+<span id="L215"><span class="lineNum">     215</span>              :                 System.out.println(&quot;- &quot; + service);</span>
+<span id="L216"><span class="lineNum">     216</span>              :             }</span>
+<span id="L217"><span class="lineNum">     217</span>              :         }</span>
+<span id="L218"><span class="lineNum">     218</span>              :     }</span>
+<span id="L219"><span class="lineNum">     219</span>              :     </span>
+<span id="L220"><span class="lineNum">     220</span>              :     /**</span>
+<span id="L221"><span class="lineNum">     221</span>              :      * @brief Simulates auto-login for a service.</span>
+<span id="L222"><span class="lineNum">     222</span>              :      *</span>
+<span id="L223"><span class="lineNum">     223</span>              :      * @param scanner The Scanner object for user input.</span>
+<span id="L224"><span class="lineNum">     224</span>              :      * @param passwordManager The PasswordManager instance to use.</span>
+<span id="L225"><span class="lineNum">     225</span>              :      */</span>
+<span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC">           1 :     private static void simulateAutoLogin(Scanner scanner, PasswordManager passwordManager) {</span></span>
+<span id="L227"><span class="lineNum">     227</span>              :         System.out.print(&quot;Enter service name to auto-login: &quot;);</span>
+<span id="L228"><span class="lineNum">     228</span>              :         String service = scanner.nextLine();</span>
+<span id="L229"><span class="lineNum">     229</span>              :         </span>
+<span id="L230"><span class="lineNum">     230</span>              :         if (!autoLogin(service, passwordManager)) {</span>
+<span id="L231"><span class="lineNum">     231</span>              :             System.out.println(&quot;Auto-login failed for &quot; + service);</span>
+<span id="L232"><span class="lineNum">     232</span>              :         }</span>
+<span id="L233"><span class="lineNum">     233</span>              :     }</span>
+<span id="L234"><span class="lineNum">     234</span>              : }</span>
         </pre>
               </td>
             </tr>

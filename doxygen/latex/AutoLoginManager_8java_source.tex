@@ -136,24 +136,25 @@
 \DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00203}00203\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00204}00204\ \ \ \ \ }
 \DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00208}00208\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ showAutoLoginServices()\ \{}
-\DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00209}00209\ \ \ \ \ \ \ \ \ System.out.println(\textcolor{stringliteral}{"{}\(\backslash\)nServices\ with\ Auto-\/Login\ enabled:"{}});}
-\DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00210}00210\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (autoLoginServices.isEmpty())\ \{}
-\DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00211}00211\ \ \ \ \ \ \ \ \ \ \ \ \ System.out.println(\textcolor{stringliteral}{"{}None"{}});}
-\DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00212}00212\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (String\ service\ :\ autoLoginServices)\ \{}
-\DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00214}00214\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ System.out.println(\textcolor{stringliteral}{"{}-\/\ "{}}\ +\ service);}
-\DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00215}00215\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00216}00216\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00217}00217\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00218}00218\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00225}00225\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ simulateAutoLogin(Scanner\ scanner,\ PasswordManager\ passwordManager)\ \{}
-\DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00226}00226\ \ \ \ \ \ \ \ \ System.out.print(\textcolor{stringliteral}{"{}Enter\ service\ name\ to\ auto-\/login:\ "{}});}
-\DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00227}00227\ \ \ \ \ \ \ \ \ String\ service\ =\ scanner.nextLine();}
-\DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00228}00228\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00229}00229\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classcom_1_1ucoruh_1_1password_1_1AutoLoginManager_a63429ab60d36cc79362a7e6fef019eca}{autoLogin}}(service,\ passwordManager))\ \{}
-\DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00230}00230\ \ \ \ \ \ \ \ \ \ \ \ \ System.out.println(\textcolor{stringliteral}{"{}Auto-\/login\ failed\ for\ "{}}\ +\ service);}
-\DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00231}00231\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00232}00232\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00233}00233\ \}}
+\DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00209}00209\ \ \ \ \ \ \ \ \ initialize();}
+\DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00210}00210\ \ \ \ \ \ \ \ \ System.out.println(\textcolor{stringliteral}{"{}\(\backslash\)nServices\ with\ Auto-\/Login\ enabled:"{}});}
+\DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00211}00211\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (autoLoginServices.isEmpty())\ \{}
+\DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00212}00212\ \ \ \ \ \ \ \ \ \ \ \ \ System.out.println(\textcolor{stringliteral}{"{}None"{}});}
+\DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00213}00213\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00214}00214\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (String\ service\ :\ autoLoginServices)\ \{}
+\DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00215}00215\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ System.out.println(\textcolor{stringliteral}{"{}-\/\ "{}}\ +\ service);}
+\DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00216}00216\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00217}00217\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00218}00218\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00219}00219\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00226}00226\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ simulateAutoLogin(Scanner\ scanner,\ PasswordManager\ passwordManager)\ \{}
+\DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00227}00227\ \ \ \ \ \ \ \ \ System.out.print(\textcolor{stringliteral}{"{}Enter\ service\ name\ to\ auto-\/login:\ "{}});}
+\DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00228}00228\ \ \ \ \ \ \ \ \ String\ service\ =\ scanner.nextLine();}
+\DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00229}00229\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00230}00230\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classcom_1_1ucoruh_1_1password_1_1AutoLoginManager_a63429ab60d36cc79362a7e6fef019eca}{autoLogin}}(service,\ passwordManager))\ \{}
+\DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00231}00231\ \ \ \ \ \ \ \ \ \ \ \ \ System.out.println(\textcolor{stringliteral}{"{}Auto-\/login\ failed\ for\ "{}}\ +\ service);}
+\DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00232}00232\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00233}00233\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{AutoLoginManager_8java_source_l00234}00234\ \}}
 
 \end{DoxyCode}
