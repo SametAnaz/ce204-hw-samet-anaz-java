@@ -137,7 +137,7 @@ jobs:
           
       - name: Get Commit Summary
         id: commit_summary
-        run: echo "::set-output name=summary::$(git log --format=%B -n 10 ${{ github.sha }})"
+        run: echo "summary=$(git log --format=%B -n 10 ${{ github.sha }})" >> $GITHUB_OUTPUT
 
       - name: Create Release
         id: create_common_release
