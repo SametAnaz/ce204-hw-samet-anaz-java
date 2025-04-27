@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['setpassword_0',['setPassword',['../classcom_1_1ucoruh_1_1password_1_1Password.html#a50fde41c22e09aa73e41a27cbc0e1458',1,'com::ucoruh::password::Password']]],
-  ['setusername_1',['setUsername',['../classcom_1_1ucoruh_1_1password_1_1Password.html#a61385ad34ca377c79c6e1c5042b7da1b',1,'com::ucoruh::password::Password']]],
-  ['showplatforms_2',['showPlatforms',['../classcom_1_1ucoruh_1_1password_1_1PlatformManager.html#a0ed6dd9a7435c3135c0d0b2a4608d7bf',1,'com::ucoruh::password::PlatformManager']]]
+  ['main_0',['main',['../classcom_1_1ucoruh_1_1password_1_1PasswordApp.html#a640e1d366f86d17023d58550428ff795',1,'com.ucoruh.password.PasswordApp.main()'],['../classcom_1_1ucoruh_1_1password_1_1PasswordManager.html#a3cb37a64c5cc86e0075dd195a8374d6e',1,'com.ucoruh.password.PasswordManager.main()']]],
+  ['menu_1',['menu',['../classcom_1_1ucoruh_1_1password_1_1AutoLoginManager.html#af2802356b5bc4441678252e400695b66',1,'com.ucoruh.password.AutoLoginManager.menu()'],['../classcom_1_1ucoruh_1_1password_1_1PasswordManager.html#a6fc0efa64346092b3a41b5706c98e1e0',1,'com.ucoruh.password.PasswordManager.menu()']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['interfacepasswordstorage_2ejava_0',['InterfacePasswordStorage.java',['../InterfacePasswordStorage_8java.html',1,'']]]
+  ['filepasswordstorage_2ejava_0',['FilePasswordStorage.java',['../FilePasswordStorage_8java.html',1,'']]]
 ];

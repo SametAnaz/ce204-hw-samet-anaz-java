@@ -1,9 +1,15 @@
 var searchData=
 [
-  ['setpassword_0',['setPassword',['../classcom_1_1ucoruh_1_1password_1_1Password.html#a50fde41c22e09aa73e41a27cbc0e1458',1,'com::ucoruh::password::Password']]],
-  ['setusername_1',['setUsername',['../classcom_1_1ucoruh_1_1password_1_1Password.html#a61385ad34ca377c79c6e1c5042b7da1b',1,'com::ucoruh::password::Password']]],
-  ['showplatforms_2',['showPlatforms',['../classcom_1_1ucoruh_1_1password_1_1PlatformManager.html#a0ed6dd9a7435c3135c0d0b2a4608d7bf',1,'com::ucoruh::password::PlatformManager']]],
-  ['sqlite_3',['SQLITE',['../enumcom_1_1ucoruh_1_1password_1_1StorageType.html#aa5cd323ea0d9febe1387d0487ad55846',1,'com::ucoruh::password::StorageType']]],
-  ['storagetype_4',['StorageType',['../enumcom_1_1ucoruh_1_1password_1_1StorageType.html',1,'com::ucoruh::password']]],
-  ['storagetype_2ejava_5',['StorageType.java',['../StorageType_8java.html',1,'']]]
+  ['password_0',['password',['../classcom_1_1ucoruh_1_1password_1_1Password.html',1,'com.ucoruh.password.Password'],['../classcom_1_1ucoruh_1_1password_1_1Password.html#a2426ee892932f9622c7c9e0dba29b12f',1,'com.ucoruh.password.Password.Password()']]],
+  ['password_2ejava_1',['Password.java',['../Password_8java.html',1,'']]],
+  ['passwordapp_2',['PasswordApp',['../classcom_1_1ucoruh_1_1password_1_1PasswordApp.html',1,'com::ucoruh::password']]],
+  ['passwordapp_2ejava_3',['PasswordApp.java',['../PasswordApp_8java.html',1,'']]],
+  ['passwordgenerator_4',['PasswordGenerator',['../classcom_1_1ucoruh_1_1password_1_1PasswordGenerator.html',1,'com::ucoruh::password']]],
+  ['passwordgenerator_2ejava_5',['PasswordGenerator.java',['../PasswordGenerator_8java.html',1,'']]],
+  ['passwordmanager_6',['passwordmanager',['../classcom_1_1ucoruh_1_1password_1_1PasswordManager.html',1,'com.ucoruh.password.PasswordManager'],['../classcom_1_1ucoruh_1_1password_1_1PasswordManager.html#a903e09f359bffd2d40b66bcd240aaefd',1,'com.ucoruh.password.PasswordManager.PasswordManager(String masterPassword)'],['../classcom_1_1ucoruh_1_1password_1_1PasswordManager.html#a614074076c79b74a2575a56dfe6ba079',1,'com.ucoruh.password.PasswordManager.PasswordManager(String masterPassword, StorageType storageType)']]],
+  ['passwordmanager_2ejava_7',['PasswordManager.java',['../PasswordManager_8java.html',1,'']]],
+  ['passwordstoragefactory_8',['PasswordStorageFactory',['../classcom_1_1ucoruh_1_1password_1_1PasswordStorageFactory.html',1,'com::ucoruh::password']]],
+  ['passwordstoragefactory_2ejava_9',['PasswordStorageFactory.java',['../PasswordStorageFactory_8java.html',1,'']]],
+  ['platformmanager_10',['PlatformManager',['../classcom_1_1ucoruh_1_1password_1_1PlatformManager.html',1,'com::ucoruh::password']]],
+  ['platformmanager_2ejava_11',['PlatformManager.java',['../PlatformManager_8java.html',1,'']]]
 ];

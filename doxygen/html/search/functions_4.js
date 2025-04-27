@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ismasterpasswordset_0',['isMasterPasswordSet',['../classcom_1_1ucoruh_1_1password_1_1AuthManager.html#a0ac402a736634c3b63c88772f0758bb2',1,'com::ucoruh::password::AuthManager']]]
+  ['filepasswordstorage_0',['FilePasswordStorage',['../classcom_1_1ucoruh_1_1password_1_1FilePasswordStorage.html#a3c3ac494750d220ea0805851f166d061',1,'com::ucoruh::password::FilePasswordStorage']]]
 ];

@@ -3,10 +3,10 @@
   <compounddef id="classPlatformManager" kind="class" language="Java" prot="package">
     <compoundname>PlatformManager</compoundname>
     <briefdescription>
-<para>Stub class for Multi-Platform Compatibility. </para>
+<para>Class for Multi-Platform Compatibility management. </para>
     </briefdescription>
     <detaileddescription>
-<para>This file is a placeholder implementation for displaying supported platforms. It demonstrates how to integrate multi-platform compatibility into the project. </para>
+<para>This class provides functionality to manage and display platform-specific features and compatibility information. </para>
     </detaileddescription>
     <location file="password-app/src/main/java/com/ucoruh/password/PlatformManager.java" line="3" column="1"/>
     <listofallmembers>

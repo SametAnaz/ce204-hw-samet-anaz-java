@@ -5,6 +5,7 @@
     <innerfile refid="AuthManager_8java">AuthManager.java</innerfile>
     <innerfile refid="AutoLoginManager_8java">AutoLoginManager.java</innerfile>
     <innerfile refid="DatabasePasswordStorage_8java">DatabasePasswordStorage.java</innerfile>
+    <innerfile refid="EncryptionUtil_8java">EncryptionUtil.java</innerfile>
     <innerfile refid="FilePasswordStorage_8java">FilePasswordStorage.java</innerfile>
     <innerfile refid="InterfacePasswordStorage_8java">InterfacePasswordStorage.java</innerfile>
     <innerfile refid="Password_8java">Password.java</innerfile>

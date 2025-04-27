@@ -4,7 +4,7 @@
   <option  id='PROJECT_NAME' default='no' type='string'><value><![CDATA["Password Application with Library"]]></value></option>
   <option  id='PROJECT_NUMBER' default='no' type='string'><value><![CDATA[0.0.1]]></value></option>
   <option  id='PROJECT_BRIEF' default='no' type='string'><value><![CDATA["A simple library for performing basic arithmetic operations with application"]]></value></option>
-  <option  id='PROJECT_LOGO' default='no' type='string'><value><![CDATA[C:/Users/ugur.coruh/Desktop/eclipse-java-maven-template/assets/rteu_logo.jpg]]></value></option>
+  <option  id='PROJECT_LOGO' default='no' type='string'><value><![CDATA[assets/rteu_logo.jpg]]></value></option>
   <option  id='OUTPUT_DIRECTORY' default='no' type='string'><value><![CDATA[password-app/target/site/doxygen]]></value></option>
   <option  id='CREATE_SUBDIRS' default='yes' type='bool'><value>NO</value></option>
   <option  id='CREATE_SUBDIRS_LEVEL' default='yes' type='int'><value>8</value></option>

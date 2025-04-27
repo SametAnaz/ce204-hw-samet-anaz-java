@@ -4,6 +4,7 @@ var searchData=
   ['addcredential_1',['addCredential',['../classcom_1_1ucoruh_1_1password_1_1PasswordManager.html#a18c3f249db545c340acb1705e8fe8d17',1,'com::ucoruh::password::PasswordManager']]],
   ['authmanager_2',['AuthManager',['../classcom_1_1ucoruh_1_1password_1_1AuthManager.html',1,'com::ucoruh::password']]],
   ['authmanager_2ejava_3',['AuthManager.java',['../AuthManager_8java.html',1,'']]],
-  ['autologinmanager_4',['AutoLoginManager',['../classcom_1_1ucoruh_1_1password_1_1AutoLoginManager.html',1,'com::ucoruh::password']]],
-  ['autologinmanager_2ejava_5',['AutoLoginManager.java',['../AutoLoginManager_8java.html',1,'']]]
+  ['autologin_4',['autoLogin',['../classcom_1_1ucoruh_1_1password_1_1AutoLoginManager.html#a63429ab60d36cc79362a7e6fef019eca',1,'com::ucoruh::password::AutoLoginManager']]],
+  ['autologinmanager_5',['AutoLoginManager',['../classcom_1_1ucoruh_1_1password_1_1AutoLoginManager.html',1,'com::ucoruh::password']]],
+  ['autologinmanager_2ejava_6',['AutoLoginManager.java',['../AutoLoginManager_8java.html',1,'']]]
 ];
