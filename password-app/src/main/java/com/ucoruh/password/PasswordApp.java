@@ -33,7 +33,7 @@ public class PasswordApp {
             PasswordManager pm = new PasswordManager(auth.getMasterPassword());
             int choice = -1;
             do {
-                out.println("==== MAIN MENU ====");
+                out.println("\n==== MAIN MENU ====");
                 out.println("1. User Authentication");
                 out.println("2. Secure Storage of Passwords");
                 out.println("3. Password Generator");
@@ -56,13 +56,13 @@ public class PasswordApp {
                         pm.menu(scanner, out);
                         break;
                     case 3:
-                        PasswordGenerator.generate(scanner);
+                        passwordGeneratorMenu(scanner, out);
                         break;
                     case 4:
-                        AutoLoginManager.menu(scanner);
+                        AutoLoginManager.menu(scanner, pm);
                         break;
                     case 5:
-                        PlatformManager.showPlatforms();
+                        platformMenu(scanner, out);
                         break;
                     case 0:
                         out.println("Exiting...");
@@ -75,6 +75,46 @@ public class PasswordApp {
         } else {
             out.println("Login failed.");
         }
+    }
+
+    /**
+     * @brief Displays the password generator menu and processes user input.
+     *
+     * @param scanner The Scanner object for user input.
+     * @param out The PrintStream object for output.
+     */
+    private static void passwordGeneratorMenu(Scanner scanner, PrintStream out) {
+        out.println("\n==== PASSWORD GENERATOR ====");
+        out.print("Enter desired password length: ");
+        try {
+            int length = Integer.parseInt(scanner.nextLine());
+            if (length <= 0) {
+                out.println("Password length must be greater than 0.");
+                return;
+            }
+            String password = PasswordGenerator.generatePassword(length);
+            out.println("Generated Password: " + password);
+        } catch (NumberFormatException e) {
+            out.println("Invalid number.");
+        }
+    }
+    
+    /**
+     * @brief Displays the platform compatibility menu and processes user input.
+     *
+     * @param scanner The Scanner object for user input.
+     * @param out The PrintStream object for output.
+     */
+    private static void platformMenu(Scanner scanner, PrintStream out) {
+        out.println("\n==== PLATFORM COMPATIBILITY ====");
+        out.println("This password manager is compatible with the following platforms:");
+        out.println("1. Windows");
+        out.println("2. macOS");
+        out.println("3. Linux");
+        out.println("4. Android");
+        out.println("5. iOS");
+        out.print("\nPress Enter to continue...");
+        scanner.nextLine();
     }
 
     /**

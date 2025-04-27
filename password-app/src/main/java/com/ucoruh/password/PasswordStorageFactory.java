@@ -16,14 +16,16 @@ public class PasswordStorageFactory {
      *
      * This method uses a switch expression to determine which implementation of
      * InterfacePasswordStorage to instantiate depending on the given storage type.
+     * It passes the master password to the storage implementation for encryption/decryption.
      *
      * @param type The storage type (e.g., FILE, SQLITE, etc.).
+     * @param masterPassword The master password for encryption/decryption.
      * @return An instance of InterfacePasswordStorage corresponding to the provided storage type.
      */
-    public static InterfacePasswordStorage create(StorageType type) {
+    public static InterfacePasswordStorage create(StorageType type, String masterPassword) {
         return switch (type) {
-            case FILE -> new FilePasswordStorage();
-            case SQLITE -> new DatabasePasswordStorage();
+            case FILE -> new FilePasswordStorage(masterPassword);
+            case SQLITE -> new DatabasePasswordStorage(masterPassword);
         };
     }
 }

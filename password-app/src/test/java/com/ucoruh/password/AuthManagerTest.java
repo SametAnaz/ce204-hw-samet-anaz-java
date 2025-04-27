@@ -21,6 +21,12 @@ public class AuthManagerTest {
      */
     @Before
     public void setUp() {
+        // Remove existing master password file for clean tests
+        File file = new File("master-password.txt");
+        if (file.exists()) {
+            file.delete();
+        }
+        
         AuthManager.resetInstance();
         auth = AuthManager.getInstance();
         System.setOut(new PrintStream(outContent));
@@ -33,6 +39,12 @@ public class AuthManagerTest {
     public void tearDown() {
         System.setOut(originalOut);
         AuthManager.resetInstance();
+        
+        // Clean up test file after tests
+        File file = new File("master-password.txt");
+        if (file.exists()) {
+            file.delete();
+        }
     }
     
     /**
@@ -74,7 +86,11 @@ public class AuthManagerTest {
      */
     @Test
     public void testIsMasterPasswordSetFalse() {
-        // New instance should not have master password set
+        // Force a clean state by deleting the file and resetting
+        File file = new File("master-password.txt");
+        if (file.exists()) {
+            file.delete();
+        }
         AuthManager.resetInstance();
         AuthManager freshAuth = AuthManager.getInstance();
         assertFalse("New AuthManager instance should not have master password set", freshAuth.isMasterPasswordSet());
@@ -103,8 +119,12 @@ public class AuthManagerTest {
         auth.createMasterPassword(scanner);
         scanner.close();
         
-        // Reset instance
+        // Reset instance and delete the file
         AuthManager.resetInstance();
+        File file = new File("master-password.txt");
+        if (file.exists()) {
+            file.delete();
+        }
         AuthManager newAuth = AuthManager.getInstance();
         
         assertFalse("New instance after reset should not have master password set", newAuth.isMasterPasswordSet());
@@ -118,6 +138,10 @@ public class AuthManagerTest {
         String password = "secretMaster";
         Scanner scanner = new Scanner(password + "\n");
         auth.createMasterPassword(scanner);
+        
+        // Login to get the actual master password (not the hash)
+        scanner = new Scanner(password + "\n");
+        auth.login(scanner);
         scanner.close();
         
         assertEquals("getMasterPassword should return the correct master password", password, auth.getMasterPassword());
@@ -128,11 +152,19 @@ public class AuthManagerTest {
      */
     @Test
     public void testUserMenu() {
-        Scanner scanner = new Scanner("");
+        // First set up the master password
+        String password = "testPassword";
+        Scanner setupScanner = new Scanner(password + "\n");
+        auth.createMasterPassword(setupScanner);
+        setupScanner.close();
+        
+        // Provide input for the menu: select option 0 (back to main menu)
+        Scanner scanner = new Scanner("0\n");
         auth.userMenu(scanner);
         scanner.close();
         
         String output = outContent.toString();
-        assertTrue("userMenu should output message about functionality", output.contains("User menu functionality not yet implemented"));
+        assertTrue("userMenu should output USER AUTHENTICATION MENU", 
+                output.contains("USER AUTHENTICATION MENU"));
     }
 }

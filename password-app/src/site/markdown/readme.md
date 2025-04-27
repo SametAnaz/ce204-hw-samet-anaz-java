@@ -1,14 +1,38 @@
 # ce204-hw-samet-anaz-java
 
+## Contents
+
+- [Overview](#overview)
+- [Releases](#releases)
+- [UML Class Diagramları](#uml-class-diagramları)
+  - [Class Diagram](#class-diagram)
+  - [Sequence Diagram](#sequence-diagram)
+  - [C4 Diagram](#c4-diagram)
+  - [Context Diagram](#context-diagram)
+  - [Container Diagram](#container-diagram)
+  - [C4 Code Diagram](#c4-code-diagram)
+  - [Use Case Diagram](#use-case-diagram)
+- [Source Code](#source-code)
+  - [Password Class](#password-class)
+  - [PasswordApp Class](#passwordapp-class)
+- [Test Sınıfları](#test-sınıfları)
+  - [PasswordTest](#passwordtest)
+  - [PasswordAppTest](#passwordapptest)
+- [pom.xml](#pomxml)
+
 # Overview
 
 The Password Application is a secure and lightweight console-based password manager developed using Java and the Maven framework. It provides essential features such as encrypted password storage, strong password generation, user authentication, and platform-based credential organization. Designed with modularity and maintainability in mind, the application leverages object-oriented principles and supports SQLite for local database management. This project also integrates test coverage and documentation tools, and is structured to allow future expansion, including GUI development.
 ## Releases
 
-- [![GitHub release badge](https://badgen.net/github/release/ucoruh/ce204-hw-samet-anaz-java)](https://github.com/SametAnaz/ce204-hw-samet-anaz-java.git/releases/latest)
+- [![GitHub Release](https://img.shields.io/github/release/SametAnaz/ce204-hw-samet-anaz-java.svg)](https://github.com/SametAnaz/ce204-hw-samet-anaz-java/releases/latest)
+[![Build Status](https://img.shields.io/github/workflow/status/SametAnaz/ce204-hw-samet-anaz-java/Build)](https://github.com/SametAnaz/ce204-hw-samet-anaz-java/actions)
+
+[![License](https://img.shields.io/github/license/SametAnaz/ce204-hw-samet-anaz-java)](LICENSE)
 
 
-## Uml Class Diagrams
+
+# Uml Class Diagrams
 ## Class Diagram
 ![](assets/UmlClassDiagram.png)
 ## Sqeence Diagram
@@ -18,7 +42,7 @@ The Password Application is a secure and lightweight console-based password mana
 ## Context Diagram
 ![](assets/ContextDiagram.png)
 ## Conteiner Diagram
-![](assets/Conteiner.png)
+![](assets/Cointainer.png)
 ## C4 Code Diagram
 ![](assets/C4codeDiagram.png)
 ## Use Case Diagram
@@ -28,37 +52,10 @@ The Password Application is a secure and lightweight console-based password mana
 
 
 
-```yaml
-# https://github.com/brchiu/openairinterface5g/blob/master/ci-scripts/astyle-options.txt
-# OAI is using a style that is similar to the Google style
---style=google
-# long options can be written without the preceding '--'
-# Convert tabs to spaces
-convert-tabs
-# Indentation is 2 spaces
-indent=spaces=2
-# Indent 'switch' blocks so that the 'case X:' statements are indented in the switch block. 
-indent-switches
-# Indent preprocessor blocks at bracket level 0.
-indent-preproc-block
-# Indent multi-line preprocessor #define statements.
-indent-preproc-define
-# Indent C++ comments beginning in column one.
-indent-col1-comments
-# Pad empty lines around header blocks
-break-blocks
-delete-empty-lines
-# Attach a pointer or reference operator (*, &, or ^) to the variable name (right)
-align-pointer=name
-# The code line length is 200 characters/columns (this is the maximum allowed by astyle)
-max-code-length=200
-# If the line contains logical conditionals they will be placed first on the new line.
-break-after-logical
-# Force use of the linux end of line
-# lineend=linux
-```
+# Source Code
 
-
+## Password Class
+The Password class represents a stored password entry for a specific service. It contains fields for the service name, username, and password, along with getter and setter methods to access and update these values. The toString() method provides a formatted representation of the password entry.
 
 
 ```java
@@ -112,6 +109,9 @@ public class Password {
 }
 
 ```
+## PasswordApp Class
+
+The PasswordApp class serves as the entry point for the Password Manager console application. It contains the main method and the runApp method that orchestrates user authentication and displays an interactive main menu. This menu allows users to perform tasks such as adding credentials, retrieving stored passwords, generating passwords, activating the auto-login feature, and accessing platform-specific functions.
 
 ```java
 package com.ucoruh.password;
@@ -200,8 +200,8 @@ public class PasswordApp {
 }
 
 ```
-
-
+# Test Classes
+## PasswordTest
 ```java
 package com.ucoruh.password;
 
@@ -243,6 +243,7 @@ public class PasswordTest {
 }
 
 ```
+## PasswordAppTest
 
 ```java
 package com.ucoruh.password;
@@ -461,8 +462,8 @@ public class PasswordAppTest {
 
 ```
 
-### Update pom.xml
-
+## pom.xml
+The pom.xml file is the core configuration file for Maven projects. It defines important information such as the project's dependencies, plugins, build profiles, and other configuration details. This file centralizes settings related to project structure, compilation, testing, and packaging, allowing for a standardized and automated build process.
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 

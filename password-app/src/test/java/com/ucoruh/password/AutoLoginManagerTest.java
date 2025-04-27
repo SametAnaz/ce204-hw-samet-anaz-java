@@ -14,10 +14,12 @@ import static org.junit.Assert.*;
 public class AutoLoginManagerTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
+    private PasswordManager passwordManager;
 
     @Before
     public void setUpStreams() {
         System.setOut(new PrintStream(outContent));
+        passwordManager = new PasswordManager("test-master-password");
     }
 
     @After
@@ -26,34 +28,42 @@ public class AutoLoginManagerTest {
     }
 
     /**
-     * @brief Tests that the menu method produces the expected output message.
+     * @brief Tests the menu method with a basic input.
      *
-     * This test calls the menu method directly and verifies that it contains
-     * the expected "activated" message.
+     * This test provides input to select option 0 (back to main menu) and verifies
+     * that the menu is displayed correctly.
      */
     @Test
-    public void testMenuOutput() {
-        AutoLoginManager.menu(new Scanner(System.in)); 
+    public void testMenuBasicNavigation() {
+        // Simulate input to navigate back to main menu
+        String input = "0\n";
+        Scanner scanner = new Scanner(new ByteArrayInputStream(input.getBytes()));
+        
+        AutoLoginManager.menu(scanner, passwordManager);
         
         String output = outContent.toString();
-        assertTrue("Output should mention auto-login activation", 
-                  output.contains("Auto-Login Feature activated."));
+        assertTrue("Output should contain auto-login menu header", 
+                  output.contains("AUTO-LOGIN MENU"));
+        assertTrue("Output should contain option to enable auto-login",
+                  output.contains("Enable Auto-Login"));
     }
     
     /**
-     * @brief Tests menu method with different scanner input.
+     * @brief Tests showing services with auto-login enabled when none exist.
      *
-     * Verifies that the method works correctly with custom scanner input.
+     * Simulates selecting option 3 (show services) and verifies the output
+     * indicates no services have auto-login enabled.
      */
     @Test
-    public void testMenuWithCustomInput() {
-        // Provide some input, though it's currently not used by the method
-        Scanner scanner = new Scanner("any input here\n");
+    public void testShowServicesEmpty() {
+        // Simulate input to select option 3 (show services) then 0 (back)
+        String input = "3\n0\n";
+        Scanner scanner = new Scanner(new ByteArrayInputStream(input.getBytes()));
         
-        AutoLoginManager.menu(scanner);
+        AutoLoginManager.menu(scanner, passwordManager);
         
         String output = outContent.toString();
-        assertTrue("Output should contain the activation message regardless of input", 
-                  output.contains("Auto-Login Feature activated."));
+        assertTrue("Output should indicate no services have auto-login enabled", 
+                  output.contains("None"));
     }
 }

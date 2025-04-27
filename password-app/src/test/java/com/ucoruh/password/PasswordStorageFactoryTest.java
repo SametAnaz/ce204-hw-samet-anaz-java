@@ -11,13 +11,17 @@ import org.junit.Test;
  * based on the provided StorageType and that all possible enum values are handled.
  */
 public class PasswordStorageFactoryTest {
+    /**
+     * @brief Test master password for testing.
+     */
+    private static final String TEST_MASTER_PASSWORD = "test-master-password";
 
     /**
      * @brief Tests that create() returns a FilePasswordStorage instance when given StorageType.FILE.
      */
     @Test
     public void testCreateFileStorage() {
-        InterfacePasswordStorage storage = PasswordStorageFactory.create(StorageType.FILE);
+        InterfacePasswordStorage storage = PasswordStorageFactory.create(StorageType.FILE, TEST_MASTER_PASSWORD);
         assertNotNull("Factory should not return null for FILE type", storage);
         assertTrue("The created storage should be an instance of FilePasswordStorage",
                    storage instanceof FilePasswordStorage);
@@ -28,7 +32,7 @@ public class PasswordStorageFactoryTest {
      */
     @Test
     public void testCreateDatabaseStorage() {
-        InterfacePasswordStorage storage = PasswordStorageFactory.create(StorageType.SQLITE);
+        InterfacePasswordStorage storage = PasswordStorageFactory.create(StorageType.SQLITE, TEST_MASTER_PASSWORD);
         assertNotNull("Factory should not return null for SQLITE type", storage);
         assertTrue("The created storage should be an instance of DatabasePasswordStorage",
                    storage instanceof DatabasePasswordStorage);
@@ -42,7 +46,7 @@ public class PasswordStorageFactoryTest {
     @Test
     public void testAllStorageTypesHandled() {
         for (StorageType type : StorageType.values()) {
-            InterfacePasswordStorage storage = PasswordStorageFactory.create(type);
+            InterfacePasswordStorage storage = PasswordStorageFactory.create(type, TEST_MASTER_PASSWORD);
             assertNotNull("Factory should not return null for type: " + type, storage);
         }
     }

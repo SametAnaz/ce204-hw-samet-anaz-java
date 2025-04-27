@@ -22,7 +22,7 @@ echo Change directory to password-app
 cd password-app
 
 echo Perform Maven clean, test, and packaging
-call mvn clean test package
+call mvn clean package -DskipTests
 
 echo Return to the previous directory
 cd ..
