@@ -206,6 +206,7 @@ public class AutoLoginManager {
      * @brief Displays all services with auto-login enabled.
      */
     private static void showAutoLoginServices() {
+        initialize();
         System.out.println("\nServices with Auto-Login enabled:");
         if (autoLoginServices.isEmpty()) {
             System.out.println("None");
