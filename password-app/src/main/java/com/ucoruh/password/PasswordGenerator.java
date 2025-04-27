@@ -22,12 +22,18 @@ public class PasswordGenerator {
      * @brief Generates a random password of a given length.
      *
      * This method uses a random number generator and a predefined character set to
-     * create a password string of the specified length.
+     * create a password string of the specified length. If a negative length is provided,
+     * an empty string is returned.
      *
      * @param length Desired password length.
      * @return A randomly generated password as a String.
      */
     public static String generatePassword(int length) {
+        // Return empty string for zero or negative length
+        if (length <= 0) {
+            return "";
+        }
+        
         StringBuilder password = new StringBuilder(length);
         Random random = new Random();
         for (int i = 0; i < length; i++) {
@@ -47,8 +53,12 @@ public class PasswordGenerator {
      */
     public static void generate(Scanner scanner) {
         System.out.print("Enter desired password length: ");
-        int length = Integer.parseInt(scanner.nextLine());
-        String newPassword = generatePassword(length);
-        System.out.println("Generated Password: " + newPassword);
+        try {
+            int length = Integer.parseInt(scanner.nextLine());
+            String newPassword = generatePassword(length);
+            System.out.println("Generated Password: " + newPassword);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a valid number.");
+        }
     }
 }

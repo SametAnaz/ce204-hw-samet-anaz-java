@@ -18,6 +18,8 @@ public class DatabasePasswordStorageTest {
     private static final String TEST_DB_PATH = "test-passwords.db";
     private static final String TEST_DB_URL = "jdbc:sqlite:" + TEST_DB_PATH;
     private DatabasePasswordStorage storage;
+    private PrintStream originalOut;
+    private ByteArrayOutputStream outContent;
 
     /**
      * Anonymous subclass to override the database URL for testing.
@@ -34,6 +36,11 @@ public class DatabasePasswordStorageTest {
         File dbFile = new File(TEST_DB_PATH);
         if (dbFile.exists()) dbFile.delete();
         storage = new TestableDatabasePasswordStorage();
+        
+        // Setup output capture
+        originalOut = System.out;
+        outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
     }
 
     /**
@@ -134,6 +141,31 @@ public class DatabasePasswordStorageTest {
         assertEquals("newUser", updated.getUsername());
         assertEquals("newPass", updated.getPassword());
     }
+    
+    /**
+     * @brief Tests updating a non-existent record.
+     *
+     * Attempts to update a record that doesn't exist and verifies
+     * that an appropriate error message is shown.
+     */
+    @Test
+    public void testUpdateNonExistentRecord() {
+        // Simulated input for update: Service, New Username, New Password.
+        String simulatedInput = "nonExistentService\n" + "newUser\n" + "newPass\n";
+        ByteArrayInputStream inStream = new ByteArrayInputStream(simulatedInput.getBytes(StandardCharsets.UTF_8));
+        Scanner scanner = new Scanner(inStream);
+        
+        storage.update(scanner);
+        scanner.close();
+        
+        // Verify the error message was shown.
+        String output = outContent.toString();
+        assertTrue(output.contains("not found") || output.contains("Not found"));
+        
+        // Verify no record was created.
+        List<Password> result = storage.readAll();
+        assertEquals(0, result.size());
+    }
 
     /**
      * @brief Tests the delete() method.
@@ -159,6 +191,27 @@ public class DatabasePasswordStorageTest {
         List<Password> result = storage.readAll();
         assertEquals(0, result.size());
     }
+    
+    /**
+     * @brief Tests deleting a non-existent record.
+     *
+     * Attempts to delete a record that doesn't exist and verifies
+     * that an appropriate error message is shown.
+     */
+    @Test
+    public void testDeleteNonExistentRecord() {
+        // Simulated input for delete: Service.
+        String simulatedInput = "nonExistentService\n";
+        ByteArrayInputStream inStream = new ByteArrayInputStream(simulatedInput.getBytes(StandardCharsets.UTF_8));
+        Scanner scanner = new Scanner(inStream);
+        
+        storage.delete(scanner);
+        scanner.close();
+        
+        // Verify the error message was shown.
+        String output = outContent.toString();
+        assertTrue(output.contains("not found") || output.contains("Not found"));
+    }
 
     /**
      * @brief Tests the view() method.
@@ -174,17 +227,9 @@ public class DatabasePasswordStorageTest {
         );
         storage.writeAll(initial);
         
-        // Capture output from view() via System.out redirection.
-        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-        PrintStream testOut = new PrintStream(outStream);
-        PrintStream originalOut = System.out;
-        System.setOut(testOut);
-        
         storage.view();
-        System.out.flush();
-        System.setOut(originalOut);
         
-        String output = outStream.toString();
+        String output = outContent.toString();
         // Verify that output contains details of both records.
         assertTrue(output.contains("viewService1"));
         assertTrue(output.contains("user1"));
@@ -193,9 +238,36 @@ public class DatabasePasswordStorageTest {
         assertTrue(output.contains("user2"));
         assertTrue(output.contains("pass2"));
     }
+    
+    /**
+     * @brief Tests viewing an empty database.
+     *
+     * Calls view() when no records exist and verifies that an
+     * appropriate message is shown.
+     */
+    @Test
+    public void testViewEmptyDatabase() {
+        storage.view();
+        
+        String output = outContent.toString();
+        assertTrue(output.contains("No records found") || output.contains("no records") || output.contains("No passwords"));}
+    
+    /**
+     * @brief Tests the getDatabaseUrl method of the parent class.
+     */
+    @Test
+    public void testGetDatabaseUrl() {
+        DatabasePasswordStorage regularStorage = new DatabasePasswordStorage();
+        assertNotNull("Database URL should not be null", regularStorage.getDatabaseUrl());
+        assertTrue("Database URL should contain jdbc:sqlite:", regularStorage.getDatabaseUrl().contains("jdbc:sqlite:"));
+    }
 
     @After
     public void tearDown() {
+        // Restore System.out
+        System.setOut(originalOut);
+        
+        // Delete the test database file
         File dbFile = new File(TEST_DB_PATH);
         if (dbFile.exists()) dbFile.delete();
     }
