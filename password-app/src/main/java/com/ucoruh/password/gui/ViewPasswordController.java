@@ -118,8 +118,8 @@ public class ViewPasswordController implements DialogController {
         buttonPanel.setBackground(Color.WHITE);
         buttonPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
         
-        JButton btnShow = gui.createStyledButton("Show Password", gui.PRIMARY_COLOR);
-        JButton btnClose = gui.createStyledButton("Close", gui.DARK_COLOR);
+        JButton btnShow = gui.createStyledButton("Show Password", PasswordManagerGUI.PRIMARY_COLOR);
+        JButton btnClose = gui.createStyledButton("Close", PasswordManagerGUI.DARK_COLOR);
         
         buttonPanel.add(btnShow);
         buttonPanel.add(btnClose);
@@ -168,8 +168,8 @@ public class ViewPasswordController implements DialogController {
                     JPanel dialogButtonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
                     dialogButtonPanel.setBackground(Color.WHITE);
                     
-                    JButton copyButton = gui.createStyledButton("Copy Password", gui.PRIMARY_COLOR);
-                    JButton okButton = gui.createStyledButton("OK", gui.DARK_COLOR);
+                    JButton copyButton = gui.createStyledButton("Copy Password", PasswordManagerGUI.PRIMARY_COLOR);
+                    JButton okButton = gui.createStyledButton("OK", PasswordManagerGUI.DARK_COLOR);
                     
                     dialogButtonPanel.add(copyButton);
                     dialogButtonPanel.add(okButton);

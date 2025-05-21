@@ -131,8 +131,8 @@ public class DeletePasswordController implements DialogController {
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         buttonPanel.setBackground(Color.WHITE);
         
-        JButton btnDelete = gui.createStyledButton("Delete", gui.ACCENT_COLOR);
-        JButton btnCancel = gui.createStyledButton("Cancel", gui.DARK_COLOR);
+        JButton btnDelete = gui.createStyledButton("Delete", PasswordManagerGUI.ACCENT_COLOR);
+        JButton btnCancel = gui.createStyledButton("Cancel", PasswordManagerGUI.DARK_COLOR);
         
         buttonPanel.add(btnCancel);
         buttonPanel.add(btnDelete);

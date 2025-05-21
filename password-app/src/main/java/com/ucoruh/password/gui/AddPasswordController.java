@@ -142,8 +142,8 @@ public class AddPasswordController implements DialogController {
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         buttonPanel.setBackground(Color.WHITE);
         
-        JButton btnSave = gui.createStyledButton("Save", gui.PRIMARY_COLOR);
-        JButton btnCancel = gui.createStyledButton("Cancel", gui.DARK_COLOR);
+        JButton btnSave = gui.createStyledButton("Save", PasswordManagerGUI.PRIMARY_COLOR);
+        JButton btnCancel = gui.createStyledButton("Cancel", PasswordManagerGUI.DARK_COLOR);
         
         buttonPanel.add(btnCancel);
         buttonPanel.add(btnSave);

@@ -161,6 +161,7 @@
     <configuration>
         <includes>
             <include>**/com/ucoruh/password/*Test.java</include> 
+            <include>**/com/ucoruh/password/gui/*Test.java</include>
         </includes>
     </configuration>
 </plugin>

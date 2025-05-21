@@ -145,7 +145,7 @@ public class UpdatePasswordController implements DialogController {
         panel.add(passwordPanel, gbc);
         
         // Generate password option
-        JButton btnGenerate = gui.createStyledButton("Generate Password", gui.SECONDARY_COLOR);
+        JButton btnGenerate = gui.createStyledButton("Generate Password", PasswordManagerGUI.SECONDARY_COLOR);
         gbc.gridx = 0;
         gbc.gridy = 4;
         gbc.insets = new Insets(15, 5, 5, 5);
@@ -168,8 +168,8 @@ public class UpdatePasswordController implements DialogController {
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         buttonPanel.setBackground(Color.WHITE);
         
-        JButton btnUpdate = gui.createStyledButton("Update", gui.PRIMARY_COLOR);
-        JButton btnCancel = gui.createStyledButton("Cancel", gui.DARK_COLOR);
+        JButton btnUpdate = gui.createStyledButton("Update", PasswordManagerGUI.PRIMARY_COLOR);
+        JButton btnCancel = gui.createStyledButton("Cancel", PasswordManagerGUI.DARK_COLOR);
         
         buttonPanel.add(btnCancel);
         buttonPanel.add(btnUpdate);

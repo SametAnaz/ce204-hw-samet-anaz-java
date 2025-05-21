@@ -2,7 +2,9 @@ package com.ucoruh.password.gui;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.awt.event.ItemListener;
 import java.util.List;
 
 import com.ucoruh.password.*;
@@ -21,6 +23,10 @@ public class GeneratePasswordController implements DialogController {
     private JTextField txtUsername;
     private JTextField txtGenerated;
     private JSlider sliderLength;
+    private JCheckBox chkUppercase;
+    private JCheckBox chkLowercase;
+    private JCheckBox chkDigits;
+    private JCheckBox chkSpecial;
     
     /**
      * Constructor
@@ -35,7 +41,7 @@ public class GeneratePasswordController implements DialogController {
     public void showDialog() {
         // Create dialog
         dialog = new JDialog(gui, "Generate and Save Password", true);
-        dialog.setSize(450, 450);
+        dialog.setSize(450, 550);  // Increased height to accommodate additional controls
         dialog.setLocationRelativeTo(gui);
         dialog.setLayout(new BorderLayout());
         
@@ -119,41 +125,112 @@ public class GeneratePasswordController implements DialogController {
         gbc.gridy = 5;
         panel.add(sliderLength, gbc);
         
+        // Character options panel
+        JPanel optionsPanel = new JPanel(new GridLayout(2, 2, 10, 5));
+        optionsPanel.setBorder(BorderFactory.createTitledBorder(
+            BorderFactory.createEtchedBorder(), 
+            "Character Types", 
+            TitledBorder.LEFT, 
+            TitledBorder.TOP,
+            new Font("Segoe UI", Font.BOLD, 14)));
+        optionsPanel.setBackground(Color.WHITE);
+        
+        chkUppercase = new JCheckBox("Uppercase Letters (A-Z)");
+        chkUppercase.setSelected(true);
+        chkUppercase.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        chkUppercase.setBackground(Color.WHITE);
+        
+        chkLowercase = new JCheckBox("Lowercase Letters (a-z)");
+        chkLowercase.setSelected(true);
+        chkLowercase.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        chkLowercase.setBackground(Color.WHITE);
+        
+        chkDigits = new JCheckBox("Digits (0-9)");
+        chkDigits.setSelected(true);
+        chkDigits.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        chkDigits.setBackground(Color.WHITE);
+        
+        chkSpecial = new JCheckBox("Special Characters (!@#$...)");
+        chkSpecial.setSelected(true);
+        chkSpecial.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        chkSpecial.setBackground(Color.WHITE);
+        
+        optionsPanel.add(chkUppercase);
+        optionsPanel.add(chkLowercase);
+        optionsPanel.add(chkDigits);
+        optionsPanel.add(chkSpecial);
+        
+        gbc.gridx = 0;
+        gbc.gridy = 6;
+        gbc.insets = new Insets(15, 5, 5, 5);
+        panel.add(optionsPanel, gbc);
+        
+        // Checkbox state change listener to ensure at least one is selected
+        ItemListener checkBoxListener = e -> {
+            // Check if any checkbox is selected
+            if (!chkUppercase.isSelected() && !chkLowercase.isSelected() && 
+                !chkDigits.isSelected() && !chkSpecial.isSelected()) {
+                // If this is the last checkbox being unchecked, prevent it
+                ((JCheckBox)e.getSource()).setSelected(true);
+                JOptionPane.showMessageDialog(dialog, 
+                    "At least one character type must be selected.", 
+                    "Warning", 
+                    JOptionPane.WARNING_MESSAGE);
+            }
+        };
+        
+        // Add the listener to all checkboxes
+        chkUppercase.addItemListener(checkBoxListener);
+        chkLowercase.addItemListener(checkBoxListener);
+        chkDigits.addItemListener(checkBoxListener);
+        chkSpecial.addItemListener(checkBoxListener);
+        
         // Generated password field
         JLabel lblGenerated = new JLabel("Generated Password:");
         lblGenerated.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         gbc.gridx = 0;
-        gbc.gridy = 6;
-        gbc.insets = new Insets(15, 5, 5, 5);
+        gbc.gridy = 7;
         panel.add(lblGenerated, gbc);
         
         txtGenerated = new JTextField(20);
         txtGenerated.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         txtGenerated.setEditable(false);
         gbc.gridx = 0;
-        gbc.gridy = 7;
+        gbc.gridy = 8;
         gbc.insets = new Insets(5, 5, 5, 5);
         panel.add(txtGenerated, gbc);
         
         // Generate button
-        JButton btnGenerate = gui.createStyledButton("Generate", gui.SECONDARY_COLOR);
+        JButton btnGenerate = gui.createStyledButton("Generate", PasswordManagerGUI.SECONDARY_COLOR);
         gbc.gridx = 0;
-        gbc.gridy = 8;
+        gbc.gridy = 9;
         gbc.insets = new Insets(15, 5, 5, 5);
         panel.add(btnGenerate, gbc);
         
         // Generate button action
         btnGenerate.addActionListener(e -> {
-            int length = sliderLength.getValue();
-            String generatedPassword = PasswordGenerator.generatePassword(length);
-            txtGenerated.setText(generatedPassword);
+            generatePassword();
         });
         
-        // Generate an initial password
-        String initialPassword = PasswordGenerator.generatePassword(16);
-        txtGenerated.setText(initialPassword);
+        // Generate an initial password with all options
+        generatePassword();
         
         return panel;
+    }
+    
+    /**
+     * Generates a password based on current settings
+     */
+    private void generatePassword() {
+        int length = sliderLength.getValue();
+        boolean includeUppercase = chkUppercase.isSelected();
+        boolean includeLowercase = chkLowercase.isSelected();
+        boolean includeDigits = chkDigits.isSelected();
+        boolean includeSpecial = chkSpecial.isSelected();
+        
+        String generatedPassword = PasswordGenerator.generatePassword(
+            length, includeUppercase, includeLowercase, includeDigits, includeSpecial);
+        txtGenerated.setText(generatedPassword);
     }
     
     /**
@@ -164,8 +241,8 @@ public class GeneratePasswordController implements DialogController {
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         buttonPanel.setBackground(Color.WHITE);
         
-        JButton btnSave = gui.createStyledButton("Save", gui.PRIMARY_COLOR);
-        JButton btnCancel = gui.createStyledButton("Cancel", gui.DARK_COLOR);
+        JButton btnSave = gui.createStyledButton("Save", PasswordManagerGUI.PRIMARY_COLOR);
+        JButton btnCancel = gui.createStyledButton("Cancel", PasswordManagerGUI.DARK_COLOR);
         
         buttonPanel.add(btnCancel);
         buttonPanel.add(btnSave);
