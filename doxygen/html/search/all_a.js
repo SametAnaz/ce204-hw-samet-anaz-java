@@ -13,5 +13,6 @@ var searchData=
   ['passwordstoragefactory_10',['PasswordStorageFactory',['../classcom_1_1ucoruh_1_1password_1_1PasswordStorageFactory.html',1,'com::ucoruh::password']]],
   ['passwordstoragefactory_2ejava_11',['PasswordStorageFactory.java',['../PasswordStorageFactory_8java.html',1,'']]],
   ['platformmanager_12',['PlatformManager',['../classcom_1_1ucoruh_1_1password_1_1PlatformManager.html',1,'com::ucoruh::password']]],
-  ['platformmanager_2ejava_13',['PlatformManager.java',['../PlatformManager_8java.html',1,'']]]
+  ['platformmanager_2ejava_13',['PlatformManager.java',['../PlatformManager_8java.html',1,'']]],
+  ['primary_5fcolor_14',['PRIMARY_COLOR',['../classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI.html#ad6cc0782b2ff702aa68b639343488a72',1,'com::ucoruh::password::gui::PasswordManagerGUI']]]
 ];

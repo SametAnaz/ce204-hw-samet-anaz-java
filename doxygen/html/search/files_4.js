@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['interfacepasswordstorage_2ejava_0',['InterfacePasswordStorage.java',['../InterfacePasswordStorage_8java.html',1,'']]]
+  ['generatepasswordcontroller_2ejava_0',['GeneratePasswordController.java',['../GeneratePasswordController_8java.html',1,'']]]
 ];

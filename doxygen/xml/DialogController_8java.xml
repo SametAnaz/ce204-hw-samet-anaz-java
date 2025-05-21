@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="DialogController_8java" kind="file" language="Java">
+    <compoundname>DialogController.java</compoundname>
+    <includes local="no">javax.swing.JDialog</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>password-app/src/main/java/com/ucoruh/password/gui/DialogController.java</label>
+        <link refid="DialogController_8java"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>javax.swing.JDialog</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="interfacecom_1_1ucoruh_1_1password_1_1gui_1_1DialogController" prot="public">com::ucoruh::password::gui::DialogController</innerclass>
+    <innernamespace refid="namespacecom_1_1ucoruh_1_1password_1_1gui">com::ucoruh::password::gui</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="keyword">package<sp/></highlight><highlight class="normal">com.ucoruh.password.gui;</highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>javax.swing.JDialog;</highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9" refid="interfacecom_1_1ucoruh_1_1password_1_1gui_1_1DialogController" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">interface<sp/></highlight><highlight class="normal"><ref refid="interfacecom_1_1ucoruh_1_1password_1_1gui_1_1DialogController" kindref="compound">DialogController</ref><sp/>{</highlight></codeline>
+<codeline lineno="13" refid="interfacecom_1_1ucoruh_1_1password_1_1gui_1_1DialogController_1a580ff178883baaf8aafc02ae6623b835" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="interfacecom_1_1ucoruh_1_1password_1_1gui_1_1DialogController_1a580ff178883baaf8aafc02ae6623b835" kindref="member">showDialog</ref>();</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="18" refid="interfacecom_1_1ucoruh_1_1password_1_1gui_1_1DialogController_1ad91f192161d4b37e7ffe8dcbaf2290b5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="interfacecom_1_1ucoruh_1_1password_1_1gui_1_1DialogController_1ad91f192161d4b37e7ffe8dcbaf2290b5" kindref="member">closeDialog</ref>();</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="24" refid="interfacecom_1_1ucoruh_1_1password_1_1gui_1_1DialogController_1ab6109329865562bb0b7f26c4f6ddd938" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>JDialog<sp/><ref refid="interfacecom_1_1ucoruh_1_1password_1_1gui_1_1DialogController_1ab6109329865562bb0b7f26c4f6ddd938" kindref="member">getDialog</ref>();</highlight></codeline>
+<codeline lineno="25"><highlight class="normal">}<sp/></highlight></codeline>
+    </programlisting>
+    <location file="password-app/src/main/java/com/ucoruh/password/gui/DialogController.java"/>
+  </compounddef>
+</doxygen>

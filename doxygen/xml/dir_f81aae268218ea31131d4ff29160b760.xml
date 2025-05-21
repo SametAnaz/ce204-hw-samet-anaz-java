@@ -2,7 +2,13 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="dir_f81aae268218ea31131d4ff29160b760" kind="dir">
     <compoundname>password-app/src/main/java/com/ucoruh/password/gui</compoundname>
+    <innerfile refid="AddPasswordController_8java">AddPasswordController.java</innerfile>
+    <innerfile refid="DeletePasswordController_8java">DeletePasswordController.java</innerfile>
+    <innerfile refid="DialogController_8java">DialogController.java</innerfile>
+    <innerfile refid="GeneratePasswordController_8java">GeneratePasswordController.java</innerfile>
     <innerfile refid="PasswordManagerGUI_8java">PasswordManagerGUI.java</innerfile>
+    <innerfile refid="UpdatePasswordController_8java">UpdatePasswordController.java</innerfile>
+    <innerfile refid="ViewPasswordController_8java">ViewPasswordController.java</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
