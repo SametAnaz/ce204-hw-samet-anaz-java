@@ -134,8 +134,10 @@
     <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI_1aa76092e5edb9399a9c267056d435b21b" kind="function"><name>createMasterPassword</name></member>
     <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI_1a5b6943d1ba1829c8e5f7eb8653d8df4e" kind="function"><name>showMainMenu</name></member>
     <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI_1a1497c402a5384f122cc0010cfb10c6f0" kind="function"><name>handleMenuSelection</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI_1ab0b7a86da7c5b5cc758048309b82d636" kind="function"><name>showUserAuthentication</name></member>
     <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI_1a1f60bb526d9bd23e0dc28de787acbbe9" kind="function"><name>showPasswordManagement</name></member>
     <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI_1affffa6857cc1f13586852507f161d419" kind="function"><name>showPasswordGenerator</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI_1ab22bafcec4c10d8277196c76396aa5e0" kind="function"><name>showAutoLoginFeature</name></member>
   </compound>
   <compound refid="classcom_1_1ucoruh_1_1password_1_1PasswordStorageFactory" kind="class"><name>com::ucoruh::password::PasswordStorageFactory</name>
     <member refid="classcom_1_1ucoruh_1_1password_1_1PasswordStorageFactory_1a6f84a4200fa81f059dbc453610cdfc5e" kind="function"><name>create</name></member>

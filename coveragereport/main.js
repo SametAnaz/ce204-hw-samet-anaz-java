@@ -230,7 +230,7 @@ var assemblies = [
   {
     "name": "com/ucoruh/password/gui",
     "classes": [
-      { "name": "com/ucoruh/password/gui/PasswordManagerGUI", "rp": "gui_com_ucoruh_password_gui_PasswordManagerGUI.html", "cl": 0, "ucl": 347, "cal": 347, "tl": 651, "cb": 0, "tb": 22, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "com/ucoruh/password/gui/PasswordManagerGUI", "rp": "gui_com_ucoruh_password_gui_PasswordManagerGUI.html", "cl": 0, "ucl": 686, "cal": 686, "tl": 1189, "cb": 0, "tb": 32, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
     ]},
 ];
 
