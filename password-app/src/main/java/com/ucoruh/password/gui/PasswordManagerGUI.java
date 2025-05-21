@@ -3,6 +3,7 @@ package com.ucoruh.password.gui;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
@@ -21,9 +22,7 @@ public class PasswordManagerGUI extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    private JTextField txtUsername;
     private JPasswordField txtPassword;
-    private PasswordManager passwordManager;
     private AuthManager authManager;
     
     // Controllers
@@ -350,7 +349,7 @@ public class PasswordManagerGUI extends JFrame {
                         JOptionPane.INFORMATION_MESSAGE);
                         
                 // Initialize Password Manager with master password
-                passwordManager = new PasswordManager(authManager.getMasterPassword());
+                new PasswordManager(authManager.getMasterPassword());
                 
                 // Show main menu
                 showMainMenu();
@@ -714,7 +713,7 @@ public class PasswordManagerGUI extends JFrame {
                         JOptionPane.INFORMATION_MESSAGE);
                 
                 // Update password manager with new master password
-                passwordManager = new PasswordManager(authManager.getMasterPassword());
+                new PasswordManager(authManager.getMasterPassword());
                 
                 // Clear fields
                 txtCurrentPassword.setText("");
@@ -938,15 +937,76 @@ public class PasswordManagerGUI extends JFrame {
         gbc.anchor = GridBagConstraints.EAST;
         centerPanel.add(spinnerLength, gbc);
         
+        // Character type options
+        JPanel optionsPanel = new JPanel(new GridLayout(2, 2, 10, 5));
+        optionsPanel.setBorder(BorderFactory.createTitledBorder(
+            BorderFactory.createEtchedBorder(), 
+            "Character Types", 
+            TitledBorder.LEFT, 
+            TitledBorder.TOP,
+            new Font("Segoe UI", Font.BOLD, 14)));
+        optionsPanel.setBackground(Color.WHITE);
+        
+        JCheckBox chkUppercase = new JCheckBox("Uppercase Letters (A-Z)");
+        chkUppercase.setSelected(true);
+        chkUppercase.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        chkUppercase.setBackground(Color.WHITE);
+        
+        JCheckBox chkLowercase = new JCheckBox("Lowercase Letters (a-z)");
+        chkLowercase.setSelected(true);
+        chkLowercase.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        chkLowercase.setBackground(Color.WHITE);
+        
+        JCheckBox chkDigits = new JCheckBox("Digits (0-9)");
+        chkDigits.setSelected(true);
+        chkDigits.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        chkDigits.setBackground(Color.WHITE);
+        
+        JCheckBox chkSpecial = new JCheckBox("Special Characters (!@#$...)");
+        chkSpecial.setSelected(true);
+        chkSpecial.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        chkSpecial.setBackground(Color.WHITE);
+        
+        optionsPanel.add(chkUppercase);
+        optionsPanel.add(chkLowercase);
+        optionsPanel.add(chkDigits);
+        optionsPanel.add(chkSpecial);
+        
+        // Add item listener to ensure at least one checkbox is selected
+        ItemListener checkBoxListener = e -> {
+            // Check if any checkbox is selected
+            if (!chkUppercase.isSelected() && !chkLowercase.isSelected() && 
+                !chkDigits.isSelected() && !chkSpecial.isSelected()) {
+                // If this is the last checkbox being unchecked, prevent it
+                ((JCheckBox)e.getSource()).setSelected(true);
+                JOptionPane.showMessageDialog(PasswordManagerGUI.this, 
+                    "At least one character type must be selected.", 
+                    "Warning", 
+                    JOptionPane.WARNING_MESSAGE);
+            }
+        };
+        
+        // Add the listener to all checkboxes
+        chkUppercase.addItemListener(checkBoxListener);
+        chkLowercase.addItemListener(checkBoxListener);
+        chkDigits.addItemListener(checkBoxListener);
+        chkSpecial.addItemListener(checkBoxListener);
+        
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 2;
+        gbc.insets = new Insets(20, 10, 20, 10);
+        centerPanel.add(optionsPanel, gbc);
+        
         // Generated password
         JLabel lblGeneratedPassword = new JLabel("Generated Password:");
         lblGeneratedPassword.setFont(new Font("Segoe UI", Font.PLAIN, 16));
         lblGeneratedPassword.setForeground(DARK_COLOR);
         gbc.gridx = 0;
-        gbc.gridy = 1;
+        gbc.gridy = 2;
         gbc.gridwidth = 2;
         gbc.anchor = GridBagConstraints.WEST;
-        gbc.insets = new Insets(30, 10, 10, 10);
+        gbc.insets = new Insets(10, 10, 10, 10);
         centerPanel.add(lblGeneratedPassword, gbc);
         
         JTextField txtGeneratedPassword = new JTextField();
@@ -960,7 +1020,7 @@ public class PasswordManagerGUI extends JFrame {
                 BorderFactory.createEmptyBorder(5, 10, 5, 10)));
         txtGeneratedPassword.setBackground(new Color(250, 250, 250));
         gbc.gridx = 0;
-        gbc.gridy = 2;
+        gbc.gridy = 3;
         gbc.gridwidth = 2;
         gbc.insets = new Insets(10, 10, 20, 10);
         centerPanel.add(txtGeneratedPassword, gbc);
@@ -980,7 +1040,7 @@ public class PasswordManagerGUI extends JFrame {
             }
         });
         gbc.gridx = 0;
-        gbc.gridy = 3;
+        gbc.gridy = 4;
         gbc.gridwidth = 1;
         gbc.weightx = 0.5;
         gbc.insets = new Insets(10, 10, 10, 5);
@@ -990,7 +1050,7 @@ public class PasswordManagerGUI extends JFrame {
         JButton btnGenerate = createStyledButton("Generate Password", SECONDARY_COLOR);
         btnGenerate.setPreferredSize(new Dimension(200, 45));
         gbc.gridx = 1;
-        gbc.gridy = 3;
+        gbc.gridy = 4;
         gbc.gridwidth = 1;
         gbc.weightx = 0.5;
         gbc.insets = new Insets(10, 5, 10, 10);
@@ -1000,7 +1060,13 @@ public class PasswordManagerGUI extends JFrame {
         btnGenerate.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int length = (int) spinnerLength.getValue();
-                String generatedPassword = PasswordGenerator.generatePassword(length);
+                boolean includeUppercase = chkUppercase.isSelected();
+                boolean includeLowercase = chkLowercase.isSelected();
+                boolean includeDigits = chkDigits.isSelected();
+                boolean includeSpecial = chkSpecial.isSelected();
+                
+                String generatedPassword = PasswordGenerator.generatePassword(
+                    length, includeUppercase, includeLowercase, includeDigits, includeSpecial);
                 txtGeneratedPassword.setText(generatedPassword);
                 btnCopy.setEnabled(true);
             }
@@ -1168,9 +1234,6 @@ public class PasswordManagerGUI extends JFrame {
                 String selectedBrowser = (String) comboBrowsers.getSelectedItem();
                 
                 if (selectedService != null) {
-                    // Create an instance of AutoLoginManager
-                    AutoLoginManager manager = new AutoLoginManager();
-                    
                     // Show success dialog
                     JOptionPane.showMessageDialog(
                         PasswordManagerGUI.this,
