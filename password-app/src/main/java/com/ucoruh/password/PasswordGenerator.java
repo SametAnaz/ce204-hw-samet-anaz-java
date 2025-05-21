@@ -8,15 +8,19 @@ import java.util.Scanner;
  * @class PasswordGenerator
  * @brief Utility class for generating random passwords.
  *
- * This class provides methods to generate secure random passwords using a predefined
- * set of characters.
+ * This class provides methods to generate secure random passwords using configurable
+ * character sets.
  */
 public class PasswordGenerator {
 
     /**
-     * @brief The set of characters allowed when generating random passwords.
+     * @brief Character sets for password generation.
      */
-    private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
+    private static final String UPPERCASE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static final String LOWERCASE_CHARS = "abcdefghijklmnopqrstuvwxyz";
+    private static final String DIGIT_CHARS = "0123456789";
+    private static final String SPECIAL_CHARS = "!@#$%^&*()_-+=<>?/[]{}|";
+    private static final String CHARACTERS = UPPERCASE_CHARS + LOWERCASE_CHARS + DIGIT_CHARS + SPECIAL_CHARS;
 
     /**
      * @brief Generates a random password of a given length.
@@ -29,18 +33,76 @@ public class PasswordGenerator {
      * @return A randomly generated password as a String.
      */
     public static String generatePassword(int length) {
+        // For backward compatibility, use all character sets
+        return generatePassword(length, true, true, true, true);
+    }
+    
+    /**
+     * @brief Generates a random password of a given length with specific character sets.
+     *
+     * This method allows selective inclusion of character sets (uppercase letters,
+     * lowercase letters, digits, and special characters) in the generated password.
+     * At least one character set must be included.
+     *
+     * @param length Desired password length.
+     * @param includeUppercase Whether to include uppercase letters.
+     * @param includeLowercase Whether to include lowercase letters.
+     * @param includeDigits Whether to include digits.
+     * @param includeSpecial Whether to include special characters.
+     * @return A randomly generated password as a String.
+     */
+    public static String generatePassword(int length, boolean includeUppercase,
+                                         boolean includeLowercase, boolean includeDigits,
+                                         boolean includeSpecial) {
         // Return empty string for zero or negative length
         if (length <= 0) {
             return "";
         }
         
+        // Build the character set based on includes
+        StringBuilder charSetBuilder = new StringBuilder();
+        if (includeUppercase) charSetBuilder.append(UPPERCASE_CHARS);
+        if (includeLowercase) charSetBuilder.append(LOWERCASE_CHARS);
+        if (includeDigits) charSetBuilder.append(DIGIT_CHARS);
+        if (includeSpecial) charSetBuilder.append(SPECIAL_CHARS);
+        
+        // If no character set is selected, use lowercase as default
+        String charSet = charSetBuilder.length() > 0 ? charSetBuilder.toString() : LOWERCASE_CHARS;
+        
+        // Generate the password
         StringBuilder password = new StringBuilder(length);
         Random random = new Random();
-        for (int i = 0; i < length; i++) {
-            int index = random.nextInt(CHARACTERS.length());
-            password.append(CHARACTERS.charAt(index));
+        
+        // Ensure at least one character from each selected char set
+        if (length >= 1 && includeUppercase && password.length() < length) {
+            password.append(UPPERCASE_CHARS.charAt(random.nextInt(UPPERCASE_CHARS.length())));
         }
-        return password.toString();
+        if (length >= 2 && includeLowercase && password.length() < length) {
+            password.append(LOWERCASE_CHARS.charAt(random.nextInt(LOWERCASE_CHARS.length())));
+        }
+        if (length >= 3 && includeDigits && password.length() < length) {
+            password.append(DIGIT_CHARS.charAt(random.nextInt(DIGIT_CHARS.length())));
+        }
+        if (length >= 4 && includeSpecial && password.length() < length) {
+            password.append(SPECIAL_CHARS.charAt(random.nextInt(SPECIAL_CHARS.length())));
+        }
+        
+        // Fill the rest with random characters from the selected set
+        while (password.length() < length) {
+            int index = random.nextInt(charSet.length());
+            password.append(charSet.charAt(index));
+        }
+        
+        // Shuffle the characters to avoid predictable patterns
+        char[] passChars = password.toString().toCharArray();
+        for (int i = passChars.length - 1; i > 0; i--) {
+            int j = random.nextInt(i + 1);
+            char temp = passChars[i];
+            passChars[i] = passChars[j];
+            passChars[j] = temp;
+        }
+        
+        return new String(passChars);
     }
 
     /**
