@@ -125,8 +125,51 @@ public class PasswordApp {
      * @param args Command-line arguments (not used).
      */
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        runApp(scanner, System.out);
-        scanner.close();
+        // Check whether to start in GUI mode
+        boolean useGUI = true;
+        
+        for (String arg : args) {
+            if (arg.equalsIgnoreCase("--console") || arg.equalsIgnoreCase("-c")) {
+                useGUI = false;
+                break;
+            }
+        }
+        
+        if (useGUI) {
+            // Start in GUI mode
+            try {
+                // Set system look and feel
+                javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+                
+                // Font settings
+                java.awt.Font defaultFont = new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 14);
+                javax.swing.UIManager.put("Button.font", defaultFont);
+                javax.swing.UIManager.put("Label.font", defaultFont);
+                javax.swing.UIManager.put("TextField.font", defaultFont);
+                javax.swing.UIManager.put("PasswordField.font", defaultFont);
+                javax.swing.UIManager.put("TextArea.font", defaultFont);
+                javax.swing.UIManager.put("ComboBox.font", defaultFont);
+                javax.swing.UIManager.put("CheckBox.font", defaultFont);
+                javax.swing.UIManager.put("RadioButton.font", defaultFont);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    try {
+                        com.ucoruh.password.gui.PasswordManagerGUI frame = new com.ucoruh.password.gui.PasswordManagerGUI();
+                        frame.setVisible(true);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        } else {
+            // Start in console mode
+            Scanner scanner = new Scanner(System.in);
+            runApp(scanner, System.out);
+            scanner.close();
+        }
     }
 }

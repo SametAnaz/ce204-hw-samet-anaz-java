@@ -133,6 +133,12 @@
 			<scope>test</scope>
 		</dependency>
 
+        <!-- GUI için gerekli kütüphaneler -->
+        <dependency>
+            <groupId>com.miglayout</groupId>
+            <artifactId>miglayout-swing</artifactId>
+            <version>5.3</version>
+        </dependency>
 		
     </dependencies>
 
