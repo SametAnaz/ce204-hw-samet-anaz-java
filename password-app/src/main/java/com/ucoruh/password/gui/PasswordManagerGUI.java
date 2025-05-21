@@ -3,9 +3,14 @@ package com.ucoruh.password.gui;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.*;
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 import com.ucoruh.password.*;
 
@@ -307,11 +312,17 @@ public class PasswordManagerGUI extends JFrame {
             return;
         }
         
+        System.out.println("Attempting to login with password: " + masterPassword);
+        System.out.println("Is master password set: " + authManager.isMasterPasswordSet());
+        
         // Convert String to Scanner
         Scanner scanner = new Scanner(masterPassword);
         
         try {
-            if (authManager.login(scanner)) {
+            boolean loginSuccess = authManager.login(scanner);
+            System.out.println("Login result: " + loginSuccess);
+            
+            if (loginSuccess) {
                 JOptionPane.showMessageDialog(this, 
                         "Login successful!", 
                         "Success", 
@@ -324,10 +335,17 @@ public class PasswordManagerGUI extends JFrame {
                 showMainMenu();
             } else {
                 JOptionPane.showMessageDialog(this, 
-                        "Invalid master password. Please try again.", 
+                        "Invalid master password. Please try again.\nIf this problem persists, try deleting the master-password.txt file and restarting the application.", 
                         "Login Failed", 
                         JOptionPane.ERROR_MESSAGE);
             }
+        } catch (Exception e) {
+            System.out.println("Login error: " + e.getMessage());
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, 
+                    "An error occurred during login: " + e.getMessage(), 
+                    "Login Error", 
+                    JOptionPane.ERROR_MESSAGE);
         } finally {
             // Ensure Scanner is closed
             scanner.close();
@@ -349,12 +367,17 @@ public class PasswordManagerGUI extends JFrame {
             return;
         }
         
+        System.out.println("Creating master password: " + masterPassword);
+        
         // Convert String to Scanner
         Scanner scanner = new Scanner(masterPassword);
         
         try {
             // Create master password
             authManager.createMasterPassword(scanner);
+            
+            System.out.println("Master password created successfully");
+            System.out.println("Is master password set: " + authManager.isMasterPasswordSet());
             
             JOptionPane.showMessageDialog(this, 
                     "Master password created successfully.", 
@@ -366,6 +389,13 @@ public class PasswordManagerGUI extends JFrame {
             createComponents();
             contentPane.revalidate();
             contentPane.repaint();
+        } catch (Exception e) {
+            System.out.println("Error creating master password: " + e.getMessage());
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, 
+                    "An error occurred while creating the master password: " + e.getMessage(), 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
         } finally {
             // Ensure Scanner is closed
             scanner.close();
@@ -771,43 +801,699 @@ public class PasswordManagerGUI extends JFrame {
         
         // Button actions
         btnAddPassword.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, 
-                "To add a new password, use the menu option:\nStorage & Management -> Add New Password", 
-                "Add Password", 
-                JOptionPane.INFORMATION_MESSAGE);
+            showAddPasswordDialog();
         });
         
         btnViewPasswords.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, 
-                "To view all passwords, use the menu option:\nStorage & Management -> View All Passwords", 
-                "View Passwords", 
-                JOptionPane.INFORMATION_MESSAGE);
+            showViewPasswordsDialog();
         });
         
         btnUpdatePassword.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, 
-                "To update a password, use the menu option:\nStorage & Management -> Update Password", 
-                "Update Password", 
-                JOptionPane.INFORMATION_MESSAGE);
+            showUpdatePasswordDialog();
         });
         
         btnDeletePassword.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, 
-                "To delete a password, use the menu option:\nStorage & Management -> Delete Password", 
-                "Delete Password", 
-                JOptionPane.INFORMATION_MESSAGE);
+            showDeletePasswordDialog();
         });
         
         btnGeneratePassword.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, 
-                "To generate and save a password, use the menu option:\nStorage & Management -> Generate and Save Password", 
-                "Generate Password", 
-                JOptionPane.INFORMATION_MESSAGE);
+            showGeneratePasswordDialog();
         });
         
         // Refresh panel
         contentPane.revalidate();
         contentPane.repaint();
+    }
+    
+    /**
+     * Show dialog to add a new password
+     */
+    private void showAddPasswordDialog() {
+        JDialog dialog = new JDialog(this, "Add New Password", true);
+        dialog.setSize(450, 400);
+        dialog.setLocationRelativeTo(this);
+        dialog.setLayout(new BorderLayout());
+        
+        JPanel panel = new JPanel(new GridBagLayout());
+        panel.setBorder(new EmptyBorder(20, 20, 20, 20));
+        panel.setBackground(Color.WHITE);
+        
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(5, 5, 5, 5);
+        
+        // Service field
+        JLabel lblService = new JLabel("Service/Website:");
+        lblService.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        panel.add(lblService, gbc);
+        
+        JTextField txtService = new JTextField(20);
+        txtService.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        panel.add(txtService, gbc);
+        
+        // Username field
+        JLabel lblUsername = new JLabel("Username:");
+        lblUsername.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        panel.add(lblUsername, gbc);
+        
+        JTextField txtUsername = new JTextField(20);
+        txtUsername.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        panel.add(txtUsername, gbc);
+        
+        // Password field
+        JLabel lblPassword = new JLabel("Password:");
+        lblPassword.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        panel.add(lblPassword, gbc);
+        
+        JPanel passwordPanel = new JPanel(new BorderLayout());
+        passwordPanel.setBackground(Color.WHITE);
+        
+        JPasswordField txtPassword = new JPasswordField(20);
+        txtPassword.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        passwordPanel.add(txtPassword, BorderLayout.CENTER);
+        
+        JButton btnToggle = new JButton("Show");
+        btnToggle.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        btnToggle.addActionListener(e -> {
+            if (txtPassword.getEchoChar() == 0) {
+                txtPassword.setEchoChar('•');
+                btnToggle.setText("Show");
+            } else {
+                txtPassword.setEchoChar((char) 0);
+                btnToggle.setText("Hide");
+            }
+        });
+        passwordPanel.add(btnToggle, BorderLayout.EAST);
+        
+        gbc.gridx = 0;
+        gbc.gridy = 5;
+        panel.add(passwordPanel, gbc);
+        
+        // Button panel
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        buttonPanel.setBackground(Color.WHITE);
+        
+        JButton btnSave = createStyledButton("Save", PRIMARY_COLOR);
+        JButton btnCancel = createStyledButton("Cancel", DARK_COLOR);
+        
+        buttonPanel.add(btnCancel);
+        buttonPanel.add(btnSave);
+        
+        // Save button action
+        btnSave.addActionListener(e -> {
+            String service = txtService.getText().trim();
+            String username = txtUsername.getText().trim();
+            String password = new String(txtPassword.getPassword());
+            
+            if (service.isEmpty() || username.isEmpty() || password.isEmpty()) {
+                JOptionPane.showMessageDialog(dialog, 
+                        "All fields are required.", 
+                        "Error", 
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            // Get all passwords
+            InterfacePasswordStorage storage = PasswordStorageFactory.create(
+                    StorageType.FILE, authManager.getMasterPassword());
+            List<Password> passwords = storage.readAll();
+            
+            // Check if service already exists
+            boolean updated = false;
+            for (Password p : passwords) {
+                if (p.getService().equalsIgnoreCase(service)) {
+                    p.setUsername(username);
+                    p.setPassword(password);
+                    updated = true;
+                    break;
+                }
+            }
+            
+            // If not found, add new password
+            if (!updated) {
+                passwords.add(new Password(service, username, password));
+            }
+            
+            // Save passwords
+            storage.writeAll(passwords);
+            
+            JOptionPane.showMessageDialog(dialog, 
+                    "Password saved successfully!", 
+                    "Success", 
+                    JOptionPane.INFORMATION_MESSAGE);
+            
+            dialog.dispose();
+        });
+        
+        // Cancel button action
+        btnCancel.addActionListener(e -> dialog.dispose());
+        
+        dialog.add(panel, BorderLayout.CENTER);
+        dialog.add(buttonPanel, BorderLayout.SOUTH);
+        dialog.setVisible(true);
+    }
+    
+    /**
+     * Show dialog to view all passwords
+     */
+    private void showViewPasswordsDialog() {
+        JDialog dialog = new JDialog(this, "All Passwords", true);
+        dialog.setSize(600, 400);
+        dialog.setLocationRelativeTo(this);
+        dialog.setLayout(new BorderLayout());
+        
+        // Get all passwords
+        InterfacePasswordStorage storage = PasswordStorageFactory.create(
+                StorageType.FILE, authManager.getMasterPassword());
+        List<Password> passwordList = storage.readAll();
+        
+        // Create table model
+        String[] columnNames = {"Service/Website", "Username", "Password"};
+        Object[][] data = new Object[passwordList.size()][3];
+        
+        for (int i = 0; i < passwordList.size(); i++) {
+            Password password = passwordList.get(i);
+            data[i][0] = password.getService();
+            data[i][1] = password.getUsername();
+            data[i][2] = "•••••••••";
+        }
+        
+        DefaultTableModel model = new DefaultTableModel(data, columnNames) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        
+        JTable table = new JTable(model);
+        table.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        table.setRowHeight(25);
+        table.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBorder(new EmptyBorder(10, 10, 10, 10));
+        
+        // Button panel
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        buttonPanel.setBackground(Color.WHITE);
+        buttonPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+        
+        JButton btnShow = createStyledButton("Show Password", PRIMARY_COLOR);
+        JButton btnClose = createStyledButton("Close", DARK_COLOR);
+        
+        buttonPanel.add(btnShow);
+        buttonPanel.add(btnClose);
+        
+        // Show password button action
+        btnShow.addActionListener(e -> {
+            int selectedRow = table.getSelectedRow();
+            if (selectedRow != -1) {
+                String service = (String) table.getValueAt(selectedRow, 0);
+                String username = (String) table.getValueAt(selectedRow, 1);
+                
+                // Find the password
+                for (Password password : passwordList) {
+                    if (password.getService().equals(service) && 
+                        password.getUsername().equals(username)) {
+                        
+                        // Create custom dialog with copy option
+                        String passwordText = password.getPassword();
+                        JDialog passwordDialog = new JDialog(dialog, "Password", true);
+                        passwordDialog.setLayout(new BorderLayout());
+                        passwordDialog.setSize(400, 150);
+                        passwordDialog.setLocationRelativeTo(dialog);
+                        
+                        // Message panel
+                        JPanel messagePanel = new JPanel(new BorderLayout());
+                        messagePanel.setBorder(new EmptyBorder(15, 15, 15, 15));
+                        messagePanel.setBackground(Color.WHITE);
+                        
+                        JLabel passwordLabel = new JLabel(
+                            "<html>Password for <b>" + service + "</b>: " + passwordText + "</html>");
+                        passwordLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+                        messagePanel.add(passwordLabel, BorderLayout.CENTER);
+                        
+                        // Dialog button panel
+                        JPanel dialogButtonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+                        dialogButtonPanel.setBackground(Color.WHITE);
+                        
+                        JButton copyButton = createStyledButton("Copy Password", PRIMARY_COLOR);
+                        JButton okButton = createStyledButton("OK", DARK_COLOR);
+                        
+                        dialogButtonPanel.add(copyButton);
+                        dialogButtonPanel.add(okButton);
+                        
+                        // Copy button action
+                        copyButton.addActionListener(copyEvent -> {
+                            // Copy to clipboard
+                            StringSelection selection = new StringSelection(passwordText);
+                            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+                            clipboard.setContents(selection, null);
+                            
+                            JOptionPane.showMessageDialog(passwordDialog, 
+                                    "Password copied to clipboard!", 
+                                    "Success", 
+                                    JOptionPane.INFORMATION_MESSAGE);
+                        });
+                        
+                        // OK button action
+                        okButton.addActionListener(okEvent -> passwordDialog.dispose());
+                        
+                        passwordDialog.add(messagePanel, BorderLayout.CENTER);
+                        passwordDialog.add(dialogButtonPanel, BorderLayout.SOUTH);
+                        passwordDialog.setVisible(true);
+                        break;
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(dialog, 
+                        "Please select a password to show.", 
+                        "No Selection", 
+                        JOptionPane.WARNING_MESSAGE);
+            }
+        });
+        
+        // Close button action
+        btnClose.addActionListener(e -> dialog.dispose());
+        
+        dialog.add(scrollPane, BorderLayout.CENTER);
+        dialog.add(buttonPanel, BorderLayout.SOUTH);
+        dialog.setVisible(true);
+    }
+    
+    /**
+     * Show dialog to update a password
+     */
+    private void showUpdatePasswordDialog() {
+        // Get all passwords
+        InterfacePasswordStorage storage = PasswordStorageFactory.create(
+                StorageType.FILE, authManager.getMasterPassword());
+        List<Password> passwordList = storage.readAll();
+        
+        if (passwordList.isEmpty()) {
+            JOptionPane.showMessageDialog(this, 
+                    "No passwords found to update.", 
+                    "No Passwords", 
+                    JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        
+        // Create dialog
+        JDialog dialog = new JDialog(this, "Update Password", true);
+        dialog.setSize(450, 450);
+        dialog.setLocationRelativeTo(this);
+        dialog.setLayout(new BorderLayout());
+        
+        JPanel panel = new JPanel(new GridBagLayout());
+        panel.setBorder(new EmptyBorder(20, 20, 20, 20));
+        panel.setBackground(Color.WHITE);
+        
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(5, 5, 5, 5);
+        
+        // Service selection
+        JLabel lblSelect = new JLabel("Select Service/Website:");
+        lblSelect.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        panel.add(lblSelect, gbc);
+        
+        // Create service list
+        String[] services = new String[passwordList.size()];
+        for (int i = 0; i < passwordList.size(); i++) {
+            Password password = passwordList.get(i);
+            services[i] = password.getService() + " (" + password.getUsername() + ")";
+        }
+        
+        JComboBox<String> comboServices = new JComboBox<>(services);
+        comboServices.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        panel.add(comboServices, gbc);
+        
+        // Password field
+        JLabel lblPassword = new JLabel("New Password:");
+        lblPassword.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        panel.add(lblPassword, gbc);
+        
+        JPanel passwordPanel = new JPanel(new BorderLayout());
+        passwordPanel.setBackground(Color.WHITE);
+        
+        JPasswordField txtPassword = new JPasswordField(20);
+        txtPassword.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        passwordPanel.add(txtPassword, BorderLayout.CENTER);
+        
+        JButton btnToggle = new JButton("Show");
+        btnToggle.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        btnToggle.addActionListener(e -> {
+            if (txtPassword.getEchoChar() == 0) {
+                txtPassword.setEchoChar('•');
+                btnToggle.setText("Show");
+            } else {
+                txtPassword.setEchoChar((char) 0);
+                btnToggle.setText("Hide");
+            }
+        });
+        passwordPanel.add(btnToggle, BorderLayout.EAST);
+        
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        panel.add(passwordPanel, gbc);
+        
+        // Generate password option
+        JButton btnGenerate = createStyledButton("Generate Password", SECONDARY_COLOR);
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        gbc.insets = new Insets(15, 5, 5, 5);
+        panel.add(btnGenerate, gbc);
+        
+        // Button panel
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        buttonPanel.setBackground(Color.WHITE);
+        
+        JButton btnUpdate = createStyledButton("Update", PRIMARY_COLOR);
+        JButton btnCancel = createStyledButton("Cancel", DARK_COLOR);
+        
+        buttonPanel.add(btnCancel);
+        buttonPanel.add(btnUpdate);
+        
+        // Generate password button action
+        btnGenerate.addActionListener(e -> {
+            String generatedPassword = PasswordGenerator.generatePassword(12);
+            txtPassword.setText(generatedPassword);
+        });
+        
+        // Update button action
+        btnUpdate.addActionListener(e -> {
+            int selectedIndex = comboServices.getSelectedIndex();
+            String newPassword = new String(txtPassword.getPassword());
+            
+            if (newPassword.isEmpty()) {
+                JOptionPane.showMessageDialog(dialog, 
+                        "Please enter a new password.", 
+                        "Error", 
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            // Update password
+            Password selectedPassword = passwordList.get(selectedIndex);
+            selectedPassword.setPassword(newPassword);
+            
+            // Save passwords
+            storage.writeAll(passwordList);
+            
+            JOptionPane.showMessageDialog(dialog, 
+                    "Password updated successfully!", 
+                    "Success", 
+                    JOptionPane.INFORMATION_MESSAGE);
+            
+            dialog.dispose();
+        });
+        
+        // Cancel button action
+        btnCancel.addActionListener(e -> dialog.dispose());
+        
+        dialog.add(panel, BorderLayout.CENTER);
+        dialog.add(buttonPanel, BorderLayout.SOUTH);
+        dialog.setVisible(true);
+    }
+    
+    /**
+     * Show dialog to delete a password
+     */
+    private void showDeletePasswordDialog() {
+        // Get all passwords
+        InterfacePasswordStorage storage = PasswordStorageFactory.create(
+                StorageType.FILE, authManager.getMasterPassword());
+        List<Password> passwordList = storage.readAll();
+        
+        if (passwordList.isEmpty()) {
+            JOptionPane.showMessageDialog(this, 
+                    "No passwords found to delete.", 
+                    "No Passwords", 
+                    JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        
+        // Create dialog
+        JDialog dialog = new JDialog(this, "Delete Password", true);
+        dialog.setSize(450, 250);
+        dialog.setLocationRelativeTo(this);
+        dialog.setLayout(new BorderLayout());
+        
+        JPanel panel = new JPanel(new GridBagLayout());
+        panel.setBorder(new EmptyBorder(20, 20, 20, 20));
+        panel.setBackground(Color.WHITE);
+        
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(5, 5, 5, 5);
+        
+        // Service selection
+        JLabel lblSelect = new JLabel("Select Service/Website to Delete:");
+        lblSelect.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        panel.add(lblSelect, gbc);
+        
+        // Create service list
+        String[] services = new String[passwordList.size()];
+        for (int i = 0; i < passwordList.size(); i++) {
+            Password password = passwordList.get(i);
+            services[i] = password.getService() + " (" + password.getUsername() + ")";
+        }
+        
+        JComboBox<String> comboServices = new JComboBox<>(services);
+        comboServices.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        panel.add(comboServices, gbc);
+        
+        // Warning message
+        JLabel lblWarning = new JLabel("<html><div style='color:red;'>Warning: This action cannot be undone!</div></html>");
+        lblWarning.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.insets = new Insets(20, 5, 5, 5);
+        panel.add(lblWarning, gbc);
+        
+        // Button panel
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        buttonPanel.setBackground(Color.WHITE);
+        
+        JButton btnDelete = createStyledButton("Delete", ACCENT_COLOR);
+        JButton btnCancel = createStyledButton("Cancel", DARK_COLOR);
+        
+        buttonPanel.add(btnCancel);
+        buttonPanel.add(btnDelete);
+        
+        // Delete button action
+        btnDelete.addActionListener(e -> {
+            int selectedIndex = comboServices.getSelectedIndex();
+            
+            // Confirm deletion
+            int confirm = JOptionPane.showConfirmDialog(dialog, 
+                    "Are you sure you want to delete this password?", 
+                    "Confirm Deletion", 
+                    JOptionPane.YES_NO_OPTION, 
+                    JOptionPane.WARNING_MESSAGE);
+            
+            if (confirm == JOptionPane.YES_OPTION) {
+                // Remove password
+                passwordList.remove(selectedIndex);
+                
+                // Save passwords
+                storage.writeAll(passwordList);
+                
+                JOptionPane.showMessageDialog(dialog, 
+                        "Password deleted successfully!", 
+                        "Success", 
+                        JOptionPane.INFORMATION_MESSAGE);
+                
+                dialog.dispose();
+            }
+        });
+        
+        // Cancel button action
+        btnCancel.addActionListener(e -> dialog.dispose());
+        
+        dialog.add(panel, BorderLayout.CENTER);
+        dialog.add(buttonPanel, BorderLayout.SOUTH);
+        dialog.setVisible(true);
+    }
+    
+    /**
+     * Show dialog to generate and save a password
+     */
+    private void showGeneratePasswordDialog() {
+        // Create dialog
+        JDialog dialog = new JDialog(this, "Generate and Save Password", true);
+        dialog.setSize(450, 450);
+        dialog.setLocationRelativeTo(this);
+        dialog.setLayout(new BorderLayout());
+        
+        JPanel panel = new JPanel(new GridBagLayout());
+        panel.setBorder(new EmptyBorder(20, 20, 20, 20));
+        panel.setBackground(Color.WHITE);
+        
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(5, 5, 5, 5);
+        
+        // Service field
+        JLabel lblService = new JLabel("Service/Website:");
+        lblService.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        panel.add(lblService, gbc);
+        
+        JTextField txtService = new JTextField(20);
+        txtService.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        panel.add(txtService, gbc);
+        
+        // Username field
+        JLabel lblUsername = new JLabel("Username:");
+        lblUsername.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        panel.add(lblUsername, gbc);
+        
+        JTextField txtUsername = new JTextField(20);
+        txtUsername.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        panel.add(txtUsername, gbc);
+        
+        // Password length
+        JLabel lblLength = new JLabel("Password Length:");
+        lblLength.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        panel.add(lblLength, gbc);
+        
+        JSlider sliderLength = new JSlider(JSlider.HORIZONTAL, 8, 32, 16);
+        sliderLength.setMajorTickSpacing(4);
+        sliderLength.setMinorTickSpacing(1);
+        sliderLength.setPaintTicks(true);
+        sliderLength.setPaintLabels(true);
+        sliderLength.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        sliderLength.setBackground(Color.WHITE);
+        gbc.gridx = 0;
+        gbc.gridy = 5;
+        panel.add(sliderLength, gbc);
+        
+        // Generated password field
+        JLabel lblGenerated = new JLabel("Generated Password:");
+        lblGenerated.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        gbc.gridx = 0;
+        gbc.gridy = 6;
+        gbc.insets = new Insets(15, 5, 5, 5);
+        panel.add(lblGenerated, gbc);
+        
+        JTextField txtGenerated = new JTextField(20);
+        txtGenerated.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        txtGenerated.setEditable(false);
+        gbc.gridx = 0;
+        gbc.gridy = 7;
+        gbc.insets = new Insets(5, 5, 5, 5);
+        panel.add(txtGenerated, gbc);
+        
+        // Generate button
+        JButton btnGenerate = createStyledButton("Generate", SECONDARY_COLOR);
+        gbc.gridx = 0;
+        gbc.gridy = 8;
+        gbc.insets = new Insets(15, 5, 5, 5);
+        panel.add(btnGenerate, gbc);
+        
+        // Button panel
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        buttonPanel.setBackground(Color.WHITE);
+        
+        JButton btnSave = createStyledButton("Save", PRIMARY_COLOR);
+        JButton btnCancel = createStyledButton("Cancel", DARK_COLOR);
+        
+        buttonPanel.add(btnCancel);
+        buttonPanel.add(btnSave);
+        
+        // Generate button action
+        btnGenerate.addActionListener(e -> {
+            int length = sliderLength.getValue();
+            String generatedPassword = PasswordGenerator.generatePassword(length);
+            txtGenerated.setText(generatedPassword);
+        });
+        
+        // Save button action
+        btnSave.addActionListener(e -> {
+            String service = txtService.getText().trim();
+            String username = txtUsername.getText().trim();
+            String password = txtGenerated.getText();
+            
+            if (service.isEmpty() || username.isEmpty() || password.isEmpty()) {
+                JOptionPane.showMessageDialog(dialog, 
+                        "Service, username, and password are required.", 
+                        "Error", 
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            // Get all passwords
+            InterfacePasswordStorage storage = PasswordStorageFactory.create(
+                    StorageType.FILE, authManager.getMasterPassword());
+            List<Password> passwordList = storage.readAll();
+            
+            // Check if service already exists
+            boolean updated = false;
+            for (Password p : passwordList) {
+                if (p.getService().equalsIgnoreCase(service)) {
+                    p.setUsername(username);
+                    p.setPassword(password);
+                    updated = true;
+                    break;
+                }
+            }
+            
+            // If not found, add new password
+            if (!updated) {
+                passwordList.add(new Password(service, username, password));
+            }
+            
+            // Save passwords
+            storage.writeAll(passwordList);
+            
+            JOptionPane.showMessageDialog(dialog, 
+                    "Password saved successfully!", 
+                    "Success", 
+                    JOptionPane.INFORMATION_MESSAGE);
+            
+            dialog.dispose();
+        });
+        
+        // Cancel button action
+        btnCancel.addActionListener(e -> dialog.dispose());
+        
+        // Generate an initial password
+        btnGenerate.doClick();
+        
+        dialog.add(panel, BorderLayout.CENTER);
+        dialog.add(buttonPanel, BorderLayout.SOUTH);
+        dialog.setVisible(true);
     }
     
     /**
