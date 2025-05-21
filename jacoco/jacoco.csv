@@ -1,13 +1,26 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-password-app,com.ucoruh.password,PasswordManager,148,168,11,14,49,54,11,13,4,5
 password-app,com.ucoruh.password,AuthManager,120,117,16,10,36,43,12,13,1,10
-password-app,com.ucoruh.password,PasswordGenerator,3,54,0,4,1,16,1,4,1,2
 password-app,com.ucoruh.password,PasswordStorageFactory,7,15,1,2,1,3,2,2,1,1
-password-app,com.ucoruh.password,PasswordApp,30,140,3,12,13,54,5,10,2,3
+password-app,com.ucoruh.password,AutoLoginManager,53,198,9,19,14,78,8,21,1,12
+password-app,com.ucoruh.password,EncryptionUtil,17,119,0,4,5,25,1,6,1,4
+password-app,com.ucoruh.password,PasswordManager,148,168,11,14,49,54,11,13,4,5
+password-app,com.ucoruh.password,PasswordGenerator,3,54,0,4,1,16,1,4,1,2
+password-app,com.ucoruh.password,PasswordApp.new Runnable() {...},15,0,0,0,7,0,2,0,2,0
+password-app,com.ucoruh.password,PasswordApp,111,140,11,12,33,54,9,10,2,3
 password-app,com.ucoruh.password,DatabasePasswordStorage,387,139,30,0,104,52,15,9,0,9
 password-app,com.ucoruh.password,PlatformManager,9,59,3,3,4,11,4,5,1,5
-password-app,com.ucoruh.password,AutoLoginManager,53,198,9,19,14,78,8,21,1,12
 password-app,com.ucoruh.password,Password,0,37,0,0,0,13,0,7,0,7
 password-app,com.ucoruh.password,FilePasswordStorage,18,314,4,26,6,88,4,20,0,9
 password-app,com.ucoruh.password,StorageType,0,15,0,0,0,3,0,1,0,1
-password-app,com.ucoruh.password,EncryptionUtil,17,119,0,4,5,25,1,6,1,4
+password-app,com.ucoruh.password.gui,PasswordManagerGUI.new Runnable() {...},15,0,0,0,7,0,2,0,2,0
+password-app,com.ucoruh.password.gui,PasswordManagerGUI.new WindowAdapter() {...},10,0,0,0,3,0,2,0,2,0
+password-app,com.ucoruh.password.gui,PasswordManagerGUI.new ActionListener() {...},10,0,0,0,3,0,2,0,2,0
+password-app,com.ucoruh.password.gui,PasswordManagerGUI.new ActionListener() {...},10,0,0,0,3,0,2,0,2,0
+password-app,com.ucoruh.password.gui,PasswordManagerGUI.new KeyAdapter() {...},32,0,6,0,7,0,5,0,2,0
+password-app,com.ucoruh.password.gui,PasswordManagerGUI.new MouseAdapter() {...},48,0,0,0,9,0,5,0,5,0
+password-app,com.ucoruh.password.gui,PasswordManagerGUI.new ActionListener() {...},15,0,0,0,3,0,2,0,2,0
+password-app,com.ucoruh.password.gui,PasswordManagerGUI.new ActionListener() {...},10,0,0,0,3,0,2,0,2,0
+password-app,com.ucoruh.password.gui,PasswordManagerGUI.new MouseAdapter() {...},23,0,0,0,5,0,3,0,3,0
+password-app,com.ucoruh.password.gui,PasswordManagerGUI.new ActionListener() {...},33,0,0,0,6,0,2,0,2,0
+password-app,com.ucoruh.password.gui,PasswordManagerGUI,1537,0,16,0,304,0,23,0,13,0
+password-app,com.ucoruh.password.gui,PasswordManagerGUI.new ActionListener() {...},22,0,0,0,5,0,2,0,2,0

@@ -2,6 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="dir_a3cc24e53ae690631fe2bee650ae7461" kind="dir">
     <compoundname>password-app/src/main/java/com/ucoruh/password</compoundname>
+    <innerdir refid="dir_f81aae268218ea31131d4ff29160b760">password-app/src/main/java/com/ucoruh/password/gui</innerdir>
     <innerfile refid="AuthManager_8java">AuthManager.java</innerfile>
     <innerfile refid="AutoLoginManager_8java">AutoLoginManager.java</innerfile>
     <innerfile refid="DatabasePasswordStorage_8java">DatabasePasswordStorage.java</innerfile>

@@ -110,6 +110,33 @@
     <member refid="classcom_1_1ucoruh_1_1password_1_1PasswordManager_1ac54c89533970ab1079065cf2fac576f4" kind="function"><name>runApp</name></member>
     <member refid="classcom_1_1ucoruh_1_1password_1_1PasswordManager_1a3cb37a64c5cc86e0075dd195a8374d6e" kind="function"><name>main</name></member>
   </compound>
+  <compound refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI" kind="class"><name>com::ucoruh::password::gui::PasswordManagerGUI</name>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI_1a5f837e993e9d8c13cc9b8627d3ba37d3" kind="variable"><name>serialVersionUID</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI_1ad6cc0782b2ff702aa68b639343488a72" kind="variable"><name>PRIMARY_COLOR</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI_1a73b9661b25f028414eb24a17e1301b46" kind="variable"><name>SECONDARY_COLOR</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI_1a56e71cfbb9495250081ea46b50ce8076" kind="variable"><name>ACCENT_COLOR</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI_1abfda5d7321c9e5fdc445200c2c7eb7c8" kind="variable"><name>DARK_COLOR</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI_1ac071cb99fc4ceefe3362e8bf84d20f29" kind="variable"><name>LIGHT_COLOR</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI_1a5abba487ff37eef107f9d21f5e63f0cd" kind="variable"><name>TEXT_COLOR</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI_1ad2b684b71fc58db3d2dd95d83fade00f" kind="variable"><name>HEADER_BG</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI_1a19c9ea1964cb13a83f7c92dc4a6b3c2d" kind="variable"><name>contentPane</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI_1a70c80ec86dfd90a4950bc4b49b34e0f6" kind="variable"><name>txtUsername</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI_1ae77bf3c0932e1653699d9342da977350" kind="variable"><name>txtPassword</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI_1a2d58066c95d063c967c579c7f3282858" kind="variable"><name>passwordManager</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI_1ad17e63075d34dbbdf982e13faceb0470" kind="variable"><name>authManager</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI_1acc618470d7f2a638c4c40c04a7f9d400" kind="function"><name>main</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI_1ae610e7300172d6e4dd5aefe0b56cdd12" kind="function"><name>PasswordManagerGUI</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI_1a4420d14384930029608b83f3dcb9e3aa" kind="function"><name>createComponents</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI_1a0e9f1fc1c2adaf46136634c7ac1f7534" kind="function"><name>createLoginPanel</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI_1a2c539db637d3dd3ef03c17e6944778f1" kind="function"><name>createStyledButton</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI_1a17f8f25cfbd969d0ebbf7c9ea956bf34" kind="function"><name>darken</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI_1ac6ec5dc14eeacde029f88bf8bb3fff1f" kind="function"><name>login</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI_1aa76092e5edb9399a9c267056d435b21b" kind="function"><name>createMasterPassword</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI_1a5b6943d1ba1829c8e5f7eb8653d8df4e" kind="function"><name>showMainMenu</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI_1a1497c402a5384f122cc0010cfb10c6f0" kind="function"><name>handleMenuSelection</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI_1a1f60bb526d9bd23e0dc28de787acbbe9" kind="function"><name>showPasswordManagement</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI_1affffa6857cc1f13586852507f161d419" kind="function"><name>showPasswordGenerator</name></member>
+  </compound>
   <compound refid="classcom_1_1ucoruh_1_1password_1_1PasswordStorageFactory" kind="class"><name>com::ucoruh::password::PasswordStorageFactory</name>
     <member refid="classcom_1_1ucoruh_1_1password_1_1PasswordStorageFactory_1a6f84a4200fa81f059dbc453610cdfc5e" kind="function"><name>create</name></member>
   </compound>
@@ -132,6 +159,8 @@
   </compound>
   <compound refid="namespacecom_1_1ucoruh_1_1password" kind="namespace"><name>com::ucoruh::password</name>
   </compound>
+  <compound refid="namespacecom_1_1ucoruh_1_1password_1_1gui" kind="namespace"><name>com::ucoruh::password::gui</name>
+  </compound>
   <compound refid="namespacejava_1_1lang" kind="namespace"><name>java::lang</name>
   </compound>
   <compound refid="AuthManager_8java" kind="file"><name>AuthManager.java</name>
@@ -143,6 +172,8 @@
   <compound refid="EncryptionUtil_8java" kind="file"><name>EncryptionUtil.java</name>
   </compound>
   <compound refid="FilePasswordStorage_8java" kind="file"><name>FilePasswordStorage.java</name>
+  </compound>
+  <compound refid="PasswordManagerGUI_8java" kind="file"><name>PasswordManagerGUI.java</name>
   </compound>
   <compound refid="InterfacePasswordStorage_8java" kind="file"><name>InterfacePasswordStorage.java</name>
   </compound>
@@ -161,6 +192,8 @@
   <compound refid="StorageType_8java" kind="file"><name>StorageType.java</name>
   </compound>
   <compound refid="dir_ab93d7df21b9e909f8bb63d659b99166" kind="dir"><name>password-app/src/main/java/com</name>
+  </compound>
+  <compound refid="dir_f81aae268218ea31131d4ff29160b760" kind="dir"><name>password-app/src/main/java/com/ucoruh/password/gui</name>
   </compound>
   <compound refid="dir_21ff29864e818d55bb4c7f5cd6d30e79" kind="dir"><name>password-app/src/main/java</name>
   </compound>
