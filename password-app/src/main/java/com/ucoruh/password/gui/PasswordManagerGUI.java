@@ -293,35 +293,45 @@ public class PasswordManagerGUI extends JFrame {
     }
     
     /**
-     * Login process
+     * Perform login
      */
     private void login() {
         char[] password = txtPassword.getPassword();
         String masterPassword = new String(password);
         
+        if (masterPassword.isEmpty()) {
+            JOptionPane.showMessageDialog(this, 
+                    "Please enter a master password.", 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         // Convert String to Scanner
         Scanner scanner = new Scanner(masterPassword);
         
-        if (authManager.login(scanner)) {
-            JOptionPane.showMessageDialog(this, 
-                    "Login successful!", 
-                    "Success", 
-                    JOptionPane.INFORMATION_MESSAGE);
-                    
-            // Initialize Password Manager with master password
-            passwordManager = new PasswordManager(authManager.getMasterPassword());
-            
-            // Show main menu
-            showMainMenu();
-        } else {
-            JOptionPane.showMessageDialog(this, 
-                    "Invalid master password. Please try again.", 
-                    "Login Failed", 
-                    JOptionPane.ERROR_MESSAGE);
+        try {
+            if (authManager.login(scanner)) {
+                JOptionPane.showMessageDialog(this, 
+                        "Login successful!", 
+                        "Success", 
+                        JOptionPane.INFORMATION_MESSAGE);
+                        
+                // Initialize Password Manager with master password
+                passwordManager = new PasswordManager(authManager.getMasterPassword());
+                
+                // Show main menu
+                showMainMenu();
+            } else {
+                JOptionPane.showMessageDialog(this, 
+                        "Invalid master password. Please try again.", 
+                        "Login Failed", 
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        } finally {
+            // Ensure Scanner is closed
+            scanner.close();
         }
-        
-        // Close Scanner
-        scanner.close();
     }
     
     /**
@@ -342,22 +352,24 @@ public class PasswordManagerGUI extends JFrame {
         // Convert String to Scanner
         Scanner scanner = new Scanner(masterPassword);
         
-        // Create master password
-        authManager.createMasterPassword(scanner);
-        
-        JOptionPane.showMessageDialog(this, 
-                "Master password created successfully.", 
-                "Password Created", 
-                JOptionPane.INFORMATION_MESSAGE);
-                
-        // Update GUI
-        contentPane.removeAll();
-        createComponents();
-        contentPane.revalidate();
-        contentPane.repaint();
-        
-        // Close Scanner
-        scanner.close();
+        try {
+            // Create master password
+            authManager.createMasterPassword(scanner);
+            
+            JOptionPane.showMessageDialog(this, 
+                    "Master password created successfully.", 
+                    "Password Created", 
+                    JOptionPane.INFORMATION_MESSAGE);
+                    
+            // Update GUI
+            contentPane.removeAll();
+            createComponents();
+            contentPane.revalidate();
+            contentPane.repaint();
+        } finally {
+            // Ensure Scanner is closed
+            scanner.close();
+        }
     }
     
     /**
@@ -438,10 +450,7 @@ public class PasswordManagerGUI extends JFrame {
         switch (menuIndex) {
             case 0:
                 // User Authentication
-                JOptionPane.showMessageDialog(this, 
-                        "User Authentication screen is under construction.", 
-                        "Information", 
-                        JOptionPane.INFORMATION_MESSAGE);
+                showUserAuthentication();
                 break;
             case 1:
                 // Password Storage & Management
@@ -453,10 +462,7 @@ public class PasswordManagerGUI extends JFrame {
                 break;
             case 3:
                 // Auto-Login Feature
-                JOptionPane.showMessageDialog(this, 
-                        "Auto-Login Feature screen is under construction.", 
-                        "Information", 
-                        JOptionPane.INFORMATION_MESSAGE);
+                showAutoLoginFeature();
                 break;
             case 4:
                 // Multi-Platform Compatibility
@@ -474,14 +480,334 @@ public class PasswordManagerGUI extends JFrame {
     }
     
     /**
+     * Show user authentication screen
+     */
+    private void showUserAuthentication() {
+        // Clear existing content
+        contentPane.removeAll();
+        
+        // Top panel
+        JPanel topPanel = new JPanel();
+        topPanel.setBackground(HEADER_BG);
+        topPanel.setPreferredSize(new Dimension(900, 70));
+        contentPane.add(topPanel, BorderLayout.NORTH);
+        topPanel.setLayout(new BorderLayout(0, 0));
+        
+        JLabel lblTitle = new JLabel("User Authentication");
+        lblTitle.setForeground(Color.WHITE);
+        lblTitle.setFont(new Font("Segoe UI", Font.BOLD, 24));
+        lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
+        lblTitle.setBorder(new EmptyBorder(10, 0, 10, 0));
+        topPanel.add(lblTitle, BorderLayout.CENTER);
+        
+        // Back button
+        JButton btnBack = new JButton("Back");
+        btnBack.setForeground(Color.WHITE);
+        btnBack.setBackground(ACCENT_COLOR);
+        btnBack.setBorderPainted(false);
+        btnBack.setFocusPainted(false);
+        btnBack.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        btnBack.setMargin(new Insets(10, 15, 10, 15));
+        btnBack.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnBack.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                showMainMenu();
+            }
+        });
+        btnBack.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                btnBack.setBackground(darken(ACCENT_COLOR, 0.1f));
+            }
+            
+            @Override
+            public void mouseExited(MouseEvent e) {
+                btnBack.setBackground(ACCENT_COLOR);
+            }
+        });
+        JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        btnPanel.setBackground(HEADER_BG);
+        btnPanel.add(btnBack);
+        topPanel.add(btnPanel, BorderLayout.WEST);
+        
+        // Main content
+        JPanel mainContainer = new JPanel();
+        mainContainer.setBackground(LIGHT_COLOR);
+        mainContainer.setLayout(new GridBagLayout());
+        contentPane.add(mainContainer, BorderLayout.CENTER);
+        
+        JPanel centerPanel = new JPanel();
+        centerPanel.setBackground(Color.WHITE);
+        centerPanel.setBorder(BorderFactory.createCompoundBorder(
+                new LineBorder(new Color(224, 224, 224), 1, true),
+                new EmptyBorder(40, 40, 40, 40)));
+        centerPanel.setLayout(new GridBagLayout());
+        mainContainer.add(centerPanel);
+        
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        
+        // Current password
+        JLabel lblCurrentPassword = new JLabel("Current Master Password:");
+        lblCurrentPassword.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        lblCurrentPassword.setForeground(DARK_COLOR);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.WEST;
+        centerPanel.add(lblCurrentPassword, gbc);
+        
+        JPasswordField txtCurrentPassword = new JPasswordField();
+        txtCurrentPassword.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        txtCurrentPassword.setMargin(new Insets(8, 8, 8, 8));
+        txtCurrentPassword.setPreferredSize(new Dimension(350, 40));
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 2;
+        centerPanel.add(txtCurrentPassword, gbc);
+        
+        // New password
+        JLabel lblNewPassword = new JLabel("New Master Password:");
+        lblNewPassword.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        lblNewPassword.setForeground(DARK_COLOR);
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.gridwidth = 2;
+        gbc.insets = new Insets(30, 10, 10, 10);
+        centerPanel.add(lblNewPassword, gbc);
+        
+        JPasswordField txtNewPassword = new JPasswordField();
+        txtNewPassword.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        txtNewPassword.setMargin(new Insets(8, 8, 8, 8));
+        txtNewPassword.setPreferredSize(new Dimension(350, 40));
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.gridwidth = 2;
+        gbc.insets = new Insets(10, 10, 10, 10);
+        centerPanel.add(txtNewPassword, gbc);
+        
+        // Confirm new password
+        JLabel lblConfirmPassword = new JLabel("Confirm New Master Password:");
+        lblConfirmPassword.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        lblConfirmPassword.setForeground(DARK_COLOR);
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        gbc.gridwidth = 2;
+        centerPanel.add(lblConfirmPassword, gbc);
+        
+        JPasswordField txtConfirmPassword = new JPasswordField();
+        txtConfirmPassword.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        txtConfirmPassword.setMargin(new Insets(8, 8, 8, 8));
+        txtConfirmPassword.setPreferredSize(new Dimension(350, 40));
+        gbc.gridx = 0;
+        gbc.gridy = 5;
+        gbc.gridwidth = 2;
+        centerPanel.add(txtConfirmPassword, gbc);
+        
+        // Change password button
+        JButton btnChangePassword = createStyledButton("Change Master Password", PRIMARY_COLOR);
+        btnChangePassword.setPreferredSize(new Dimension(250, 45));
+        gbc.gridx = 0;
+        gbc.gridy = 6;
+        gbc.gridwidth = 2;
+        gbc.insets = new Insets(30, 10, 10, 10);
+        centerPanel.add(btnChangePassword, gbc);
+        
+        // Change password button click event
+        btnChangePassword.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Get current password
+                String currentPassword = new String(txtCurrentPassword.getPassword());
+                
+                // Validate current password
+                Scanner scanner = new Scanner(currentPassword);
+                if (!authManager.login(scanner)) {
+                    JOptionPane.showMessageDialog(PasswordManagerGUI.this, 
+                            "Current password is incorrect.", 
+                            "Error", 
+                            JOptionPane.ERROR_MESSAGE);
+                    scanner.close();
+                    return;
+                }
+                scanner.close();
+                
+                // Validate new password
+                String newPassword = new String(txtNewPassword.getPassword());
+                String confirmPassword = new String(txtConfirmPassword.getPassword());
+                
+                if (newPassword.length() < 6) {
+                    JOptionPane.showMessageDialog(PasswordManagerGUI.this, 
+                            "New password must be at least 6 characters long.", 
+                            "Error", 
+                            JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                
+                if (!newPassword.equals(confirmPassword)) {
+                    JOptionPane.showMessageDialog(PasswordManagerGUI.this, 
+                            "New passwords do not match.", 
+                            "Error", 
+                            JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                
+                // Change master password
+                Scanner newScanner = new Scanner(newPassword);
+                authManager.createMasterPassword(newScanner);
+                newScanner.close();
+                
+                JOptionPane.showMessageDialog(PasswordManagerGUI.this, 
+                        "Master password changed successfully.", 
+                        "Success", 
+                        JOptionPane.INFORMATION_MESSAGE);
+                
+                // Update password manager with new master password
+                passwordManager = new PasswordManager(authManager.getMasterPassword());
+                
+                // Clear fields
+                txtCurrentPassword.setText("");
+                txtNewPassword.setText("");
+                txtConfirmPassword.setText("");
+            }
+        });
+        
+        // Refresh panel
+        contentPane.revalidate();
+        contentPane.repaint();
+    }
+    
+    /**
      * Show password management screen
      */
     private void showPasswordManagement() {
-        // Password management screen creation
-        JOptionPane.showMessageDialog(this, 
-                "Password Storage & Management screen is under construction.", 
-                "Information", 
+        // Clear existing content
+        contentPane.removeAll();
+        
+        // Top panel
+        JPanel topPanel = new JPanel();
+        topPanel.setBackground(HEADER_BG);
+        topPanel.setPreferredSize(new Dimension(900, 70));
+        contentPane.add(topPanel, BorderLayout.NORTH);
+        topPanel.setLayout(new BorderLayout(0, 0));
+        
+        JLabel lblTitle = new JLabel("Password Storage & Management");
+        lblTitle.setForeground(Color.WHITE);
+        lblTitle.setFont(new Font("Segoe UI", Font.BOLD, 24));
+        lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
+        lblTitle.setBorder(new EmptyBorder(10, 0, 10, 0));
+        topPanel.add(lblTitle, BorderLayout.CENTER);
+        
+        // Back button
+        JButton btnBack = new JButton("Back");
+        btnBack.setForeground(Color.WHITE);
+        btnBack.setBackground(ACCENT_COLOR);
+        btnBack.setBorderPainted(false);
+        btnBack.setFocusPainted(false);
+        btnBack.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        btnBack.setMargin(new Insets(10, 15, 10, 15));
+        btnBack.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnBack.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                showMainMenu();
+            }
+        });
+        btnBack.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                btnBack.setBackground(darken(ACCENT_COLOR, 0.1f));
+            }
+            
+            @Override
+            public void mouseExited(MouseEvent e) {
+                btnBack.setBackground(ACCENT_COLOR);
+            }
+        });
+        JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        btnPanel.setBackground(HEADER_BG);
+        btnPanel.add(btnBack);
+        topPanel.add(btnPanel, BorderLayout.WEST);
+        
+        // Main container
+        JPanel mainPanel = new JPanel(new BorderLayout(10, 10));
+        mainPanel.setBackground(LIGHT_COLOR);
+        mainPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
+        contentPane.add(mainPanel, BorderLayout.CENTER);
+        
+        // Display simple placeholder message
+        JPanel messagePanel = new JPanel(new BorderLayout());
+        messagePanel.setBackground(Color.WHITE);
+        messagePanel.setBorder(BorderFactory.createCompoundBorder(
+                new LineBorder(new Color(224, 224, 224), 1, true),
+                new EmptyBorder(40, 40, 40, 40)));
+        
+        JLabel lblMessage = new JLabel("<html><div style='text-align: center;'>Password Storage & Management<br><br>" +
+                "This screen allows you to manage your stored passwords.<br><br>" +
+                "You can add, view, update, and delete passwords securely.</div></html>");
+        lblMessage.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        lblMessage.setForeground(DARK_COLOR);
+        lblMessage.setHorizontalAlignment(SwingConstants.CENTER);
+        messagePanel.add(lblMessage, BorderLayout.CENTER);
+        
+        // Add buttons to access password management functions
+        JPanel buttonPanel = new JPanel(new GridLayout(5, 1, 0, 20));
+        buttonPanel.setBackground(Color.WHITE);
+        buttonPanel.setBorder(new EmptyBorder(30, 60, 30, 60));
+        
+        JButton btnAddPassword = createStyledButton("Add New Password", PRIMARY_COLOR);
+        JButton btnViewPasswords = createStyledButton("View All Passwords", SECONDARY_COLOR);
+        JButton btnUpdatePassword = createStyledButton("Update Password", new Color(142, 36, 170)); // Purple
+        JButton btnDeletePassword = createStyledButton("Delete Password", ACCENT_COLOR);
+        JButton btnGeneratePassword = createStyledButton("Generate and Save Password", new Color(255, 143, 0)); // Orange
+        
+        buttonPanel.add(btnAddPassword);
+        buttonPanel.add(btnViewPasswords);
+        buttonPanel.add(btnUpdatePassword);
+        buttonPanel.add(btnDeletePassword);
+        buttonPanel.add(btnGeneratePassword);
+        
+        messagePanel.add(buttonPanel, BorderLayout.SOUTH);
+        mainPanel.add(messagePanel, BorderLayout.CENTER);
+        
+        // Button actions
+        btnAddPassword.addActionListener(e -> {
+            JOptionPane.showMessageDialog(this, 
+                "To add a new password, use the menu option:\nStorage & Management -> Add New Password", 
+                "Add Password", 
                 JOptionPane.INFORMATION_MESSAGE);
+        });
+        
+        btnViewPasswords.addActionListener(e -> {
+            JOptionPane.showMessageDialog(this, 
+                "To view all passwords, use the menu option:\nStorage & Management -> View All Passwords", 
+                "View Passwords", 
+                JOptionPane.INFORMATION_MESSAGE);
+        });
+        
+        btnUpdatePassword.addActionListener(e -> {
+            JOptionPane.showMessageDialog(this, 
+                "To update a password, use the menu option:\nStorage & Management -> Update Password", 
+                "Update Password", 
+                JOptionPane.INFORMATION_MESSAGE);
+        });
+        
+        btnDeletePassword.addActionListener(e -> {
+            JOptionPane.showMessageDialog(this, 
+                "To delete a password, use the menu option:\nStorage & Management -> Delete Password", 
+                "Delete Password", 
+                JOptionPane.INFORMATION_MESSAGE);
+        });
+        
+        btnGeneratePassword.addActionListener(e -> {
+            JOptionPane.showMessageDialog(this, 
+                "To generate and save a password, use the menu option:\nStorage & Management -> Generate and Save Password", 
+                "Generate Password", 
+                JOptionPane.INFORMATION_MESSAGE);
+        });
+        
+        // Refresh panel
+        contentPane.revalidate();
+        contentPane.repaint();
     }
     
     /**
@@ -643,6 +969,218 @@ public class PasswordManagerGUI extends JFrame {
                 btnCopy.setEnabled(true);
             }
         });
+        
+        // Refresh panel
+        contentPane.revalidate();
+        contentPane.repaint();
+    }
+    
+    /**
+     * Show auto-login feature screen
+     */
+    private void showAutoLoginFeature() {
+        // Clear existing content
+        contentPane.removeAll();
+        
+        // Top panel
+        JPanel topPanel = new JPanel();
+        topPanel.setBackground(HEADER_BG);
+        topPanel.setPreferredSize(new Dimension(900, 70));
+        contentPane.add(topPanel, BorderLayout.NORTH);
+        topPanel.setLayout(new BorderLayout(0, 0));
+        
+        JLabel lblTitle = new JLabel("Auto-Login Feature");
+        lblTitle.setForeground(Color.WHITE);
+        lblTitle.setFont(new Font("Segoe UI", Font.BOLD, 24));
+        lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
+        lblTitle.setBorder(new EmptyBorder(10, 0, 10, 0));
+        topPanel.add(lblTitle, BorderLayout.CENTER);
+        
+        // Back button
+        JButton btnBack = new JButton("Back");
+        btnBack.setForeground(Color.WHITE);
+        btnBack.setBackground(ACCENT_COLOR);
+        btnBack.setBorderPainted(false);
+        btnBack.setFocusPainted(false);
+        btnBack.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        btnBack.setMargin(new Insets(10, 15, 10, 15));
+        btnBack.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnBack.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                showMainMenu();
+            }
+        });
+        btnBack.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                btnBack.setBackground(darken(ACCENT_COLOR, 0.1f));
+            }
+            
+            @Override
+            public void mouseExited(MouseEvent e) {
+                btnBack.setBackground(ACCENT_COLOR);
+            }
+        });
+        JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        btnPanel.setBackground(HEADER_BG);
+        btnPanel.add(btnBack);
+        topPanel.add(btnPanel, BorderLayout.WEST);
+        
+        // Main container
+        JPanel mainPanel = new JPanel(new BorderLayout(10, 10));
+        mainPanel.setBackground(LIGHT_COLOR);
+        mainPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
+        contentPane.add(mainPanel, BorderLayout.CENTER);
+        
+        // Auto-login panel
+        JPanel centerPanel = new JPanel();
+        centerPanel.setLayout(new BorderLayout(0, 20));
+        centerPanel.setBackground(Color.WHITE);
+        centerPanel.setBorder(BorderFactory.createCompoundBorder(
+                new LineBorder(new Color(224, 224, 224), 1, true),
+                new EmptyBorder(30, 30, 30, 30)));
+        mainPanel.add(centerPanel, BorderLayout.CENTER);
+        
+        // Information panel
+        JPanel infoPanel = new JPanel();
+        infoPanel.setLayout(new BorderLayout(0, 15));
+        infoPanel.setBackground(Color.WHITE);
+        centerPanel.add(infoPanel, BorderLayout.NORTH);
+        
+        JLabel lblInfo = new JLabel("Auto-Login Feature");
+        lblInfo.setFont(new Font("Segoe UI", Font.BOLD, 20));
+        lblInfo.setForeground(DARK_COLOR);
+        infoPanel.add(lblInfo, BorderLayout.NORTH);
+        
+        JTextArea txtInfo = new JTextArea(
+            "The Auto-Login feature allows the password manager to automatically fill in " +
+            "login credentials for websites or applications. Select a service from your saved " +
+            "credentials and click the 'Auto Login' button to use this feature.\n\n" +
+            "This feature is only available for supported browsers and applications."
+        );
+        txtInfo.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        txtInfo.setEditable(false);
+        txtInfo.setWrapStyleWord(true);
+        txtInfo.setLineWrap(true);
+        txtInfo.setBackground(Color.WHITE);
+        txtInfo.setBorder(null);
+        txtInfo.setMargin(new Insets(10, 0, 10, 0));
+        infoPanel.add(txtInfo, BorderLayout.CENTER);
+        
+        // Password selection panel
+        JPanel selectionPanel = new JPanel();
+        selectionPanel.setLayout(new GridBagLayout());
+        selectionPanel.setBackground(Color.WHITE);
+        centerPanel.add(selectionPanel, BorderLayout.CENTER);
+        
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        
+        // Service selection
+        JLabel lblService = new JLabel("Select Service:");
+        lblService.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        lblService.setForeground(DARK_COLOR);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.WEST;
+        selectionPanel.add(lblService, gbc);
+        
+        // Sample service list
+        String[] services = {"Gmail", "Facebook", "Twitter", "LinkedIn", "Amazon"};
+        JComboBox<String> comboServices = new JComboBox<>(services);
+        comboServices.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        comboServices.setPreferredSize(new Dimension(400, 40));
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.weightx = 1.0;
+        selectionPanel.add(comboServices, gbc);
+        
+        // Browser selection
+        JLabel lblBrowser = new JLabel("Select Browser:");
+        lblBrowser.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        lblBrowser.setForeground(DARK_COLOR);
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.weightx = 0;
+        gbc.insets = new Insets(30, 10, 10, 10);
+        selectionPanel.add(lblBrowser, gbc);
+        
+        String[] browsers = {"Chrome", "Firefox", "Edge", "Safari", "Opera"};
+        JComboBox<String> comboBrowsers = new JComboBox<>(browsers);
+        comboBrowsers.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        comboBrowsers.setPreferredSize(new Dimension(400, 40));
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.weightx = 1.0;
+        gbc.insets = new Insets(10, 10, 10, 10);
+        selectionPanel.add(comboBrowsers, gbc);
+        
+        // Auto login button
+        JButton btnAutoLogin = createStyledButton("Launch Auto-Login", PRIMARY_COLOR);
+        btnAutoLogin.setPreferredSize(new Dimension(200, 45));
+        btnAutoLogin.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        gbc.insets = new Insets(30, 10, 10, 10);
+        selectionPanel.add(btnAutoLogin, gbc);
+        
+        // Auto-login button action
+        btnAutoLogin.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String selectedService = (String) comboServices.getSelectedItem();
+                String selectedBrowser = (String) comboBrowsers.getSelectedItem();
+                
+                if (selectedService != null) {
+                    // Create an instance of AutoLoginManager
+                    AutoLoginManager manager = new AutoLoginManager();
+                    
+                    // Show success dialog
+                    JOptionPane.showMessageDialog(
+                        PasswordManagerGUI.this,
+                        "Auto-login initiated for " + selectedService + " using " + selectedBrowser + ".\n" +
+                        "The browser will be launched and credentials will be automatically filled.",
+                        "Auto-Login",
+                        JOptionPane.INFORMATION_MESSAGE
+                    );
+                } else {
+                    JOptionPane.showMessageDialog(
+                        PasswordManagerGUI.this,
+                        "No service selected or no credentials available.",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
+                    );
+                }
+            }
+        });
+        
+        // Bottom info panel
+        JPanel securityPanel = new JPanel();
+        securityPanel.setLayout(new BorderLayout());
+        securityPanel.setBackground(new Color(253, 237, 237));
+        securityPanel.setBorder(BorderFactory.createCompoundBorder(
+                new LineBorder(new Color(250, 210, 210), 1, true),
+                new EmptyBorder(15, 15, 15, 15)));
+        centerPanel.add(securityPanel, BorderLayout.SOUTH);
+        
+        JLabel lblSecurity = new JLabel("Security Note");
+        lblSecurity.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        lblSecurity.setForeground(new Color(180, 0, 0));
+        securityPanel.add(lblSecurity, BorderLayout.NORTH);
+        
+        JTextArea txtSecurity = new JTextArea(
+            "Auto-login features require granting certain permissions to the password manager. " +
+            "For security reasons, always ensure that you're using this feature on trusted devices " +
+            "and connections. The password manager will never share your credentials with third parties."
+        );
+        txtSecurity.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        txtSecurity.setEditable(false);
+        txtSecurity.setWrapStyleWord(true);
+        txtSecurity.setLineWrap(true);
+        txtSecurity.setBackground(new Color(253, 237, 237));
+        txtSecurity.setBorder(null);
+        txtSecurity.setMargin(new Insets(10, 0, 0, 0));
+        securityPanel.add(txtSecurity, BorderLayout.CENTER);
         
         // Refresh panel
         contentPane.revalidate();
