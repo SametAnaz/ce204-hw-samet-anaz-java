@@ -143,8 +143,13 @@
     <member refid="classcom_1_1ucoruh_1_1password_1_1PasswordApp_1a3fa76d7d89d53ee109ef7b3d11f1ec87" kind="function"><name>platformMenu</name></member>
   </compound>
   <compound refid="classcom_1_1ucoruh_1_1password_1_1PasswordGenerator" kind="class"><name>com::ucoruh::password::PasswordGenerator</name>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1PasswordGenerator_1a125dfe1a06b43250abf25b22cc6d422c" kind="variable"><name>UPPERCASE_CHARS</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1PasswordGenerator_1aebb9cc6d435130a77b25def0d2534217" kind="variable"><name>LOWERCASE_CHARS</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1PasswordGenerator_1aa34ba01f307421df4cbff2e7058b64ac" kind="variable"><name>DIGIT_CHARS</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1PasswordGenerator_1a63c62a4a1b622199872f00bf88fbcd52" kind="variable"><name>SPECIAL_CHARS</name></member>
     <member refid="classcom_1_1ucoruh_1_1password_1_1PasswordGenerator_1a17f426d87cf23321432105a084cb7b9b" kind="variable"><name>CHARACTERS</name></member>
     <member refid="classcom_1_1ucoruh_1_1password_1_1PasswordGenerator_1a8aea66fb62433e17575299ffd6ba0b52" kind="function"><name>generatePassword</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1PasswordGenerator_1ab6f966910167edd4d17e634dbd4d6db2" kind="function"><name>generatePassword</name></member>
     <member refid="classcom_1_1ucoruh_1_1password_1_1PasswordGenerator_1a310273be744ee0a5983a605d0ee8dc66" kind="function"><name>generate</name></member>
   </compound>
   <compound refid="classcom_1_1ucoruh_1_1password_1_1PasswordManager" kind="class"><name>com::ucoruh::password::PasswordManager</name>
@@ -164,9 +169,7 @@
   <compound refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI" kind="class"><name>com::ucoruh::password::gui::PasswordManagerGUI</name>
     <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI_1a5f837e993e9d8c13cc9b8627d3ba37d3" kind="variable"><name>serialVersionUID</name></member>
     <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI_1a19c9ea1964cb13a83f7c92dc4a6b3c2d" kind="variable"><name>contentPane</name></member>
-    <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI_1a70c80ec86dfd90a4950bc4b49b34e0f6" kind="variable"><name>txtUsername</name></member>
     <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI_1ae77bf3c0932e1653699d9342da977350" kind="variable"><name>txtPassword</name></member>
-    <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI_1a2d58066c95d063c967c579c7f3282858" kind="variable"><name>passwordManager</name></member>
     <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI_1ad17e63075d34dbbdf982e13faceb0470" kind="variable"><name>authManager</name></member>
     <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI_1a3e2d676d28a85c243f79d0449c8d884b" kind="variable"><name>addPasswordController</name></member>
     <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1PasswordManagerGUI_1af31f87472f3c2d3ad3b4203ce64f239c" kind="variable"><name>viewPasswordController</name></member>
