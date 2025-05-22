@@ -180,13 +180,23 @@ jobs:
       - name: Compress Web Site
         run: tar -czvf app-website.tar.gz -C password-app/target/site .
         
-      - name: Upload release asset
+      - name: Upload release asset (JAR)
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_common_release.outputs.upload_url }}
           asset_path: ./password-app/target/password-app-1.0-SNAPSHOT.jar
           asset_name: password.jar
           asset_content_type: application/jar
+        env:
+          GITHUB_TOKEN: ${{ secrets.SECRET_SAMET }}
+          
+      - name: Upload release asset (EXE)
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_common_release.outputs.upload_url }}
+          asset_path: ./password-app/target/PasswordManager.exe
+          asset_name: PasswordManager.exe
+          asset_content_type: application/octet-stream
         env:
           GITHUB_TOKEN: ${{ secrets.SECRET_SAMET }}
           

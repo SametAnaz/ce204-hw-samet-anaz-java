@@ -302,3 +302,20 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Built with ❤️ by [Samet Anaz](https://github.com/SametAnaz)
 
+## 📥 Quick Start
+
+### Download and Run
+
+1. Go to the [Releases](https://github.com/SametAnaz/ce204-hw-samet-anaz-java/releases) page
+2. Download the latest version:
+   - For Windows: Download `PasswordManager.exe`
+   - For other platforms: Download `PasswordManager.jar`
+3. Run the application:
+   - Windows: Double-click `PasswordManager.exe`
+   - Other platforms: Run `java -jar PasswordManager.jar`
+
+### Requirements
+
+- Windows: No additional requirements for EXE
+- Other platforms: Java 17 or higher required
+
