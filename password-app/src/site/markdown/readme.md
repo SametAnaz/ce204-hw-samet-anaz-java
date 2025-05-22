@@ -23,6 +23,15 @@
 # Overview
 
 The Password Application is a secure and lightweight console-based password manager developed using Java and the Maven framework. It provides essential features such as encrypted password storage, strong password generation, user authentication, and platform-based credential organization. Designed with modularity and maintainability in mind, the application leverages object-oriented principles and supports SQLite for local database management. This project also integrates test coverage and documentation tools, and is structured to allow future expansion, including GUI development.
+
+## Features
+
+- Secure password storage with master password protection
+- Password generation with customizable options (length, character types)
+- View, add, update, and delete password entries
+- Copy password to clipboard functionality
+- Modern, user-friendly interface
+
 ## Releases
 
 - [![GitHub Release](https://img.shields.io/github/release/SametAnaz/ce204-hw-samet-anaz-java.svg)](https://github.com/SametAnaz/ce204-hw-samet-anaz-java/releases/latest)

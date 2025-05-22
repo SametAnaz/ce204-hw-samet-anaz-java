@@ -515,18 +515,26 @@ public class AddPasswordControllerTest {
             Method savePasswordMethod = AddPasswordController.class.getDeclaredMethod("savePassword");
             savePasswordMethod.setAccessible(true);
             
-            // Test with valid fields
-            txtService.setText("TestService");
-            txtUsername.setText("TestUser");
-            txtPassword.setText("TestPassword");
-            
-            // Create a controller that won't actually show dialog messages for testing
-            AddPasswordController testController = new AddPasswordController(gui) {
+            // Create a controller class that tracks method calls
+            class TestController extends AddPasswordController {
+                private boolean dialogClosed = false;
+                
+                public TestController(PasswordManagerGUI gui) {
+                    super(gui);
+                }
+                
                 @Override
                 public void closeDialog() {
-                    // Don't actually close the dialog in test
+                    dialogClosed = true;
                 }
-            };
+                
+                public boolean isDialogClosed() {
+                    return dialogClosed;
+                }
+            }
+            
+            // Create the test controller
+            TestController testController = new TestController(gui);
             
             // Set the fields on the test controller
             dialogField.set(testController, testDialog);
@@ -534,19 +542,71 @@ public class AddPasswordControllerTest {
             txtUsernameField.set(testController, txtUsername);
             txtPasswordField.set(testController, txtPassword);
             
-            // Try saving with valid fields
+            // Test Case 1: Empty fields - should show error
+            txtService.setText("");
+            txtUsername.setText("");
+            txtPassword.setText("");
+            
+            // Call the method
+            savePasswordMethod.invoke(testController);
+            
+            // Dialog should not be closed for empty fields
+            assertFalse("Dialog should not be closed with validation error", 
+                    testController.isDialogClosed());
+            
+            // Test Case 2: Only service filled - should show error
+            txtService.setText("Service");
+            txtUsername.setText("");
+            txtPassword.setText("");
+            
+            // Reset the flag
+            Field dialogClosedField = TestController.class.getDeclaredField("dialogClosed");
+            dialogClosedField.setAccessible(true);
+            dialogClosedField.set(testController, false);
+            
+            // Call the method
+            savePasswordMethod.invoke(testController);
+            
+            // Dialog should not be closed for incomplete fields
+            assertFalse("Dialog should not be closed with validation error", 
+                    testController.isDialogClosed());
+            
+            // Test Case 3: All fields filled - should proceed
+            txtService.setText("TestService");
+            txtUsername.setText("TestUser");
+            txtPassword.setText("TestPassword");
+            
+            // Reset the flag
+            dialogClosedField.set(testController, false);
+            
             try {
+                // Call the method - this will attempt to access storage
                 savePasswordMethod.invoke(testController);
-            } catch (Exception ex) {
-                // Expected - storage or JOptionPane may cause issues in tests
+            } catch (Exception e) {
+                // Expected in test environment - we can't easily mock JOptionPane or storage
+                System.out.println("Expected exception when accessing storage: " + e.getMessage());
             }
             
-            // Since we can't easily mock the storage or JOptionPane, we just verify the method exists
-            // and can be called without throwing exceptions in our test environment
-            assertTrue(true);
+            // Test another scenario with existing data
+            // Since we can't easily mock the storage, we'll simulate this 
+            // by calling savePassword with different values
+            txtService.setText("ExistingService");
+            txtUsername.setText("UpdatedUser");
+            txtPassword.setText("UpdatedPassword");
+            
+            // Reset the flag
+            dialogClosedField.set(testController, false);
+            
+            try {
+                // Call the method again
+                savePasswordMethod.invoke(testController);
+            } catch (Exception e) {
+                // Expected in test environment
+                System.out.println("Expected exception when accessing storage: " + e.getMessage());
+            }
             
         } catch (Exception e) {
-            fail("Exception during test setup: " + e.getMessage());
+            fail("Exception during test: " + e.getMessage());
         }
     }
 } 

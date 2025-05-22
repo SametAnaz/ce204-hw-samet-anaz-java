@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.lang.reflect.Field;
 import java.util.Scanner;
 
 import org.junit.After;
@@ -28,6 +29,103 @@ public class PasswordGeneratorTest {
     @After
     public void tearDown() {
         System.setOut(originalOut);
+    }
+
+    /**
+     * Test to verify the character set constants are correctly defined.
+     * This test uses reflection to access the private static fields.
+     */
+    @Test
+    public void testCharacterSetConstants() throws Exception {
+        // Use reflection to access private static fields
+        Field uppercaseField = PasswordGenerator.class.getDeclaredField("UPPERCASE_CHARS");
+        Field lowercaseField = PasswordGenerator.class.getDeclaredField("LOWERCASE_CHARS");
+        Field digitField = PasswordGenerator.class.getDeclaredField("DIGIT_CHARS");
+        Field specialField = PasswordGenerator.class.getDeclaredField("SPECIAL_CHARS");
+        Field charactersField = PasswordGenerator.class.getDeclaredField("CHARACTERS");
+        
+        // Make the fields accessible
+        uppercaseField.setAccessible(true);
+        lowercaseField.setAccessible(true);
+        digitField.setAccessible(true);
+        specialField.setAccessible(true);
+        charactersField.setAccessible(true);
+        
+        // Get the values
+        String uppercase = (String) uppercaseField.get(null);
+        String lowercase = (String) lowercaseField.get(null);
+        String digits = (String) digitField.get(null);
+        String special = (String) specialField.get(null);
+        String characters = (String) charactersField.get(null);
+        
+        // Verify the contents
+        assertEquals("ABCDEFGHIJKLMNOPQRSTUVWXYZ", uppercase);
+        assertEquals("abcdefghijklmnopqrstuvwxyz", lowercase);
+        assertEquals("0123456789", digits);
+        assertEquals("!@#$%^&*()_-+=<>?/[]{}|", special);
+        
+        // Verify that CHARACTERS is the concatenation of the other sets
+        assertEquals(uppercase + lowercase + digits + special, characters);
+    }
+    
+    /**
+     * Test to verify that each character set is used properly when generating passwords.
+     */
+    @Test
+    public void testCharacterSetsUsage() throws Exception {
+        // Get access to the character sets via reflection
+        Field uppercaseField = PasswordGenerator.class.getDeclaredField("UPPERCASE_CHARS");
+        Field lowercaseField = PasswordGenerator.class.getDeclaredField("LOWERCASE_CHARS");
+        Field digitField = PasswordGenerator.class.getDeclaredField("DIGIT_CHARS");
+        Field specialField = PasswordGenerator.class.getDeclaredField("SPECIAL_CHARS");
+        
+        uppercaseField.setAccessible(true);
+        lowercaseField.setAccessible(true);
+        digitField.setAccessible(true);
+        specialField.setAccessible(true);
+        
+        String uppercase = (String) uppercaseField.get(null);
+        String lowercase = (String) lowercaseField.get(null);
+        String digits = (String) digitField.get(null);
+        String special = (String) specialField.get(null);
+        
+        // Generate a password with only lowercase
+        String lowercasePassword = PasswordGenerator.generatePassword(20, false, true, false, false);
+        for (char c : lowercasePassword.toCharArray()) {
+            assertTrue("Character should be in lowercase set", lowercase.indexOf(c) >= 0);
+        }
+        
+        // Generate a password with only digits
+        String digitPassword = PasswordGenerator.generatePassword(20, false, false, true, false);
+        for (char c : digitPassword.toCharArray()) {
+            assertTrue("Character should be in digit set", digits.indexOf(c) >= 0);
+        }
+        
+        // Generate a password with only special characters
+        String specialPassword = PasswordGenerator.generatePassword(20, false, false, false, true);
+        for (char c : specialPassword.toCharArray()) {
+            assertTrue("Character should be in special character set", special.indexOf(c) >= 0);
+        }
+        
+        // Generate a password with all character types
+        String allCharsPassword = PasswordGenerator.generatePassword(100);
+        
+        boolean hasUppercase = false;
+        boolean hasLowercase = false;
+        boolean hasDigit = false;
+        boolean hasSpecial = false;
+        
+        for (char c : allCharsPassword.toCharArray()) {
+            if (uppercase.indexOf(c) >= 0) hasUppercase = true;
+            else if (lowercase.indexOf(c) >= 0) hasLowercase = true;
+            else if (digits.indexOf(c) >= 0) hasDigit = true;
+            else if (special.indexOf(c) >= 0) hasSpecial = true;
+        }
+        
+        assertTrue("Password should include characters from uppercase set", hasUppercase);
+        assertTrue("Password should include characters from lowercase set", hasLowercase);
+        assertTrue("Password should include characters from digit set", hasDigit);
+        assertTrue("Password should include characters from special character set", hasSpecial);
     }
 
     /**
