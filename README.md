@@ -56,6 +56,8 @@ The Password Application is a secure and lightweight console-based password mana
 ![](assets/C4codeDiagram.png)
 ## Use Case Diagram
 ![](assets/UsaCase.png)
+# Uml GUI Diagrams
+![](assets/AddPasswordControllerUML.png)
 
 
 
