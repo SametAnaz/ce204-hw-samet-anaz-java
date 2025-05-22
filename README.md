@@ -57,11 +57,36 @@ The Password Application is a secure and lightweight console-based password mana
 ## Use Case Diagram
 ![](assets/UsaCase.png)
 # Uml GUI Diagrams
+## Add Password Controller Diagram
 ![](assets/AddPasswordControllerUML.png)
-
-
-
-
+## Delete Password Controller Diagram
+![](assets/DeletePasswordController.png)
+## Dialog Controller Diagram
+![](assets/DialogController.png)
+## Generate Password Controller Diagram 1
+![](assets/GeneratePasswordController_1.png)
+## Generate Password Controller Diagram 2
+![](assets/GeneratePasswordController_2.png)
+## Generate Password Controller Diagram 3
+![](assets/GeneratePasswordController_3.png)
+## PasswordManagerGUI Class Diagram 1
+![](assets/PasswordManagerGUI_1.png)
+## PasswordManagerGUI Class Diagram 2
+![](assets/PasswordManagerGUI_2.png)
+## PasswordManagerGUI Class Diagram 3
+![](assets/PasswordManagerGUI_3.png)
+## Update Password Controller Diagram 1
+![](assets/UpdatePasswordController_1.png)
+## Update Password Controller Diagram 2
+![](assets/UpdatePasswordController_2.png)
+## Update Password Controller Diagram 3
+![](assets/UpdatePasswordController_3.png)
+## View Password Controller Diagram 1
+![](assets/ViewPasswordController_1.png)
+## View Password Controller Diagram 2
+![](assets/ViewPasswordController_2.png)
+## View Password Controller Diagram 3
+![](assets/ViewPasswordController_3.png)
 
 # Source Code
 
