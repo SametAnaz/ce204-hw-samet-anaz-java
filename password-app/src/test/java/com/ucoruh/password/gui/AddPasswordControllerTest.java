@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.Ignore;
 
 import com.ucoruh.password.AuthManager;
 import com.ucoruh.password.Password;
@@ -31,26 +32,31 @@ import com.ucoruh.password.StorageType;
  */
 public class AddPasswordControllerTest {
     
+    // Static flag to immediately skip all tests in CI environments
+    private static final boolean SKIP_ALL_UI_TESTS;
+    
+    // Static initializer to check CI environment once
+    static {
+        boolean isHeadless = GraphicsEnvironment.isHeadless();
+        String ciEnv = System.getenv("CI");
+        boolean isCiEnvironment = (ciEnv != null && ciEnv.equals("true"));
+        
+        SKIP_ALL_UI_TESTS = isHeadless || isCiEnvironment;
+        
+        if (SKIP_ALL_UI_TESTS) {
+            System.out.println("UI tests will be completely skipped - running in headless or CI environment");
+        }
+    }
+    
     private PasswordManagerGUI gui;
     private AddPasswordController controller;
     private AuthManager originalAuthManager;
-    private boolean isHeadlessEnvironment;
     
     @Before
     public void setUp() {
-        // Check if we're in a headless environment
-        isHeadlessEnvironment = GraphicsEnvironment.isHeadless();
-        
-        // Force headless mode in CI environments
-        String ciEnv = System.getenv("CI");
-        if (ciEnv != null && ciEnv.equals("true")) {
-            System.out.println("CI environment detected, forcing headless mode");
-            isHeadlessEnvironment = true;
-        }
-        
-        // Skip initialization in headless environments
-        if (isHeadlessEnvironment) {
-            System.out.println("Running in headless environment, UI tests will be skipped");
+        // Skip everything if in CI environment - don't even attempt to initialize
+        if (SKIP_ALL_UI_TESTS) {
+            Assume.assumeTrue("Skipping all UI tests in headless/CI environment", false);
             return;
         }
         
@@ -65,20 +71,16 @@ public class AddPasswordControllerTest {
             // Create controller with real GUI
             controller = new AddPasswordController(gui);
         } catch (HeadlessException e) {
-            // If we get a HeadlessException, mark as headless
-            isHeadlessEnvironment = true;
-            System.out.println("HeadlessException detected, UI tests will be skipped: " + e.getMessage());
+            Assume.assumeNoException("Headless environment detected", e);
         } catch (Exception e) {
-            // If we get any other exception, mark as headless and log
-            isHeadlessEnvironment = true;
-            System.out.println("Exception during UI setup, tests will be skipped: " + e.getMessage());
+            Assume.assumeNoException("Error initializing UI components", e);
         }
     }
     
     @After
     public void tearDown() {
-        // Skip cleanup if we're in a headless environment
-        if (isHeadlessEnvironment) {
+        // Skip cleanup if tests were skipped
+        if (SKIP_ALL_UI_TESTS) {
             return;
         }
         
@@ -98,8 +100,7 @@ public class AddPasswordControllerTest {
      */
     @Test
     public void testInitialDialogIsNull() {
-        // Skip test in headless environment
-        Assume.assumeFalse("Skipping UI test in headless environment", isHeadlessEnvironment);
+        // Will be skipped automatically if SKIP_ALL_UI_TESTS is true
         
         assertNotNull("Controller should not be null", controller);
         assertNull("Initial dialog should be null", controller.getDialog());
@@ -110,8 +111,7 @@ public class AddPasswordControllerTest {
      */
     @Test
     public void testDialogControllerInterface() {
-        // Skip test in headless environment
-        Assume.assumeFalse("Skipping UI test in headless environment", isHeadlessEnvironment);
+        // Will be skipped automatically if SKIP_ALL_UI_TESTS is true
         
         // Initially the dialog should be null
         assertNull(controller.getDialog());
@@ -145,7 +145,7 @@ public class AddPasswordControllerTest {
     @Test
     public void testCloseDialog() {
         // Skip test in headless environment
-        Assume.assumeFalse("Skipping UI test in headless environment", isHeadlessEnvironment);
+        Assume.assumeFalse("Skipping UI test in headless environment", SKIP_ALL_UI_TESTS);
         
         try {
             // Create a dialog to close
@@ -183,7 +183,7 @@ public class AddPasswordControllerTest {
     @Test
     public void testCreateContentPanel() {
         // Skip test in headless environment
-        Assume.assumeFalse("Skipping UI test in headless environment", isHeadlessEnvironment);
+        Assume.assumeFalse("Skipping UI test in headless environment", SKIP_ALL_UI_TESTS);
         
         try {
             // Initialize necessary fields
@@ -250,7 +250,7 @@ public class AddPasswordControllerTest {
     @Test
     public void testCreateButtonPanel() {
         // Skip test in headless environment
-        Assume.assumeFalse("Skipping UI test in headless environment", isHeadlessEnvironment);
+        Assume.assumeFalse("Skipping UI test in headless environment", SKIP_ALL_UI_TESTS);
         
         try {
             // Initialize necessary fields
@@ -306,7 +306,7 @@ public class AddPasswordControllerTest {
     @Test
     public void testShowDialog() {
         // Skip test in headless environment
-        Assume.assumeFalse("Skipping UI test in headless environment", isHeadlessEnvironment);
+        Assume.assumeFalse("Skipping UI test in headless environment", SKIP_ALL_UI_TESTS);
         
         try {
             // Create a controller with a modified showDialog method that doesn't actually show the dialog
@@ -352,7 +352,7 @@ public class AddPasswordControllerTest {
     @Test
     public void testTogglePasswordVisibility() {
         // Skip test in headless environment
-        Assume.assumeFalse("Skipping UI test in headless environment", isHeadlessEnvironment);
+        Assume.assumeFalse("Skipping UI test in headless environment", SKIP_ALL_UI_TESTS);
         
         try {
             // Initialize necessary fields
@@ -425,7 +425,7 @@ public class AddPasswordControllerTest {
     @Test
     public void testSavePasswordMoreCases() {
         // Skip test in headless environment
-        Assume.assumeFalse("Skipping UI test in headless environment", isHeadlessEnvironment);
+        Assume.assumeFalse("Skipping UI test in headless environment", SKIP_ALL_UI_TESTS);
         
         try {
             // Set up fields for test
@@ -533,7 +533,7 @@ public class AddPasswordControllerTest {
     @Test
     public void testSavePassword() {
         // Skip test in headless environment
-        Assume.assumeFalse("Skipping UI test in headless environment", isHeadlessEnvironment);
+        Assume.assumeFalse("Skipping UI test in headless environment", SKIP_ALL_UI_TESTS);
         
         try {
             // Initialize necessary fields
