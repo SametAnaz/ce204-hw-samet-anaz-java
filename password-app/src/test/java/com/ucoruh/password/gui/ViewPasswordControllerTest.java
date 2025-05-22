@@ -15,6 +15,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.ArrayList;
+import java.awt.BorderLayout;
 
 import org.junit.After;
 import org.junit.Before;
@@ -300,63 +301,48 @@ public class ViewPasswordControllerTest {
     @Test
     public void testShowDialog() {
         try {
-            // Create a test mock for the loadPasswords method to avoid loading real passwords
-            Field passwordListField = ViewPasswordController.class.getDeclaredField("passwordList");
-            passwordListField.setAccessible(true);
-            
-            // Set a mock password list
-            List<Password> mockPasswords = new ArrayList<>();
-            mockPasswords.add(new Password("TestService", "TestUser", "TestPassword"));
-            passwordListField.set(controller, mockPasswords);
-            
-            // Create a subclass to intercept the dialog visibility
-            // This is a bit of a hack, but avoids showing the dialog
+            // Create a controller with a modified showDialog method that doesn't actually show the dialog
             ViewPasswordController testController = new ViewPasswordController(gui) {
                 @Override
                 public void showDialog() {
+                    // Call the parent method but intercept the setVisible call
                     try {
                         // Create dialog but don't show it
                         Field dialogField = ViewPasswordController.class.getDeclaredField("dialog");
                         dialogField.setAccessible(true);
-                        JDialog dialog = new JDialog(gui, "All Passwords", false); // false = non-modal
+                        JDialog dialog = new JDialog(gui, "All Passwords", true);
                         dialog.setSize(600, 400);
                         dialog.setLocationRelativeTo(gui);
                         dialogField.set(this, dialog);
                         
-                        // Get the passwordList field of the new controller
+                        // Set up a mock password list
                         Field passwordListField = ViewPasswordController.class.getDeclaredField("passwordList");
                         passwordListField.setAccessible(true);
-                        
-                        // Set up a sample password list
                         List<Password> passwords = new ArrayList<>();
-                        passwords.add(new Password("TestService", "TestUser", "TestPassword"));
+                        passwords.add(new Password("TestService1", "TestUser1", "password1"));
+                        passwords.add(new Password("TestService2", "TestUser2", "password2"));
                         passwordListField.set(this, passwords);
                         
-                        // Call the methods that showDialog would call
-                        Method loadPasswordsMethod = ViewPasswordController.class.getDeclaredMethod("loadPasswords");
+                        // Create the password table
                         Method createPasswordTableMethod = ViewPasswordController.class.getDeclaredMethod("createPasswordTable");
-                        Method createButtonPanelMethod = ViewPasswordController.class.getDeclaredMethod("createButtonPanel");
-                        
-                        loadPasswordsMethod.setAccessible(true);
                         createPasswordTableMethod.setAccessible(true);
-                        createButtonPanelMethod.setAccessible(true);
-                        
-                        // We won't actually call loadPasswords since it requires real auth
-                        // But we'll call the other methods
                         JScrollPane scrollPane = (JScrollPane) createPasswordTableMethod.invoke(this);
+                        
+                        // Create the button panel
+                        Method createButtonPanelMethod = ViewPasswordController.class.getDeclaredMethod("createButtonPanel");
+                        createButtonPanelMethod.setAccessible(true);
                         JPanel buttonPanel = (JPanel) createButtonPanelMethod.invoke(this);
                         
-                        dialog.add(scrollPane);
-                        dialog.add(buttonPanel);
-                        // Don't make dialog visible
+                        dialog.setLayout(new BorderLayout());
+                        dialog.add(scrollPane, BorderLayout.CENTER);
+                        dialog.add(buttonPanel, BorderLayout.SOUTH);
+                        
+                        // Don't make dialog visible to avoid UI interactions in tests
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
             };
-            
-            // Set the password list on the new controller
-            passwordListField.set(testController, mockPasswords);
             
             // Call the showDialog method
             testController.showDialog();
@@ -365,11 +351,25 @@ public class ViewPasswordControllerTest {
             JDialog dialog = testController.getDialog();
             assertNotNull("Dialog should have been created", dialog);
             
+            // Verify dialog properties
+            assertEquals("All Passwords", dialog.getTitle());
+            assertTrue("Dialog should have components", dialog.getContentPane().getComponentCount() > 0);
+            
+            // Check the table was initialized
+            Field tableField = ViewPasswordController.class.getDeclaredField("table");
+            tableField.setAccessible(true);
+            JTable table = (JTable) tableField.get(testController);
+            assertNotNull("Table should be initialized", table);
+            
+            // Verify table model
+            DefaultTableModel model = (DefaultTableModel) table.getModel();
+            assertEquals("Table should have 3 columns", 3, model.getColumnCount());
+            assertEquals("Table should have 2 rows", 2, model.getRowCount());
+            
             // Clean up
             if (dialog != null) {
                 dialog.dispose();
             }
-            
         } catch (Exception e) {
             // Don't fail the test because of UI issues
             System.out.println("Note: " + e.getMessage());

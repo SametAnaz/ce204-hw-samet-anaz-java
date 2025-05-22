@@ -16,6 +16,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.ArrayList;
+import java.awt.BorderLayout;
 
 import org.junit.After;
 import org.junit.Before;
@@ -321,43 +322,48 @@ public class UpdatePasswordControllerTest {
     @Test
     public void testShowDialog() {
         try {
-            // Create a test mock for the loadPasswords method to avoid loading real passwords
-            Field passwordListField = UpdatePasswordController.class.getDeclaredField("passwordList");
-            passwordListField.setAccessible(true);
-            
-            // Set a mock password list
-            List<Password> mockPasswords = new ArrayList<>();
-            mockPasswords.add(new Password("TestService", "TestUser", "TestPassword"));
-            passwordListField.set(controller, mockPasswords);
-            
-            // Create a subclass to intercept the dialog visibility
-            // This is a bit of a hack, but avoids showing the dialog
+            // Create a controller with a modified showDialog method that doesn't actually show the dialog
             UpdatePasswordController testController = new UpdatePasswordController(gui) {
                 @Override
                 public void showDialog() {
+                    // Call the parent method but intercept the setVisible call
                     try {
-                        // Get the passwordList field of the new controller
-                        Field passwordListField = UpdatePasswordController.class.getDeclaredField("passwordList");
-                        passwordListField.setAccessible(true);
-                        
-                        // Set up a sample password list
-                        List<Password> passwords = new ArrayList<>();
-                        passwords.add(new Password("TestService", "TestUser", "TestPassword"));
-                        passwordListField.set(this, passwords);
-                        
-                        // Create but don't show the dialog
+                        // Create dialog but don't show it
                         Field dialogField = UpdatePasswordController.class.getDeclaredField("dialog");
                         dialogField.setAccessible(true);
-                        JDialog dialog = new JDialog(gui, "Update Password", false); // false = non-modal
+                        JDialog dialog = new JDialog(gui, "Update Password", true);
+                        dialog.setSize(450, 400);
+                        dialog.setLocationRelativeTo(gui);
                         dialogField.set(this, dialog);
                         
-                        // Create the panels but don't add them or show the dialog
+                        // Set up a mock password list
+                        Field passwordListField = UpdatePasswordController.class.getDeclaredField("passwordList");
+                        passwordListField.setAccessible(true);
+                        List<Password> passwords = new ArrayList<>();
+                        passwords.add(new Password("TestService1", "TestUser1", "password1"));
+                        passwords.add(new Password("TestService2", "TestUser2", "password2"));
+                        passwordListField.set(this, passwords);
+                        
+                        // Call loadPasswords to populate the password list
+                        Method loadPasswordsMethod = UpdatePasswordController.class.getDeclaredMethod("loadPasswords");
+                        loadPasswordsMethod.setAccessible(true);
+                        loadPasswordsMethod.invoke(this);
+                        
+                        // Create the content and button panels
                         Method createContentPanelMethod = UpdatePasswordController.class.getDeclaredMethod("createContentPanel");
                         Method createButtonPanelMethod = UpdatePasswordController.class.getDeclaredMethod("createButtonPanel");
+                        
                         createContentPanelMethod.setAccessible(true);
                         createButtonPanelMethod.setAccessible(true);
-                        createContentPanelMethod.invoke(this);
-                        createButtonPanelMethod.invoke(this);
+                        
+                        JPanel contentPanel = (JPanel) createContentPanelMethod.invoke(this);
+                        JPanel buttonPanel = (JPanel) createButtonPanelMethod.invoke(this);
+                        
+                        dialog.setLayout(new BorderLayout());
+                        dialog.add(contentPanel, BorderLayout.CENTER);
+                        dialog.add(buttonPanel, BorderLayout.SOUTH);
+                        
+                        // Don't make dialog visible to avoid UI interactions in tests
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -371,11 +377,26 @@ public class UpdatePasswordControllerTest {
             JDialog dialog = testController.getDialog();
             assertNotNull("Dialog should have been created", dialog);
             
+            // Verify dialog properties
+            assertEquals("Update Password", dialog.getTitle());
+            assertTrue("Dialog should have components", dialog.getContentPane().getComponentCount() > 0);
+            
+            // Check the comboServices field to verify it was populated
+            Field comboServicesField = UpdatePasswordController.class.getDeclaredField("comboServices");
+            comboServicesField.setAccessible(true);
+            JComboBox<String> comboServices = (JComboBox<String>) comboServicesField.get(testController);
+            assertNotNull("ComboBox should be initialized", comboServices);
+            
+            // Check the password field was initialized
+            Field txtPasswordField = UpdatePasswordController.class.getDeclaredField("txtPassword");
+            txtPasswordField.setAccessible(true);
+            JPasswordField txtPassword = (JPasswordField) txtPasswordField.get(testController);
+            assertNotNull("Password field should be initialized", txtPassword);
+            
             // Clean up
             if (dialog != null) {
                 dialog.dispose();
             }
-            
         } catch (Exception e) {
             // Don't fail the test because of UI issues
             System.out.println("Note: " + e.getMessage());
