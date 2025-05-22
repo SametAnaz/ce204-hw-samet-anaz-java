@@ -8,6 +8,9 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JLabel;
 import java.awt.Color;
+import java.awt.GraphicsEnvironment;
+import java.awt.HeadlessException;
+import org.junit.Assume;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
@@ -27,13 +30,25 @@ public class PasswordManagerGUITest {
     
     @Before
     public void setUp() {
-        gui = new PasswordManagerGUI();
-        gui.setVisible(false); // Don't show the UI
+        // Skip tests if running in a headless environment
+        Assume.assumeFalse("Skipping test in headless environment", 
+                          GraphicsEnvironment.isHeadless());
+        
+        try {
+            gui = new PasswordManagerGUI();
+            gui.setVisible(false); // Don't show the UI
+        } catch (HeadlessException e) {
+            // If we still get a HeadlessException despite the check above,
+            // mark the test as skipped
+            Assume.assumeNoException("Headless environment detected", e);
+        }
     }
     
     @After
     public void tearDown() {
-        gui.dispose();
+        if (gui != null) {
+            gui.dispose();
+        }
     }
     
     /**

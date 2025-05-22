@@ -163,6 +163,14 @@
             <include>**/com/ucoruh/password/*Test.java</include> 
             <include>**/com/ucoruh/password/gui/*Test.java</include>
         </includes>
+        <systemPropertyVariables>
+            <!-- Configure Java AWT to run in headless mode if needed -->
+            <java.awt.headless>false</java.awt.headless>
+            <!-- Set default value for DISPLAY if running in CI environment -->
+            <awt.toolkit>sun.awt.X11.XToolkit</awt.toolkit>
+            <!-- Ensure system knows Xvfb is available -->
+            <xvfb.available>true</xvfb.available>
+        </systemPropertyVariables>
     </configuration>
 </plugin>
 

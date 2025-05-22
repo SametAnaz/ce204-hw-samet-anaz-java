@@ -59,9 +59,22 @@ jobs:
         run: sudo apt-get install -y libxml2-utils
         shell: bash
 
+      # Add Xvfb setup for GUI tests
+      - name: Set up Xvfb for GUI tests
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb
+          Xvfb :99 -screen 0 1920x1080x24 > /dev/null 2>&1 &
+          echo "export DISPLAY=:99" >> $GITHUB_ENV
+        shell: bash
+
       - name: Perform Maven clean, test, and packaging
         run: mvn clean test package
         working-directory: ./password-app
+        env:
+          DISPLAY: :99
+          # Add headless property for Java AWT
+          _JAVA_OPTIONS: "-Djava.awt.headless=false"
 
       - name: Generate Folders
         run: |

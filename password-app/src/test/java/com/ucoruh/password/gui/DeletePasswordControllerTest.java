@@ -5,6 +5,9 @@ import static org.junit.Assert.*;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
+import java.awt.GraphicsEnvironment;
+import java.awt.HeadlessException;
+import org.junit.Assume;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
@@ -26,26 +29,38 @@ public class DeletePasswordControllerTest {
     
     @Before
     public void setUp() {
-        // Save original auth manager
-        originalAuthManager = AuthManager.getInstance();
+        // Skip tests if running in a headless environment
+        Assume.assumeFalse("Skipping test in headless environment", 
+                          GraphicsEnvironment.isHeadless());
         
-        // Create a real GUI for testing
-        gui = new PasswordManagerGUI();
-        gui.setVisible(false); // Don't show the UI
-        
-        // Create controller with real GUI
-        controller = new DeletePasswordController(gui);
+        try {
+            // Save original auth manager
+            originalAuthManager = AuthManager.getInstance();
+            
+            // Create a real GUI for testing
+            gui = new PasswordManagerGUI();
+            gui.setVisible(false); // Don't show the UI
+            
+            // Create controller with real GUI
+            controller = new DeletePasswordController(gui);
+        } catch (HeadlessException e) {
+            // If we still get a HeadlessException despite the check above,
+            // mark the test as skipped
+            Assume.assumeNoException("Headless environment detected", e);
+        }
     }
     
     @After
     public void tearDown() {
         // Clean up any dialog that might have been created
-        if (controller.getDialog() != null) {
+        if (controller != null && controller.getDialog() != null) {
             controller.getDialog().dispose();
         }
         
         // Clean up the GUI
-        gui.dispose();
+        if (gui != null) {
+            gui.dispose();
+        }
     }
     
     /**
@@ -53,6 +68,7 @@ public class DeletePasswordControllerTest {
      */
     @Test
     public void testInitialDialogIsNull() {
+        assertNotNull("Controller should not be null", controller);
         assertNull("Initial dialog should be null", controller.getDialog());
     }
     
