@@ -108,11 +108,16 @@
     <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1GeneratePasswordController_1afa3890dbbff981345a9dd08eb7defdca" kind="variable"><name>txtUsername</name></member>
     <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1GeneratePasswordController_1a3b6b606b29fff69d794a06dfbaf00b0b" kind="variable"><name>txtGenerated</name></member>
     <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1GeneratePasswordController_1a9025dc7cc511669e1955daea7becf25a" kind="variable"><name>sliderLength</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1GeneratePasswordController_1a33f365227018a0b582013ce03930325a" kind="variable"><name>chkUppercase</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1GeneratePasswordController_1abc2f9e5ee1dc0e664e1d5deeb158ab76" kind="variable"><name>chkLowercase</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1GeneratePasswordController_1a69bf0807861b1c141fc80b97b6af74d8" kind="variable"><name>chkDigits</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1GeneratePasswordController_1a199cdc0fc063ba0d6d2a3dcc524f529b" kind="variable"><name>chkSpecial</name></member>
     <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1GeneratePasswordController_1a368092ddcc00a1edbaccb407795829cd" kind="function"><name>GeneratePasswordController</name></member>
     <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1GeneratePasswordController_1a9dbeed22bd8064f2e61452a741fdbc9f" kind="function"><name>showDialog</name></member>
     <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1GeneratePasswordController_1a12a4faf702c3ca3f27b14a64a77560a3" kind="function"><name>closeDialog</name></member>
     <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1GeneratePasswordController_1a058fb179e0ee4fa20c0df72a264ca9b0" kind="function"><name>getDialog</name></member>
     <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1GeneratePasswordController_1aefd168912f4de3c7bc9c7febef4f2553" kind="function"><name>createContentPanel</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1GeneratePasswordController_1a246b6b5266d2d8e478b91c72f1917d11" kind="function"><name>generatePassword</name></member>
     <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1GeneratePasswordController_1af6ee726c9d14e4d893666edcbdd1cb98" kind="function"><name>createButtonPanel</name></member>
     <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1GeneratePasswordController_1aea45f38f8bd3492dc8ec4d807ab854c0" kind="function"><name>savePassword</name></member>
   </compound>
