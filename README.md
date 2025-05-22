@@ -1,4 +1,4 @@
-# ce204-hw-samet-anaz-java
+# ce206-hw-samet-anaz-java
 
 ## Contents
 
