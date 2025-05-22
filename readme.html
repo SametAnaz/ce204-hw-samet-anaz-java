@@ -10,7 +10,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content="Apache Maven Doxia Site Renderer 2.0.0" />
-    <title>ce206-hw-samet-anaz-java – password-app</title>
+    <title>Password Manager Application – password-app</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-2.0.1.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -129,743 +129,334 @@ Password App
           </div>
         </header>
         <main id="bodyColumn" class="span10">
-<section><a id="ce206-hw-samet-anaz-java"></a>
-<h1>ce206-hw-samet-anaz-java</h1><section><a id="Contents"></a>
-<h2>Contents</h2>
+<section><a id="Password_Manager_Application"></a>
+<h1>Password Manager Application</h1>
+<p><a href="https://github.com/SametAnaz/ce204-hw-samet-anaz-java/releases/latest" class="externalLink"><img src="https://img.shields.io/github/release/SametAnaz/ce204-hw-samet-anaz-java.svg" alt="GitHub Release" /></a>
+<a href="https://github.com/SametAnaz/ce204-hw-samet-anaz-java/actions" class="externalLink"><img src="https://img.shields.io/github/workflow/status/SametAnaz/ce204-hw-samet-anaz-java/Build" alt="Build Status" /></a>
+<a href="LICENSE"><img src="https://img.shields.io/github/license/SametAnaz/ce204-hw-samet-anaz-java" alt="License" /></a>
+<a href="https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html" class="externalLink"><img src="https://img.shields.io/badge/java-17-orange.svg" alt="Java Version" /></a>
+<a href="https://maven.apache.org/" class="externalLink"><img src="https://img.shields.io/badge/maven-3.8.1-blue.svg" alt="Maven" /></a></p><section><a id="a.3F.3F_Table_of_Contents"></a>
+<h2>&#x1f4cb; Table of Contents</h2>
 <ul>
 
-<li><a href="#overview">Overview</a></li>
-<li><a href="#releases">Releases</a></li>
-<li><a href="#uml-class-diagramlar.C4.B1">UML Class Diagramlar&#x131;</a>
+<li><a href="#a-overview">Overview</a></li>
+<li><a href="#a-features">Features</a></li>
+<li><a href="#a-system-requirements">System Requirements</a></li>
+<li><a href="#a-installation">Installation</a></li>
+<li><a href="#a-usage">Usage</a></li>
+<li><a href="#a-architecture">Architecture</a>
 <ul>
 
-<li><a href="#class-diagram">Class Diagram</a></li>
-<li><a href="#sequence-diagram">Sequence Diagram</a></li>
-<li><a href="#c4-diagram">C4 Diagram</a></li>
-<li><a href="#context-diagram">Context Diagram</a></li>
-<li><a href="#container-diagram">Container Diagram</a></li>
-<li><a href="#c4-code-diagram">C4 Code Diagram</a></li>
-<li><a href="#use-case-diagram">Use Case Diagram</a></li>
+<li><a href="#core-components">Core Components</a></li>
+<li><a href="#storage-systems">Storage Systems</a></li>
+<li><a href="#security-features">Security Features</a></li>
+<li><a href="#uml-diagrams">UML Diagrams</a></li>
+<li><a href="#gui-components">GUI Components</a></li>
+<li><a href="#test-components">Test Components</a></li>
 </ul></li>
-<li><a href="#source-code">Source Code</a>
+<li><a href="#a-development">Development</a></li>
+<li><a href="#a-testing">Testing</a></li>
+<li><a href="#a-documentation">Documentation</a></li>
+<li><a href="#a-contributing">Contributing</a></li>
+<li><a href="#a-license">License</a></li>
+</ul></section><section><a id="a.3F.3F_Overview"></a>
+<h2>&#x1f50d; Overview</h2>
+<p>The Password Manager Application is a robust, secure, and user-friendly password management solution developed using Java and the Maven framework. It provides comprehensive password management capabilities with a focus on security, usability, and extensibility.</p></section><section><a id="a.E2.9C.A8_Features"></a>
+<h2>&#x2728; Features</h2>
 <ul>
 
-<li><a href="#password-class">Password Class</a></li>
-<li><a href="#passwordapp-class">PasswordApp Class</a></li>
+<li>&#x1f510; Secure password storage with master password protection</li>
+<li>&#x1f3b2; Advanced password generation with customizable options</li>
+<li>&#x1f441;&#xfe0f; Intuitive password viewing and management</li>
+<li>&#x1f4cb; Clipboard integration for easy password copying</li>
+<li>&#x1f504; Auto-login functionality</li>
+<li>&#x1f310; Cross-platform compatibility</li>
+<li>&#x1f3a8; Modern, user-friendly GUI interface</li>
+<li>&#x1f512; Multiple storage options (File-based and SQLite database)</li>
+<li>&#x1f6e1;&#xfe0f; Strong encryption for all sensitive data</li>
+<li>&#x1f4f1; Platform-specific credential management</li>
+</ul></section><section><a id="a.3F.3F_System_Requirements"></a>
+<h2>&#x1f4bb; System Requirements</h2>
+<ul>
+
+<li>Java 17 or higher</li>
+<li>Maven 3.8.1 or higher</li>
+<li>SQLite support</li>
+<li>Minimum 2GB RAM</li>
+<li>100MB free disk space</li>
+</ul></section><section><a id="a.3F.3F_Installation"></a>
+<h2>&#x1f680; Installation</h2>
+<ol style="list-style-type: decimal;">
+
+<li>Clone the repository:</li>
+</ol>
+
+<pre class="prettyprint"><code class="language-bash">git clone https://github.com/SametAnaz/ce204-hw-samet-anaz-java.git
+</code></pre>
+<ol style="list-style-type: decimal;">
+
+<li>Navigate to the project directory:</li>
+</ol>
+
+<pre class="prettyprint"><code class="language-bash">cd ce204-hw-samet-anaz-java
+</code></pre>
+<ol style="list-style-type: decimal;">
+
+<li>Build the project:</li>
+</ol>
+
+<pre class="prettyprint"><code class="language-bash">mvn clean install
+</code></pre>
+<ol style="list-style-type: decimal;">
+
+<li>Run the application:</li>
+</ol>
+
+<pre class="prettyprint"><code class="language-bash">java -jar target/password-app-1.0-SNAPSHOT.jar
+</code></pre></section><section><a id="a.3F.3F_Usage"></a>
+<h2>&#x1f3af; Usage</h2>
+<p>The application provides both GUI and command-line interfaces. After launching, you'll need to:</p>
+<ol style="list-style-type: decimal;">
+
+<li>Set up a master password (first-time use)</li>
+<li>Log in using your master password</li>
+<li>Access various features through the main menu:
+<ul>
+
+<li>Password Management</li>
+<li>Password Generation</li>
+<li>Auto-Login Configuration</li>
+<li>Platform Settings</li>
 </ul></li>
-<li><a href="#test-s.C4.B1n.C4.B1flar.C4.B1">Test S&#x131;n&#x131;flar&#x131;</a>
+</ol><section><a id="GUI_Interface"></a>
+<h3>GUI Interface</h3>
+<p>The graphical interface provides easy access to all features:</p>
 <ul>
 
-<li><a href="#passwordtest">PasswordTest</a></li>
-<li><a href="#passwordapptest">PasswordAppTest</a></li>
-</ul></li>
-<li><a href="#pomxml">pom.xml</a></li>
-</ul></section></section><section><a id="Overview"></a>
-<h1>Overview</h1>
-<p>The Password Application is a secure and lightweight console-based password manager developed using Java and the Maven framework. It provides essential features such as encrypted password storage, strong password generation, user authentication, and platform-based credential organization. Designed with modularity and maintainability in mind, the application leverages object-oriented principles and supports SQLite for local database management. This project also integrates test coverage and documentation tools, and is structured to allow future expansion, including GUI development.</p><section><a id="Features"></a>
-<h2>Features</h2>
+<li><strong>Main Window</strong>: Central dashboard for all password management operations</li>
+<li><strong>Add Password</strong>: Create new password entries with service and username</li>
+<li><strong>View Passwords</strong>: List and search all stored passwords</li>
+<li><strong>Update Password</strong>: Modify existing password entries</li>
+<li><strong>Generate Password</strong>: Create strong, customized passwords</li>
+<li><strong>Delete Password</strong>: Remove unwanted password entries</li>
+</ul></section><section><a id="Command-Line_Interface"></a>
+<h3>Command-Line Interface</h3>
+<p>For users who prefer terminal-based operations:</p>
+
+<pre class="prettyprint"><code class="language-bash"># View all passwords
+1. Select option 2 (Secure Storage of Passwords)
+2. Select option 1 (View Passwords)
+
+# Add new password
+1. Select option 2 (Secure Storage of Passwords)
+2. Select option 2 (Add Password)
+
+# Generate password
+1. Select option 3 (Password Generator)
+2. Enter desired length
+</code></pre></section></section><section><a id="a.3F.3F.EF.B8.8F_Architecture"></a>
+<h2>&#x1f3d7;&#xfe0f; Architecture</h2><section><a id="Core_Components"></a>
+<h3>Core Components</h3><section><a id="Authentication_System"></a>
+<h4>Authentication System</h4>
 <ul>
 
-<li>Secure password storage with master password protection</li>
-<li>Password generation with customizable options (length, character types)</li>
-<li>View, add, update, and delete password entries</li>
-<li>Copy password to clipboard functionality</li>
-<li>Modern, user-friendly interface</li>
-</ul></section><section><a id="Releases"></a>
-<h2>Releases</h2>
+<li><code>AuthManager</code>: Singleton class managing user authentication</li>
+<li>Master password creation and verification</li>
+<li>Secure password hashing using <code>EncryptionUtil</code></li>
+</ul></section><section><a id="Password_Management"></a>
+<h4>Password Management</h4>
 <ul>
 
-<li><a href="https://github.com/SametAnaz/ce204-hw-samet-anaz-java/releases/latest" class="externalLink"><img src="https://img.shields.io/github/release/SametAnaz/ce204-hw-samet-anaz-java.svg" alt="GitHub Release" /></a>
-<a href="https://github.com/SametAnaz/ce204-hw-samet-anaz-java/actions" class="externalLink"><img src="https://img.shields.io/github/workflow/status/SametAnaz/ce204-hw-samet-anaz-java/Build" alt="Build Status" /></a></li>
-</ul>
-<p><a href="LICENSE"><img src="https://img.shields.io/github/license/SametAnaz/ce204-hw-samet-anaz-java" alt="License" /></a></p></section></section><section><a id="Uml_Class_Diagrams"></a>
-<h1>Uml Class Diagrams</h1><section><a id="Class_Diagram"></a>
-<h2>Class Diagram</h2>
-<p><img src="assets/UmlClassDiagram.png" alt="" /></p></section><section><a id="Sqeence_Diagram"></a>
-<h2>Sqeence Diagram</h2>
-<p><img src="assets/Squence.png" alt="" /></p></section><section><a id="C4_Diagram"></a>
-<h2>C4 Diagram</h2>
-<p><img src="assets/C4.png" alt="" /></p></section><section><a id="Context_Diagram"></a>
-<h2>Context Diagram</h2>
-<p><img src="assets/ContextDiagram.png" alt="" /></p></section><section><a id="Conteiner_Diagram"></a>
-<h2>Conteiner Diagram</h2>
-<p><img src="assets/Cointainer.png" alt="" /></p></section><section><a id="C4_Code_Diagram"></a>
-<h2>C4 Code Diagram</h2>
-<p><img src="assets/C4codeDiagram.png" alt="" /></p></section><section><a id="Use_Case_Diagram"></a>
-<h2>Use Case Diagram</h2>
-<p><img src="assets/UsaCase.png" alt="" /></p></section></section><section><a id="Uml_GUI_Diagrams"></a>
-<h1>Uml GUI Diagrams</h1>
-<p><img src="assets/AddPasswordControllerUML.png" alt="" /></p></section><section><a id="Source_Code"></a>
-<h1>Source Code</h1><section><a id="Password_Class"></a>
-<h2>Password Class</h2>
-<p>The Password class represents a stored password entry for a specific service. It contains fields for the service name, username, and password, along with getter and setter methods to access and update these values. The toString() method provides a formatted representation of the password entry.</p>
+<li><code>PasswordManager</code>: Core class handling password operations</li>
+<li>Credential storage and retrieval</li>
+<li>Integration with storage systems</li>
+</ul></section><section><a id="Storage_Systems"></a>
+<h4>Storage Systems</h4>
+<ul>
 
-<pre class="prettyprint"><code class="language-java">package com.ucoruh.password;
+<li><code>InterfacePasswordStorage</code>: Abstract storage interface</li>
+<li><code>FilePasswordStorage</code>: File-based implementation</li>
+<li><code>DatabasePasswordStorage</code>: SQLite database implementation</li>
+<li><code>PasswordStorageFactory</code>: Factory pattern for storage creation</li>
+</ul></section><section><a id="Security_Features"></a>
+<h4>Security Features</h4>
+<ul>
 
-/**
- * Represents a stored password entry for a specific service.
- */
+<li>Strong encryption for all stored passwords</li>
+<li>Secure master password handling</li>
+<li>Memory-safe data management</li>
+<li>Clipboard security measures</li>
+</ul></section></section><section><a id="UML_Diagrams"></a>
+<h3>UML Diagrams</h3><section><a id="Core_System_Diagrams"></a>
+<h4>Core System Diagrams</h4>
+<p><img src="assets/UmlClassDiagram.png" alt="Class Diagram" />
+<img src="assets/Squence.png" alt="Sequence Diagram" />
+<img src="assets/C4.png" alt="C4 Diagram" /></p></section><section><a id="Architectural_Views"></a>
+<h4>Architectural Views</h4>
+<p><img src="assets/ContextDiagram.png" alt="Context Diagram" />
+<img src="assets/Cointainer.png" alt="Container Diagram" />
+<img src="assets/C4codeDiagram.png" alt="C4 Code Diagram" />
+<img src="assets/UsaCase.png" alt="Use Case Diagram" /></p></section></section><section><a id="GUI_Components"></a>
+<h3>GUI Components</h3><section><a id="Password_Management_Interface"></a>
+<h4>Password Management Interface</h4>
+<p><img src="assets/AddPasswordControllerUML.png" alt="Add Password Controller" />
+<img src="assets/DeletePasswordController.png" alt="Delete Password Controller" />
+<img src="assets/DialogController.png" alt="Dialog Controller" /></p></section><section><a id="Password_Generation_Interface"></a>
+<h4>Password Generation Interface</h4>
+<p><img src="assets/GeneratePasswordController_1.png" alt="Generate Password Controller 1" />
+<img src="assets/GeneratePasswordController_2.png" alt="Generate Password Controller 2" />
+<img src="assets/GeneratePasswordController_3.png" alt="Generate Password Controller 3" /></p></section><section><a id="Main_GUI_Components"></a>
+<h4>Main GUI Components</h4>
+<p><img src="assets/PasswordManagerGUI_1.png" alt="PasswordManagerGUI Class 1" />
+<img src="assets/PasswordManagerGUI_2.png" alt="PasswordManagerGUI Class 2" />
+<img src="assets/PasswordManagerGUI_3.png" alt="PasswordManagerGUI Class 3" /></p></section><section><a id="Password_Operations_Interface"></a>
+<h4>Password Operations Interface</h4>
+<p><img src="assets/UpdatePasswordController_1.png" alt="Update Password Controller 1" />
+<img src="assets/UpdatePasswordController_2.png" alt="Update Password Controller 2" />
+<img src="assets/UpdatePasswordController_3.png" alt="Update Password Controller 3" />
+<img src="assets/ViewPasswordController_1.png" alt="View Password Controller 1" />
+<img src="assets/ViewPasswordController_2.png" alt="View Password Controller 2" />
+<img src="assets/ViewPasswordController_3.png" alt="View Password Controller 3" /></p></section></section><section><a id="Test_Components"></a>
+<h3>Test Components</h3><section><a id="Authentication_Testing"></a>
+<h4>Authentication Testing</h4>
+<p><img src="assets/AuthManagerTestUML_1.png" alt="Auth Manager Test 1" />
+<img src="assets/AuthManagerTestUML_2.png" alt="Auth Manager Test 2" />
+<img src="assets/AuthManagerTestUML_3.png" alt="Auth Manager Test 3" /></p></section><section><a id="Feature_Testing"></a>
+<h4>Feature Testing</h4>
+<p><img src="assets/AutoLoginManagerTest.png" alt="Auto Login Manager Test" />
+<img src="assets/DatabasePasswordStorageTest.png" alt="Database Password Storage Test" />
+<img src="assets/EncryptionUtilTest.png" alt="Encryption Util Test" />
+<img src="assets/FilePasswordStorageTest.png" alt="File Password Storage Test" />
+<img src="assets/PasswordStorageFactoryTest.png" alt="Password Storage Factory Test" /></p></section></section></section><section><a id="a.3F.3F.E2.80.8D.3F.3F_Development"></a>
+<h2>&#x1f468;&#x200d;&#x1f4bb; Development</h2>
+<p>The project follows standard Java development practices and uses Maven for dependency management. Key components include:</p><section><a id="Core_Classes"></a>
+<h3>Core Classes</h3>
+
+<pre class="prettyprint"><code class="language-java">// Password Class - Represents a stored password entry
 public class Password {
-    private String service;
-    private String username;
-    private String password;
-
-    /**
-     * Constructs a Password object with service, username, and password.
-     *
-     * @param service the service name (e.g., Gmail, Facebook)
-     * @param username the associated username
-     * @param password the password string
-     */
-    public Password(String service, String username, String password) {
-        this.service = service;
-        this.username = username;
-        this.password = password;
-    }
-
-    public String getService() {
-        return service;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    @Override
-    public String toString() {
-        return &quot;Service: &quot; + service + &quot; | Username: &quot; + username + &quot; | Password: &quot; + password;
-    }
+    private String service;    // Service name (e.g., Gmail, Facebook)
+    private String username;   // Associated username
+    private String password;   // Encrypted password
+    // ... methods for access and modification
 }
 
-</code></pre></section><section><a id="PasswordApp_Class"></a>
-<h2>PasswordApp Class</h2>
-<p>The PasswordApp class serves as the entry point for the Password Manager console application. It contains the main method and the runApp method that orchestrates user authentication and displays an interactive main menu. This menu allows users to perform tasks such as adding credentials, retrieving stored passwords, generating passwords, activating the auto-login feature, and accessing platform-specific functions.</p>
-
-<pre class="prettyprint"><code class="language-java">package com.ucoruh.password;
-
-import java.io.PrintStream;
-import java.util.Scanner;
-
-/**
- * Entry point for the Password Manager console application.
- */
-public class PasswordApp {
-    /**
-     * Runs the application using the provided Scanner and PrintStream.
-     * This method is designed for testing and production use.
-     *
-     * @param scanner Scanner for user input.
-     * @param out PrintStream for output.
-     */
-    public static void runApp(Scanner scanner, PrintStream out) {
-        AuthManager auth = AuthManager.getInstance();
-
-        if (!auth.isMasterPasswordSet()) {
-            out.print(&quot;Set master password: &quot;);
-            auth.createMasterPassword(scanner);
-        }
-
-        out.print(&quot;Enter master password to login: &quot;);
-        if (auth.login(scanner)) {
-            PasswordManager pm = new PasswordManager(auth.getMasterPassword());
-            int choice = -1;
-            do {
-                out.println(&quot;==== MAIN MENU ====&quot;);
-                out.println(&quot;1. User Authentication&quot;);
-                out.println(&quot;2. Secure Storage of Passwords&quot;);
-                out.println(&quot;3. Password Generator&quot;);
-                out.println(&quot;4. Auto-Login Feature&quot;);
-                out.println(&quot;5. Multi-Platform Compatibility&quot;);
-                out.println(&quot;0. Exit&quot;);
-                out.print(&quot;Your choice: &quot;);
-                String input = scanner.nextLine();
-                try {
-                    choice = Integer.parseInt(input);
-                } catch (NumberFormatException e) {
-                    out.println(&quot;Invalid number.&quot;);
-                    continue;
-                }
-                switch (choice) {
-                    case 1:
-                        auth.userMenu(scanner);
-                        break;
-                    case 2:
-                        pm.menu(scanner, out);
-                        break;
-                    case 3:
-                        PasswordGenerator.generate(scanner);
-                        break;
-                    case 4:
-                        AutoLoginManager.menu(scanner);
-                        break;
-                    case 5:
-                        PlatformManager.showPlatforms();
-                        break;
-                    case 0:
-                        out.println(&quot;Exiting...&quot;);
-                        break;
-                    default:
-                        out.println(&quot;Invalid choice.&quot;);
-                        break;
-                }
-            } while (choice != 0);
-        } else {
-            out.println(&quot;Login failed.&quot;);
-        }
-    }
-
-    /**
-     * Main method to launch the console application.
-     *
-     * @param args command-line arguments (not used)
-     */
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        runApp(scanner, System.out);
-        scanner.close();
-    }
+// PasswordManager Class - Manages password operations
+public class PasswordManager {
+    private final Map&lt;String, String&gt; credentials;
+    private final String masterPassword;
+    private final InterfacePasswordStorage storage;
+    
+    // ... methods for password management
 }
 
-</code></pre></section></section><section><a id="Test_Classes"></a>
-<h1>Test Classes</h1><section><a id="PasswordTest"></a>
-<h2>PasswordTest</h2>
+// AuthManager Class - Handles authentication
+public class AuthManager {
+    private static AuthManager instance;
+    private String masterPassword;
+    
+    // ... authentication methods
+}
+</code></pre></section><section><a id="Storage_Implementation"></a>
+<h3>Storage Implementation</h3>
 
-<pre class="prettyprint"><code class="language-java">package com.ucoruh.password;
-
-import static org.junit.Assert.*;
-
-import org.junit.Test;
-
-/**
- * Unit tests for the Password class.
- */
-public class PasswordTest {
-
-    @Test
-    public void testConstructorAndGetters() {
-        Password password = new Password(&quot;gmail&quot;, &quot;user1&quot;, &quot;pass123&quot;);
-        assertEquals(&quot;gmail&quot;, password.getService());
-        assertEquals(&quot;user1&quot;, password.getUsername());
-        assertEquals(&quot;pass123&quot;, password.getPassword());
-    }
-
-    @Test
-    public void testSetters() {
-        Password password = new Password(&quot;service&quot;, &quot;user&quot;, &quot;pass&quot;);
-        password.setUsername(&quot;newuser&quot;);
-        password.setPassword(&quot;newpass&quot;);
-
-        assertEquals(&quot;newuser&quot;, password.getUsername());
-        assertEquals(&quot;newpass&quot;, password.getPassword());
-    }
-
-    @Test
-    public void testToString() {
-        Password password = new Password(&quot;github&quot;, &quot;dev&quot;, &quot;secure&quot;);
-        String result = password.toString();
-        assertTrue(result.contains(&quot;github&quot;));
-        assertTrue(result.contains(&quot;dev&quot;));
-        assertTrue(result.contains(&quot;secure&quot;));
-    }
+<pre class="prettyprint"><code class="language-java">// File-based Storage
+public class FilePasswordStorage implements InterfacePasswordStorage {
+    private static final String FILE = &quot;passwords.txt&quot;;
+    private final String masterPassword;
+    
+    // ... file operations
 }
 
-</code></pre></section><section><a id="PasswordAppTest"></a>
-<h2>PasswordAppTest</h2>
-
-<pre class="prettyprint"><code class="language-java">package com.ucoruh.password;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-import java.nio.charset.StandardCharsets;
-import java.util.Scanner;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
-/**
- * @brief Unit tests for the PasswordApp class using the runApp method.
- *
- * These tests simulate full application flow by injecting input and capturing output.
- * Additional tests cover each main menu branch.
- */
-public class PasswordAppTest {
-
-    private final PrintStream originalOut = System.out;
-    private ByteArrayOutputStream outputStream;
-
-    /**
-     * Reset the AuthManager singleton and set up a new output stream.
-     */
-    @Before
-    public void setUp() {
-        AuthManager.resetInstance();
-        outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
-    }
-
-    /**
-     * Restore the original System.out after each test.
-     */
-    @After
-    public void tearDown() {
-        System.setOut(originalOut);
-        outputStream.reset();
-    }
-
-    /**
-     * @brief Tests a successful run of the application.
-     *
-     * Simulates setting a master password, successful login, and then exiting
-     * the main menu. Verifies that the output contains the main menu prompt and
-     * an exit message.
-     */
-    @Test
-    public void testMainSuccess() {
-        String simulatedInput = &quot;testMaster\n&quot; + &quot;testMaster\n&quot; + &quot;0\n&quot;;
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(
-                simulatedInput.getBytes(StandardCharsets.UTF_8));
-        Scanner scanner = new Scanner(inputStream);
-
-        PasswordApp.runApp(scanner, System.out);
-        scanner.close();
-
-        String output = outputStream.toString();
-        assertTrue(&quot;Output should contain MAIN MENU&quot;, output.contains(&quot;==== MAIN MENU ====&quot;));
-        assertTrue(&quot;Output should contain Exiting...&quot;, output.contains(&quot;Exiting...&quot;));
-        assertFalse(&quot;Output should not contain 'Login failed.'&quot;, output.contains(&quot;Login failed.&quot;));
-    }
-
-    /**
-     * @brief Tests the login failure scenario.
-     *
-     * Simulates setting a master password but then providing an incorrect
-     * login input. Verifies that the output contains &quot;Login failed.&quot;
-     */
-    @Test
-    public void testMainError() {
-        String simulatedInput = &quot;testMaster\n&quot; + &quot;wrongMaster\n&quot;;
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(
-                simulatedInput.getBytes(StandardCharsets.UTF_8));
-        Scanner scanner = new Scanner(inputStream);
-
-        PasswordApp.runApp(scanner, System.out);
-        scanner.close();
-
-        String output = outputStream.toString();
-        assertTrue(&quot;Output should contain 'Login failed.'&quot;, output.contains(&quot;Login failed.&quot;));
-    }
-
-    /**
-     * @brief Tests full menu navigation.
-     *
-     * Simulates a run of the application that displays the main menu.
-     * Verifies that the captured output shows the menu header.
-     */
-    @Test
-    public void testFullMenuNavigation() {
-        String simulatedInput = &quot;testMaster\n&quot; + &quot;testMaster\n&quot; + &quot;0\n&quot;;
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(
-                simulatedInput.getBytes(StandardCharsets.UTF_8));
-        Scanner scanner = new Scanner(inputStream);
-
-        PasswordApp.runApp(scanner, System.out);
-        scanner.close();
-
-        String output = outputStream.toString();
-        assertTrue(&quot;Output should contain MAIN MENU&quot;, output.contains(&quot;==== MAIN MENU ====&quot;));
-    }
-
-    /**
-     * @brief Tests main menu option 1: User Authentication.
-     *
-     * Simulates choosing option 1 and verifies that the user menu stub output is shown.
-     */
-    @Test
-    public void testMenuOptionUserAuthentication() {
-        // Simulated input: set master, login, then choose option 1, then exit.
-        String simulatedInput = &quot;testMaster\n&quot; + &quot;testMaster\n&quot; + &quot;1\n&quot; + &quot;0\n&quot;;
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(
-                simulatedInput.getBytes(StandardCharsets.UTF_8));
-        Scanner scanner = new Scanner(inputStream);
-
-        PasswordApp.runApp(scanner, System.out);
-        scanner.close();
-
-        String output = outputStream.toString();
-        assertTrue(&quot;Output should indicate user menu stub&quot;, output.contains(&quot;User menu functionality not yet implemented.&quot;));
-    }
-
-    /**
-     * @brief Tests main menu option 2: Secure Storage of Passwords.
-     *
-     * Simulates choosing option 2 and then immediately exiting the inner PasswordManager menu.
-     */
-    @Test
-    public void testMenuOptionSecureStorage() {
-        // Simulated input: set master, login, choose option 2, then in inner menu choose 4 to exit, then exit main menu.
-        String simulatedInput = &quot;testMaster\n&quot; + &quot;testMaster\n&quot; + &quot;2\n&quot; + &quot;4\n&quot; + &quot;0\n&quot;;
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(
-                simulatedInput.getBytes(StandardCharsets.UTF_8));
-        Scanner scanner = new Scanner(inputStream);
-
-        PasswordApp.runApp(scanner, System.out);
-        scanner.close();
-
-        String output = outputStream.toString();
-        // Since PasswordManager.menu prints its own menu header, verify its presence.
-        assertTrue(&quot;Output should contain inner PasswordManager menu&quot;, output.contains(&quot;==== MAIN MENU ====&quot;));
-    }
-
-    /**
-     * @brief Tests main menu option 3: Password Generator.
-     *
-     * Simulates choosing option 3 and entering a desired password length.
-     * Verifies that the generated password output is present.
-     */
-    @Test
-    public void testMenuOptionPasswordGenerator() {
-        // Simulated input: set master, login, choose option 3, input desired length, then exit.
-        String simulatedInput = &quot;testMaster\n&quot; + &quot;testMaster\n&quot; + &quot;3\n&quot; + &quot;8\n&quot; + &quot;0\n&quot;;
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(
-                simulatedInput.getBytes(StandardCharsets.UTF_8));
-        Scanner scanner = new Scanner(inputStream);
-
-        PasswordApp.runApp(scanner, System.out);
-        scanner.close();
-
-        String output = outputStream.toString();
-        // Expect the password generator to output &quot;Generated Password:&quot;.
-        assertTrue(&quot;Output should contain Generated Password:&quot;, output.contains(&quot;Generated Password:&quot;));
-    }
-
-    /**
-     * @brief Tests main menu option 4: Auto-Login Feature.
-     *
-     * Simulates choosing option 4. Assumes AutoLoginManager.menu prints a placeholder message.
-     */
-    @Test
-    public void testMenuOptionAutoLoginFeature() {
-        // Simulated input: set master, login, choose option 4, then exit.
-        String simulatedInput = &quot;testMaster\n&quot; + &quot;testMaster\n&quot; + &quot;4\n&quot; + &quot;0\n&quot;;
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(
-                simulatedInput.getBytes(StandardCharsets.UTF_8));
-        Scanner scanner = new Scanner(inputStream);
-
-        PasswordApp.runApp(scanner, System.out);
-        scanner.close();
-
-        String output = outputStream.toString();
-        // Check for expected placeholder output; adjust expected text if needed.
-        assertTrue(&quot;Output should mention Auto-Login Feature&quot;, output.contains(&quot;Auto-Login Feature&quot;));
-    }
-
-    /**
-     * @brief Tests main menu option 5: Multi-Platform Compatibility.
-     *
-     * Simulates choosing option 5. Assumes PlatformManager.showPlatforms prints a placeholder message.
-     */
-    @Test
-    public void testMenuOptionMultiPlatform() {
-        // Simulated input: set master, login, choose option 5, then exit.
-        String simulatedInput = &quot;testMaster\n&quot; + &quot;testMaster\n&quot; + &quot;5\n&quot; + &quot;0\n&quot;;
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(
-                simulatedInput.getBytes(StandardCharsets.UTF_8));
-        Scanner scanner = new Scanner(inputStream);
-
-        PasswordApp.runApp(scanner, System.out);
-        scanner.close();
-
-        String output = outputStream.toString();
-        // Check for expected placeholder text from platform manager; adjust as necessary.
-        assertTrue(&quot;Output should mention Supported platforms&quot;, output.contains(&quot;Supported platforms:&quot;));
-    }
+// Database Storage
+public class DatabasePasswordStorage implements InterfacePasswordStorage {
+    private static final String DB_URL = &quot;jdbc:sqlite:passwords.db&quot;;
+    private final String masterPassword;
+    
+    // ... database operations
 }
+</code></pre></section></section><section><a id="a.3F.3F_Testing"></a>
+<h2>&#x1f9ea; Testing</h2>
+<p>The project includes comprehensive unit tests and integration tests:</p><section><a id="Unit_Tests"></a>
+<h3>Unit Tests</h3>
+<ul>
 
-</code></pre></section><section><a id="pom.xml"></a>
-<h2>pom.xml</h2>
-<p>The pom.xml file is the core configuration file for Maven projects. It defines important information such as the project's dependencies, plugins, build profiles, and other configuration details. This file centralizes settings related to project structure, compilation, testing, and packaging, allowing for a standardized and automated build process.</p>
+<li>Authentication testing</li>
+<li>Password management testing</li>
+<li>Storage system testing</li>
+<li>Encryption testing</li>
+<li>GUI component testing</li>
+</ul></section><section><a id="Integration_Tests"></a>
+<h3>Integration Tests</h3>
+<ul>
 
-<pre class="prettyprint"><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+<li>End-to-end workflow testing</li>
+<li>Storage system integration</li>
+<li>GUI integration testing</li>
+</ul>
+<p>Run tests using:</p>
 
-&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
-         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
-    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+<pre class="prettyprint"><code class="language-bash">mvn test
+</code></pre>
+<p>Test coverage reports are generated in the <code>target/site/jacoco</code> directory.</p></section></section><section><a id="a.3F.3F_Documentation"></a>
+<h2>&#x1f4da; Documentation</h2>
+<ul>
 
-    &lt;groupId&gt;com.ucoruh.password&lt;/groupId&gt;
-    &lt;artifactId&gt;password-app&lt;/artifactId&gt;
-    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
-    &lt;packaging&gt;jar&lt;/packaging&gt;
+<li><a href="Java_Installation_Guide_Windows.html">Java Installation Guide</a></li>
+<li><a href="Maven_Installation_Guide_Windows.html">Maven Installation Guide</a></li>
+<li><a href="target/site/apidocs/index.html">API Documentation</a></li>
+<li><a href="target/site/surefire-report.html">Test Reports</a></li>
+</ul><section><a id="Additional_Resources"></a>
+<h3>Additional Resources</h3>
+<ul>
 
-    &lt;name&gt;password-app&lt;/name&gt;
-    &lt;url&gt;https://github.com/ucoruh/eclipse-java-maven-template&lt;/url&gt;
-    &lt;description&gt;Password App Example Template Project&lt;/description&gt;
+<li>JavaDoc documentation for all classes</li>
+<li>UML diagrams for architecture visualization</li>
+<li>Test coverage reports</li>
+<li>User guides and tutorials</li>
+</ul></section></section><section><a id="a.3F.3F_Contributing"></a>
+<h2>&#x1f91d; Contributing</h2>
+<ol style="list-style-type: decimal;">
 
-    &lt;scm&gt;
-        &lt;url&gt;https://github.com/ucoruh/eclipse-java-maven-template&lt;/url&gt;
-    &lt;/scm&gt;
+<li>Fork the repository</li>
+<li>Create your feature branch (<code>git checkout -b feature/AmazingFeature</code>)</li>
+<li>Commit your changes (<code>git commit -m 'Add some AmazingFeature'</code>)</li>
+<li>Push to the branch (<code>git push origin feature/AmazingFeature</code>)</li>
+<li>Open a Pull Request</li>
+</ol><section><a id="Development_Guidelines"></a>
+<h3>Development Guidelines</h3>
+<ul>
 
-    &lt;inceptionYear&gt;2023&lt;/inceptionYear&gt;
+<li>Follow Java coding standards</li>
+<li>Document all public APIs</li>
+<li>Update UML diagrams for architectural changes</li>
+</ul></section></section><section><a id="a.3F.3F_License"></a>
+<h2>&#x1f4c4; License</h2>
+<p>This project is licensed under the MIT License - see the <a href="LICENSE">LICENSE</a> file for details.</p><hr />
+<p>Built with &#x2764;&#xfe0f; by <a href="https://github.com/SametAnaz" class="externalLink">Samet Anaz</a></p></section><section><a id="a.3F.3F_Quick_Start"></a>
+<h2>&#x1f4e5; Quick Start</h2><section><a id="Download_and_Run"></a>
+<h3>Download and Run</h3>
+<ol style="list-style-type: decimal;">
 
-    &lt;developers&gt;
-        &lt;developer&gt;
-            &lt;name&gt;Asst. Prof. Dr. Ugur CORUH&lt;/name&gt;
-            &lt;organization&gt;RTEU&lt;/organization&gt;
-            &lt;email&gt;ugur.coruh@erdogan.edu.tr&lt;/email&gt;
-            &lt;roles&gt;
-                &lt;role&gt;Developer&lt;/role&gt;
-                &lt;role&gt;Designer&lt;/role&gt;
-            &lt;/roles&gt;
-        &lt;/developer&gt;
-        &lt;developer&gt;
-            &lt;name&gt;Other Person&lt;/name&gt;
-            &lt;organization&gt;RTEU&lt;/organization&gt;
-            &lt;email&gt;mail@gmail.com&lt;/email&gt;
-            &lt;roles&gt;
-                &lt;role&gt;Developer&lt;/role&gt;
-            &lt;/roles&gt;
-        &lt;/developer&gt;
-    &lt;/developers&gt;
+<li>Go to the <a href="https://github.com/SametAnaz/ce204-hw-samet-anaz-java/releases" class="externalLink">Releases</a> page</li>
+<li>Download the latest version:
+<ul>
 
-    &lt;contributors&gt;
-        &lt;contributor&gt;
-            &lt;name&gt;Asst. Prof. Dr. Ugur CORUH&lt;/name&gt;
-            &lt;email&gt;ugur.coruh@erdogan.edu.tr&lt;/email&gt;
-            &lt;organization&gt;RTEU&lt;/organization&gt;
-            &lt;roles&gt;
-                &lt;role&gt;Developer&lt;/role&gt;
-                &lt;role&gt;Designer&lt;/role&gt;
-            &lt;/roles&gt;
-        &lt;/contributor&gt;
-        &lt;contributor&gt;
-            &lt;name&gt;Other Person&lt;/name&gt;
-            &lt;organization&gt;RTEU&lt;/organization&gt;
-            &lt;email&gt;mail@gmail.com&lt;/email&gt;
-            &lt;roles&gt;
-                &lt;role&gt;Developer&lt;/role&gt;
-            &lt;/roles&gt;
-        &lt;/contributor&gt;
-    &lt;/contributors&gt;
+<li>For Windows: Download <code>PasswordManager.exe</code></li>
+<li>For other platforms: Download <code>PasswordManager.jar</code></li>
+</ul></li>
+<li>Run the application:
+<ul>
 
-    &lt;organization&gt;
-        &lt;name&gt;Recep Tayyip Erdogan University&lt;/name&gt;
-        &lt;url&gt;www.erdogan.edu.tr&lt;/url&gt;
-    &lt;/organization&gt;
+<li>Windows: Double-click <code>PasswordManager.exe</code></li>
+<li>Other platforms: Run <code>java -jar PasswordManager.jar</code></li>
+</ul></li>
+</ol></section><section><a id="Requirements"></a>
+<h3>Requirements</h3>
+<ul>
 
-    &lt;issueManagement&gt;
-        &lt;system&gt;Github&lt;/system&gt;
-        &lt;url&gt;https://github.com/ucoruh/eclipse-java-maven-template&lt;/url&gt;
-    &lt;/issueManagement&gt;
-
-    &lt;ciManagement&gt;
-        &lt;system&gt;Github&lt;/system&gt;
-        &lt;notifiers&gt;
-            &lt;notifier&gt;
-                &lt;address&gt;ugur.coruh@erdogan.edu.tr&lt;/address&gt;
-                &lt;sendOnSuccess&gt;true&lt;/sendOnSuccess&gt;
-                &lt;sendOnError&gt;true&lt;/sendOnError&gt;
-                &lt;sendOnFailure&gt;true&lt;/sendOnFailure&gt;
-                &lt;sendOnWarning&gt;true&lt;/sendOnWarning&gt;
-            &lt;/notifier&gt;
-        &lt;/notifiers&gt;
-        &lt;url&gt;https://github.com/ucoruh/eclipse-java-maven-template&lt;/url&gt;
-    &lt;/ciManagement&gt;
-
-    &lt;repositories&gt;
-        &lt;repository&gt;
-            &lt;id&gt;eclipse-java-maven-template&lt;/id&gt;
-            &lt;name&gt;eclipse-java-maven-template&lt;/name&gt;
-            &lt;url&gt;https://github.com/ucoruh/eclipse-java-maven-template&lt;/url&gt;
-        &lt;/repository&gt;
-    &lt;/repositories&gt;
-
-    &lt;distributionManagement&gt;
-        &lt;site&gt;
-            &lt;name&gt;https://github.com/ucoruh/eclipse-java-maven-template&lt;/name&gt;
-            &lt;id&gt;eclipse-java-maven-template&lt;/id&gt;
-        &lt;/site&gt;
-        &lt;downloadUrl&gt;https://github.com/ucoruh/eclipse-java-maven-template&lt;/downloadUrl&gt;
-        &lt;repository&gt;
-            &lt;id&gt;eclipse-java-maven-template&lt;/id&gt;
-            &lt;name&gt;eclipse-java-maven-template&lt;/name&gt;
-            &lt;url&gt;https://github.com/ucoruh/eclipse-java-maven-template&lt;/url&gt;
-        &lt;/repository&gt;
-    &lt;/distributionManagement&gt;
-
-    &lt;properties&gt;
-        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
-        &lt;maven.compiler.source&gt;17&lt;/maven.compiler.source&gt;
-        &lt;maven.compiler.target&gt;17&lt;/maven.compiler.target&gt;
-    &lt;/properties&gt;
-
-    &lt;dependencies&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.xerial&lt;/groupId&gt;
-            &lt;artifactId&gt;sqlite-jdbc&lt;/artifactId&gt;
-            &lt;version&gt;3.36.0.3&lt;/version&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;junit&lt;/groupId&gt;
-            &lt;artifactId&gt;junit&lt;/artifactId&gt;
-            &lt;version&gt;4.11&lt;/version&gt;
-            &lt;scope&gt;test&lt;/scope&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.hamcrest&lt;/groupId&gt;
-            &lt;artifactId&gt;hamcrest-all&lt;/artifactId&gt;
-            &lt;version&gt;1.3&lt;/version&gt;
-            &lt;scope&gt;test&lt;/scope&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
-            &lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;
-            &lt;version&gt;1.7.32&lt;/version&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
-            &lt;artifactId&gt;logback-classic&lt;/artifactId&gt;
-            &lt;version&gt;1.2.6&lt;/version&gt;
-        &lt;/dependency&gt;
-		
-		&lt;dependency&gt;
-			&lt;groupId&gt;com.github.stefanbirkner&lt;/groupId&gt;
-			&lt;artifactId&gt;system-lambda&lt;/artifactId&gt;
-			&lt;version&gt;1.2.0&lt;/version&gt;
-			&lt;scope&gt;test&lt;/scope&gt;
-		&lt;/dependency&gt;
-
-		
-    &lt;/dependencies&gt;
-
-    &lt;build&gt;
-        &lt;plugins&gt;
-            &lt;plugin&gt;
-                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-                &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
-                &lt;version&gt;3.10.1&lt;/version&gt;
-                &lt;configuration&gt;
-                    &lt;source&gt;17&lt;/source&gt;
-                    &lt;target&gt;17&lt;/target&gt;
-                &lt;/configuration&gt;
-            &lt;/plugin&gt;
-
-         &lt;plugin&gt;
-    &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-    &lt;artifactId&gt;maven-surefire-plugin&lt;/artifactId&gt;
-    &lt;version&gt;2.22.1&lt;/version&gt;
-    &lt;configuration&gt;
-        &lt;includes&gt;
-            &lt;include&gt;**/com/ucoruh/password/*Test.java&lt;/include&gt; 
-        &lt;/includes&gt;
-    &lt;/configuration&gt;
-&lt;/plugin&gt;
-
-            &lt;plugin&gt;
-    &lt;groupId&gt;org.jacoco&lt;/groupId&gt;
-    &lt;artifactId&gt;jacoco-maven-plugin&lt;/artifactId&gt;
-    &lt;version&gt;0.8.7&lt;/version&gt;  
-    &lt;executions&gt;
-        &lt;execution&gt;
-            &lt;goals&gt;
-                &lt;goal&gt;prepare-agent&lt;/goal&gt;
-            &lt;/goals&gt;
-        &lt;/execution&gt;
-        &lt;execution&gt;
-            &lt;id&gt;report&lt;/id&gt;
-            &lt;phase&gt;test&lt;/phase&gt;
-            &lt;goals&gt;
-                &lt;goal&gt;report&lt;/goal&gt;
-            &lt;/goals&gt;
-        &lt;/execution&gt;
-    &lt;/executions&gt;
-&lt;/plugin&gt;
-
-			&lt;plugin&gt;
-				&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-				&lt;artifactId&gt;maven-site-plugin&lt;/artifactId&gt;
-				&lt;version&gt;3.21.0&lt;/version&gt;
-				&lt;configuration&gt;
-					&lt;port&gt;9000&lt;/port&gt;
-					&lt;tempWebappDirectory&gt;${basedir}/target/site&lt;/tempWebappDirectory&gt;
-				&lt;/configuration&gt;
-			&lt;/plugin&gt;
-
-            &lt;plugin&gt;
-                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-                &lt;artifactId&gt;maven-shade-plugin&lt;/artifactId&gt;
-                &lt;version&gt;3.2.4&lt;/version&gt;
-                &lt;executions&gt;
-                    &lt;execution&gt;
-                        &lt;phase&gt;package&lt;/phase&gt;
-                        &lt;goals&gt;
-                            &lt;goal&gt;shade&lt;/goal&gt;
-                        &lt;/goals&gt;
-                        &lt;configuration&gt;
-                            &lt;createDependencyReducedPom&gt;false&lt;/createDependencyReducedPom&gt;
-                            &lt;transformers&gt;
-                                &lt;transformer implementation=&quot;org.apache.maven.plugins.shade.resource.ManifestResourceTransformer&quot;&gt;
-                                    &lt;mainClass&gt;com.ucoruh.password.PasswordApp&lt;/mainClass&gt;
-                                &lt;/transformer&gt;
-                            &lt;/transformers&gt;
-                        &lt;/configuration&gt;
-                    &lt;/execution&gt;
-                &lt;/executions&gt;
-            &lt;/plugin&gt;
-        &lt;/plugins&gt;
-        
-
-        &lt;pluginManagement&gt;
-            &lt;plugins&gt;
-                &lt;plugin&gt;
-                    &lt;artifactId&gt;maven-clean-plugin&lt;/artifactId&gt;
-                    &lt;version&gt;3.1.0&lt;/version&gt;
-                &lt;/plugin&gt;
-                &lt;plugin&gt;
-                    &lt;artifactId&gt;maven-resources-plugin&lt;/artifactId&gt;
-                    &lt;version&gt;3.0.2&lt;/version&gt;
-                &lt;/plugin&gt;
-                &lt;plugin&gt;
-                    &lt;artifactId&gt;maven-jar-plugin&lt;/artifactId&gt;
-                    &lt;version&gt;3.0.2&lt;/version&gt;
-                &lt;/plugin&gt;
-                &lt;plugin&gt;
-                    &lt;artifactId&gt;maven-install-plugin&lt;/artifactId&gt;
-                    &lt;version&gt;2.5.2&lt;/version&gt;
-                &lt;/plugin&gt;
-                &lt;plugin&gt;
-                    &lt;artifactId&gt;maven-deploy-plugin&lt;/artifactId&gt;
-                    &lt;version&gt;2.8.2&lt;/version&gt;
-                &lt;/plugin&gt;
-                &lt;plugin&gt;
-					&lt;artifactId&gt;maven-site-plugin&lt;/artifactId&gt;
-					&lt;version&gt;3.21.0&lt;/version&gt;
-				&lt;/plugin&gt;
-                &lt;plugin&gt;
-                    &lt;artifactId&gt;maven-project-info-reports-plugin&lt;/artifactId&gt;
-                    &lt;version&gt;3.5.0&lt;/version&gt;
-                &lt;/plugin&gt;
-            &lt;/plugins&gt;
-        &lt;/pluginManagement&gt;
-    &lt;/build&gt;
-&lt;/project&gt;
-</code></pre></section></section>        </main>
+<li>Windows: No additional requirements for EXE</li>
+<li>Other platforms: Java 17 or higher required</li>
+</ul></section></section></section>        </main>
       </div>
     </div>
     <hr/>
