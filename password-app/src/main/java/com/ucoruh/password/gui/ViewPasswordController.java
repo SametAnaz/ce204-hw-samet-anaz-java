@@ -11,18 +11,27 @@ import java.util.List;
 import com.ucoruh.password.*;
 
 /**
- * Controller for View Passwords dialog
- * Handles functionality for viewing stored passwords
+ * @brief Controller for View Passwords dialog
+ * @details Handles functionality for viewing stored passwords
  */
 public class ViewPasswordController implements DialogController {
+    /** @brief Reference to main GUI */
     private PasswordManagerGUI gui;
+    
+    /** @brief Dialog window for viewing passwords */
     private JDialog dialog;
+    
+    /** @brief Authentication manager instance */
     private AuthManager authManager;
+    
+    /** @brief List of stored passwords */
     private List<Password> passwordList;
+    
+    /** @brief Table for displaying passwords */
     private JTable table;
     
     /**
-     * Constructor
+     * @brief Constructor for ViewPasswordController
      * @param gui Reference to main GUI
      */
     public ViewPasswordController(PasswordManagerGUI gui) {
@@ -30,6 +39,9 @@ public class ViewPasswordController implements DialogController {
         this.authManager = AuthManager.getInstance();
     }
     
+    /**
+     * @brief Shows the dialog for viewing passwords
+     */
     @Override
     public void showDialog() {
         // Create dialog
@@ -52,6 +64,9 @@ public class ViewPasswordController implements DialogController {
         dialog.setVisible(true);
     }
     
+    /**
+     * @brief Closes the view passwords dialog
+     */
     @Override
     public void closeDialog() {
         if (dialog != null && dialog.isVisible()) {
@@ -59,13 +74,17 @@ public class ViewPasswordController implements DialogController {
         }
     }
     
+    /**
+     * @brief Gets the dialog instance
+     * @return JDialog instance
+     */
     @Override
     public JDialog getDialog() {
         return dialog;
     }
     
     /**
-     * Loads passwords from storage
+     * @brief Loads passwords from storage
      */
     private void loadPasswords() {
         // Get all passwords
@@ -75,7 +94,7 @@ public class ViewPasswordController implements DialogController {
     }
     
     /**
-     * Creates the password table
+     * @brief Creates the password table
      * @return JScrollPane containing password table
      */
     private JScrollPane createPasswordTable() {
@@ -110,7 +129,7 @@ public class ViewPasswordController implements DialogController {
     }
     
     /**
-     * Creates the button panel with action buttons
+     * @brief Creates the button panel with action buttons
      * @return JPanel containing buttons
      */
     private JPanel createButtonPanel() {
@@ -134,7 +153,7 @@ public class ViewPasswordController implements DialogController {
     }
     
     /**
-     * Shows the selected password with a copy button
+     * @brief Shows the selected password with a copy button
      */
     private void showPassword() {
         int selectedRow = table.getSelectedRow();

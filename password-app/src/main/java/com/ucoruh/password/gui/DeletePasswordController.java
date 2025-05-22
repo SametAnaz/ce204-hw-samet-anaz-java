@@ -8,18 +8,27 @@ import java.util.List;
 import com.ucoruh.password.*;
 
 /**
- * Controller for Delete Password dialog
- * Handles functionality for deleting existing passwords
+ * @brief Controller for Delete Password dialog
+ * @details Handles functionality for deleting existing passwords
  */
 public class DeletePasswordController implements DialogController {
+    /** @brief Reference to main GUI */
     private PasswordManagerGUI gui;
+    
+    /** @brief Dialog window for deleting passwords */
     private JDialog dialog;
+    
+    /** @brief Authentication manager instance */
     private AuthManager authManager;
+    
+    /** @brief List of stored passwords */
     private List<Password> passwordList;
+    
+    /** @brief Combo box for selecting services */
     private JComboBox<String> comboServices;
     
     /**
-     * Constructor
+     * @brief Constructor for DeletePasswordController
      * @param gui Reference to main GUI
      */
     public DeletePasswordController(PasswordManagerGUI gui) {
@@ -27,6 +36,9 @@ public class DeletePasswordController implements DialogController {
         this.authManager = AuthManager.getInstance();
     }
     
+    /**
+     * @brief Shows the dialog for deleting a password
+     */
     @Override
     public void showDialog() {
         // Load passwords
@@ -57,6 +69,9 @@ public class DeletePasswordController implements DialogController {
         dialog.setVisible(true);
     }
     
+    /**
+     * @brief Closes the delete password dialog
+     */
     @Override
     public void closeDialog() {
         if (dialog != null && dialog.isVisible()) {
@@ -64,13 +79,17 @@ public class DeletePasswordController implements DialogController {
         }
     }
     
+    /**
+     * @brief Gets the dialog instance
+     * @return JDialog instance
+     */
     @Override
     public JDialog getDialog() {
         return dialog;
     }
     
     /**
-     * Loads passwords from storage
+     * @brief Loads passwords from storage
      */
     private void loadPasswords() {
         // Get all passwords
@@ -80,7 +99,7 @@ public class DeletePasswordController implements DialogController {
     }
     
     /**
-     * Creates the content panel with form fields
+     * @brief Creates the content panel with form fields
      * @return JPanel containing form fields
      */
     private JPanel createContentPanel() {
@@ -124,7 +143,7 @@ public class DeletePasswordController implements DialogController {
     }
     
     /**
-     * Creates the button panel with action buttons
+     * @brief Creates the button panel with action buttons
      * @return JPanel containing buttons
      */
     private JPanel createButtonPanel() {
@@ -147,7 +166,7 @@ public class DeletePasswordController implements DialogController {
     }
     
     /**
-     * Deletes the selected password after confirmation
+     * @brief Deletes the selected password after confirmation
      */
     private void deletePassword() {
         int selectedIndex = comboServices.getSelectedIndex();

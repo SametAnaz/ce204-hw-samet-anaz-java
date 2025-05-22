@@ -8,19 +8,30 @@ import java.util.List;
 import com.ucoruh.password.*;
 
 /**
- * Controller for Update Password dialog
- * Handles functionality for updating existing passwords
+ * @brief Controller for Update Password dialog
+ * @details Handles functionality for updating existing passwords
  */
 public class UpdatePasswordController implements DialogController {
+    /** @brief Reference to main GUI */
     private PasswordManagerGUI gui;
+    
+    /** @brief Dialog window for updating passwords */
     private JDialog dialog;
+    
+    /** @brief Authentication manager instance */
     private AuthManager authManager;
+    
+    /** @brief List of stored passwords */
     private List<Password> passwordList;
+    
+    /** @brief Combo box for selecting services */
     private JComboBox<String> comboServices;
+    
+    /** @brief Password field for the new password */
     private JPasswordField txtPassword;
     
     /**
-     * Constructor
+     * @brief Constructor for UpdatePasswordController
      * @param gui Reference to main GUI
      */
     public UpdatePasswordController(PasswordManagerGUI gui) {
@@ -28,6 +39,9 @@ public class UpdatePasswordController implements DialogController {
         this.authManager = AuthManager.getInstance();
     }
     
+    /**
+     * @brief Shows the dialog for updating a password
+     */
     @Override
     public void showDialog() {
         // Load passwords
@@ -58,6 +72,9 @@ public class UpdatePasswordController implements DialogController {
         dialog.setVisible(true);
     }
     
+    /**
+     * @brief Closes the update password dialog
+     */
     @Override
     public void closeDialog() {
         if (dialog != null && dialog.isVisible()) {
@@ -65,13 +82,17 @@ public class UpdatePasswordController implements DialogController {
         }
     }
     
+    /**
+     * @brief Gets the dialog instance
+     * @return JDialog instance
+     */
     @Override
     public JDialog getDialog() {
         return dialog;
     }
     
     /**
-     * Loads passwords from storage
+     * @brief Loads passwords from storage
      */
     private void loadPasswords() {
         // Get all passwords
@@ -81,7 +102,7 @@ public class UpdatePasswordController implements DialogController {
     }
     
     /**
-     * Creates the content panel with form fields
+     * @brief Creates the content panel with form fields
      * @return JPanel containing form fields
      */
     private JPanel createContentPanel() {
@@ -161,7 +182,7 @@ public class UpdatePasswordController implements DialogController {
     }
     
     /**
-     * Creates the button panel with action buttons
+     * @brief Creates the button panel with action buttons
      * @return JPanel containing buttons
      */
     private JPanel createButtonPanel() {
@@ -184,7 +205,7 @@ public class UpdatePasswordController implements DialogController {
     }
     
     /**
-     * Updates the selected password
+     * @brief Updates the selected password
      */
     private void updatePassword() {
         int selectedIndex = comboServices.getSelectedIndex();

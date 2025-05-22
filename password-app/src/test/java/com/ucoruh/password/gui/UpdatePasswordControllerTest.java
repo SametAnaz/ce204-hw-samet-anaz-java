@@ -79,13 +79,17 @@ public class UpdatePasswordControllerTest {
                 loadPasswordsMethod.setAccessible(true);
                 loadPasswordsMethod.invoke(this);
                 
+                // Get the password list after loading
+                List<Password> passwords = (List<Password>) passwordListField.get(this);
+                
                 // This is the key part - when the list is empty, a message should be shown
                 // and no dialog created
-                List<Password> passwords = (List<Password>) passwordListField.get(this);
                 if (passwords.isEmpty()) {
-                    // In real implementation, a JOptionPane message would be shown here
-                    // Just set our flag that the message would have been shown
                     messageShown = true;
+                    JOptionPane.showMessageDialog(gui,
+                        "No passwords available to update.",
+                        "Empty Password List",
+                        JOptionPane.INFORMATION_MESSAGE);
                     return; // Important - don't create a dialog
                 }
                 
@@ -96,7 +100,7 @@ public class UpdatePasswordControllerTest {
                 JDialog dialog = new JDialog(gui, "Update Password", true);
                 dialogField.set(this, dialog);
             } catch (Exception e) {
-                e.printStackTrace();
+                System.out.println("Note: " + e.getMessage());
             }
         }
         

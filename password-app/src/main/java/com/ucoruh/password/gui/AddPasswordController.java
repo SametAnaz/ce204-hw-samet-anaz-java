@@ -8,21 +8,31 @@ import java.util.List;
 import com.ucoruh.password.*;
 
 /**
- * Controller for Add Password dialog
- * Handles functionality for adding new passwords
+ * @brief Controller for Add Password dialog
+ * @details Handles functionality for adding new passwords
  */
 public class AddPasswordController implements DialogController {
+    /** @brief Reference to main GUI */
     private PasswordManagerGUI gui;
+    
+    /** @brief Dialog window for adding passwords */
     private JDialog dialog;
+    
+    /** @brief Authentication manager instance */
     private AuthManager authManager;
     
     // UI Components
+    /** @brief Text field for service/website name */
     private JTextField txtService;
+    
+    /** @brief Text field for username */
     private JTextField txtUsername;
+    
+    /** @brief Password field for the password */
     private JPasswordField txtPassword;
     
     /**
-     * Constructor
+     * @brief Constructor for AddPasswordController
      * @param gui Reference to main GUI
      */
     public AddPasswordController(PasswordManagerGUI gui) {
@@ -30,6 +40,9 @@ public class AddPasswordController implements DialogController {
         this.authManager = AuthManager.getInstance();
     }
     
+    /**
+     * @brief Shows the dialog for adding a new password
+     */
     @Override
     public void showDialog() {
         // Create dialog
@@ -49,6 +62,9 @@ public class AddPasswordController implements DialogController {
         dialog.setVisible(true);
     }
     
+    /**
+     * @brief Closes the add password dialog
+     */
     @Override
     public void closeDialog() {
         if (dialog != null && dialog.isVisible()) {
@@ -56,13 +72,17 @@ public class AddPasswordController implements DialogController {
         }
     }
     
+    /**
+     * @brief Gets the dialog instance
+     * @return JDialog instance
+     */
     @Override
     public JDialog getDialog() {
         return dialog;
     }
     
     /**
-     * Creates the content panel with form fields
+     * @brief Creates the content panel with form fields
      * @return JPanel containing form fields
      */
     private JPanel createContentPanel() {
@@ -135,7 +155,7 @@ public class AddPasswordController implements DialogController {
     }
     
     /**
-     * Creates the button panel with action buttons
+     * @brief Creates the button panel with action buttons
      * @return JPanel containing buttons
      */
     private JPanel createButtonPanel() {
@@ -158,7 +178,7 @@ public class AddPasswordController implements DialogController {
     }
     
     /**
-     * Saves the password to storage
+     * @brief Saves the password to storage
      */
     private void savePassword() {
         String service = txtService.getText().trim();

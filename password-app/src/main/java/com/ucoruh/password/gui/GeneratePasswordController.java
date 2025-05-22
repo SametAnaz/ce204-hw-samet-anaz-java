@@ -10,26 +10,46 @@ import java.util.List;
 import com.ucoruh.password.*;
 
 /**
- * Controller for Generate Password dialog
- * Handles functionality for generating and saving passwords
+ * @brief Controller for Generate Password dialog
+ * @details Handles functionality for generating and saving passwords
  */
 public class GeneratePasswordController implements DialogController {
+    /** @brief Reference to main GUI */
     private PasswordManagerGUI gui;
+    
+    /** @brief Dialog window for generating passwords */
     private JDialog dialog;
+    
+    /** @brief Authentication manager instance */
     private AuthManager authManager;
     
     // UI Components
+    /** @brief Text field for service/website name */
     private JTextField txtService;
+    
+    /** @brief Text field for username */
     private JTextField txtUsername;
+    
+    /** @brief Text field for generated password */
     private JTextField txtGenerated;
+    
+    /** @brief Slider for password length */
     private JSlider sliderLength;
+    
+    /** @brief Checkbox for uppercase letters */
     private JCheckBox chkUppercase;
+    
+    /** @brief Checkbox for lowercase letters */
     private JCheckBox chkLowercase;
+    
+    /** @brief Checkbox for digits */
     private JCheckBox chkDigits;
+    
+    /** @brief Checkbox for special characters */
     private JCheckBox chkSpecial;
     
     /**
-     * Constructor
+     * @brief Constructor for GeneratePasswordController
      * @param gui Reference to main GUI
      */
     public GeneratePasswordController(PasswordManagerGUI gui) {
@@ -37,6 +57,9 @@ public class GeneratePasswordController implements DialogController {
         this.authManager = AuthManager.getInstance();
     }
     
+    /**
+     * @brief Shows the dialog for generating a password
+     */
     @Override
     public void showDialog() {
         // Create dialog
@@ -56,6 +79,9 @@ public class GeneratePasswordController implements DialogController {
         dialog.setVisible(true);
     }
     
+    /**
+     * @brief Closes the generate password dialog
+     */
     @Override
     public void closeDialog() {
         if (dialog != null && dialog.isVisible()) {
@@ -63,13 +89,17 @@ public class GeneratePasswordController implements DialogController {
         }
     }
     
+    /**
+     * @brief Gets the dialog instance
+     * @return JDialog instance
+     */
     @Override
     public JDialog getDialog() {
         return dialog;
     }
     
     /**
-     * Creates the content panel with form fields
+     * @brief Creates the content panel with form fields
      * @return JPanel containing form fields
      */
     private JPanel createContentPanel() {
@@ -219,7 +249,7 @@ public class GeneratePasswordController implements DialogController {
     }
     
     /**
-     * Generates a password based on current settings
+     * @brief Generates a password based on current settings
      */
     private void generatePassword() {
         int length = sliderLength.getValue();
@@ -234,7 +264,7 @@ public class GeneratePasswordController implements DialogController {
     }
     
     /**
-     * Creates the button panel with action buttons
+     * @brief Creates the button panel with action buttons
      * @return JPanel containing buttons
      */
     private JPanel createButtonPanel() {
@@ -257,7 +287,7 @@ public class GeneratePasswordController implements DialogController {
     }
     
     /**
-     * Saves the generated password
+     * @brief Saves the generated password
      */
     private void savePassword() {
         String service = txtService.getText().trim();
