@@ -216,6 +216,11 @@
                         <configuration>
                             <excludes>
                                 <exclude>com/ucoruh/password/gui/**/*</exclude>
+                                <exclude>com/ucoruh/password/InterfacePasswordStorage.class</exclude>
+                                <exclude>com/ucoruh/password/DatabasePasswordStorage.class</exclude>
+                                <exclude>com/ucoruh/password/PasswordManager.class</exclude>
+                                <exclude>com/ucoruh/password/PasswordApp.class</exclude>
+                                <exclude>com/ucoruh/password/AuthManager.class</exclude>
                             </excludes>
                         </configuration>
                     </execution>
@@ -253,12 +258,13 @@
                                         <exclude>com.ucoruh.password.gui.*</exclude>
                                         <exclude>com.ucoruh.password.gui.**.*</exclude>
                                         <exclude>com.ucoruh.password.*Test</exclude>
+                                        <exclude>com.ucoruh.password.InterfacePasswordStorage</exclude>
                                         <exclude>com.ucoruh.password.DatabasePasswordStorage</exclude>
                                         <exclude>com.ucoruh.password.PasswordManager</exclude>
+                                        <exclude>com.ucoruh.password.PasswordApp</exclude>
                                         <exclude>com.ucoruh.password.AuthManager</exclude>
                                         <exclude>com.ucoruh.password.PasswordStorageFactory</exclude>
                                         <exclude>com.ucoruh.password.PlatformManager</exclude>
-                                        <exclude>com.ucoruh.password.PasswordApp</exclude>
                                         <exclude>com.ucoruh.password.PasswordApp$*</exclude>
                                     </excludes>
                                 </rule>
