@@ -227,17 +227,6 @@ var assemblies = [
       { "name": "com/ucoruh/password/PlatformManager", "rp": "password_com_ucoruh_password_PlatformManager.html", "cl": 11, "ucl": 4, "cal": 15, "tl": 73, "cb": 3, "tb": 6, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "com/ucoruh/password/StorageType", "rp": "password_com_ucoruh_password_StorageType.html", "cl": 3, "ucl": 0, "cal": 3, "tl": 19, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
     ]},
-  {
-    "name": "com/ucoruh/password/gui",
-    "classes": [
-      { "name": "com/ucoruh/password/gui/AddPasswordController", "rp": "gui_com_ucoruh_password_gui_AddPasswordController.html", "cl": 0, "ucl": 68, "cal": 68, "tl": 172, "cb": 0, "tb": 12, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "com/ucoruh/password/gui/DeletePasswordController", "rp": "gui_com_ucoruh_password_gui_DeletePasswordController.html", "cl": 0, "ucl": 72, "cal": 72, "tl": 198, "cb": 0, "tb": 10, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "com/ucoruh/password/gui/DialogController", "rp": "gui_com_ucoruh_password_gui_DialogController.html", "cl": 0, "ucl": 0, "cal": 0, "tl": 25, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "com/ucoruh/password/gui/GeneratePasswordController", "rp": "gui_com_ucoruh_password_gui_GeneratePasswordController.html", "cl": 0, "ucl": 159, "cal": 159, "tl": 336, "cb": 0, "tb": 24, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "com/ucoruh/password/gui/PasswordManagerGUI", "rp": "gui_com_ucoruh_password_gui_PasswordManagerGUI.html", "cl": 0, "ucl": 751, "cal": 751, "tl": 1398, "cb": 0, "tb": 40, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "com/ucoruh/password/gui/UpdatePasswordController", "rp": "gui_com_ucoruh_password_gui_UpdatePasswordController.html", "cl": 0, "ucl": 101, "cal": 101, "tl": 238, "cb": 0, "tb": 12, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "com/ucoruh/password/gui/ViewPasswordController", "rp": "gui_com_ucoruh_password_gui_ViewPasswordController.html", "cl": 0, "ucl": 89, "cal": 89, "tl": 225, "cb": 0, "tb": 14, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-    ]},
 ];
 
 var metrics = [{ "name": "Line coverage", "abbreviation": "cov", "explanationUrl": "https://en.wikipedia.org/wiki/Code_coverage" }, { "name": "Branch coverage", "abbreviation": "bcov", "explanationUrl": "https://en.wikipedia.org/wiki/Code_coverage" }];
