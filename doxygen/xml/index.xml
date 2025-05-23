@@ -9,10 +9,8 @@
     <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1AddPasswordController_1a4c1c689d9f19172f0f9d72a0c3b57435" kind="variable"><name>txtPassword</name></member>
     <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1AddPasswordController_1acc8e3c4d1fd3367868d4da32215609e4" kind="function"><name>AddPasswordController</name></member>
     <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1AddPasswordController_1ad62737714bf7abd1fb2aad56dbaf5afc" kind="function"><name>showDialog</name></member>
-    <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1AddPasswordController_1aeac0d5d7925a4073af684291d7fff71d" kind="function"><name>closeDialog</name></member>
     <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1AddPasswordController_1a71cb157c67f5257b071a3aa38e040c6c" kind="function"><name>getDialog</name></member>
-    <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1AddPasswordController_1aa8d2e4c678ee116373ede76527438e9f" kind="function"><name>createContentPanel</name></member>
-    <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1AddPasswordController_1acaf9543918789ca3fc3565ce94c95ca7" kind="function"><name>createButtonPanel</name></member>
+    <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1AddPasswordController_1aeac0d5d7925a4073af684291d7fff71d" kind="function"><name>closeDialog</name></member>
     <member refid="classcom_1_1ucoruh_1_1password_1_1gui_1_1AddPasswordController_1a1450295424c666c84c0685ad9ed64201" kind="function"><name>savePassword</name></member>
   </compound>
   <compound refid="classcom_1_1ucoruh_1_1password_1_1AuthManager" kind="class"><name>com::ucoruh::password::AuthManager</name>

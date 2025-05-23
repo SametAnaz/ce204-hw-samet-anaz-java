@@ -230,7 +230,7 @@ var assemblies = [
   {
     "name": "com/ucoruh/password/gui",
     "classes": [
-      { "name": "com/ucoruh/password/gui/AddPasswordController", "rp": "gui_com_ucoruh_password_gui_AddPasswordController.html", "cl": 0, "ucl": 100, "cal": 100, "tl": 227, "cb": 0, "tb": 18, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "com/ucoruh/password/gui/AddPasswordController", "rp": "gui_com_ucoruh_password_gui_AddPasswordController.html", "cl": 0, "ucl": 68, "cal": 68, "tl": 172, "cb": 0, "tb": 12, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "com/ucoruh/password/gui/DeletePasswordController", "rp": "gui_com_ucoruh_password_gui_DeletePasswordController.html", "cl": 0, "ucl": 72, "cal": 72, "tl": 198, "cb": 0, "tb": 10, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "com/ucoruh/password/gui/DialogController", "rp": "gui_com_ucoruh_password_gui_DialogController.html", "cl": 0, "ucl": 0, "cal": 0, "tl": 25, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "com/ucoruh/password/gui/GeneratePasswordController", "rp": "gui_com_ucoruh_password_gui_GeneratePasswordController.html", "cl": 0, "ucl": 159, "cal": 159, "tl": 336, "cb": 0, "tb": 24, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
