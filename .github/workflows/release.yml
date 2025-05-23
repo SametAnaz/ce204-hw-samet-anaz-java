@@ -87,21 +87,53 @@ jobs:
                 
       - name: Check Test Coverage
         run: |
+          echo "Checking JaCoCo report..."
+          
+          # Check if the JaCoCo report exists
+          if [ ! -f "target/site/jacoco/jacoco.xml" ]; then
+            echo "Error: JaCoCo report not found!"
+            exit 1
+          fi
+          
           # Parse the JaCoCo XML report and check coverage percentage
-          covered=$(xmllint --xpath "string(//counter[@type='INSTRUCTION']/@covered)" target/site/jacoco/jacoco.xml)
-          missed=$(xmllint --xpath "string(//counter[@type='INSTRUCTION']/@missed)" target/site/jacoco/jacoco.xml)
+          echo "Parsing coverage data..."
+          
+          # Get line coverage instead of instruction coverage
+          covered=$(xmllint --xpath "string(//counter[@type='LINE']/@covered)" target/site/jacoco/jacoco.xml)
+          missed=$(xmllint --xpath "string(//counter[@type='LINE']/@missed)" target/site/jacoco/jacoco.xml)
+          
+          # Validate the parsed values
+          if [[ ! "$covered" =~ ^[0-9]+$ ]] || [[ ! "$missed" =~ ^[0-9]+$ ]]; then
+            echo "Error: Failed to parse coverage values"
+            echo "Covered lines: $covered"
+            echo "Missed lines: $missed"
+            exit 1
+          fi
+          
           total=$((covered + missed))
-          coverage_percentage=$(awk "BEGIN { print ($covered / $total) * 100 }")
+          if [ "$total" -eq 0 ]; then
+            echo "Error: No lines found for coverage calculation"
+            exit 1
+          fi
+          
+          coverage_percentage=$(awk "BEGIN { printf \"%.2f\", ($covered / $total) * 100 }")
+          
+          echo "Coverage Statistics:"
+          echo "===================="
+          echo "Covered lines: $covered"
+          echo "Missed lines: $missed"
+          echo "Total lines: $total"
+          echo "Coverage percentage: $coverage_percentage%"
+          echo "===================="
+          
           # Check if coverage is above 80%
           if (( $(echo "$coverage_percentage >= 80" | bc -l) )); then
-            echo "Test coverage is acceptable: $coverage_percentage%"
+            echo "✅ Test coverage is acceptable: $coverage_percentage%"
           else
-            echo "Test coverage is below 80%."
-            exit 1  # Fail the GitHub Actions workflow
+            echo "❌ Test coverage is below 80%: $coverage_percentage%"
+            echo "Please add more tests to improve coverage."
+            exit 1
           fi
-          echo "Coverage Percentage: $coverage_percentage"
-          echo "Covered: $covered"
-          echo "Missed: $missed"
         working-directory: ./password-app 
 
       - name: Install ReportGenerator
