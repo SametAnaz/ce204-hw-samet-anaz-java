@@ -213,6 +213,11 @@
                         <goals>
                             <goal>report</goal>
                         </goals>
+                        <configuration>
+                            <excludes>
+                                <exclude>com/ucoruh/password/gui/**/*</exclude>
+                            </excludes>
+                        </configuration>
                     </execution>
                     <execution>
                         <id>check</id>
@@ -230,6 +235,11 @@
                                             <value>COVEREDRATIO</value>
                                             <minimum>0.80</minimum>
                                         </limit>
+                                        <limit>
+                                            <counter>BRANCH</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>0.80</minimum>
+                                        </limit>
                                     </limits>
                                     <includes>
                                         <include>com.ucoruh.password.AutoLoginManager</include>
@@ -241,6 +251,7 @@
                                     </includes>
                                     <excludes>
                                         <exclude>com.ucoruh.password.gui.*</exclude>
+                                        <exclude>com.ucoruh.password.gui.**.*</exclude>
                                         <exclude>com.ucoruh.password.*Test</exclude>
                                         <exclude>com.ucoruh.password.DatabasePasswordStorage</exclude>
                                         <exclude>com.ucoruh.password.PasswordManager</exclude>
