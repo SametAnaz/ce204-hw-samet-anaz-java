@@ -13,19 +13,13 @@ import java.util.Scanner;
  */
 public class PasswordGenerator {
 
-    /** @brief Character set containing uppercase letters */
+    /**
+     * @brief Character sets for password generation.
+     */
     private static final String UPPERCASE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    
-    /** @brief Character set containing lowercase letters */
     private static final String LOWERCASE_CHARS = "abcdefghijklmnopqrstuvwxyz";
-    
-    /** @brief Character set containing digits */
     private static final String DIGIT_CHARS = "0123456789";
-    
-    /** @brief Character set containing special characters */
     private static final String SPECIAL_CHARS = "!@#$%^&*()_-+=<>?/[]{}|";
-    
-    /** @brief Combined character set containing all available characters */
     private static final String CHARACTERS = UPPERCASE_CHARS + LOWERCASE_CHARS + DIGIT_CHARS + SPECIAL_CHARS;
 
     /**

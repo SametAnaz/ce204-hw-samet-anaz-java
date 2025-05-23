@@ -15,7 +15,6 @@ import javax.crypto.spec.SecretKeySpec;
  * like passwords using AES encryption with a key derived from the master password.
  */
 public class EncryptionUtil {
-    /** @brief The encryption algorithm used (AES) */
     private static final String ALGORITHM = "AES";
     
     /**

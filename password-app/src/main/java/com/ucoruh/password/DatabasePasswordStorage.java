@@ -45,76 +45,21 @@ public class DatabasePasswordStorage implements InterfacePasswordStorage {
 	 * @brief Creates the passwords table in the database if it does not already exist.
 	 *
 	 * This method executes an SQL statement to initialize the database structure required
-	 * to store password entries. If an error occurs during table creation, it will throw
-	 * a RuntimeException to prevent the application from continuing with an invalid database state.
-	 *
-	 * @throws RuntimeException if the table cannot be created due to a database error
+	 * to store password entries.
 	 */
 	private void createTableIfNotExists() {
-		try (Connection conn = DriverManager.getConnection(getDatabaseUrl())) {
-			// Enable foreign keys
-			try (Statement stmt = conn.createStatement()) {
-				stmt.execute("PRAGMA foreign_keys = ON");
-			}
-			
-			// Create the passwords table if it doesn't exist
-			try (Statement stmt = conn.createStatement()) {
-				stmt.execute("""
-					CREATE TABLE IF NOT EXISTS passwords (
-						service TEXT PRIMARY KEY,
-						username TEXT NOT NULL,
-						password TEXT NOT NULL
-					)
-					""");
-				
-				// Verify the table exists and has the correct schema
-				try (ResultSet rs = stmt.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='passwords'")) {
-					if (!rs.next()) {
-						throw new SQLException("Failed to create passwords table");
-					}
-				}
-				
-				// Verify table schema
-				try (ResultSet rs = stmt.executeQuery("PRAGMA table_info(passwords)")) {
-					boolean hasService = false;
-					boolean hasUsername = false;
-					boolean hasPassword = false;
-					
-					while (rs.next()) {
-						String columnName = rs.getString("name");
-						String columnType = rs.getString("type");
-						
-						switch (columnName) {
-							case "service" -> {
-								hasService = true;
-								if (!"TEXT".equals(columnType)) {
-									throw new SQLException("Invalid type for service column");
-								}
-							}
-							case "username" -> {
-								hasUsername = true;
-								if (!"TEXT".equals(columnType)) {
-									throw new SQLException("Invalid type for username column");
-								}
-							}
-							case "password" -> {
-								hasPassword = true;
-								if (!"TEXT".equals(columnType)) {
-									throw new SQLException("Invalid type for password column");
-								}
-							}
-						}
-					}
-					
-					if (!hasService || !hasUsername || !hasPassword) {
-						throw new SQLException("Table schema is invalid");
-					}
-				}
-			}
+		try (Connection conn = DriverManager.getConnection(getDatabaseUrl());
+			 Statement stmt = conn.createStatement()) {
+			String sql = """
+				CREATE TABLE IF NOT EXISTS passwords (
+					service TEXT PRIMARY KEY,
+					username TEXT NOT NULL,
+					password TEXT NOT NULL
+				)
+				""";
+			stmt.execute(sql);
 		} catch (SQLException e) {
-			String errorMsg = "Failed to initialize database: " + e.getMessage();
-			System.err.println(errorMsg);
-			throw new RuntimeException(errorMsg, e);
+			System.out.println("Error initializing database: " + e.getMessage());
 		}
 	}
 
