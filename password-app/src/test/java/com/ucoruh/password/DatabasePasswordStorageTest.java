@@ -24,43 +24,51 @@ public class DatabasePasswordStorageTest {
     private ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private PrintStream originalOut = System.out;
     private static final String TEST_MASTER_PASSWORD = "test-master-password";
+    private File tempDbFile;
     
-    /**
-     * Test database URL for in-memory SQLite database.
-     */
-    private static final String TEST_DB_URL = "jdbc:sqlite::memory:";
-
     /**
      * Setup method for preparing the database storage instance.
      */
     @Before
-    public void setUp() {
+    public void setUp() throws IOException {
+        // Create a temporary file for the test database
+        tempDbFile = File.createTempFile("test-db-", ".sqlite");
+        tempDbFile.deleteOnExit();
+        
         // Create a test password storage with a test master password and use a test database
         database = new DatabasePasswordStorage(TEST_MASTER_PASSWORD) {
             @Override
             protected String getDatabaseUrl() {
-                return TEST_DB_URL;
+                return "jdbc:sqlite:" + tempDbFile.getAbsolutePath();
             }
         };
         
         System.setOut(new PrintStream(outContent));
         
-        // Ensure the database is clean for each test
-        cleanupTestDatabase();
-        
-        // Ensure the database is initialized before each test
-        try (Connection conn = DriverManager.getConnection(TEST_DB_URL);
+        // Initialize the database schema
+        initializeDatabase();
+    }
+
+    /**
+     * Initialize the database schema
+     */
+    private void initializeDatabase() {
+        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + tempDbFile.getAbsolutePath());
              Statement stmt = conn.createStatement()) {
-            String sql = """
-                CREATE TABLE IF NOT EXISTS passwords (
+            // Enable foreign keys
+            stmt.execute("PRAGMA foreign_keys = ON");
+            
+            // Create the passwords table
+            stmt.execute("DROP TABLE IF EXISTS passwords");
+            stmt.execute("""
+                CREATE TABLE passwords (
                     service TEXT PRIMARY KEY,
                     username TEXT NOT NULL,
                     password TEXT NOT NULL
                 )
-                """;
-            stmt.execute(sql);
+                """);
         } catch (SQLException e) {
-            System.err.println("Error initializing test database: " + e.getMessage());
+            throw new RuntimeException("Failed to initialize test database", e);
         }
     }
 
@@ -70,18 +78,8 @@ public class DatabasePasswordStorageTest {
     @After
     public void tearDown() {
         System.setOut(originalOut);
-        cleanupTestDatabase();
-    }
-    
-    /**
-     * Helper method to clean up test database.
-     */
-    private void cleanupTestDatabase() {
-        try (Connection conn = DriverManager.getConnection(TEST_DB_URL);
-             Statement stmt = conn.createStatement()) {
-            stmt.execute("DROP TABLE IF EXISTS passwords");
-        } catch (Exception e) {
-            System.err.println("Error cleaning up test database: " + e.getMessage());
+        if (tempDbFile != null && tempDbFile.exists()) {
+            tempDbFile.delete();
         }
     }
 
@@ -300,42 +298,47 @@ public class DatabasePasswordStorageTest {
 
     /**
      * Test method for creating the table if it doesn't exist.
-     * This tests the createTableIfNotExists method more thoroughly.
      */
     @Test
     public void testCreateTableIfNotExistsMethod() {
         try {
-            // Clean up any existing table first
-            cleanupTestDatabase();
-            
-            // Create a new database to trigger createTableIfNotExists
+            // Create a new database instance which should create the table
             DatabasePasswordStorage newDb = new DatabasePasswordStorage(TEST_MASTER_PASSWORD) {
                 @Override
                 protected String getDatabaseUrl() {
-                    return TEST_DB_URL;
+                    return "jdbc:sqlite:" + tempDbFile.getAbsolutePath();
                 }
             };
             
-            // Create another instance which should not recreate the table
-            DatabasePasswordStorage anotherDb = new DatabasePasswordStorage(TEST_MASTER_PASSWORD) {
-                @Override
-                protected String getDatabaseUrl() {
-                    return TEST_DB_URL;
-                }
-            };
+            // Call a method that will trigger table creation
+            newDb.add(new Scanner(new ByteArrayInputStream("TestService\nuser@example.com\nSecureP@ss\n".getBytes())));
             
-            // Verify the table exists by checking if we can run a query against it
-            try (Connection conn = DriverManager.getConnection(TEST_DB_URL);
+            // Verify the table exists and has the correct schema
+            try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + tempDbFile.getAbsolutePath());
                  Statement stmt = conn.createStatement()) {
-                // If this query runs without exception, the table exists
-                stmt.executeQuery("SELECT COUNT(*) FROM passwords");
-                assertTrue(true);
+                // Check if table exists
+                try (ResultSet rs = stmt.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='passwords'")) {
+                    assertTrue("Table 'passwords' should exist", rs.next());
+                }
+                
+                // Check table schema
+                try (ResultSet rs = stmt.executeQuery("PRAGMA table_info(passwords)")) {
+                    // Verify columns
+                    assertTrue("Table should have 'service' column", rs.next());
+                    assertEquals("service", rs.getString("name"));
+                    assertEquals("TEXT", rs.getString("type"));
+                    
+                    assertTrue("Table should have 'username' column", rs.next());
+                    assertEquals("username", rs.getString("name"));
+                    assertEquals("TEXT", rs.getString("type"));
+                    
+                    assertTrue("Table should have 'password' column", rs.next());
+                    assertEquals("password", rs.getString("name"));
+                    assertEquals("TEXT", rs.getString("type"));
+                }
             }
-            
-        } catch (Exception e) {
-            System.err.println("Test exception: " + e.getMessage());
-            // Don't fail the test due to SQLite implementation differences across platforms
-            // In a real project, we would add proper mocking to avoid such issues
+        } catch (SQLException e) {
+            fail("Table creation test failed: " + e.getMessage());
         }
     }
     
@@ -371,7 +374,7 @@ public class DatabasePasswordStorageTest {
         DatabasePasswordStorage nullMasterDb = new DatabasePasswordStorage(null) {
             @Override
             protected String getDatabaseUrl() {
-                return TEST_DB_URL;
+                return "jdbc:sqlite:" + tempDbFile.getAbsolutePath();
             }
         };
         
@@ -401,7 +404,7 @@ public class DatabasePasswordStorageTest {
             
             // Add some encrypted entries directly to ensure they're stored properly
             for (Password password : passwords) {
-                try (Connection conn = DriverManager.getConnection(TEST_DB_URL);
+                try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + tempDbFile.getAbsolutePath());
                     PreparedStatement pstmt = conn.prepareStatement(
                         "INSERT INTO passwords(service, username, password) VALUES(?, ?, ?)")) {
                     
@@ -424,7 +427,7 @@ public class DatabasePasswordStorageTest {
             assertNotNull(multipleOutput);
             
             // Test the decryption error path by creating a corrupt entry
-            try (Connection conn = DriverManager.getConnection(TEST_DB_URL);
+            try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + tempDbFile.getAbsolutePath());
                 PreparedStatement pstmt = conn.prepareStatement(
                         "INSERT INTO passwords(service, username, password) VALUES(?, ?, ?)")) {
                 pstmt.setString(1, "CorruptService");
@@ -469,7 +472,7 @@ public class DatabasePasswordStorageTest {
     public void testDeleteEnhanced() {
         try {
             // Add entries directly to the database to ensure they're there
-            try (Connection conn = DriverManager.getConnection(TEST_DB_URL);
+            try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + tempDbFile.getAbsolutePath());
                  PreparedStatement pstmt = conn.prepareStatement(
                      "INSERT INTO passwords(service, username, password) VALUES(?, ?, ?)")) {
                 
@@ -536,7 +539,7 @@ public class DatabasePasswordStorageTest {
     public void testReadAllEnhanced() {
         try {
             // Add entries directly to the database to ensure they're there
-            try (Connection conn = DriverManager.getConnection(TEST_DB_URL);
+            try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + tempDbFile.getAbsolutePath());
                  PreparedStatement pstmt = conn.prepareStatement(
                      "INSERT INTO passwords(service, username, password) VALUES(?, ?, ?)")) {
                 
@@ -562,7 +565,7 @@ public class DatabasePasswordStorageTest {
             assertTrue("Should read at least one password", !readPasswords.isEmpty());
             
             // Test decryption error path by adding a corrupt entry
-            try (Connection conn = DriverManager.getConnection(TEST_DB_URL);
+            try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + tempDbFile.getAbsolutePath());
                  PreparedStatement pstmt = conn.prepareStatement(
                         "INSERT INTO passwords(service, username, password) VALUES(?, ?, ?)")) {
                 pstmt.setString(1, "CorruptService");
@@ -617,7 +620,7 @@ public class DatabasePasswordStorageTest {
             
             // Verify entries were written by checking directly in the database
             int count = 0;
-            try (Connection conn = DriverManager.getConnection(TEST_DB_URL);
+            try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + tempDbFile.getAbsolutePath());
                  Statement stmt = conn.createStatement();
                  ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM passwords")) {
                 if (rs.next()) {
@@ -633,7 +636,7 @@ public class DatabasePasswordStorageTest {
             
             // Verify the database is empty
             int emptyCount = 0;
-            try (Connection conn = DriverManager.getConnection(TEST_DB_URL);
+            try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + tempDbFile.getAbsolutePath());
                  Statement stmt = conn.createStatement();
                  ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM passwords")) {
                 if (rs.next()) {
@@ -647,7 +650,7 @@ public class DatabasePasswordStorageTest {
             DatabasePasswordStorage nullMasterDb = new DatabasePasswordStorage(null) {
                 @Override
                 protected String getDatabaseUrl() {
-                    return TEST_DB_URL;
+                    return "jdbc:sqlite:" + tempDbFile.getAbsolutePath();
                 }
             };
             
@@ -684,7 +687,7 @@ public class DatabasePasswordStorageTest {
     public void testUpdateEnhanced() {
         try {
             // Add a password directly to the database
-            try (Connection conn = DriverManager.getConnection(TEST_DB_URL);
+            try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + tempDbFile.getAbsolutePath());
                  PreparedStatement pstmt = conn.prepareStatement(
                      "INSERT INTO passwords(service, username, password) VALUES(?, ?, ?)")) {
                 
@@ -731,12 +734,12 @@ public class DatabasePasswordStorageTest {
             DatabasePasswordStorage nullMasterDb = new DatabasePasswordStorage(null) {
                 @Override
                 protected String getDatabaseUrl() {
-                    return TEST_DB_URL;
+                    return "jdbc:sqlite:" + tempDbFile.getAbsolutePath();
                 }
             };
             
             // Add an unencrypted entry for the null master password db
-            try (Connection conn = DriverManager.getConnection(TEST_DB_URL);
+            try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + tempDbFile.getAbsolutePath());
                  PreparedStatement pstmt = conn.prepareStatement(
                     "INSERT INTO passwords(service, username, password) VALUES(?, ?, ?)")) {
                 pstmt.setString(1, "TestService");

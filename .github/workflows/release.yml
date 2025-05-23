@@ -68,13 +68,26 @@ jobs:
           echo "export DISPLAY=:99" >> $GITHUB_ENV
         shell: bash
 
-      - name: Perform Maven clean, test, and packaging
-        run: mvn clean test package
+      - name: Build and Test
+        run: |
+          cd password-app
+          mvn clean verify
         working-directory: ./password-app
-        env:
-          DISPLAY: :99
-          # Add headless property for Java AWT
-          _JAVA_OPTIONS: "-Djava.awt.headless=false"
+
+      - name: Check Test Coverage
+        run: |
+          # JaCoCo's check goal will enforce coverage requirements
+          # If coverage is below threshold, the build will fail
+          cd password-app
+          mvn jacoco:check
+        working-directory: ./password-app
+
+      - name: Generate Test Coverage Report
+        if: always()  # Generate report even if tests fail
+        run: |
+          cd password-app
+          mvn jacoco:report
+        working-directory: ./password-app
 
       - name: Generate Folders
         run: |
@@ -85,26 +98,6 @@ jobs:
             mkdir -p $currentDir/target/site/coveragereport
         working-directory: ./password-app
                 
-      - name: Check Test Coverage
-        run: |
-          # Parse the JaCoCo XML report and check coverage percentage
-          # Get total coverage excluding GUI package
-          covered=$(xmllint --xpath "sum(//package[not(contains(@name,'gui'))]//counter[@type='INSTRUCTION']/@covered)" target/site/jacoco/jacoco.xml)
-          missed=$(xmllint --xpath "sum(//package[not(contains(@name,'gui'))]//counter[@type='INSTRUCTION']/@missed)" target/site/jacoco/jacoco.xml)
-          total=$((covered + missed))
-          coverage_percentage=$(awk "BEGIN { print ($covered / $total) * 100 }")
-          # Check if coverage is 100%
-          if (( $(echo "$coverage_percentage == 100" | bc -l) )); then
-            echo "Test coverage is 100%!"
-          else
-            echo "Test coverage is not 100%."
-            exit 1  # Fail the GitHub Actions workflow
-          fi
-          echo "Coverage Percentage: $coverage_percentage"
-          echo "Covered: $covered"
-          echo "Missed: $missed"
-        working-directory: ./password-app 
-
       - name: Install ReportGenerator
         run: dotnet tool install -g dotnet-reportgenerator-globaltool
         
@@ -143,12 +136,6 @@ jobs:
         run: mvn site
         working-directory: ./password-app
 
-      #- name: Archive Coverage Report
-      #  uses: actions/upload-artifact@v2
-      #  with:
-      #    name: coverage-report
-      #    path: coveragereport
-          
       - name: Get Commit Summary
         id: commit_summary
         run: echo "summary=$(git log --format=%B -n 10 ${{ github.sha }})" >> $GITHUB_OUTPUT
@@ -192,14 +179,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.SECRET_SAMET }}
           
       - name: Upload Test Coverage Report
-        uses: actions/upload-release-asset@v1
+        if: always()
+        uses: actions/upload-artifact@v2
         with:
-          upload_url: ${{ steps.create_common_release.outputs.upload_url }}
-          asset_path: ./test-coverage-report.tar.gz
-          asset_name: test-coverage-report.tar.gz
-          asset_content_type: application/gzip
-        env:
-          GITHUB_TOKEN: ${{ secrets.SECRET_SAMET }}
+          name: coverage-report
+          path: password-app/target/site/jacoco/
           
       - name: Upload Doc Coverage Report
         uses: actions/upload-release-asset@v1
