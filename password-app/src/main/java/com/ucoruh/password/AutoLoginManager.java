@@ -20,8 +20,13 @@ import java.util.*;
  * and maintains a collection of services for which auto-login is enabled.
  */
 public class AutoLoginManager {
+    /** @brief File path for storing auto-login settings */
     private static final String AUTO_LOGIN_FILE = "autologin.txt";
+    
+    /** @brief Set containing services with auto-login enabled */
     private static Set<String> autoLoginServices = new HashSet<>();
+    
+    /** @brief Flag indicating if the manager has been initialized */
     private static boolean initialized = false;
     
     /**

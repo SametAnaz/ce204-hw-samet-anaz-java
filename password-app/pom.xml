@@ -182,15 +182,14 @@
     <version>2.22.1</version>
     <configuration>
         <includes>
-            <include>**/com/ucoruh/password/*Test.java</include> 
-            <include>**/com/ucoruh/password/gui/*Test.java</include>
+            <include>**/com/ucoruh/password/*Test.java</include>
         </includes>
+        <excludes>
+            <exclude>**/com/ucoruh/password/gui/**/*Test.java</exclude>
+        </excludes>
         <systemPropertyVariables>
-            <!-- Configure Java AWT to run in headless mode if needed -->
             <java.awt.headless>false</java.awt.headless>
-            <!-- Set default value for DISPLAY if running in CI environment -->
             <awt.toolkit>sun.awt.X11.XToolkit</awt.toolkit>
-            <!-- Ensure system knows Xvfb is available -->
             <xvfb.available>true</xvfb.available>
         </systemPropertyVariables>
     </configuration>
@@ -212,6 +211,11 @@
             <goals>
                 <goal>report</goal>
             </goals>
+            <configuration>
+                <excludes>
+                    <exclude>**/com/ucoruh/password/gui/**/*</exclude>
+                </excludes>
+            </configuration>
         </execution>
     </executions>
 </plugin>
