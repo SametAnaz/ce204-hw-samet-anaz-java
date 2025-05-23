@@ -240,7 +240,7 @@
                             <createDependencyReducedPom>false</createDependencyReducedPom>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>com.ucoruh.password.PasswordApp</mainClass>
+                                    <mainClass>com.ucoruh.gui.PasswordManagerGUI</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
@@ -265,7 +265,7 @@
                             <jar>target/${project.artifactId}-${project.version}.jar</jar>
                             <errTitle>Password Manager</errTitle>
                             <classPath>
-                                <mainClass>com.ucoruh.password.gui.PasswordManagerGUI</mainClass>
+                                <mainClass>com.ucoruh.gui.PasswordManagerGUI</mainClass>
                                 <addDependencies>true</addDependencies>
                             </classPath>
                             <jre>

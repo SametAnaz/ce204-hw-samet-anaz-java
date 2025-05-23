@@ -2,6 +2,8 @@ package com.ucoruh.password;
 
 import java.io.PrintStream;
 import java.util.Scanner;
+import com.ucoruh.gui.PasswordManagerGUI;
+import java.awt.EventQueue;
 
 /**
  * @brief Entry point for the Password Manager console application.
@@ -117,6 +119,17 @@ public class PasswordApp {
         scanner.nextLine();
     }
 
+    private static void startGUI() {
+        EventQueue.invokeLater(() -> {
+            try {
+                PasswordManagerGUI frame = new PasswordManagerGUI();
+                frame.setVisible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
     /**
      * @brief Main method to launch the console application.
      *
@@ -137,34 +150,7 @@ public class PasswordApp {
         
         if (useGUI) {
             // Start in GUI mode
-            try {
-                // Set system look and feel
-                javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
-                
-                // Font settings
-                java.awt.Font defaultFont = new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 14);
-                javax.swing.UIManager.put("Button.font", defaultFont);
-                javax.swing.UIManager.put("Label.font", defaultFont);
-                javax.swing.UIManager.put("TextField.font", defaultFont);
-                javax.swing.UIManager.put("PasswordField.font", defaultFont);
-                javax.swing.UIManager.put("TextArea.font", defaultFont);
-                javax.swing.UIManager.put("ComboBox.font", defaultFont);
-                javax.swing.UIManager.put("CheckBox.font", defaultFont);
-                javax.swing.UIManager.put("RadioButton.font", defaultFont);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            
-            java.awt.EventQueue.invokeLater(new Runnable() {
-                public void run() {
-                    try {
-                        com.ucoruh.password.gui.PasswordManagerGUI frame = new com.ucoruh.password.gui.PasswordManagerGUI();
-                        frame.setVisible(true);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
+            startGUI();
         } else {
             // Start in console mode
             Scanner scanner = new Scanner(System.in);
