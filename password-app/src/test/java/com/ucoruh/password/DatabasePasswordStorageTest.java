@@ -28,7 +28,7 @@ public class DatabasePasswordStorageTest {
     /**
      * Test database URL for in-memory SQLite database.
      */
-    private static final String TEST_DB_URL = "jdbc:sqlite::memory:";
+    private static final String TEST_DB_URL = "jdbc:sqlite:target/test.db";
 
     /**
      * Setup method for preparing the database storage instance.
@@ -51,51 +51,16 @@ public class DatabasePasswordStorageTest {
             // First drop the table if it exists to start fresh
             try (Statement stmt = conn.createStatement()) {
                 stmt.execute("DROP TABLE IF EXISTS passwords");
-            }
-            
-            // Create the table
-            try (Statement stmt = conn.createStatement()) {
-                String sql = """
-                    CREATE TABLE passwords (
-                        service TEXT PRIMARY KEY,
-                        username TEXT NOT NULL,
-                        password TEXT NOT NULL
-                    )
-                    """;
-                stmt.execute(sql);
-                System.out.println("Created passwords table successfully");
-            }
-            
-            // Verify the table was created
-            try (ResultSet rs = conn.getMetaData().getTables(null, null, "passwords", null)) {
-                if (!rs.next()) {
-                    throw new SQLException("Failed to create passwords table");
-                }
-            }
-            
-            // Verify table structure
-            try (ResultSet rs = conn.createStatement().executeQuery("PRAGMA table_info(passwords)")) {
-                boolean hasService = false;
-                boolean hasUsername = false;
-                boolean hasPassword = false;
-                
-                while (rs.next()) {
-                    String columnName = rs.getString("name");
-                    switch (columnName.toLowerCase()) {
-                        case "service" -> hasService = true;
-                        case "username" -> hasUsername = true;
-                        case "password" -> hasPassword = true;
-                    }
-                }
-                
-                if (!hasService || !hasUsername || !hasPassword) {
-                    throw new SQLException("Table structure verification failed");
-                }
+                // Create the passwords table with the correct schema
+                stmt.execute("CREATE TABLE IF NOT EXISTS passwords (" +
+                           "service TEXT NOT NULL, " +
+                           "username TEXT NOT NULL, " +
+                           "password TEXT NOT NULL, " +
+                           "PRIMARY KEY (service))");
             }
         } catch (SQLException e) {
-            System.err.println("Critical error during database setup: " + e.getMessage());
-            e.printStackTrace();
-            throw e; // Re-throw to fail the test
+            System.err.println("Error setting up test database: " + e.getMessage());
+            throw e;
         }
     }
 
@@ -103,23 +68,18 @@ public class DatabasePasswordStorageTest {
      * Tear-down method for cleaning up after tests.
      */
     @After
-    public void tearDown() {
+    public void tearDown() throws Exception {
         System.setOut(originalOut);
-        cleanupTestDatabase();
-    }
-    
-    /**
-     * Helper method to clean up test database.
-     */
-    private void cleanupTestDatabase() {
+        // Clean up the test database
         try (Connection conn = DriverManager.getConnection(TEST_DB_URL);
              Statement stmt = conn.createStatement()) {
             stmt.execute("DROP TABLE IF EXISTS passwords");
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.err.println("Error cleaning up test database: " + e.getMessage());
+            throw e;
         }
     }
-
+    
     /**
      * Test method for the database URL.
      */
@@ -341,7 +301,10 @@ public class DatabasePasswordStorageTest {
     public void testCreateTableIfNotExistsMethod() {
         try {
             // Clean up any existing table first
-            cleanupTestDatabase();
+            try (Connection conn = DriverManager.getConnection(TEST_DB_URL);
+                 Statement stmt = conn.createStatement()) {
+                stmt.execute("DROP TABLE IF EXISTS passwords");
+            }
             
             // Create a new database to trigger createTableIfNotExists
             DatabasePasswordStorage newDb = new DatabasePasswordStorage(TEST_MASTER_PASSWORD) {
