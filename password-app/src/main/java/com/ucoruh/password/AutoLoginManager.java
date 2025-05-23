@@ -1,12 +1,9 @@
 /**
  * @file AutoLoginManager.java
- * @brief Provides auto-login functionality for the password manager.
- *
- * This class manages auto-login settings for different services and provides
- * methods to enable or disable auto-login functionality for specific accounts.
- *
  * @class AutoLoginManager
- * The class that provides auto-login functionality.
+ * @brief Manages auto-login functionality for the password manager
+ * @details This class manages auto-login settings for different services and provides
+ * methods to enable or disable auto-login functionality for specific accounts.
  */
 package com.ucoruh.password;
 
@@ -20,14 +17,25 @@ import java.util.*;
  * and maintains a collection of services for which auto-login is enabled.
  */
 public class AutoLoginManager {
+    /**
+     * @brief File path for storing auto-login settings
+     */
     private static final String AUTO_LOGIN_FILE = "autologin.txt";
+    
+    /**
+     * @brief Set of services with auto-login enabled
+     */
     private static Set<String> autoLoginServices = new HashSet<>();
+    
+    /**
+     * @brief Flag indicating if the manager has been initialized
+     */
     private static boolean initialized = false;
     
     /**
-     * @brief Initializes the AutoLoginManager by loading auto-login settings.
-     *
-     * This method loads the auto-login settings from the file if it exists.
+     * @brief Initializes the AutoLoginManager
+     * @details Loads the auto-login settings from the file if it exists.
+     * This method is called internally before any operation.
      */
     private static void initialize() {
         if (initialized) return;
@@ -45,9 +53,9 @@ public class AutoLoginManager {
     }
     
     /**
-     * @brief Saves the auto-login settings to a file.
-     *
-     * This method writes the current auto-login settings to the file.
+     * @brief Saves the current auto-login settings
+     * @details Writes the current auto-login settings to the configuration file.
+     * Called after any modification to the settings.
      */
     private static void saveSettings() {
         try (PrintWriter writer = new PrintWriter(new FileWriter(AUTO_LOGIN_FILE))) {
@@ -60,10 +68,12 @@ public class AutoLoginManager {
     }
     
     /**
-     * @brief Checks if auto-login is enabled for a service.
+     * @brief Checks if auto-login is enabled for a service
+     * @details Verifies whether the specified service has auto-login enabled
+     * by checking the autoLoginServices set.
      *
-     * @param service The service name to check.
-     * @return true if auto-login is enabled for the service, false otherwise.
+     * @param service The service name to check
+     * @return boolean True if auto-login is enabled, false otherwise
      */
     public static boolean isAutoLoginEnabled(String service) {
         initialize();
@@ -71,9 +81,11 @@ public class AutoLoginManager {
     }
     
     /**
-     * @brief Enables auto-login for a service.
+     * @brief Enables auto-login for a service
+     * @details Adds the specified service to the auto-login enabled set
+     * and saves the updated settings.
      *
-     * @param service The service name to enable auto-login for.
+     * @param service The service name to enable auto-login for
      */
     public static void enableAutoLogin(String service) {
         initialize();
@@ -82,9 +94,11 @@ public class AutoLoginManager {
     }
     
     /**
-     * @brief Disables auto-login for a service.
+     * @brief Disables auto-login for a service
+     * @details Removes the specified service from the auto-login enabled set
+     * and saves the updated settings.
      *
-     * @param service The service name to disable auto-login for.
+     * @param service The service name to disable auto-login for
      */
     public static void disableAutoLogin(String service) {
         initialize();
@@ -93,14 +107,13 @@ public class AutoLoginManager {
     }
     
     /**
-     * @brief Simulates auto-login to a service.
+     * @brief Performs auto-login for a service
+     * @details Attempts to automatically log in to the specified service
+     * if auto-login is enabled and credentials are available.
      *
-     * This method checks if auto-login is enabled for the given service and,
-     * if it is, retrieves the password for the service and simulates a login.
-     *
-     * @param service The service name to auto-login to.
-     * @param passwordManager The PasswordManager instance to use.
-     * @return true if auto-login was successful, false otherwise.
+     * @param service The service name to auto-login to
+     * @param passwordManager The PasswordManager instance containing credentials
+     * @return boolean True if auto-login was successful, false otherwise
      */
     public static boolean autoLogin(String service, PasswordManager passwordManager) {
         if (isAutoLoginEnabled(service)) {
@@ -116,13 +129,12 @@ public class AutoLoginManager {
     }
     
     /**
-     * @brief Displays the auto-login menu and processes user input.
+     * @brief Displays and handles the auto-login menu
+     * @details Shows the auto-login management menu and processes user input
+     * for various auto-login operations.
      *
-     * This method shows options to enable or disable auto-login for services
-     * and processes the user's selection.
-     *
-     * @param scanner The Scanner object for user input.
-     * @param passwordManager The PasswordManager instance to use.
+     * @param scanner Scanner object for reading user input
+     * @param passwordManager The PasswordManager instance to use for credentials
      */
     public static void menu(Scanner scanner, PasswordManager passwordManager) {
         initialize();
@@ -167,10 +179,12 @@ public class AutoLoginManager {
     }
     
     /**
-     * @brief Menu to enable auto-login for a service.
+     * @brief Handles the enable auto-login menu option
+     * @details Prompts for a service name and enables auto-login if the service
+     * exists in the password manager.
      *
-     * @param scanner The Scanner object for user input.
-     * @param passwordManager The PasswordManager instance to use.
+     * @param scanner Scanner object for reading user input
+     * @param passwordManager The PasswordManager instance to verify service existence
      */
     private static void enableAutoLoginMenu(Scanner scanner, PasswordManager passwordManager) {
         System.out.print("Enter service name to enable auto-login: ");
@@ -186,9 +200,11 @@ public class AutoLoginManager {
     }
     
     /**
-     * @brief Menu to disable auto-login for a service.
+     * @brief Handles the disable auto-login menu option
+     * @details Prompts for a service name and disables auto-login if it was
+     * previously enabled.
      *
-     * @param scanner The Scanner object for user input.
+     * @param scanner Scanner object for reading user input
      */
     private static void disableAutoLoginMenu(Scanner scanner) {
         System.out.print("Enter service name to disable auto-login: ");
@@ -203,7 +219,9 @@ public class AutoLoginManager {
     }
     
     /**
-     * @brief Displays all services with auto-login enabled.
+     * @brief Shows all services with auto-login enabled
+     * @details Displays a list of all services that currently have
+     * auto-login enabled.
      */
     private static void showAutoLoginServices() {
         initialize();
@@ -218,10 +236,12 @@ public class AutoLoginManager {
     }
     
     /**
-     * @brief Simulates auto-login for a service.
+     * @brief Simulates auto-login for a specified service
+     * @details Prompts for a service name and attempts to perform
+     * auto-login using the stored credentials.
      *
-     * @param scanner The Scanner object for user input.
-     * @param passwordManager The PasswordManager instance to use.
+     * @param scanner Scanner object for reading user input
+     * @param passwordManager The PasswordManager instance to use for credentials
      */
     private static void simulateAutoLogin(Scanner scanner, PasswordManager passwordManager) {
         System.out.print("Enter service name to auto-login: ");

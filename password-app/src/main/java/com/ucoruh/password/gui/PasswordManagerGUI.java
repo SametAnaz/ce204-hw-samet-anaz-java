@@ -16,23 +16,62 @@ import java.util.ArrayList;
 import com.ucoruh.password.*;
 
 /**
- * Main GUI class for the Password Manager application
+ * @file PasswordManagerGUI.java
+ * @class PasswordManagerGUI
+ * @brief Main graphical user interface for the Password Manager application
+ * @details Provides a user-friendly interface for managing passwords, including
+ * features like password generation, storage, and auto-login capabilities.
  */
 public class PasswordManagerGUI extends JFrame {
 
+    /**
+     * @brief Serialization version ID for the class
+     */
     private static final long serialVersionUID = 1L;
+    
+    /**
+     * @brief Main content panel of the application
+     */
     private JPanel contentPane;
+    
+    /**
+     * @brief Password field for master password input
+     */
     private JPasswordField txtPassword;
+    
+    /**
+     * @brief Authentication manager instance
+     */
     private AuthManager authManager;
     
-    // Controllers
+    /**
+     * @brief Controller for adding new passwords
+     */
     private AddPasswordController addPasswordController;
+    
+    /**
+     * @brief Controller for viewing stored passwords
+     */
     private ViewPasswordController viewPasswordController;
+    
+    /**
+     * @brief Controller for updating existing passwords
+     */
     private UpdatePasswordController updatePasswordController;
+    
+    /**
+     * @brief Controller for deleting passwords
+     */
     private DeletePasswordController deletePasswordController;
+    
+    /**
+     * @brief Controller for generating new passwords
+     */
     private GeneratePasswordController generatePasswordController;
     
-    // Modern color palette
+    /**
+     * @brief Color constants for the modern UI theme
+     */
     public static final Color PRIMARY_COLOR = new Color(26, 115, 232);      // Google Blue
     public static final Color SECONDARY_COLOR = new Color(52, 168, 83);     // Google Green
     public static final Color ACCENT_COLOR = new Color(234, 67, 53);        // Google Red
@@ -42,7 +81,10 @@ public class PasswordManagerGUI extends JFrame {
     public static final Color HEADER_BG = new Color(33, 33, 33);            // Header background
 
     /**
-     * Launch the application
+     * @brief Application entry point
+     * @details Initializes the GUI with system look and feel and custom styling
+     *
+     * @param args Command line arguments (not used)
      */
     public static void main(String[] args) {
         try {
@@ -81,7 +123,8 @@ public class PasswordManagerGUI extends JFrame {
     }
 
     /**
-     * Create the GUI
+     * @brief Constructor for the PasswordManagerGUI
+     * @details Initializes the main window, sets up controllers, and creates the UI components
      */
     public PasswordManagerGUI() {
         setTitle("Password Manager");
@@ -112,7 +155,8 @@ public class PasswordManagerGUI extends JFrame {
     }
     
     /**
-     * Initialize all controllers
+     * @brief Initializes all controller instances
+     * @details Creates instances of all password management controllers
      */
     private void initializeControllers() {
         addPasswordController = new AddPasswordController(this);
@@ -123,7 +167,8 @@ public class PasswordManagerGUI extends JFrame {
     }
     
     /**
-     * Create GUI components
+     * @brief Creates the main GUI components
+     * @details Sets up the main window layout and initial login panel
      */
     private void createComponents() {
         contentPane = new JPanel();
@@ -152,7 +197,10 @@ public class PasswordManagerGUI extends JFrame {
     }
     
     /**
-     * Create login panel
+     * @brief Creates the login panel
+     * @details Creates and configures the login interface with master password input
+     *
+     * @return JPanel The configured login panel
      */
     private JPanel createLoginPanel() {
         JPanel loginContainer = new JPanel(new GridBagLayout());
@@ -269,7 +317,12 @@ public class PasswordManagerGUI extends JFrame {
     }
     
     /**
-     * Create styled button
+     * @brief Creates a styled button with consistent appearance
+     * @details Creates a button with modern styling, hover effects, and consistent colors
+     *
+     * @param text The button text
+     * @param bgColor The background color for the button
+     * @return JButton The styled button instance
      */
     public JButton createStyledButton(String text, Color bgColor) {
         JButton button = new JButton(text);
@@ -308,7 +361,12 @@ public class PasswordManagerGUI extends JFrame {
     }
     
     /**
-     * Darken color
+     * @brief Darkens a color by a specified fraction
+     * @details Reduces RGB values of a color by the given fraction
+     *
+     * @param color The color to darken
+     * @param fraction The amount to darken (0.0 to 1.0)
+     * @return Color The darkened color
      */
     private Color darken(Color color, float fraction) {
         int red = Math.max(0, Math.round(color.getRed() * (1 - fraction)));
@@ -318,7 +376,8 @@ public class PasswordManagerGUI extends JFrame {
     }
     
     /**
-     * Perform login
+     * @brief Handles the login process
+     * @details Validates the master password and initializes the main application
      */
     private void login() {
         char[] password = txtPassword.getPassword();
@@ -373,7 +432,8 @@ public class PasswordManagerGUI extends JFrame {
     }
     
     /**
-     * Create master password
+     * @brief Creates a new master password
+     * @details Validates and sets up a new master password for the application
      */
     private void createMasterPassword() {
         char[] password = txtPassword.getPassword();
@@ -423,7 +483,8 @@ public class PasswordManagerGUI extends JFrame {
     }
     
     /**
-     * Show main menu
+     * @brief Shows the main menu
+     * @details Creates and displays the main application menu with all features
      */
     private void showMainMenu() {
         // Clear existing content
@@ -494,7 +555,10 @@ public class PasswordManagerGUI extends JFrame {
     }
     
     /**
-     * Handle menu selection
+     * @brief Handles main menu selection
+     * @details Routes to appropriate feature based on menu selection
+     *
+     * @param menuIndex The index of the selected menu item
      */
     private void handleMenuSelection(int menuIndex) {
         switch (menuIndex) {
@@ -530,7 +594,8 @@ public class PasswordManagerGUI extends JFrame {
     }
     
     /**
-     * Show user authentication screen
+     * @brief Shows the user authentication screen
+     * @details Displays interface for changing master password
      */
     private void showUserAuthentication() {
         // Clear existing content
@@ -728,7 +793,8 @@ public class PasswordManagerGUI extends JFrame {
     }
     
     /**
-     * Show password management screen
+     * @brief Shows the password management screen
+     * @details Displays interface for managing stored passwords
      */
     private void showPasswordManagement() {
         // Clear existing content
@@ -846,7 +912,8 @@ public class PasswordManagerGUI extends JFrame {
     }
     
     /**
-     * Show password generator screen
+     * @brief Shows the password generator screen
+     * @details Displays interface for generating new passwords
      */
     private void showPasswordGenerator() {
         // Clear existing content
@@ -1078,7 +1145,8 @@ public class PasswordManagerGUI extends JFrame {
     }
     
     /**
-     * Show auto-login feature screen
+     * @brief Shows the auto-login feature screen
+     * @details Displays interface for managing auto-login settings
      */
     private void showAutoLoginFeature() {
         // Clear existing content

@@ -9,21 +9,26 @@ import javax.crypto.spec.SecretKeySpec;
 
 /**
  * @file EncryptionUtil.java
- * @brief Utility class for encryption and decryption operations.
- *
- * This class provides methods to securely encrypt and decrypt sensitive information
+ * @class EncryptionUtil
+ * @brief Utility class for encryption and decryption operations
+ * @details This class provides methods to securely encrypt and decrypt sensitive information
  * like passwords using AES encryption with a key derived from the master password.
  */
 public class EncryptionUtil {
+    /**
+     * @brief The encryption algorithm used (AES)
+     */
     private static final String ALGORITHM = "AES";
     
     /**
-     * @brief Encrypts a string using AES encryption.
+     * @brief Encrypts a string using AES encryption
+     * @details Uses the master password to derive an encryption key and encrypts the data
+     * using AES encryption. The result is encoded in Base64 format.
      *
-     * @param data The string to encrypt.
-     * @param masterPassword The master password used to derive the encryption key.
-     * @return The encrypted string in Base64 encoding.
-     * @throws Exception If encryption fails.
+     * @param data The string to encrypt
+     * @param masterPassword The master password used to derive the encryption key
+     * @return String The encrypted string in Base64 encoding
+     * @throws Exception If encryption fails
      */
     public static String encrypt(String data, String masterPassword) throws Exception {
         SecretKeySpec secretKey = createSecretKey(masterPassword);
@@ -34,12 +39,14 @@ public class EncryptionUtil {
     }
     
     /**
-     * @brief Decrypts a string that was encrypted using AES encryption.
+     * @brief Decrypts a string that was encrypted using AES encryption
+     * @details Uses the master password to derive the decryption key and decrypts
+     * the Base64 encoded encrypted data using AES decryption.
      *
-     * @param encryptedData The encrypted string in Base64 encoding.
-     * @param masterPassword The master password used to derive the decryption key.
-     * @return The decrypted string.
-     * @throws Exception If decryption fails.
+     * @param encryptedData The encrypted string in Base64 encoding
+     * @param masterPassword The master password used to derive the decryption key
+     * @return String The decrypted string
+     * @throws Exception If decryption fails
      */
     public static String decrypt(String encryptedData, String masterPassword) throws Exception {
         SecretKeySpec secretKey = createSecretKey(masterPassword);
@@ -51,10 +58,13 @@ public class EncryptionUtil {
     }
     
     /**
-     * @brief Creates a SecretKeySpec from the master password.
+     * @brief Creates a SecretKeySpec from the master password
+     * @details Hashes the master password using SHA-256 and creates an AES key
+     * using the first 16 bytes of the hash.
      *
-     * @param masterPassword The master password.
-     * @return A SecretKeySpec for use with AES encryption.
+     * @param masterPassword The master password to derive the key from
+     * @return SecretKeySpec The generated secret key for AES encryption
+     * @throws RuntimeException If the SHA-256 algorithm is not available
      */
     private static SecretKeySpec createSecretKey(String masterPassword) {
         try {
@@ -71,12 +81,14 @@ public class EncryptionUtil {
     }
     
     /**
-     * @brief Hashes a string using SHA-256 algorithm.
+     * @brief Hashes a string using SHA-256 algorithm
+     * @details Creates a secure hash of the input string using SHA-256 algorithm
+     * and returns it in hexadecimal format. This is useful for securely storing
+     * the master password.
      *
-     * This method is useful for securely storing the master password.
-     *
-     * @param input The string to hash.
-     * @return The hashed string in hexadecimal format.
+     * @param input The string to hash
+     * @return String The hashed string in hexadecimal format
+     * @throws RuntimeException If the SHA-256 algorithm is not available
      */
     public static String hashString(String input) {
         try {

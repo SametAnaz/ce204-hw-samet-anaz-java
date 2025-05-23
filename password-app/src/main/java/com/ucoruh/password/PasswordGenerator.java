@@ -7,14 +7,14 @@ import java.util.Scanner;
  * @file PasswordGenerator.java
  * @class PasswordGenerator
  * @brief Utility class for generating random passwords.
- *
- * This class provides methods to generate secure random passwords using configurable
+ * @details This class provides methods to generate secure random passwords using configurable
  * character sets.
  */
 public class PasswordGenerator {
 
     /**
-     * @brief Character sets for password generation.
+     * @brief Character sets used for password generation
+     * @details These constants define the character sets available for password generation
      */
     private static final String UPPERCASE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final String LOWERCASE_CHARS = "abcdefghijklmnopqrstuvwxyz";
@@ -23,14 +23,13 @@ public class PasswordGenerator {
     private static final String CHARACTERS = UPPERCASE_CHARS + LOWERCASE_CHARS + DIGIT_CHARS + SPECIAL_CHARS;
 
     /**
-     * @brief Generates a random password of a given length.
-     *
-     * This method uses a random number generator and a predefined character set to
+     * @brief Generates a random password of a given length
+     * @details This method uses a random number generator and a predefined character set to
      * create a password string of the specified length. If a negative length is provided,
      * an empty string is returned.
      *
-     * @param length Desired password length.
-     * @return A randomly generated password as a String.
+     * @param length The desired length of the password
+     * @return String A randomly generated password
      */
     public static String generatePassword(int length) {
         // For backward compatibility, use all character sets
@@ -38,18 +37,17 @@ public class PasswordGenerator {
     }
     
     /**
-     * @brief Generates a random password of a given length with specific character sets.
-     *
-     * This method allows selective inclusion of character sets (uppercase letters,
+     * @brief Generates a random password with specific character sets
+     * @details This method allows selective inclusion of character sets (uppercase letters,
      * lowercase letters, digits, and special characters) in the generated password.
      * At least one character set must be included.
      *
-     * @param length Desired password length.
-     * @param includeUppercase Whether to include uppercase letters.
-     * @param includeLowercase Whether to include lowercase letters.
-     * @param includeDigits Whether to include digits.
-     * @param includeSpecial Whether to include special characters.
-     * @return A randomly generated password as a String.
+     * @param length The desired length of the password
+     * @param includeUppercase Whether to include uppercase letters (A-Z)
+     * @param includeLowercase Whether to include lowercase letters (a-z)
+     * @param includeDigits Whether to include digits (0-9)
+     * @param includeSpecial Whether to include special characters
+     * @return String A randomly generated password meeting the specified criteria
      */
     public static String generatePassword(int length, boolean includeUppercase,
                                          boolean includeLowercase, boolean includeDigits,
@@ -106,12 +104,11 @@ public class PasswordGenerator {
     }
 
     /**
-     * @brief Prompts for password length and outputs the generated password.
-     *
-     * This method reads the desired password length from the user input using the provided
+     * @brief Prompts user for password length and generates a password
+     * @details This method reads the desired password length from the user input using the provided
      * Scanner, then generates and prints the random password.
      *
-     * @param scanner Scanner for user input.
+     * @param scanner Scanner object for reading user input
      */
     public static void generate(Scanner scanner) {
         System.out.print("Enter desired password length: ");
