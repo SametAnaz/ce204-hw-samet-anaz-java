@@ -32,9 +32,10 @@ public class DatabasePasswordStorageTest {
 
     /**
      * Setup method for preparing the database storage instance.
+     * @throws Exception if database setup fails
      */
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         // Create a test password storage with a test master password and use a test database
         database = new DatabasePasswordStorage(TEST_MASTER_PASSWORD) {
             @Override
@@ -49,18 +50,39 @@ public class DatabasePasswordStorageTest {
         cleanupTestDatabase();
         
         // Ensure the database is initialized before each test
-        try (Connection conn = DriverManager.getConnection(TEST_DB_URL);
-             Statement stmt = conn.createStatement()) {
-            String sql = """
-                CREATE TABLE IF NOT EXISTS passwords (
-                    service TEXT PRIMARY KEY,
-                    username TEXT NOT NULL,
-                    password TEXT NOT NULL
-                )
-                """;
-            stmt.execute(sql);
+        try (Connection conn = DriverManager.getConnection(TEST_DB_URL)) {
+            // First check if the table exists
+            boolean tableExists = false;
+            try (ResultSet rs = conn.getMetaData().getTables(null, null, "passwords", null)) {
+                tableExists = rs.next();
+            }
+            
+            if (!tableExists) {
+                try (Statement stmt = conn.createStatement()) {
+                    String sql = """
+                        CREATE TABLE IF NOT EXISTS passwords (
+                            service TEXT PRIMARY KEY,
+                            username TEXT NOT NULL,
+                            password TEXT NOT NULL
+                        )
+                        """;
+                    stmt.execute(sql);
+                    System.out.println("Created passwords table successfully");
+                }
+            } else {
+                System.out.println("Passwords table already exists");
+            }
+            
+            // Verify the table was created
+            try (ResultSet rs = conn.getMetaData().getTables(null, null, "passwords", null)) {
+                if (!rs.next()) {
+                    throw new SQLException("Failed to create passwords table");
+                }
+            }
         } catch (SQLException e) {
-            System.err.println("Error initializing test database: " + e.getMessage());
+            System.err.println("Critical error during database setup: " + e.getMessage());
+            e.printStackTrace();
+            throw e; // Re-throw to fail the test
         }
     }
 
