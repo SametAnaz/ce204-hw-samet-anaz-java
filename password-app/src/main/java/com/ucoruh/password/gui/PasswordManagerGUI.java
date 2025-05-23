@@ -72,12 +72,54 @@ public class PasswordManagerGUI extends JFrame {
     /**
      * @brief Color constants for the modern UI theme
      */
+    /**
+     * @brief Primary color used in the GUI (Google Blue)
+     * @param r Red component value: 26
+     * @param g Green component value: 115
+     * @param b Blue component value: 232
+     */
     public static final Color PRIMARY_COLOR = new Color(26, 115, 232);      // Google Blue
+    /**
+     * @brief Secondary color used in the GUI (Google Green)
+     * @param r Red component value: 52
+     * @param g Green component value: 168
+     * @param b Blue component value: 83
+     */
     public static final Color SECONDARY_COLOR = new Color(52, 168, 83);     // Google Green
+    /**
+     * @brief Accent color used in the GUI (Google Red)
+     * @param r Red component value: 234
+     * @param g Green component value: 67
+     * @param b Blue component value: 53
+     */
     public static final Color ACCENT_COLOR = new Color(234, 67, 53);        // Google Red
+    /**
+     * @brief Dark color used in the GUI (Dark gray)
+     * @param r Red component value: 66
+     * @param g Green component value: 66
+     * @param b Blue component value: 66
+     */
     public static final Color DARK_COLOR = new Color(66, 66, 66);           // Dark gray
+    /**
+     * @brief Light color used in the GUI (Light gray)
+     * @param r Red component value: 245
+     * @param g Green component value: 245
+     * @param b Blue component value: 245
+     */
     public static final Color LIGHT_COLOR = new Color(245, 245, 245);       // Light gray
+    /**
+     * @brief Text color used in the GUI
+     * @param r Red component value: 33
+     * @param g Green component value: 33
+     * @param b Blue component value: 33
+     */
     public static final Color TEXT_COLOR = new Color(33, 33, 33);           // Text color
+    /**
+     * @brief Header background color used in the GUI
+     * @param r Red component value: 33
+     * @param g Green component value: 33
+     * @param b Blue component value: 33
+     */
     public static final Color HEADER_BG = new Color(33, 33, 33);            // Header background
 
     /**
