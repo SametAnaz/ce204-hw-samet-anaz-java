@@ -212,6 +212,18 @@
             <goals>
                 <goal>report</goal>
             </goals>
+            <configuration>
+                <includes>
+                    <include>**/com/ucoruh/password/AutoLoginManager.class</include>
+                    <include>**/com/ucoruh/password/EncryptionUtil.class</include>
+                    <include>**/com/ucoruh/password/FilePasswordStorage.class</include>
+                    <include>**/com/ucoruh/password/Password.class</include>
+                    <include>**/com/ucoruh/password/PasswordGenerator.class</include>
+                    <include>**/com/ucoruh/password/StorageType.class</include>
+                    <include>**/com/ucoruh/password/PasswordStorageFactory.class</include>
+                    <include>**/com/ucoruh/password/PlatformManager.class</include>
+                </includes>
+            </configuration>
         </execution>
     </executions>
 </plugin>
