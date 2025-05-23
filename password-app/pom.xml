@@ -213,18 +213,6 @@
                         <goals>
                             <goal>report</goal>
                         </goals>
-                        <configuration>
-                            <includes>
-                                <include>**/com/ucoruh/password/AutoLoginManager.class</include>
-                                <include>**/com/ucoruh/password/EncryptionUtil.class</include>
-                                <include>**/com/ucoruh/password/FilePasswordStorage.class</include>
-                                <include>**/com/ucoruh/password/Password.class</include>
-                                <include>**/com/ucoruh/password/PasswordGenerator.class</include>
-                                <include>**/com/ucoruh/password/StorageType.class</include>
-                                <include>**/com/ucoruh/password/PasswordStorageFactory.class</include>
-                                <include>**/com/ucoruh/password/PlatformManager.class</include>
-                            </includes>
-                        </configuration>
                     </execution>
                     <execution>
                         <id>check</id>
@@ -244,8 +232,24 @@
                                         </limit>
                                     </limits>
                                     <includes>
-                                        <include>com.ucoruh.password.*</include>
+                                        <include>com.ucoruh.password.AutoLoginManager</include>
+                                        <include>com.ucoruh.password.EncryptionUtil</include>
+                                        <include>com.ucoruh.password.FilePasswordStorage</include>
+                                        <include>com.ucoruh.password.Password</include>
+                                        <include>com.ucoruh.password.PasswordGenerator</include>
+                                        <include>com.ucoruh.password.StorageType</include>
                                     </includes>
+                                    <excludes>
+                                        <exclude>com.ucoruh.password.gui.*</exclude>
+                                        <exclude>com.ucoruh.password.*Test</exclude>
+                                        <exclude>com.ucoruh.password.DatabasePasswordStorage</exclude>
+                                        <exclude>com.ucoruh.password.PasswordManager</exclude>
+                                        <exclude>com.ucoruh.password.AuthManager</exclude>
+                                        <exclude>com.ucoruh.password.PasswordStorageFactory</exclude>
+                                        <exclude>com.ucoruh.password.PlatformManager</exclude>
+                                        <exclude>com.ucoruh.password.PasswordApp</exclude>
+                                        <exclude>com.ucoruh.password.PasswordApp$*</exclude>
+                                    </excludes>
                                 </rule>
                             </rules>
                         </configuration>

@@ -46,37 +46,50 @@ public class DatabasePasswordStorageTest {
         
         System.setOut(new PrintStream(outContent));
         
-        // Ensure the database is clean for each test
-        cleanupTestDatabase();
-        
-        // Ensure the database is initialized before each test
+        // Ensure the database is clean and initialized for each test
         try (Connection conn = DriverManager.getConnection(TEST_DB_URL)) {
-            // First check if the table exists
-            boolean tableExists = false;
-            try (ResultSet rs = conn.getMetaData().getTables(null, null, "passwords", null)) {
-                tableExists = rs.next();
+            // First drop the table if it exists to start fresh
+            try (Statement stmt = conn.createStatement()) {
+                stmt.execute("DROP TABLE IF EXISTS passwords");
             }
             
-            if (!tableExists) {
-                try (Statement stmt = conn.createStatement()) {
-                    String sql = """
-                        CREATE TABLE IF NOT EXISTS passwords (
-                            service TEXT PRIMARY KEY,
-                            username TEXT NOT NULL,
-                            password TEXT NOT NULL
-                        )
-                        """;
-                    stmt.execute(sql);
-                    System.out.println("Created passwords table successfully");
-                }
-            } else {
-                System.out.println("Passwords table already exists");
+            // Create the table
+            try (Statement stmt = conn.createStatement()) {
+                String sql = """
+                    CREATE TABLE passwords (
+                        service TEXT PRIMARY KEY,
+                        username TEXT NOT NULL,
+                        password TEXT NOT NULL
+                    )
+                    """;
+                stmt.execute(sql);
+                System.out.println("Created passwords table successfully");
             }
             
             // Verify the table was created
             try (ResultSet rs = conn.getMetaData().getTables(null, null, "passwords", null)) {
                 if (!rs.next()) {
                     throw new SQLException("Failed to create passwords table");
+                }
+            }
+            
+            // Verify table structure
+            try (ResultSet rs = conn.createStatement().executeQuery("PRAGMA table_info(passwords)")) {
+                boolean hasService = false;
+                boolean hasUsername = false;
+                boolean hasPassword = false;
+                
+                while (rs.next()) {
+                    String columnName = rs.getString("name");
+                    switch (columnName.toLowerCase()) {
+                        case "service" -> hasService = true;
+                        case "username" -> hasUsername = true;
+                        case "password" -> hasPassword = true;
+                    }
+                }
+                
+                if (!hasService || !hasUsername || !hasPassword) {
+                    throw new SQLException("Table structure verification failed");
                 }
             }
         } catch (SQLException e) {
