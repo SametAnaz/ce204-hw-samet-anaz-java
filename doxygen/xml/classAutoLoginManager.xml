@@ -3,11 +3,12 @@
   <compounddef id="classAutoLoginManager" kind="class" language="Java" prot="package">
     <compoundname>AutoLoginManager</compoundname>
     <briefdescription>
+<para>Manages auto-login functionality for the password manager. </para>
     </briefdescription>
     <detaileddescription>
-<para>The class that provides auto-login functionality. </para>
+<para>This class manages auto-login settings for different services and provides methods to enable or disable auto-login functionality for specific accounts. </para>
     </detaileddescription>
-    <location file="password-app/src/main/java/com/ucoruh/password/AutoLoginManager.java" line="8" column="1"/>
+    <location file="password-app/src/main/java/com/ucoruh/password/AutoLoginManager.java" line="3" column="1"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>
